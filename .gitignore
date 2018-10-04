@@ -6,3 +6,5 @@
 /src/MeshyDb.SDK/bin
 /src/MeshyDb.SDK/obj
 /src/.vs
+/src/MeshyDb.SDK.Tests/obj
+/src/MeshyDb.SDK.Tests/bin

@@ -4,7 +4,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using MeshyDb.SDK.Services;
 
-[assembly: InternalsVisibleTo("MeshyDb.SDK.Tests")]
+[assembly:InternalsVisibleTo("MeshyDb.SDK.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace MeshyDb.SDK
 {
     /// <summary>
@@ -36,9 +37,9 @@ namespace MeshyDb.SDK
                 throw new ArgumentException($"{nameof(privateKey)} was not supplied", nameof(privateKey));
             }
 
-            Tenant = tenant;
+            Tenant = tenant.Trim();
 
-            ConfigureServices(publicKey, privateKey);
+            ConfigureServices(publicKey.Trim(), privateKey.Trim());
         }
 
         /// <summary>
