@@ -1,4 +1,4 @@
-# MeshyDb.SDK
+# MeshyDb.SDK [![Build Status](https://yetisoftworks.visualstudio.com/CloudX/_apis/build/status/yetisoftworks.MeshDb.SDK)](https://yetisoftworks.visualstudio.com/CloudX/_build/latest?definitionId=3)
 
 The Meshy SDK is meant to integration with [MeshyDB](http://meshydb.com).
 
