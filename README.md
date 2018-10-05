@@ -98,12 +98,12 @@ Because of that we can use NoSQL search strings to find data based on your needs
 
 NoSQL Example:
 ```c#
-  var pagedSearchResult = await client.Meshes.SearchAsync<ExampleData>("{ 'FavoriteNmber': { '$gt': 5000 } }");
+  var pagedSearchResult = await client.Meshes.SearchAsync<ExampleData>("{ 'FavoriteNumber': { '$gt': 5000 } }");
 ```
 
 Linq Example:
 ```c#
-  var pagedSearchResult = await client.Meshes.SearchAsync<ExampleData>((t) => t.FavoriteNmber > 5000);
+  var pagedSearchResult = await client.Meshes.SearchAsync<ExampleData>((t) => t.FavoriteNumber > 5000);
 ```
 
 ### Delete Mesh Data
