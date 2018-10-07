@@ -1,2 +1,10 @@
 theme: jekyll-theme-tactile
-google_site_verification : F7HGQdjrrrOnJdqIYcDAnc8OyYSlDIWOVIkm1XPLG8s
+google_site_verification: F7HGQdjrrrOnJdqIYcDAnc8OyYSlDIWOVIkm1XPLG8s
+plugins:
+- jekyll-avatar
+- jekyll-feed
+- jekyll-mentions
+- jekyll-redirect-from
+- jekyll-seo-tag
+- jekyll-sitemap
+- jemoji
