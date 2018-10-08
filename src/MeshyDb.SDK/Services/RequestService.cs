@@ -1,17 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿using MeshyDb.SDK.Enums;
+using MeshyDb.SDK.Resolvers;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using MeshyDb.SDK;
-using MeshyDb.SDK.Enums;
-using MeshyDb.SDK.Models;
-using MeshyDb.SDK.Resolvers;
 
 namespace MeshyDb.SDK.Services
 {
@@ -25,7 +21,7 @@ namespace MeshyDb.SDK.Services
         /// </summary>
         /// <param name="httpService">Service to make http requests against</param>
         /// <param name="baseUrl">Base Api Url to make requests for</param>
-        public RequestService(IHttpService httpService, string baseUrl) : this(httpService, baseUrl,null) { }
+        public RequestService(IHttpService httpService, string baseUrl) : this(httpService, baseUrl, null) { }
 
         /// <summary>
         /// Instantiates an instance of the <see cref="RequestService"/> class.
@@ -82,7 +78,7 @@ namespace MeshyDb.SDK.Services
                                                     Encoding.UTF8,
                                                     "application/json");
                 case RequestDataFormat.Form:
-                    return new FormUrlEncodedContent(model.GetType()
+                    var content = new FormUrlEncodedContent(model.GetType()
                                          .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                               .ToDictionary(prop =>
                                               {
@@ -91,6 +87,8 @@ namespace MeshyDb.SDK.Services
                                                   return jsonProp?.PropertyName ?? prop.Name;
                                               },
                                               prop => prop.GetValue(model, null)?.ToString()));
+                    content.Headers.ContentType.CharSet = Encoding.UTF8.BodyName;
+                    return content;
                 default:
                     return null;
             }
