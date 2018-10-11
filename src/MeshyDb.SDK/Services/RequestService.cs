@@ -1,5 +1,5 @@
-﻿using MeshyDb.SDK.Enums;
-using MeshyDb.SDK.Resolvers;
+﻿using MeshyDB.SDK.Enums;
+using MeshyDB.SDK.Resolvers;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeshyDb.SDK.Services
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Implementation of <see cref="IRequestService"/>
@@ -73,7 +73,7 @@ namespace MeshyDb.SDK.Services
                 case RequestDataFormat.Json:
                     return new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings()
                     {
-                        ContractResolver = new MeshyDbJsonContractResolver()
+                        ContractResolver = new MeshyDBJsonContractResolver()
                     }),
                                                     Encoding.UTF8,
                                                     "application/json");
@@ -102,7 +102,7 @@ namespace MeshyDb.SDK.Services
 
             request.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings()
             {
-                ContractResolver = new MeshyDbJsonContractResolver()
+                ContractResolver = new MeshyDBJsonContractResolver()
             }),
                                     Encoding.UTF8,
                                     "application/json");

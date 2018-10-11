@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeshyDb.SDK", "MeshyDb.SDK\MeshyDb.SDK.csproj", "{91CEDF3D-9E37-489F-8169-CB5AF9E955BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeshyDB.SDK", "MeshyDB.SDK\MeshyDB.SDK.csproj", "{91CEDF3D-9E37-489F-8169-CB5AF9E955BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeshyDb.SDK.Tests", "MeshyDb.SDK.Tests\MeshyDb.SDK.Tests.csproj", "{5021B1EF-DFC5-4411-816D-537C932564E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeshyDB.SDK.Tests", "MeshyDB.SDK.Tests\MeshyDB.SDK.Tests.csproj", "{5021B1EF-DFC5-4411-816D-537C932564E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

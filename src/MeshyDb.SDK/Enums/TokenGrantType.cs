@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Enums
+namespace MeshyDB.SDK.Enums
 {
     /// <summary>
     /// List of supported grant types to be requested for a token

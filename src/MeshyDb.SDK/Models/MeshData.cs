@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using MeshyDb.SDK.Attributes;
+using MeshyDB.SDK.Attributes;
 
-namespace MeshyDb.SDK.Models
+namespace MeshyDB.SDK.Models
 {
     /// <summary>
     /// Abstract class defining required data pieces and format for web requests

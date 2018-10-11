@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MeshyDb.SDK.Tests
+namespace MeshyDB.SDK.Tests
 {
     public class Generator
     {

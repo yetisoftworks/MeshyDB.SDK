@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Models
+namespace MeshyDB.SDK.Models
 {
     /// <summary>
     /// Class getting paged result of mesh data

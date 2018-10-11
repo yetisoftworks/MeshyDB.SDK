@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK
+namespace MeshyDB.SDK
 {
     /// <summary>
     /// Class containing any static text used within the SDK

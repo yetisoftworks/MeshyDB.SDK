@@ -3,8 +3,8 @@
 ################################################################################
 
 /.vs
-/src/MeshyDb.SDK/bin
-/src/MeshyDb.SDK/obj
+/src/MeshyDB.SDK/bin
+/src/MeshyDB.SDK/obj
 /src/.vs
-/src/MeshyDb.SDK.Tests/obj
-/src/MeshyDb.SDK.Tests/bin
+/src/MeshyDB.SDK.Tests/obj
+/src/MeshyDB.SDK.Tests/bin

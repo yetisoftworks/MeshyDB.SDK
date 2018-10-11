@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Attributes
+namespace MeshyDB.SDK.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Attributes
+namespace MeshyDB.SDK.Attributes
 {
     /// <summary>
     /// Class used to mark a property that should not be serialized during Json Serialization process 

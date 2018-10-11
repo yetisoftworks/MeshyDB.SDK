@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
-using MeshyDb.SDK.Services;
+using MeshyDB.SDK.Services;
 
-[assembly:InternalsVisibleTo("MeshyDb.SDK.Tests")]
+[assembly:InternalsVisibleTo("MeshyDB.SDK.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
-namespace MeshyDb.SDK
+namespace MeshyDB.SDK
 {
     /// <summary>
-    /// Meshy Db Client is used to connect with the Meshy Db REST API
+    /// MeshyDB Client is used to connect with the MeshyDB REST API
     /// </summary>
-    public class MeshyDbClient
+    public class MeshyDBClient
     {
         /// <summary>
-        /// Initializes a new instance of <seealso cref="MeshyDbClient"/> that is used to communicate with the Meshy Db REST API
+        /// Initializes a new instance of <seealso cref="MeshyDBClient"/> that is used to communicate with the MeshyDB REST API
         /// </summary>
-        /// <param name="tenant">Name of Meshy Db tenant required for communication</param>
-        /// <param name="publicKey">Public Api credential supplied from Meshy Db to communicate with tenant</param>
-        /// <param name="privateKey">Private Api credential supplied from Meshy Db to communicate with tenant</param>
+        /// <param name="tenant">Name of MeshyDB tenant required for communication</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant</param>
+        /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with tenant</param>
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured</exception>
-        public MeshyDbClient(string tenant, string publicKey, string privateKey)
+        public MeshyDBClient(string tenant, string publicKey, string privateKey)
         {
             if (string.IsNullOrWhiteSpace(tenant))
             {
@@ -43,7 +43,7 @@ namespace MeshyDb.SDK
         }
 
         /// <summary>
-        /// Gets the name of the tenant for Meshy Db communication
+        /// Gets the name of the tenant for MeshyDB communication
         /// </summary>
         internal string Tenant { get; }
 

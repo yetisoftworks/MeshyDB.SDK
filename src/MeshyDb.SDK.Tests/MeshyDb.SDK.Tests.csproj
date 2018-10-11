@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MeshyDb.SDK\MeshyDb.SDK.csproj" />
+    <ProjectReference Include="..\MeshyDb.SDK\MeshyDB.SDK.csproj" />
   </ItemGroup>
 
 </Project>

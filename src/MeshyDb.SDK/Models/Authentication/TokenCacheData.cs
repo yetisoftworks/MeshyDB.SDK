@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Models.Authentication
+namespace MeshyDB.SDK.Models.Authentication
 {
     /// <summary>
     /// Class used for storing token data used in a cache

@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeshyDb.SDK.Services
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Defines methods for http requests via a service

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Enums
+namespace MeshyDB.SDK.Enums
 {
     /// <summary>
     /// List of supported data formats to be sent as part of a HTTP request

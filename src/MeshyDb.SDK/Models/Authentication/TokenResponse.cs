@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Models.Authentication
+namespace MeshyDB.SDK.Models.Authentication
 {
     /// <summary>
     /// Class defining elements supplied when a toekn request has been fulfilled

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using MeshyDb.SDK.Enums;
-using MeshyDb.SDK.Models.Authentication;
+using MeshyDB.SDK.Enums;
+using MeshyDB.SDK.Models.Authentication;
 
-namespace MeshyDb.SDK.Services
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Implementation of <see cref="ITokenService"/>
@@ -21,8 +21,8 @@ namespace MeshyDb.SDK.Services
         /// Instantiates an instance of the <see cref="TokenService"/> class.
         /// </summary>
         /// <param name="requestService">Service to make requests against</param>
-        /// <param name="publicKey">Public Api credential supplied from Meshy Db to communicate with tenant</param>
-        /// <param name="privateKey">Private Api credential supplied from Meshy Db to communicate with tenant</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant</param>
+        /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with tenant</param>
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured</exception>
         public TokenService(IRequestService requestService, string publicKey, string privateKey)
         {

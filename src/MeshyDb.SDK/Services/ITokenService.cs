@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeshyDb.SDK.Services
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Defines methods for authentication tokens

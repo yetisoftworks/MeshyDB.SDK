@@ -1,14 +1,14 @@
-﻿using MeshyDb.SDK.Attributes;
-using MeshyDb.SDK.Enums;
-using MeshyDb.SDK.Models;
-using MeshyDb.SDK.Services;
+﻿using MeshyDB.SDK.Attributes;
+using MeshyDB.SDK.Enums;
+using MeshyDB.SDK.Models;
+using MeshyDB.SDK.Services;
 using Moq;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace MeshyDb.SDK.Tests
+namespace MeshyDB.SDK.Tests
 {
     public class MeshesServiceTests
     {

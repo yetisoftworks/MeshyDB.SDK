@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using MeshyDb.SDK.Models;
+using MeshyDB.SDK.Models;
 using System.Linq;
-using MeshyDb.SDK.Attributes;
+using MeshyDB.SDK.Attributes;
 
-namespace MeshyDb.SDK.Services
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Implementation of <see cref="IMeshesService"/>

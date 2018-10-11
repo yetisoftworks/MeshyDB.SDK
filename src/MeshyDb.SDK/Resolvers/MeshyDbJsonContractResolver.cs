@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MeshyDb.SDK.Attributes;
+using MeshyDB.SDK.Attributes;
 
-namespace MeshyDb.SDK.Resolvers
+namespace MeshyDB.SDK.Resolvers
 {
     /// <summary>
     /// Class resolving a json contract for Meshy
     /// </summary>
     /// <remarks>Used for implementing logic around custom json attributes</remarks>
-    internal class MeshyDbJsonContractResolver : DefaultContractResolver
+    internal class MeshyDBJsonContractResolver : DefaultContractResolver
     {
         /// <inheritdoc/>
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)

@@ -1,4 +1,4 @@
-﻿using MeshyDb.SDK.Services;
+﻿using MeshyDB.SDK.Services;
 using Moq;
 using Newtonsoft.Json;
 using System;
@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace MeshyDb.SDK.Tests
+namespace MeshyDB.SDK.Tests
 {
     public class RequestServiceTests
     {

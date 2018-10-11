@@ -1,10 +1,10 @@
-﻿using MeshyDb.SDK.Enums;
+﻿using MeshyDB.SDK.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MeshyDb.SDK.Models.Authentication
+namespace MeshyDB.SDK.Models.Authentication
 {
     /// <summary>
     /// Class defining elements required for generating a token request with the auth url

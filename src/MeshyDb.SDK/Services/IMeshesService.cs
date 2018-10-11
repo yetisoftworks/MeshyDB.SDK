@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using MeshyDb.SDK.Models;
+using MeshyDB.SDK.Models;
 
-namespace MeshyDb.SDK.Services
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Defines methods for meshes

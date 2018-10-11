@@ -1,6 +1,6 @@
-﻿using MeshyDb.SDK.Enums;
-using MeshyDb.SDK.Models.Authentication;
-using MeshyDb.SDK.Services;
+﻿using MeshyDB.SDK.Enums;
+using MeshyDB.SDK.Models.Authentication;
+using MeshyDB.SDK.Services;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace MeshyDb.SDK.Tests
+namespace MeshyDB.SDK.Tests
 {
     public class TokenServiceTests
     {
