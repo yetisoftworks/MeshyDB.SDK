@@ -1,16 +1,16 @@
-# MeshyDb.SDK [![Build Status](https://yetisoftworks.visualstudio.com/CloudX/_apis/build/status/yetisoftworks.MeshyDb.SDK)](https://yetisoftworks.visualstudio.com/CloudX/_build/latest?definitionId=3)
+# MeshyDB.SDK [![Build Status](https://yetisoftworks.visualstudio.com/CloudX/_apis/build/status/yetisoftworks.MeshyDB.SDK)](https://yetisoftworks.visualstudio.com/CloudX/_build/latest?definitionId=3)
 
 The Meshy SDK is meant to integration with [MeshyDB](http://meshydb.com).
 
 This sdk is developed in a .Net framework and is distributed using .Net Framework 4.5 and .Net Core 2.0.
 
 ## Getting Started
-Add the reference to [MeshDb.SDK](https://www.nuget.org/packages/MeshyDb.SDK/) via [NuGet](https://www.nuget.org).
+Add the reference to [MeshDB.SDK](https://www.nuget.org/packages/MeshyDB.SDK/) via [NuGet](https://www.nuget.org).
 
-Once the package is installed you can instantiate a new instance of the Meshy Db Client to communicate with the Meshy Db API.
+Once the package is installed you can instantiate a new instance of the MeshyDB Client to communicate with the Meshy DB API.
 
 ``` c#
-var client = new MeshyDbClient({accountName},{publicKey},{privateKey});
+var client = new MeshyDBClient({accountName},{publicKey},{privateKey});
 ```
 
 ### Creating a Mesh
@@ -21,7 +21,7 @@ When we create our definition it will define what fields we want to collect as w
 We will create a definition by inheriting and extending the MeshData abstract class.
 
 ``` c#
-using MeshyDb.SDK.Models;
+using MeshyDB.SDK.Models;
 
 public class ExampleData : MeshData
 {
@@ -39,8 +39,8 @@ public class ExampleData : MeshData
 Aditionally, we can override our Mesh name by providing something more specific.
 
 ``` c#
-using MeshyDb.SDK.Models;
-using MeshyDb.SDK.Attributes;
+using MeshyDB.SDK.Models;
+using MeshyDB.SDK.Attributes;
 
 [MeshName("ExampleMeshName")]
 public class ExampleData : MeshData
@@ -90,11 +90,11 @@ If we have a specific id we can get the individual record based on id. We will u
 ```
 
 ### Search Mesh Data
-MeshyDb uses NoSQL to store and search data so that it can best fit a varity of needs from dynamic or normalized data.
+MeshyDB uses NoSQL to store and search data so that it can best fit a varity of needs from dynamic or normalized data.
 
 Every search will be paged based on the [Page Result]() definition in the SDK.
 
-Because of that we can use NoSQL search strings to find data based on your needs. This can be done in two different ways. Manually creating a NoSQL search string or using Linq that will be converted into proper search criteria using MongoDb Driver.
+Because of that we can use NoSQL search strings to find data based on your needs. This can be done in two different ways. Manually creating a NoSQL search string or using Linq that will be converted into proper search criteria using MongoDB Driver.
 
 NoSQL Example:
 ```c#
