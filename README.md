@@ -2,7 +2,7 @@
 
 The Meshy SDK is meant to integration with [MeshyDB](http://meshydb.com).
 
-This sdk is developed in a .Net framework and is distributed using .Net Framework 4.5 and .Net Core 2.0.
+This sdk is developed in a .Net framework and is distributed using .Net Framework 4.7.1 and .Net Core 2.0.
 
 ## Getting Started
 Create a [MeshyDB](http://meshydb.com) account if one does not exist.
