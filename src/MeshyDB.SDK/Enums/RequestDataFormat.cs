@@ -7,7 +7,7 @@ namespace MeshyDB.SDK.Enums
     /// <summary>
     /// List of supported data formats to be sent as part of a HTTP request
     /// </summary>
-    internal enum RequestDataFormat
+    public enum RequestDataFormat
     {
         /// <summary>
         /// Json format. This is used when the API should serialize as json data to be sent in the request

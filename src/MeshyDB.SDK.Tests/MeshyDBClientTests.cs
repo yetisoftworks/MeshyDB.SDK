@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace MeshyDB.SDK.Tests
@@ -81,6 +79,9 @@ namespace MeshyDB.SDK.Tests
         {
             var tenant = Generator.RandomString(5);
             var client = new MeshyDBClient(tenant, Generator.RandomString(36), Generator.RandomString(36));
+
+            Assert.Equal($"https://api.meshydb.com/{tenant}".ToLower(), client.GetApiUrl().ToLower());
+
         }
 
         [Fact]
@@ -89,7 +90,7 @@ namespace MeshyDB.SDK.Tests
             var tenant = Generator.RandomString(5);
             var client = new MeshyDBClient(tenant, Generator.RandomString(36), Generator.RandomString(36));
 
-            Assert.Equal($"http://auth.meshydb.com/{tenant}".ToLower(), client.GetAuthUrl().ToLower());
+            Assert.Equal($"https://auth.meshydb.com/{tenant}".ToLower(), client.GetAuthUrl().ToLower());
         }
     }
 }

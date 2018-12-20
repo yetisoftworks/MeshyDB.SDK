@@ -1,18 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net471</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.6.0</Version>
+    <Version>0.7.0</Version>
     <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK</RepositoryUrl>
     <PackageProjectUrl>https://github.com/yetisoftworks/MeshyDB.SDK</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/yetisoftworks/MeshyDB.SDK/master/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>Mesh definition now belongs on an object instance and not on a call level.</PackageReleaseNotes>
-    <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB</PackageTags>
+    <PackageReleaseNotes>Updated minimum .Net Framework version to 4.7.1 and allowed ability to override Http Service for custom caller needs.</PackageReleaseNotes>
+    <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB Backend</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>This SDK allows integration with MeshyDB.</Description>
     <Authors>Yeti Softworks</Authors>
     <Copyright />
+    <AssemblyVersion>0.7.0.0</AssemblyVersion>
+    <FileVersion>0.7.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -20,11 +22,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="System.Net.Http" Version="4.3.3" Condition="'$(TargetFramework)' == 'net45'" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
-    <Reference Include="System.Net" />
+    <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
-﻿using MeshyDB.SDK.Services;
+﻿using MeshyDB.SDK.Models;
+using MeshyDB.SDK.Services;
 using Moq;
 using Newtonsoft.Json;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -50,9 +50,9 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -70,7 +70,7 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             Assert.Equal("GET", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(passedRequest.Headers.Contains("Authorization"));
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         [Fact]
@@ -94,9 +94,9 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, null);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -108,7 +108,7 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("GET", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         [Fact]
@@ -119,9 +119,9 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -138,7 +138,7 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("GET", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         [Fact]
@@ -149,9 +149,9 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -168,7 +168,7 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("GET", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         #endregion
@@ -183,9 +183,9 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -203,7 +203,7 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             Assert.Equal("DELETE", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(passedRequest.Headers.Contains("Authorization"));
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         [Fact]
@@ -227,9 +227,9 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, null);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -241,7 +241,7 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("DELETE", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         [Fact]
@@ -252,9 +252,9 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -271,7 +271,7 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("DELETE", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         [Fact]
@@ -282,9 +282,9 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -301,7 +301,7 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("DELETE", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
         #endregion
@@ -316,7 +316,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
             var data = new TestData()
             {
@@ -324,7 +324,7 @@ namespace MeshyDB.SDK.Tests
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -342,11 +342,9 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             Assert.Equal("PUT", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -375,14 +373,14 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, null);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
             {
                 Id = 5,
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -395,11 +393,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("PUT", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -410,14 +406,14 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
             {
                 Id = 5,
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -434,11 +430,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("PUT", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -449,14 +443,14 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
             {
                 Id = 5,
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -473,11 +467,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("PUT", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -488,10 +480,10 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = default(TestData);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -508,11 +500,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("PUT", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(4, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         #endregion
@@ -527,7 +517,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
             var data = new TestData()
             {
@@ -535,7 +525,7 @@ namespace MeshyDB.SDK.Tests
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -553,11 +543,9 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -568,7 +556,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
             var data = new TestData()
             {
@@ -576,7 +564,7 @@ namespace MeshyDB.SDK.Tests
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -594,11 +582,9 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -609,7 +595,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
 
             var data = new TestData()
             {
@@ -617,7 +603,7 @@ namespace MeshyDB.SDK.Tests
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -635,11 +621,9 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/x-www-form-urlencoded", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal($"Id={data.Id}&Data={data.Data}", await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(25, passedRequest.Content.Headers.ContentLength);
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/x-www-form-urlencoded", passedRequest.ContentType);
+            Assert.Equal($"Id={data.Id}&Data={data.Data}", passedRequest.Content);
         }
 
         [Fact]
@@ -668,14 +652,14 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var service = new RequestService(httpService.Object, baseUrl, null);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
             {
                 Id = 5,
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -688,11 +672,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -703,14 +685,14 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
             {
                 Id = 5,
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -727,11 +709,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -742,14 +722,14 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
             {
                 Id = 5,
                 Data = Generator.RandomString(15)
             };
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -766,11 +746,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(33, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         [Fact]
@@ -781,10 +759,10 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
 
-            var passedRequest = default(HttpRequestMessage);
+            var passedRequest = default(HttpServiceRequest);
             var data = default(TestData);
 
-            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpRequestMessage>())).Callback((HttpRequestMessage request) =>
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
             {
                 passedRequest = request;
             }).Returns(() =>
@@ -802,11 +780,9 @@ namespace MeshyDB.SDK.Tests
             httpService.VerifyAll();
             Assert.Equal("POST", passedRequest.Method.Method);
             Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
-            Assert.True(!passedRequest.Headers.Contains("Authorization"));
-            Assert.Equal("application/json", passedRequest.Content.Headers.ContentType.MediaType);
-            Assert.Equal("utf-8", passedRequest.Content.Headers.ContentType.CharSet);
-            Assert.Equal(JsonConvert.SerializeObject(data), await passedRequest.Content.ReadAsStringAsync());
-            Assert.Equal(4, passedRequest.Content.Headers.ContentLength);
+            Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("application/json", passedRequest.ContentType);
+            Assert.Equal(JsonConvert.SerializeObject(data), passedRequest.Content);
         }
 
         #endregion

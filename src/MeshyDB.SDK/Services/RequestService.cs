@@ -1,10 +1,11 @@
 ﻿using MeshyDB.SDK.Enums;
+using MeshyDB.SDK.Models;
 using MeshyDB.SDK.Resolvers;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,22 +62,26 @@ namespace MeshyDB.SDK.Services
         {
             var request = await GetDefaultRequestMessageAsync(path, HttpMethod.Post);
 
-            request.Content = GetContent(model, format);
+            request.Content = await GetContent(model, format);
+            request.RequestDataFormat = format;
+
+            if(format == RequestDataFormat.Form)
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+            }
 
             return await SendRequest<T>(request);
         }
 
-        private HttpContent GetContent<T>(T model, RequestDataFormat format)
+        private async Task<string> GetContent<T>(T model, RequestDataFormat format)
         {
             switch (format)
             {
                 case RequestDataFormat.Json:
-                    return new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings()
+                    return JsonConvert.SerializeObject(model, new JsonSerializerSettings()
                     {
                         ContractResolver = new MeshyDBJsonContractResolver()
-                    }),
-                                                    Encoding.UTF8,
-                                                    "application/json");
+                    });
                 case RequestDataFormat.Form:
                     var content = new FormUrlEncodedContent(model.GetType()
                                          .GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -87,12 +92,13 @@ namespace MeshyDB.SDK.Services
                                                   return jsonProp?.PropertyName ?? prop.Name;
                                               },
                                               prop => prop.GetValue(model, null)?.ToString()));
+
                     content.Headers.ContentType.CharSet = Encoding.UTF8.BodyName;
-                    return content;
+
+                    return await content.ReadAsStringAsync();
                 default:
                     return null;
             }
-
         }
 
         /// <inheritdoc/>
@@ -100,19 +106,17 @@ namespace MeshyDB.SDK.Services
         {
             var request = await GetDefaultRequestMessageAsync(path, HttpMethod.Put);
 
-            request.Content = new StringContent(JsonConvert.SerializeObject(model, new JsonSerializerSettings()
+            request.Content = JsonConvert.SerializeObject(model, new JsonSerializerSettings()
             {
                 ContractResolver = new MeshyDBJsonContractResolver()
-            }),
-                                    Encoding.UTF8,
-                                    "application/json");
+            });
 
             return await SendRequest<T>(request);
         }
 
-        private async Task<HttpRequestMessage> GetDefaultRequestMessageAsync(string path, HttpMethod method = null)
+        private async Task<HttpServiceRequest> GetDefaultRequestMessageAsync(string path, HttpMethod method = null)
         {
-            var request = new HttpRequestMessage();
+            var request = new HttpServiceRequest();
             await PopulateHeadersAsync(request.Headers);
 
             if (!Uri.TryCreate($"{baseUrl}/{path}", UriKind.Absolute, out var validatedUri))
@@ -122,11 +126,12 @@ namespace MeshyDB.SDK.Services
 
             request.Method = method ?? HttpMethod.Get;
             request.RequestUri = validatedUri;
+            request.ContentType = "application/json";
 
             return request;
         }
 
-        private async Task PopulateHeadersAsync(HttpRequestHeaders headers)
+        private async Task PopulateHeadersAsync(IDictionary<string, string> headers)
         {
             if (this.tokenService != null)
             {
@@ -138,7 +143,7 @@ namespace MeshyDB.SDK.Services
             }
         }
 
-        private async Task<T> SendRequest<T>(HttpRequestMessage requestMessage)
+        private async Task<T> SendRequest<T>(HttpServiceRequest requestMessage)
         {
             return await this.httpService.SendRequestAsync<T>(requestMessage);
         }

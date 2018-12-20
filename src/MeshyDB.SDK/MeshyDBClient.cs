@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MeshyDB.SDK.Services;
+using System;
 using System.Runtime.CompilerServices;
-using System.Text;
-using MeshyDB.SDK.Services;
 
-[assembly:InternalsVisibleTo("MeshyDB.SDK.Tests")]
+[assembly: InternalsVisibleTo("MeshyDB.SDK.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace MeshyDB.SDK
 {
@@ -39,7 +37,30 @@ namespace MeshyDB.SDK
 
             Tenant = tenant.Trim();
 
-            ConfigureServices(publicKey.Trim(), privateKey.Trim());
+            _publicKey = publicKey.Trim();
+            _privateKey = privateKey.Trim();
+
+            ConfigureServices();
+        }
+        private string _publicKey;
+        private string _privateKey;
+
+        private IHttpService _httpService = new HttpService();
+
+        public IHttpService HttpService
+        {
+            get
+            {
+                return _httpService;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _httpService = value;
+                    this.ConfigureServices();
+                }
+            }
         }
 
         /// <summary>
@@ -73,13 +94,11 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Instantiates services used for api communication with required dependencies
         /// </summary>
-        /// <param name="publicKey">Supplied Api public credential to configure the authentication service</param>
-        /// <param name="privateKey">Supplied Api private credential to configure the authentication service</param>
-        private void ConfigureServices(string publicKey, string privateKey)
+        private void ConfigureServices()
         {
-            var httpService = new HttpService();
+            var httpService = this.HttpService;
             var authRequestService = new RequestService(httpService, this.GetAuthUrl());
-            var tokenService = new TokenService(authRequestService, publicKey, privateKey);
+            var tokenService = new TokenService(authRequestService, _publicKey, _privateKey);
             var requestService = new RequestService(httpService, this.GetApiUrl(), tokenService);
             Meshes = new MeshesService(requestService);
         }

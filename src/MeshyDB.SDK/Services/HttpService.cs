@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using MeshyDB.SDK.Models;
+using Newtonsoft.Json;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace MeshyDB.SDK.Services
@@ -13,26 +11,41 @@ namespace MeshyDB.SDK.Services
     /// </summary>
     internal class HttpService : IHttpService
     {
-        /// <summary>
-        /// Http client to make requests against
-        /// </summary>
-        private static readonly HttpClient HttpClient = new HttpClient();
-
-        /// <summary>
-        /// Instantiates static instance of class <see cref="HttpService"/>
-        /// </summary>
-        static HttpService()
-        {
-            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
-
         /// <inheritdoc/>
-        public async Task<T> SendRequestAsync<T>(HttpRequestMessage requestMessage)
+        public async Task<T> SendRequestAsync<T>(HttpServiceRequest request)
         {
-            var response = await HttpClient.SendAsync(requestMessage);
-            response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(content);
+            var webRequest = WebRequest.CreateHttp(request.RequestUri);
+            webRequest.Method = request.Method.Method;
+
+            webRequest.Accept = "application/json";
+
+            if (request.Headers.TryGetValue("Authorization", out var token))
+            {
+                webRequest.UseDefaultCredentials = true;
+                webRequest.PreAuthenticate = true;
+                webRequest.Credentials = CredentialCache.DefaultCredentials;
+                webRequest.Headers.Add(HttpRequestHeader.Authorization, token);
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Content))
+            {
+                webRequest.ContentLength = request.Content.Length;
+                webRequest.ContentType = request.ContentType;
+
+                using (var streamWriter = new StreamWriter(webRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(request.Content);
+                    streamWriter.Flush();
+                }
+
+            }
+
+            var response = await webRequest.GetResponseAsync();
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                var content = await reader.ReadToEndAsync();
+                return JsonConvert.DeserializeObject<T>(content);
+            }
         }
     }
 }
