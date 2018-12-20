@@ -68,12 +68,11 @@ We can commit this data via our client we defined in [Getting Started](#getting-
     FavoriteNumber = 64983
   };
   
-  var meshName = "testmesh";
   // Create Mesh Data for a specific Mesh and get the data returned with the committed id from the API
   data = await client.Meshes.CreateAsync(data);
 ```
 
-If we are not able to work in an asynchrnous system we can simply call `client.Meshes.Create({meshName}, data)`. This pattern applies to all methods.
+If we are not able to work in an asynchrnous system we can simply call `client.Meshes.Create(data)`. This pattern applies to all methods.
 
 ### Update Mesh Data
 Updating Mesh Data is similar to creating a Mesh. The largest difference is we need to supply which location requires the data to be commited.
