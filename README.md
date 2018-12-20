@@ -2,10 +2,14 @@
 
 The Meshy SDK is meant to integration with [MeshyDB](http://meshydb.com).
 
-This sdk is developed in a .Net framework and is distributed using .Net Framework 4.5 and .Net Core 2.0.
+This sdk is developed in a .Net framework and is distributed using .Net Framework 4.7.1 and .Net Core 2.0.
 
 ## Getting Started
-Add the reference to [MeshDB.SDK](https://www.nuget.org/packages/MeshyDB.SDK/) via [NuGet](https://www.nuget.org).
+Create a [MeshyDB](http://meshydb.com) account if one does not exist.
+
+Once created retrieve the Public Key and Private Key to integrate MeshyDB.SDK.
+
+Add the reference to [MeshyDB.SDK](https://www.nuget.org/packages/MeshyDB.SDK/) via [NuGet](https://www.nuget.org).
 
 Once the package is installed you can instantiate a new instance of the MeshyDB Client to communicate with the Meshy DB API.
 
