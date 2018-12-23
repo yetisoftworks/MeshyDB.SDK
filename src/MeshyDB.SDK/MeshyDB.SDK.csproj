@@ -6,7 +6,6 @@
     <Version>0.7.0</Version>
     <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK</RepositoryUrl>
     <PackageProjectUrl>https://github.com/yetisoftworks/MeshyDB.SDK</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/yetisoftworks/MeshyDB.SDK/master/LICENSE</PackageLicenseUrl>
     <PackageReleaseNotes>Updated minimum .Net Framework version to 4.7.1 and allowed ability to override Http Service for custom caller needs.</PackageReleaseNotes>
     <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB Backend</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -16,7 +15,13 @@
     <AssemblyVersion>0.7.0.0</AssemblyVersion>
     <FileVersion>0.7.0.0</FileVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+  </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="licenses\LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <Optimize>false</Optimize>
   </PropertyGroup>
