@@ -366,6 +366,130 @@ namespace MeshyDB.SDK.Tests
             requestService.VerifyAll();
         }
 
+        [Fact]
+        public void ShouldUpdateFromModelRequestHaveCorrectMeshNameFromClassAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+            var passedModel = default(TestMeshNameFromClass);
+
+            var expectedModel = new TestMeshNameFromClass();
+            requestService.Setup(x => x.PutRequest<TestMeshNameFromClass>(It.IsAny<string>(), It.IsAny<object>())).Callback((string url, object model) =>
+            {
+                passedUrl = url;
+                passedModel = model as TestMeshNameFromClass;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<TestMeshNameFromClass>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+
+            expectedModel.Id = id;
+
+            service.Update(expectedModel);
+
+            Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
+            Assert.Equal(expectedModel, passedModel);
+
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public async Task ShouldUpdateAsyncFromModelRequestHaveCorrectMeshNameFromClassAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+            var passedModel = default(TestMeshNameFromClass);
+
+            var expectedModel = new TestMeshNameFromClass();
+            requestService.Setup(x => x.PutRequest<TestMeshNameFromClass>(It.IsAny<string>(), It.IsAny<object>())).Callback((string url, object model) =>
+            {
+                passedUrl = url;
+                passedModel = model as TestMeshNameFromClass;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<TestMeshNameFromClass>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+
+            expectedModel.Id = id;
+
+            await service.UpdateAsync(expectedModel);
+
+            Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
+            Assert.Equal(expectedModel, passedModel);
+
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldUpdateFromModelRequestHaveCorrectMeshNameFromAttributeAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+            var passedModel = default(MeshNameAttributeClassTest);
+
+            var expectedModel = new MeshNameAttributeClassTest();
+            requestService.Setup(x => x.PutRequest<MeshNameAttributeClassTest>(It.IsAny<string>(), It.IsAny<object>())).Callback((string url, object model) =>
+            {
+                passedUrl = url;
+                passedModel = model as MeshNameAttributeClassTest;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<MeshNameAttributeClassTest>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+
+            expectedModel.Id = id;
+
+            service.Update(expectedModel);
+
+            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal(expectedModel, passedModel);
+
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public async Task ShouldUpdateAsyncFromModelRequestHaveCorrectMeshNameFromAttributeAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+            var passedModel = default(MeshNameAttributeClassTest);
+
+            var expectedModel = new MeshNameAttributeClassTest();
+            requestService.Setup(x => x.PutRequest<MeshNameAttributeClassTest>(It.IsAny<string>(), It.IsAny<object>())).Callback((string url, object model) =>
+            {
+                passedUrl = url;
+                passedModel = model as MeshNameAttributeClassTest;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<MeshNameAttributeClassTest>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+
+            expectedModel.Id = id;
+
+            await service.UpdateAsync(expectedModel);
+
+            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal(expectedModel, passedModel);
+
+            requestService.VerifyAll();
+        }
+
         #endregion
 
         #region Delete Request
@@ -469,6 +593,119 @@ namespace MeshyDB.SDK.Tests
 
             requestService.VerifyAll();
         }
+
+        [Fact]
+        public void ShouldDeleteFromModelRequestHaveCorrectMeshNameFromClassAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+
+            requestService.Setup(x => x.DeleteRequest<object>(It.IsAny<string>())).Callback((string url) =>
+            {
+                passedUrl = url;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<object>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+            var data = new TestMeshNameFromClass();
+
+            data.Id = id;
+
+            service.Delete<TestMeshNameFromClass>(data);
+
+            Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
+
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public async Task ShouldDeleteAsyncFromModelRequestHaveCorrectMeshNameFromClassAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+
+            requestService.Setup(x => x.DeleteRequest<object>(It.IsAny<string>())).Callback((string url) =>
+            {
+                passedUrl = url;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<object>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+            var data = new TestMeshNameFromClass();
+
+            data.Id = id;
+
+            await service.DeleteAsync<TestMeshNameFromClass>(data);
+
+            Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
+
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldDeleteFromModelRequestHaveCorrectMeshNameFromAttributeAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+
+            requestService.Setup(x => x.DeleteRequest<object>(It.IsAny<string>())).Callback((string url) =>
+            {
+                passedUrl = url;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<object>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+            var data = new MeshNameAttributeClassTest();
+
+            data.Id = id;
+
+            service.Delete<MeshNameAttributeClassTest>(data);
+
+            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public async Task ShouldDeleteFromModelAsyncRequestHaveCorrectMeshNameFromAttributeAndUrl()
+        {
+            var requestService = new Mock<IRequestService>();
+
+            var passedUrl = string.Empty;
+
+            requestService.Setup(x => x.DeleteRequest<object>(It.IsAny<string>())).Callback((string url) =>
+            {
+                passedUrl = url;
+            }).Returns(() =>
+            {
+                return Task.FromResult(It.IsAny<object>());
+            }).Verifiable();
+
+            var service = new MeshesService(requestService.Object);
+            var id = Generator.RandomString(25);
+            var data = new MeshNameAttributeClassTest();
+
+            data.Id = id;
+
+            await service.DeleteAsync<MeshNameAttributeClassTest>(data);
+
+            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+
+            requestService.VerifyAll();
+        }
+
 
         #endregion
 

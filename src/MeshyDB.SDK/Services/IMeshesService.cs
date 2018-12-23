@@ -115,6 +115,22 @@ namespace MeshyDB.SDK.Services
         Task<TModel> UpdateAsync<TModel>(string id, TModel model) where TModel : MeshData;
 
         /// <summary>
+        /// Update mesh data for a given id
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be returned</typeparam>
+        /// <param name="model">Mesh data to be updated</param>
+        /// <returns>Result of updated mesh data</returns>
+        TModel Update<TModel>(TModel model) where TModel : MeshData;
+
+        /// <summary>
+        /// Update mesh data for a given id
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be returned</typeparam>
+        /// <param name="model">Mesh data to be updated</param>
+        /// <returns>Result of updated mesh data</returns>
+        Task<TModel> UpdateAsync<TModel>(TModel model) where TModel : MeshData;
+
+        /// <summary>
         /// Get mesh data for a given id
         /// </summary>
         /// <param name="id">Identifier of mesh record to be deleted</param>
@@ -125,5 +141,17 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <param name="id">Identifier of mesh record to be deleted</param>
         Task DeleteAsync<TModel>(string id) where TModel : MeshData;
+
+        /// <summary>
+        /// Get mesh data for a given id
+        /// </summary>
+        /// <param name="model">Mesh data to be deleted</param>
+        void Delete<TModel>(TModel model) where TModel : MeshData;
+
+        /// <summary>
+        /// Get mesh data for a given id
+        /// </summary>
+        /// <param name="model">Mesh data to be deleted</param>
+        Task DeleteAsync<TModel>(TModel model) where TModel : MeshData;
     }
 }

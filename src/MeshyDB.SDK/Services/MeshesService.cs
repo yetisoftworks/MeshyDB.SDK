@@ -62,9 +62,21 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
+        public async Task<TModel> UpdateAsync<TModel>(TModel model) where TModel : MeshData
+        {
+            return await requestService.PutRequest<TModel>($"meshes/{GetMeshName<TModel>()}/{model.Id}", model);
+        }
+
+        /// <inheritdoc/>
         public async Task DeleteAsync<TModel>(string id) where TModel : MeshData
         {
             await requestService.DeleteRequest<object>($"meshes/{GetMeshName<TModel>()}/{id}");
+        }
+
+        /// <inheritdoc/>
+        public async Task DeleteAsync<TModel>(TModel model) where TModel : MeshData
+        {
+            await requestService.DeleteRequest<object>($"meshes/{GetMeshName<TModel>()}/{model.Id}");
         }
 
         /// <inheritdoc/>
@@ -103,9 +115,23 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
+        public TModel Update<TModel>(TModel model) where TModel : MeshData
+        {
+            var t = this.UpdateAsync<TModel>(model);
+            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
         public void Delete<TModel>(string id) where TModel : MeshData
         {
             var t = this.DeleteAsync<TModel>(id);
+            t.ConfigureAwait(true).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public void Delete<TModel>(TModel model) where TModel : MeshData
+        {
+            var t = this.DeleteAsync<TModel>(model);
             t.ConfigureAwait(true).GetAwaiter().GetResult();
         }
 
