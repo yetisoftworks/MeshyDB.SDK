@@ -1,0 +1,56 @@
+﻿<h1>Example Data</h1>
+
+<p>This component demonstrates fetching example data from the server.</p>
+
+<p *ngIf="!examples"><em>Loading...</em></p>
+
+<div *ngIf="!editing">
+    <div class="row">
+        <span class="col-lg-3 col-md-3">Favorite Number</span>
+        <input type="text" [(ngModel)]="favoriteNumber" />
+    </div>
+    <div class="row">
+        <span class="col-lg-3 col-md-3">Name</span>
+        <input type="text" [(ngModel)]="name" />
+    </div>
+    <div class="row">
+        <button type="button" (click)="onFilterClicked()">Filter</button>
+        <button type="button" (click)="onResetClicked()">Reset</button>
+        <button type="button" (click)="onAddNewClicked()">Add New</button>
+    </div>
+</div>
+<table class='table' *ngIf="examples && !editing">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Favorite Number</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of examples.results">
+            <td>{{ data.id }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.favoriteNumber }}</td>
+            <td>
+                <button type="button" (click)="onEditClicked(data)">Edit</button>
+                <button type="button" (click)="onDeleteClicked(data)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="editing">
+    <div class="row">
+        <span>Name</span>
+        <span><input [(ngModel)]="editName" /></span>
+    </div>
+    <div class="row">
+        <span>Favorite Number</span>
+        <span><input [(ngModel)]="editNumber" /></span>
+    </div>
+    <div class="row">
+        <button type="button" (click)="onSaveClicked()">Save</button>
+        <button type="button" (click)="onCancelClicked()">Cancel</button>
+    </div>
+</div>
