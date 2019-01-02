@@ -13,19 +13,19 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithNullTenant()
+        public void ShouldThrowArgumentExceptionWithNullClientKey()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDBClient(null, Generator.RandomString(36), Generator.RandomString(36)));
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithEmptyTenant()
+        public void ShouldThrowArgumentExceptionWithEmptyClientKey()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDBClient(string.Empty, Generator.RandomString(36), Generator.RandomString(36)));
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithWhitespaceTenant()
+        public void ShouldThrowArgumentExceptionWithWhitespaceClientKey()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDBClient(new string(' ', 5), Generator.RandomString(36), Generator.RandomString(36)));
         }
@@ -75,22 +75,21 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldIncludeTenantInApiUrl()
+        public void ShouldIncludeClientKeyInApiUrl()
         {
-            var tenant = Generator.RandomString(5);
-            var client = new MeshyDBClient(tenant, Generator.RandomString(36), Generator.RandomString(36));
+            var clientKey = Generator.RandomString(5);
+            var client = new MeshyDBClient(clientKey, Generator.RandomString(36), Generator.RandomString(36));
 
-            Assert.Equal($"https://api.meshydb.com/{tenant}".ToLower(), client.GetApiUrl().ToLower());
-
+            Assert.Equal($"https://api.meshydb.com/{clientKey}".ToLower(), client.GetApiUrl().ToLower());
         }
 
         [Fact]
-        public void ShouldIncludeTenantInAuthUrl()
+        public void ShouldIncludeClientKeyInAuthUrl()
         {
-            var tenant = Generator.RandomString(5);
-            var client = new MeshyDBClient(tenant, Generator.RandomString(36), Generator.RandomString(36));
+            var clientKey = Generator.RandomString(5);
+            var client = new MeshyDBClient(clientKey, Generator.RandomString(36), Generator.RandomString(36));
 
-            Assert.Equal($"https://auth.meshydb.com/{tenant}".ToLower(), client.GetAuthUrl().ToLower());
+            Assert.Equal($"https://auth.meshydb.com/{clientKey}".ToLower(), client.GetAuthUrl().ToLower());
         }
     }
 }

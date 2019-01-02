@@ -81,6 +81,32 @@ namespace MeshyDB.SDK.Services
         Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, int page = 1, int pageSize = 200) where TModel : MeshData;
 
         /// <summary>
+        /// Searches mesh data for a given filter
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be returned</typeparam>
+        /// <param name="filters">Enumerable of filters that all must be met for data</param>
+        /// <param name="page">Page number to find results on</param>
+        /// <param name="pageSize">Number of items to bring back from search</param>
+        /// <returns>Page result data for the given mesh with applied filter</returns>
+        /// <remarks>
+        /// The maximum page size is 200.
+        /// </remarks>
+        PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, int page = 1, int pageSize = 200) where TModel : MeshData;
+
+        /// <summary>
+        /// Searches mesh data for a given filter
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be returned</typeparam>
+        /// <param name="filters">Enumerable of filters that all must be met for data</param>
+        /// <param name="page">Page number to find results on</param>
+        /// <param name="pageSize">Number of items to bring back from search</param>
+        /// <returns>Page result data for the given mesh with applied filter</returns>
+        /// <remarks>
+        /// The maximum page size is 200.
+        /// </remarks>
+        Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, int page = 1, int pageSize = 200) where TModel : MeshData;
+
+        /// <summary>
         /// Create mesh data
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned</typeparam>

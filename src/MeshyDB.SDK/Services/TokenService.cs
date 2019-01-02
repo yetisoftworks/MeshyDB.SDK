@@ -21,8 +21,8 @@ namespace MeshyDB.SDK.Services
         /// Instantiates an instance of the <see cref="TokenService"/> class.
         /// </summary>
         /// <param name="requestService">Service to make requests against</param>
-        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant</param>
-        /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with tenant</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with client</param>
+        /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with client</param>
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured</exception>
         public TokenService(IRequestService requestService, string publicKey, string privateKey)
         {

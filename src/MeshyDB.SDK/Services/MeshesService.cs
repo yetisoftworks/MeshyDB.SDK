@@ -50,6 +50,14 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
+        public async Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, int page = 1, int pageSize = 200) where TModel : MeshData
+        {
+            var filter = PredicateBuilder.CombineExpressions(filters);
+
+            return await SearchAsync(filter, page, pageSize);
+        }
+
+        /// <inheritdoc/>
         public async Task<TModel> CreateAsync<TModel>(TModel model) where TModel : MeshData
         {
             return await requestService.PostRequest<TModel>($"meshes/{GetMeshName<TModel>()}", model);
@@ -96,6 +104,14 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filter, int page = 1, int pageSize = 200) where TModel : MeshData
         {
+            var t = this.SearchAsync<TModel>(filter, page, pageSize);
+            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, int page = 1, int pageSize = 200) where TModel : MeshData
+        {
+            var filter = PredicateBuilder.CombineExpressions(filters);
             var t = this.SearchAsync<TModel>(filter, page, pageSize);
             return t.ConfigureAwait(true).GetAwaiter().GetResult();
         }

@@ -14,15 +14,15 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Initializes a new instance of <seealso cref="MeshyDBClient"/> that is used to communicate with the MeshyDB REST API
         /// </summary>
-        /// <param name="tenant">Name of MeshyDB tenant required for communication</param>
-        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant</param>
-        /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with tenant</param>
+        /// <param name="clientKey">Name of MeshyDB client key required for communication</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with client</param>
+        /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with client</param>
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured</exception>
-        public MeshyDBClient(string tenant, string publicKey, string privateKey)
+        public MeshyDBClient(string clientKey, string publicKey, string privateKey)
         {
-            if (string.IsNullOrWhiteSpace(tenant))
+            if (string.IsNullOrWhiteSpace(clientKey))
             {
-                throw new ArgumentException($"{nameof(tenant)} was not supplied", nameof(tenant));
+                throw new ArgumentException($"{nameof(clientKey)} was not supplied", nameof(clientKey));
             }
 
             if (string.IsNullOrWhiteSpace(publicKey))
@@ -35,7 +35,7 @@ namespace MeshyDB.SDK
                 throw new ArgumentException($"{nameof(privateKey)} was not supplied", nameof(privateKey));
             }
 
-            Tenant = tenant.Trim();
+            ClientKey = clientKey.Trim();
 
             _publicKey = publicKey.Trim();
             _privateKey = privateKey.Trim();
@@ -64,30 +64,30 @@ namespace MeshyDB.SDK
         }
 
         /// <summary>
-        /// Gets the name of the tenant for MeshyDB communication
+        /// Gets the name of the client key for MeshyDB communication
         /// </summary>
-        internal string Tenant { get; }
+        internal string ClientKey { get; }
 
         /// <summary>
-        /// Gets the Api Url configured for the supplied Tenant
+        /// Gets the Api Url configured for the supplied Client
         /// </summary>
-        /// <returns>The configured tenant Api Url communication</returns>
+        /// <returns>The configured client Api Url communication</returns>
         internal string GetApiUrl()
         {
-            return Constants.TemplateApiUrl.Replace("{tenant}", this.Tenant);
+            return Constants.TemplateApiUrl.Replace("{clientKey}", this.ClientKey);
         }
 
         /// <summary>
-        /// Gets the Auth Url configured for the supplied Tenant
+        /// Gets the Auth Url configured for the supplied Client
         /// </summary>
-        /// <returns>The configured tenant Auth Url communication</returns>
+        /// <returns>The configured client Auth Url communication</returns>
         internal string GetAuthUrl()
         {
-            return Constants.TemplateAuthUrl.Replace("{tenant}", this.Tenant);
+            return Constants.TemplateAuthUrl.Replace("{clientKey}", this.ClientKey);
         }
 
         /// <summary>
-        /// Gets the service configured to communicate with tenant meshes endpoint
+        /// Gets the service configured to communicate with client meshes endpoint
         /// </summary>
         public IMeshesService Meshes { get; private set; }
 
