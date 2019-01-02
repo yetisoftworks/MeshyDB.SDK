@@ -6,7 +6,7 @@
     <Version>0.7.2</Version>
     <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK</RepositoryUrl>
     <PackageProjectUrl>https://github.com/yetisoftworks/MeshyDB.SDK</PackageProjectUrl>
-    <PackageReleaseNotes>Updated minimum .Net Framework version to 4.7.1 and allowed ability to override Http Service for custom caller needs.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for simplier way to use multiple search criteria.</PackageReleaseNotes>
     <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB Backend</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>This SDK allows integration with MeshyDB.</Description>
