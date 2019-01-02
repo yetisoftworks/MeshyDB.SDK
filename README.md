@@ -4,6 +4,10 @@ The Meshy SDK is meant to integration with [MeshyDB](http://meshydb.com).
 
 This sdk is developed in a .Net framework and is distributed using .Net Framework 4.7.1 and .Net Core 2.0.
 
+## What is Meshy?
+
+Meshy is back-end cloud that your application integrates with via a secure RESTful API. This API provides basic Create, Read, Update, and Delete operations. Your data is kept private, isolated and redundantly stored in a high availbilty dynamically scaleable backend. And there is more to come!
+
 ## Getting Started
 Create a [MeshyDB](http://meshydb.com) account if one does not exist.
 
