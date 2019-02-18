@@ -37,9 +37,24 @@ namespace MeshyDB.SDK.Services
             this.baseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
         }
 
+        /// <summary>
+        /// Instantiates an instance of the <see cref="RequestService"/> class.
+        /// </summary>
+        /// <param name="httpService">Service to make http requests against</param>
+        /// <param name="baseUrl">Base Api Url to make requests for</param>
+        /// <param name="tokenService">Service to get token to add authentication to endpoint</param>
+        public RequestService(IHttpService httpService, string baseUrl, ITokenService tokenService, string authenticationId)
+        {
+            this.tokenService = tokenService;
+            this.httpService = httpService ?? throw new ArgumentNullException(nameof(httpService));
+            this.baseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
+            this.authenticationId = authenticationId ?? throw new ArgumentNullException(nameof(authenticationId));
+        }
+
         private readonly ITokenService tokenService;
         private readonly IHttpService httpService;
         private readonly string baseUrl;
+        private readonly string authenticationId;
 
         /// <inheritdoc/>
         public async Task<T> GetRequest<T>(string path)
@@ -65,7 +80,7 @@ namespace MeshyDB.SDK.Services
             request.Content = await GetContent(model, format);
             request.RequestDataFormat = format;
 
-            if(format == RequestDataFormat.Form)
+            if (format == RequestDataFormat.Form)
             {
                 request.ContentType = "application/x-www-form-urlencoded";
             }
@@ -133,9 +148,9 @@ namespace MeshyDB.SDK.Services
 
         private async Task PopulateHeadersAsync(IDictionary<string, string> headers)
         {
-            if (this.tokenService != null)
+            if (this.tokenService != null && !string.IsNullOrWhiteSpace(this.authenticationId))
             {
-                var token = await this.tokenService.GetOAuthTokenAsync();
+                var token = await this.tokenService.GetAccessTokenAsync(this.authenticationId);
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     headers.Add("Authorization", $"Bearer {token}");

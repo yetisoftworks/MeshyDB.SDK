@@ -6,7 +6,7 @@ using System.Text;
 namespace MeshyDB.SDK.Models.Authentication
 {
     /// <summary>
-    /// Class defining elements supplied when a toekn request has been fulfilled
+    /// Class defining elements supplied when a token request has been fulfilled
     /// </summary>
     internal class TokenResponse
     {
@@ -28,5 +28,11 @@ namespace MeshyDB.SDK.Models.Authentication
         /// <remarks>Most likely this will be "Bearer"</remarks>
         [JsonProperty("token_type")]
         public string TokenType { get; internal set; }
+
+        /// <summary>
+        /// OAuth refresh token to allow reauthentication of a user
+        /// </summary>
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; internal set; }
     }
 }

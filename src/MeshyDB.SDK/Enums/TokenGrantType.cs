@@ -10,8 +10,8 @@ namespace MeshyDB.SDK.Enums
     internal static class TokenGrantType
     {
         /// <summary>
-        /// Client Credentials. This is used to generate token using client credentials
+        /// Password. This is used to generate token using password
         /// </summary>
-        internal const string ClientCredentials = "client_credentials";
+        internal const string Password = "password";
     }
 }

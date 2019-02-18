@@ -16,10 +16,18 @@ namespace MeshyDB.SDK.Models
         /// Identifier of the mesh data
         /// </summary>
         /// <remarks>This field is auto generated when a mesh is created</remarks>
-        public string Id { get; internal set; }
-
         [JsonProperty("_id")]
         [IgnoreJsonSerialize]
-        private string ApiId { set { Id = value; } }
+        public string Id { get; internal set; }
+
+        /// <summary>
+        /// Reference identifier of the mesh
+        /// </summary>
+        /// <remarks>
+        /// This will be a url reference to this object
+        /// </remarks>
+        [JsonProperty("_rid")]
+        [IgnoreJsonSerialize]
+        public string ReferenceId { get; internal set; }
     }
 }

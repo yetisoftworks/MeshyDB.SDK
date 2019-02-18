@@ -15,6 +15,6 @@
         /// </summary>
         internal const string TemplateAuthUrl = "https://auth.meshydb.com/{clientKey}";
 
-        internal const string ApiScopes = "meshy.api";
+        internal const string ApiScopes = "meshy.api offline_access";
     }
 }

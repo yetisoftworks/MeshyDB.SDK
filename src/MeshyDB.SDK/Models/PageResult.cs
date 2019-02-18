@@ -9,7 +9,7 @@ namespace MeshyDB.SDK.Models
     /// Class getting paged result of mesh data
     /// </summary>
     /// <typeparam name="TMeshData">The type of data returned from the mesh</typeparam>
-    public class PageResult<TMeshData> where TMeshData : MeshData
+    public class PageResult<TData> where TData : class
     {
         /// <summary>
         /// Page number of the data retrieved
@@ -27,7 +27,7 @@ namespace MeshyDB.SDK.Models
         /// Collection of data results for the given page and page size of the mesh data type
         /// </summary>
         [JsonProperty("results")]
-        public IEnumerable<TMeshData> Results { get; internal set; } = new List<TMeshData>();
+        public IEnumerable<TData> Results { get; internal set; } = new List<TData>();
 
         /// <summary>
         /// Total number of records of the data retrieved

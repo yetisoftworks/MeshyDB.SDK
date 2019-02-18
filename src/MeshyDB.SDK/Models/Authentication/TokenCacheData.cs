@@ -15,6 +15,11 @@ namespace MeshyDB.SDK.Models.Authentication
         public string Token { get; set; }
 
         /// <summary>
+        /// Refresh token from the auth url
+        /// </summary>
+        public string RefreshToken { get; set; }
+
+        /// <summary>
         /// Date and time the token will expire
         /// </summary>
         public DateTimeOffset Expires { get; set; }

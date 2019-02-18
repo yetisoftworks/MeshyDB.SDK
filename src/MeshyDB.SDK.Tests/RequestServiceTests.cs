@@ -48,7 +48,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -60,7 +61,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(new TestData());
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(Generator.RandomString(25));
             }).Verifiable();
@@ -117,7 +118,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -129,7 +131,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(new TestData());
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult((string)null);
             }).Verifiable();
@@ -147,7 +149,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -159,7 +162,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(new TestData());
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(string.Empty);
             }).Verifiable();
@@ -181,7 +184,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -193,7 +197,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(new TestData());
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(Generator.RandomString(25));
             }).Verifiable();
@@ -250,7 +254,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -262,7 +267,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(new TestData());
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult((string)null);
             }).Verifiable();
@@ -280,7 +285,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -292,7 +298,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(new TestData());
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(authenticationId)).Returns(() =>
             {
                 return Task.FromResult(string.Empty);
             }).Verifiable();
@@ -314,7 +320,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -332,7 +339,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(Generator.RandomString(25));
             }).Verifiable();
@@ -404,7 +411,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -421,7 +429,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult((string)null);
             }).Verifiable();
@@ -441,7 +449,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -458,7 +467,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(string.Empty);
             }).Verifiable();
@@ -478,7 +487,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = default(TestData);
@@ -491,7 +501,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(string.Empty);
             }).Verifiable();
@@ -515,7 +525,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -533,7 +544,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(Generator.RandomString(25));
             }).Verifiable();
@@ -554,7 +565,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -572,7 +584,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(Generator.RandomString(25));
             }).Verifiable();
@@ -593,7 +605,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -611,7 +624,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(Generator.RandomString(25));
             }).Verifiable();
@@ -683,7 +696,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -700,7 +714,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult((string)null);
             }).Verifiable();
@@ -720,7 +734,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object,authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -737,7 +752,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(string.Empty);
             }).Verifiable();
@@ -757,7 +772,8 @@ namespace MeshyDB.SDK.Tests
             var httpService = new Mock<IHttpService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object,authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = default(TestData);
@@ -770,7 +786,7 @@ namespace MeshyDB.SDK.Tests
                 return Task.FromResult(data);
             }).Verifiable();
 
-            tokenService.Setup(x => x.GetOAuthTokenAsync()).Returns(() =>
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
             {
                 return Task.FromResult(string.Empty);
             }).Verifiable();

@@ -28,7 +28,7 @@ namespace MeshyDB.SDK.Models.Authentication
         /// </summary>
         /// <remarks>Client Credentials is currently the only supported grant type</remarks>
         [JsonProperty("grant_type")]
-        public string GrantType { get; set; } = TokenGrantType.ClientCredentials;
+        public string GrantType { get; set; } = TokenGrantType.Password;
 
         /// <summary>
         /// User name registered with the supplied client id to authenticate on behalf of
@@ -47,5 +47,8 @@ namespace MeshyDB.SDK.Models.Authentication
         /// </summary>
         [JsonProperty("scope")]
         public string Scope { get; set; } = Constants.ApiScopes;
+
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; set; }
     }
 }
