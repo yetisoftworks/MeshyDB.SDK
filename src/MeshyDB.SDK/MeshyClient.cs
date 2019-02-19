@@ -8,11 +8,16 @@ namespace MeshyDB.SDK
 {
     internal class MeshyClient : IMeshyClient
     {
-        public MeshyClient(ITokenService tokenService, IRequestService requestService, string identifier)
+        public MeshyClient(ITokenService tokenService, IRequestService requestService, string authenticationId)
         {
             TokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
             RequestService = requestService ?? throw new ArgumentNullException(nameof(requestService));
-            Identifier = identifier ?? throw new ArgumentNullException(nameof(identifier));
+            AuthenticationId = authenticationId ?? throw new ArgumentNullException(nameof(authenticationId));
+
+            if (string.IsNullOrWhiteSpace(authenticationId))
+            {
+                throw new ArgumentException(nameof(authenticationId));
+            }
 
             Meshes = new MeshesService(requestService);
             Users = new UsersService(requestService);
@@ -25,24 +30,24 @@ namespace MeshyDB.SDK
         /// <inheritdoc/>
         public IUsersService Users { get; private set; }
 
-        internal IAuthenticationService AuthenticationService { get; }
+        internal IAuthenticationService AuthenticationService { get; set; }
 
-        internal ITokenService TokenService { get; }
+        internal ITokenService TokenService { get; set; }
 
-        internal IRequestService RequestService { get; }
+        internal IRequestService RequestService { get; set; }
 
-        public string Identifier { get; private set; }
+        public string AuthenticationId { get; private set; }
 
         /// <inheritdoc/>
-        public async Task SignOutAsync()
+        public async Task SignoutAsync()
         {
-            await this.TokenService.Signout(this.Identifier);
+            await this.TokenService.Signout(this.AuthenticationId);
         }
 
         /// <inheritdoc/>
-        public void SignOut()
+        public void Signout()
         {
-            var t = this.SignOutAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.SignoutAsync().ConfigureAwait(true).GetAwaiter();
 
             t.GetResult();
         }
@@ -56,7 +61,7 @@ namespace MeshyDB.SDK
         /// <inheritdoc/>
         public async Task<string> RetrievePersistanceTokenAsync()
         {
-            return await this.AuthenticationService.RetrievePersistanceTokenAsync(this.Identifier);
+            return await this.AuthenticationService.RetrievePersistanceTokenAsync(this.AuthenticationId);
         }
 
         /// <inheritdoc/>

@@ -37,12 +37,12 @@ namespace MeshyDB.SDK
         /// Sign out currently logged in user
         /// </summary>
         /// <returns>Task to await success of sign out</returns>
-        Task SignOutAsync();
+        Task SignoutAsync();
 
         /// <summary>
         /// Sign out currently logged in user
         /// </summary>
-        void SignOut();
+        void Signout();
 
         /// <summary>
         /// Retrieves persistance token of logged in user to refresh their session at a later time
