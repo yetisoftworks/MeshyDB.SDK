@@ -1,5 +1,7 @@
 site_name: MeshyDB
     
+theme: readthedocs
+    
 nav:
     - Introduction: index.md
     - Test: test.md
