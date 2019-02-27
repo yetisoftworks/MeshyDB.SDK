@@ -1,6 +1,6 @@
 site_name: MeshyDB
     
-theme: readthedocs
+theme: mkdocs
     
 nav:
     - Introduction: index.md
