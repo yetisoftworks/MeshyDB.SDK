@@ -1,9 +1,4 @@
 site_name: MeshyDB
-
-nav:
-    - 'Introduction': 'index.md'
-pages:
-    - ['index.md', 'Introduction']
     
 extra_css: [css/syntaxhighlight.css]
 
