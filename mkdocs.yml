@@ -1,7 +1,5 @@
 site_name: MeshyDB
 
 theme:
-    name: mkdocs
+    name: readthedoc
     highlightjs: true
-    hljs_languages:
-        - csharp
