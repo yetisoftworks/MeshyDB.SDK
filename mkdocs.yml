@@ -1,1 +1,3 @@
 site_name: MeshyDB
+
+extra_css: [syntaxhighlight.css]
