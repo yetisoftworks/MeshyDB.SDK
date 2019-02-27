@@ -3,3 +3,4 @@ site_name: MeshyDB
 theme:
     name: readthedocs
     highlightjs: true
+    hljs_style: github
