@@ -1,2 +1,2 @@
-docs/
-    index.md
+nav:
+- 'docs/index.md'
