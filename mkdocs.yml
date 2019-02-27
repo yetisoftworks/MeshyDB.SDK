@@ -3,4 +3,4 @@ site_name: MeshyDB
 extra_css: [css/syntaxhighlight.css]
 
 nav:
-  - 'Home': 'index.md'
+    - 'Introduction': 'index.md'
