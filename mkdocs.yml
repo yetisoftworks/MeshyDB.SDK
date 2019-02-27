@@ -1,5 +1,5 @@
 site_name: MeshyDB
 
 theme:
-    name: readthedoc
+    name: readthedocs
     highlightjs: true
