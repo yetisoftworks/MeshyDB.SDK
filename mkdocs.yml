@@ -6,6 +6,9 @@ nav:
     - Introduction: index.md
     - Test: test.md
 
-extra_css: [css/syntaxhighlight.css,css/tabs.css]
+extra_css: 
+    - css/syntaxhighlight.css
+    - css/tabs.css
 
-extra_javascript: [scripts/tabs.js]
+extra_javascript: 
+    - scripts/tabs.js
