@@ -1,9 +1,9 @@
 This is a test
 
-```objectivec
+```c#
 Your objective-c code goes here.
 ```
-```swift  
+```javascript  
 Your swift code goes here.
 ``` 
 
