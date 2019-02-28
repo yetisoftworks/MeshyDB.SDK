@@ -1,53 +1,19 @@
-``` bash tab="Bash"
-#!/bin/bash
-
-echo "Hello world!"
-```
-
-``` c tab="C"
-#include <stdio.h>
-
-int main(void) {
-  printf("Hello world!\n");
-}
-```
-
-``` c++ tab="C++" 
-#include <iostream>
-
-int main() {
-  std::cout << "Hello world!" << std::endl;
-  return 0;
-}
-```
-
-``` c# tab="C#"
-using System;
-
-class Program {
-  static void Main(string[] args) {
-    Console.WriteLine("Hello world!");
-  }
-}
-```
-
-
 This is a test
 
-```c# tab="C#"
+```c#
 Your objective-c code goes here.
 ```
 
-```javascript tab="Javascript"
+```javascript
 Your swift code goes here.
 ``` 
 
 What happens now?
 
-```c# tab="C#"
+```c#
 var a = new Thing();
 ```
 
-```javascript tab="Javascript"
+```javascript
 var a = new Thing();
 ```
