@@ -11,5 +11,4 @@ extra_css:
     
 markdown_extensions:
     - codehilite
-    - pymdownx
     - pymdownx.superfences
