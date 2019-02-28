@@ -12,7 +12,7 @@ int main(void) {
 }
 ```
 
-``` c++ tab="C++"
+``` c++ tab="C++" 
 #include <iostream>
 
 int main() {
@@ -34,20 +34,20 @@ class Program {
 
 This is a test
 
-```c# tab="C#"
+```c# tab="C#" fct_label="C#"
 Your objective-c code goes here.
 ```
 
-```javascript tab="Javascript"
+```javascript tab="Javascript" fct_label="Javascript"
 Your swift code goes here.
 ``` 
 
 What happens now?
 
-```c# tab="C#"
+```c# tab="C#" fct_label="C#"
 var a = new Thing();
 ```
 
-```javascript tab="Javascript"
+```javascript tab="Javascript" fct_label="Javascript"
 var a = new Thing();
 ```
