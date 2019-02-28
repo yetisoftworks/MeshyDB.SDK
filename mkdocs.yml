@@ -10,4 +10,5 @@ extra_css:
     - css/syntaxhighlight.css
     
 markdown_extensions:
+    - pymdownx
     - pymdownx.superfences
