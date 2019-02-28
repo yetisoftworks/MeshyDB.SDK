@@ -1,1 +1,2 @@
 markdown-fenced-code-tabs
+pygments
