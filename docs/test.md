@@ -1,20 +1,16 @@
 This is a test
 
-# [C#](#tab/csharp)
-```c# fct_label="C#"
+```c# tab="C#"
 Your objective-c code goes here.
 ```
-# [Javascript](#tab/javascript)
-```javascript fct_label="Javascript"
+```javascript tab="Javascript"
 Your swift code goes here.
 ``` 
 
 What happens now?
-# [C#](#tab/csharp)
-```c# fct_label="C#"
+```c# tab="C#"
 var a = new Thing();
 ```
-# [Javascript](#tab/javascript)
-```javascript fct_label="Javascript"
+```javascript tab="Javascript"
 var a = new Thing();
 ```
