@@ -11,5 +11,4 @@ extra_css:
     - css/tabs.css
     
 markdown_extensions:
-    - codehilite
-    - pymdownx.superfences
+    - markdown_fenced_code_tabs
