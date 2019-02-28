@@ -8,7 +8,6 @@ nav:
 
 extra_css: 
     - css/syntaxhighlight.css
-    - css/tabs.css
-
+    
 markdown_extensions:
-  - markdown_fenced_code_tabs
+  - codehilite
