@@ -12,3 +12,4 @@ extra_css:
 extra_javascript:
     - scripts/tabs.js
     - https://cdn.jsdelivr.net/npm/docsify@4
+    - https://cdn.jsdelivr.net/npm/docsify-tabs@1
