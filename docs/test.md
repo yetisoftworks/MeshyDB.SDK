@@ -1,5 +1,19 @@
 This is a test
+<!-- tabs:start -->
 
+#### ** English **
+
+Hello!
+
+#### ** French **
+
+Bonjour!
+
+#### ** Italian **
+
+Ciao!
+
+<!-- tabs:end -->
 
 <!-- tabs:start -->
 #### ** C# **
