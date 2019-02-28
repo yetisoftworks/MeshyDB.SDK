@@ -9,6 +9,5 @@ nav:
 extra_css: 
     - css/syntaxhighlight.css
     
-extra_javascript:
-    - scripts/tabs.js
-    - https://cdn.jsdelivr.net/npm/docsify-tabs@1
+markdown_extensions:
+    - markdown_fenced_code_tabs
