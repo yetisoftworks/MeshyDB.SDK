@@ -1,2 +1,3 @@
 markdown-fenced-code-tabs
 pygments
+pymdown-extensions
