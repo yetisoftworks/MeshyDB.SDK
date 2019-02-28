@@ -4,14 +4,14 @@ This is a test
 <button class="tablink swiftbutton" onclick="openCode('swift', this, '#03a9f4')" markdown="1">Swift</button> 
  
   
-```objectivec  
 <div class="obj tabcontent"> 
+```objectivec
 Your objective-c code goes here.
-</div>
-```  
+```
+</div>  
   
-```swift  
 <div class="swift tabcontent"> 
+```swift  
 Your swift code goes here.
-</div>
 ``` 
+</div>
