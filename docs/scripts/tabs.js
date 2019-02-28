@@ -29,6 +29,9 @@
       });
 
       function onhashchange() {
+          console.log(hashcache);
+          console.log(location);
+          console.log(location.hash);
         var lang = hashcache[location.hash].lang;
         Array.prototype.forEach.call(Object.keys(langcache), function (maybelang) {
           if (lang === maybelang) {
