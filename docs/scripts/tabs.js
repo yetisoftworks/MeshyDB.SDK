@@ -59,5 +59,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-view raw
-tabhack.js hosted with ❤ by GitHub
