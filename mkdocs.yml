@@ -10,5 +10,8 @@ extra_css:
     - css/syntaxhighlight.css
     - css/tabs.css
     
+extra_javascript:
+    - scripts/tabs.js
+    
 markdown_extensions:
     - markdown_fenced_code_tabs
