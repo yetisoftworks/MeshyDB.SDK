@@ -9,7 +9,7 @@ Now that we have the required information let's jump in and see how easy it is t
 Let's log in using our MeshyDB credentials.
 
 ``` rest
-POST https://api.meshydb.com/{clientKey}/connect/token
+POST https://auth.meshydb.com/{clientKey}/connect/token
 Body(x-www-form-urlencoded):  
   client_id={publicKey}&grant_type=password&username={username}&password={password}&scope=meshy.api%20offline_access
 
@@ -177,4 +177,42 @@ _pageSize_:
 ## Delete data
 We are now done with our data, so let us clean up after ourselves.
 
+``` rest
+DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
+Headers:
+  Authentication: Bearer {access_token}
+```
+
+```c#
+await client.Meshes.DeleteAsync(person);
+```
+
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+ 
+_access_token_:
+  Token identifying authorization with MeshyDB requested during [Login](#login)
+  
+_mesh_:
+  Identifies name of mesh collection. e.g. person.
+
+_id_:
+  Idenfities location of what Mesh data to delete.
+  
 ## Sign out
+Now the user is complete. Let us sign out so someone else can have a try.
+
+``` rest
+POST https://auth.meshydb.com/{clientKey}/connect/token
+Body(x-www-form-urlencoded):  
+  client_id={clientKey}&grant_type=refresh_token&token={refresh_token}
+```
+
+```c#
+await client.SignoutAsync();
+```
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+ 
+_refresh_token_:
+  Token to allow reauthorization with MeshyDB after the access token expires requested during [Login](#login)
