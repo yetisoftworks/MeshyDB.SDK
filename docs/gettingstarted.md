@@ -40,6 +40,48 @@ _password_:
   User password.
  
 ## Create data
+Now that we are logged in we can use our Bearer token to authenticate requests with MeshyDB and create some data.
+
+``` rest
+POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
+Headers:
+  Authentication: Bearer {access_token}
+Body(json):
+  {
+    "firstName": "Bob",
+    "lastName": "Bobberson"
+  }
+  
+Example Response:
+  {
+    "_id":"5c78cc81dd870827a8e7b6c4",
+    "firstName": "Bob",
+    "lastName": "Bobberson"
+    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+  }
+```
+
+```c#
+// Mesh is derived from class name
+public class Person: MeshData
+{
+  public string FirstName { get; set; }
+  public string LastName { get; set; }
+}
+
+var person = await client.Meshes.CreateAsync(new Person(){
+  FirstName="Bob",
+  LastName="Bobberson"
+});
+```
+
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+ 
+ _access_token_:
+  Token identifying authorization with MeshyDB requested during [Login](Login)
+_mesh_:
+  Identifies name of mesh collection. e.g. person.
 
 ## Update data
 
