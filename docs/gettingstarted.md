@@ -42,6 +42,8 @@ _password_:
 ## Create data
 Now that we are logged in we can use our Bearer token to authenticate requests with MeshyDB and create some data.
 
+The data object can whatever information you would like to capture. The following example will have some data fields with example data.
+
 ``` rest
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
 Headers:
@@ -78,15 +80,101 @@ var person = await client.Meshes.CreateAsync(new Person(){
 _clientKey_: 
   Indicates which tenant you are connecting for authentication.
  
- _access_token_:
+_access_token_:
   Token identifying authorization with MeshyDB requested during [Login](#login)
+  
 _mesh_:
   Identifies name of mesh collection. e.g. person.
 
 ## Update data
+If we need to make a modificaiton let's update our Mesh!
+
+``` rest
+PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
+Headers:
+  Authentication: Bearer {access_token}
+Body(json):
+  {
+    "firstName": "Bobbo",
+    "lastName": "Bobberson"
+  }
+  
+Example Response:
+  {
+    "_id":"5c78cc81dd870827a8e7b6c4",
+    "firstName": "Bobbo",
+    "lastName": "Bobberson"
+    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+  }
+```
+
+```c#
+person.FirstName = "Bobbo";
+
+person = await client.Meshes.UpdateAsync(person);
+```
+
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+ 
+_access_token_:
+  Token identifying authorization with MeshyDB requested during [Login](#login)
+  
+_mesh_:
+  Identifies name of mesh collection. e.g. person.
+
+_id_:
+  Idenfities location of what Mesh data to replace.
 
 ## Search data
+Let's see if we can find Bobbo.
 
+
+``` rest
+GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&orderby={orderby}&page={page}&pageSize={pageSize}
+Headers:
+  Authentication: Bearer {access_token}
+  
+Example Response:
+  {
+    "page": 1,
+    "pageSize": 25,
+    "results": [{
+                 "_id":"5c78cc81dd870827a8e7b6c4",
+                 "firstName": "Bobbo",
+                 "lastName": "Bobberson"
+                 "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+               }],
+    "totalRecords": 1
+  }
+```
+
+```c#
+var pagedPersonResult = await client.Meshes.SearchAsync<Person>({filter},{page},{pageSize});
+```
+
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+ 
+_access_token_:
+  Token identifying authorization with MeshyDB requested during [Login](#login)
+  
+_mesh_:
+  Identifies name of mesh collection. e.g. person.
+
+_filter_:
+  Filter criteria for search. Uses MongoDB format.
+  
+_orderby_:
+  How to order results.
+  
+_page_:
+  Which page to return
+
+_pageSize_:
+  Number of results to bring  back. Maximum is 200.
+  
 ## Delete data
+We are now done with our data, so let us clean up after ourselves.
 
 ## Sign out
