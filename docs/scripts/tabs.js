@@ -1,3 +1,4 @@
+/*
 if(localStorage["selectedLang"]){
   $(':input.code-tab[data-lang="'+ localStorage["selectedLang"]  +'"]:not(:checked)').click();
 }
@@ -7,3 +8,4 @@ $(':input.code-tab').click(function(){
   $(':input.code-tab[data-lang="'+ selectedLang  +'"]:not(:checked)').not(this).click();
   localStorage["selectedLang"] = selectedLang;
 });
+*/
