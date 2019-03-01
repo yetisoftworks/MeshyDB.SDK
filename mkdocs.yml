@@ -3,8 +3,8 @@ site_name: MeshyDB
 theme: readthedocs
     
 nav:
-    - Welcome: index.md
-    - Getting Started: gettingstarted.md
+    - index.md
+    - gettingstarted.md
     - API:
         - Authentication: api/auth.md
         - Users: api/users.md
