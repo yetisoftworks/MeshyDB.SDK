@@ -5,7 +5,7 @@ theme: readthedocs
 nav:
     - Welcome: index.md
     - Getting Started: gettingstarted.md
-    - API
+    - API:
         - Authentication: api/auth.md
         - Users: api/users.md
         - Meshes: api/meshes.md
