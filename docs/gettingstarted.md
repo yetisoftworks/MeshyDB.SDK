@@ -79,7 +79,7 @@ _clientKey_:
   Indicates which tenant you are connecting for authentication.
  
  _access_token_:
-  Token identifying authorization with MeshyDB requested during [Login](Login)
+  Token identifying authorization with MeshyDB requested during [Login](#login)
 _mesh_:
   Identifies name of mesh collection. e.g. person.
 
