@@ -9,7 +9,6 @@ nav:
         - Authentication: api/auth.md
         - Users: api/users.md
         - Meshes: api/meshes.md
-    - Test: test.md
 
 extra_css: 
     - css/syntaxhighlight.css
