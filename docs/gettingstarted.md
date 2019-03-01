@@ -10,21 +10,35 @@ Let's log in using our MeshyDB credentials.
 
 ``` rest
 POST https://api.meshydb.com/{clientKey}/connect/token
-Body:  
+Body(x-www-form-urlencoded):  
+  client_id={publicKey}&grant_type=password&username={username}&password={password}&scope=meshy.api%20offline_access
+
+Example Response:
   {
-      'client_id': {publicKey},
-      'username': {username},
-      'password': {password},
-      'grant_type': "password",
-      'scope': 'meshy.api offline_access'
+    "access_token": "ey...",
+    "expires_in": 3600,
+    "token_type": "Bearer",
+    "refresh_token": "ab23cd3343e9328g"
   }
 ```
 
 ```c#
-  var database = new MeshyDB({clientKey},{publicKey});
-  var client = database.LoginWithPassword(userName, password);
+  var database = new MeshyDB({clientKey}, {publicKey});
+  var client = database.LoginWithPassword({username}, {password});
 ```
 
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+  
+_publicKey_: 
+  Public accessor for application.
+  
+_username_:
+  User name.
+
+_password_:
+  User password.
+ 
 ## Create data
 
 ## Update data
