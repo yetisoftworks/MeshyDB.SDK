@@ -67,6 +67,7 @@ PUT https://api.meshydb.com/{clientKey}/users/{id}
 ```
 
 ``` c#
+await client.Users.UpdateUserAsync({id},{user});
 ```
 
 ## Delete User
