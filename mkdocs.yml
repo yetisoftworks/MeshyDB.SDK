@@ -4,7 +4,7 @@ theme: readthedocs
     
 nav:
     - index.md
-    - gettingstarted.md
+    - getting started.md
     - API:
         - Authentication: api/auth.md
         - Users: api/users.md
