@@ -8,7 +8,7 @@ Now that we have the required information let's jump in and see how easy it is t
 ## Login
 Let's log in using our MeshyDB credentials.
 
-``` rest
+``` REST
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Body(x-www-form-urlencoded):  
   client_id={publicKey}&grant_type=password&username={username}&password={password}&scope=meshy.api%20offline_access
@@ -44,7 +44,7 @@ Now that we are logged in we can use our Bearer token to authenticate requests w
 
 The data object can whatever information you would like to capture. The following example will have some data fields with example data.
 
-``` rest
+``` REST
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
 Headers:
   Authentication: Bearer {access_token}
@@ -89,7 +89,7 @@ _mesh_:
 ## Update data
 If we need to make a modificaiton let's update our Mesh!
 
-``` rest
+``` REST
 PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Headers:
   Authentication: Bearer {access_token}
@@ -130,7 +130,7 @@ _id_:
 Let's see if we can find Bobbo.
 
 
-``` rest
+``` REST
 GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&orderby={orderby}&page={page}&pageSize={pageSize}
 Headers:
   Authentication: Bearer {access_token}
@@ -177,7 +177,7 @@ _pageSize_:
 ## Delete data
 We are now done with our data, so let us clean up after ourselves.
 
-``` rest
+``` REST
 DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Headers:
   Authentication: Bearer {access_token}
@@ -202,7 +202,7 @@ _id_:
 ## Sign out
 Now the user is complete. Let us sign out so someone else can have a try.
 
-``` rest
+``` REST
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Body(x-www-form-urlencoded):  
   client_id={clientKey}&grant_type=refresh_token&token={refresh_token}
