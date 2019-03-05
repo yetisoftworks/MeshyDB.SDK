@@ -1,3 +1,103 @@
+## Create User
+``` REST fct_label="REST"
+POST https://api.meshydb.com/{clientKey}/users
+Headers:
+  Authentication: Bearer {access_token}
+Body(json):
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ],
+    "newPassword": "newPassword"
+  }
+  
+Example Response:
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
+
+```
+
+``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+
+await database.CreateNewUserAsync(user);
+```
+
+## Get by id
+``` REST fct_label="REST"
+GET https://api.meshydb.com/{clientKey}/users/{id}
+Headers:
+  Authentication: Bearer {access_token}
+Example Response:
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
+```
+
+``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+  
+await client.Users.GetUserAsync(id);
+```
+
+## Get Me
+``` REST fct_label="REST"
+GET https://api.meshydb.com/{clientKey}/users/me
+Headers:
+  Authentication: Bearer {access_token}
+Example Response:
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
+```
+
+``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
+await client.Users.GetLoggedInUserAsync();
+```
+
 ## Search
 ``` REST fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users?query={query}&roles={roles}&activeOnly={activeOnly}&page={page}&pageSize={pageSize}
@@ -30,15 +130,16 @@ Example Response:
   var database = new MeshyDB({clientKey}, {publicKey});
   var client = await database.LoginWithAnonymouslyAsync();
   
-  await client.Users.GetUsersAsync(nameParts, roles, activeOnly, page, pageSize);
+  await client.Users.GetUsersAsync(query, roles, activeOnly, page, pageSize);
 ```
 
-## Get Me
+
+## Update User
 ``` REST fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users/me
+PUT https://api.meshydb.com/{clientKey}/users/{id}
 Headers:
   Authentication: Bearer {access_token}
-Example Response:
+Body(json):
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -52,41 +153,48 @@ Example Response:
                 "test"
              ]
   }
-```
-
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
-
-await client.Users.GetLoggedInUserAsync();
-```
-
-## Get by id
-``` REST fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users/{id}
-Headers:
-  Authentication: Bearer {access_token}
-Example Response:
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-```
-
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
   
-await client.Users.GetUserAsync(id);
+Example Response:
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
+```
+
+``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
+await client.Users.UpdateUserAsync(id, user);
+```
+
+## Delete User
+``` REST fct_label="REST"
+DELETE https://api.meshydb.com/{clientKey}/users/{id}
+Headers:
+  Authentication: Bearer {access_token}
+  
+Example Response:
+  {
+    "deletedCount": 1,
+    "isAcknowledged": true
+  }
+```
+
+``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
+await client.Users.DeleteUserAsync(id);
 ```
 
 ## Forgot Password
@@ -150,111 +258,4 @@ var database = new MeshyDB({clientKey}, {publicKey});
 var client = await database.LoginWithAnonymouslyAsync();
 
 await client.UpdatePasswordAsync(previousPassword, newPassword);
-```
-
-## Create User
-``` REST fct_label="REST"
-POST https://api.meshydb.com/{clientKey}/users
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ],
-    "newPassword": "newPassword"
-  }
-  
-Example Response:
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-
-```
-
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-
-await database.CreateNewUserAsync(user);
-```
-
-## Update User
-``` REST fct_label="REST"
-PUT https://api.meshydb.com/{clientKey}/users/{id}
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-  
-Example Response:
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-```
-
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
-
-await client.Users.UpdateUserAsync(id, user);
-```
-
-## Delete User
-``` REST fct_label="REST"
-DELETE https://api.meshydb.com/{clientKey}/users/{id}
-Headers:
-  Authentication: Bearer {access_token}
-  
-Example Response:
-  {
-    "deletedCount": 1,
-    "isAcknowledged": true
-  }
-```
-
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
-
-await client.Users.DeleteUserAsync(id);
 ```
