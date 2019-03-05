@@ -1,10 +1,37 @@
-#Getting Started
+# Getting Started
 
 The following endpoints require to be authenticated.
 
-// generate access token
-// create database and get client
+``` REST fct_label="REST"
+POST https://auth.meshydb.com/{clientKey}/connect/token
+Body(x-www-form-urlencoded):  
+  client_id={publicKey}&grant_type=password&username={username}&password={password}&scope=meshy.api%20offline_access
 
+Example Response:
+  {
+    "access_token": "ey...",
+    "expires_in": 3600,
+    "token_type": "Bearer",
+    "refresh_token": "ab23cd3343e9328g"
+  }
+```
+
+```c#
+  var database = new MeshyDB({clientKey}, {publicKey});
+  var client = database.LoginWithPassword({username}, {password});
+```
+_clientKey_: 
+  Indicates which tenant you are connecting for authentication.
+  
+_publicKey_: 
+  Public accessor for application.
+  
+_username_:
+  User name.
+
+_password_:
+  User password.
+  
 ## Create
 Creates a new user that can log into the system.
 
