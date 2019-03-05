@@ -27,7 +27,10 @@ Example Response:
 ```
 
 ``` c#
-await client.Users.GetUsersAsync(nameParts, roles, activeOnly, page, pageSize);
+  var database = new MeshyDB({clientKey}, {publicKey});
+  var client = await database.LoginWithAnonymouslyAsync();
+  
+  await client.Users.GetUsersAsync(nameParts, roles, activeOnly, page, pageSize);
 ```
 
 ## Get Me
@@ -52,6 +55,9 @@ Example Response:
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
 await client.Users.GetLoggedInUserAsync();
 ```
 
@@ -77,6 +83,9 @@ Example Response:
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+  
 await client.Users.GetUserAsync(id);
 ```
 
@@ -99,6 +108,8 @@ Example Response:
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+  
 await database.ForgotPasswordAsync(username);
 ```
 
@@ -117,6 +128,8 @@ Body(json):
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+
 await database.ResetPasswordAsync(resetHash, newPassword);
 ```
 
@@ -133,6 +146,9 @@ Body(json):
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
 await client.UpdatePasswordAsync(previousPassword, newPassword);
 ```
 
@@ -175,6 +191,8 @@ Example Response:
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+
 await database.CreateNewUserAsync(user);
 ```
 
@@ -215,6 +233,9 @@ Example Response:
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
 await client.Users.UpdateUserAsync(id, user);
 ```
 
@@ -232,5 +253,8 @@ Example Response:
 ```
 
 ``` c#
+var database = new MeshyDB({clientKey}, {publicKey});
+var client = await database.LoginWithAnonymouslyAsync();
+
 await client.Users.DeleteUserAsync(id);
 ```
