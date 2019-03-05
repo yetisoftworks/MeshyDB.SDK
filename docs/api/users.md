@@ -21,6 +21,8 @@ Example Response:
   var client = database.LoginWithPassword({username}, {password});
 ```
 
+
+
 | Parameter   | Description                                                   | Type    |
 |:------------|:--------------------------------------------------------------|:--------|
 |_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
@@ -73,6 +75,7 @@ var database = new MeshyDB({clientKey}, {publicKey});
 
 await database.CreateNewUserAsync(user);
 ```
+
 
 
 | Parameter   | Description                                                   | Type    |
