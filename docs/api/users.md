@@ -20,9 +20,13 @@ Example Response:
   var database = new MeshyDB({clientKey}, {publicKey});
   var client = database.LoginWithPassword({username}, {password});
 ```
-_clientKey_: 
-  Indicates which tenant you are connecting for authentication.
-  
+
+### Arguments
+<div class="argument">
+  <span class="parameter">clientKey</span>Indicates which tenant you are connecting for authentication.
+  <span class="type">type: <span>string</span></span>
+</div>
+
 _publicKey_: 
   Public accessor for application.
   
