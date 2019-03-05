@@ -33,6 +33,22 @@ await client.Users.GetUsersAsync(nameParts, roles, activeOnly, page, pageSize);
 ## Get Me
 ``` REST fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users/me
+Headers:
+  Authentication: Bearer {access_token}
+Example Response:
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
 ```
 
 ``` c#
@@ -42,6 +58,22 @@ await client.Users.GetLoggedInUserAsync();
 ## Get by id
 ``` REST fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users/{id}
+Headers:
+  Authentication: Bearer {access_token}
+Example Response:
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
 ```
 
 ``` c#
@@ -51,6 +83,11 @@ await client.Users.GetUserAsync({id});
 ## Forgot Password
 ``` REST fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/forgotpassword
+Headers:
+  Authentication: Bearer {access_token}
+Body(json):
+  {
+  }
 ```
 
 ``` c#
