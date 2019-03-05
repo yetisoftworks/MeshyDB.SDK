@@ -23,7 +23,8 @@ Example Response:
 
 ### Arguments
 <div class="argument">
-  <span class="parameter">clientKey</span>Indicates which tenant you are connecting for authentication.
+  <div class="parameter">clientKey</div>
+  <div class="description">Indicates which tenant you are connecting for authentication</div>
   <span class="type">type: <span>string</span></span>
 </div>
 
