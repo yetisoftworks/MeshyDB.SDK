@@ -28,7 +28,7 @@ All meshes will have the following pieces  of information.
 *_rid*
   Reference url for more detailed data.
   
-  ## Create data
+## Create data
 ``` REST fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
 Headers:
