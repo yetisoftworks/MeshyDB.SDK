@@ -21,7 +21,7 @@ Example Response:
   var client = database.LoginWithPassword({username}, {password});
 ```
 
-### Arguments
+**Arguments**
 <div class="argument">
   <div class="parameter">clientKey</div>
   <div class="description">Indicates which tenant you are connecting for authentication.</div>
@@ -91,7 +91,61 @@ var database = new MeshyDB({clientKey}, {publicKey});
 
 await database.CreateNewUserAsync(user);
 ```
+**Arguments**
+<div class="argument">
+  <div class="parameter">id <em>(required)<em></div>
+  <div class="description">Identifier of user.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
 
+<div class="argument">
+  <div class="parameter">username <em>(required)<em></div>
+  <div class="description">Username of user.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">firstName</div>
+  <div class="description">First name of user.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">lastName</div>
+  <div class="description">Last name of user.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">verified</div>
+  <div class="description">Identifies whether or not the user is verified.</div>
+  <span class="type">type: <span>bool</span> Default: <span>false</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">isActive</div>
+  <div class="description">Identifies whether or not the user is active.</div>
+  <span class="type">type: <span>bool</span> Default: <span>false</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">phoneNumber</div>
+  <div class="description">Phone number of user.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">roles</div>
+  <div class="description">Collection of roles user has access.</div>
+  <span class="type">type: <span>string[]</span></span>
+</div>
+
+<div class="argument">
+  <div class="parameter">newPassword <em>(required)<em></div>
+  <div class="description">Password of user to use for login.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
+    
 ## Retrieve a single user
 Retrieves details about an existing user.
 
