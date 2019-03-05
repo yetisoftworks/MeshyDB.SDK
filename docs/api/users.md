@@ -24,18 +24,27 @@ Example Response:
 ### Arguments
 <div class="argument">
   <div class="parameter">clientKey</div>
-  <div class="description">Indicates which tenant you are connecting for authentication</div>
+  <div class="description">Indicates which tenant you are connecting for authentication.</div>
   <span class="type">type: <span>string</span></span>
 </div>
 
-_publicKey_: 
-  Public accessor for application.
+<div class="argument">
+  <div class="parameter">publicKey</div>
+  <div class="description">Public accessor for application.</div>
+  <span class="type">type: <span>string</span></span>
+</div>  
   
-_username_:
-  User name.
+<div class="argument">
+  <div class="parameter">username</div>
+  <div class="description">User name.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
 
-_password_:
-  User password.
+<div class="argument">
+  <div class="parameter">password</div>
+  <div class="description">User password.</div>
+  <span class="type">type: <span>string</span></span>
+</div>
   
 ## Create
 Creates a new user that can log into the system.
