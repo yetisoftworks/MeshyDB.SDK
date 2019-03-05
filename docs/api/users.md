@@ -77,7 +77,7 @@ Example Response:
 ```
 
 ``` c#
-await client.Users.GetUserAsync({id});
+await client.Users.GetUserAsync(id);
 ```
 
 ## Forgot Password
@@ -99,7 +99,7 @@ Example Response:
 ```
 
 ``` c#
-await database.ForgotPasswordAsync({username});
+await database.ForgotPasswordAsync(username);
 ```
 
 ## Reset Password
@@ -117,7 +117,7 @@ Body(json):
 ```
 
 ``` c#
-await database.ResetPasswordAsync({resetHash},{newPassword});
+await database.ResetPasswordAsync(resetHash, newPassword);
 ```
 
 ## Change my Password
@@ -133,7 +133,7 @@ Body(json):
 ```
 
 ``` c#
-await client.UpdatePasswordAsync({previousPassword},{newPassword});
+await client.UpdatePasswordAsync(previousPassword, newPassword);
 ```
 
 ## Create User
@@ -175,7 +175,7 @@ Example Response:
 ```
 
 ``` c#
-await database.CreateNewUserAsync({user});
+await database.CreateNewUserAsync(user);
 ```
 
 ## Update User
@@ -215,7 +215,7 @@ Example Response:
 ```
 
 ``` c#
-await client.Users.UpdateUserAsync({id},{user});
+await client.Users.UpdateUserAsync(id, user);
 ```
 
 ## Delete User
@@ -232,5 +232,5 @@ Example Response:
 ```
 
 ``` c#
-await client.Users.DeleteUserAsync({id});
+await client.Users.DeleteUserAsync(id);
 ```
