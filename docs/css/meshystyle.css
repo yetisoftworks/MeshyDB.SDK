@@ -1,3 +1,7 @@
+.argument{
+  margin: 10px;
+}
+
 .argument .parameter{
   font-weight: bold;
 }
