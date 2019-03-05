@@ -1,0 +1,7 @@
+.argument .parameter{
+  font-weight: bold;
+}
+
+.argument .type{
+  font-style: italic;
+}
