@@ -311,20 +311,18 @@ Creates a request for password reset that must have the matching data to reset t
 
 ``` REST fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/forgotpassword
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
   {
     "username": "username_testermctesterson"
   }
-  
-Example Response:
-  {
-    "username": "username_testermctesterson",
-    "expires": "1-1-2019",
-    "hash": "randomlygeneratedhash"
-  }
 ```
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_username_   | **required** User name to be reset.                           | _string_|
 
 ``` c#
 var database = new MeshyDB({clientKey}, {publicKey});
@@ -332,14 +330,23 @@ var database = new MeshyDB({clientKey}, {publicKey});
 await database.ForgotPasswordAsync(username);
 ```
 
+Example Response:
+```
+  {
+    "username": "username_testermctesterson",
+    "expires": "1-1-2019",
+    "hash": "randomlygeneratedhash"
+  }
+```
 ## Reset Password
 Uses result from Forgot password to allow a user to reset their password.
 
 ``` REST fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/resetpassword
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
   {
     "username": "username_testermctesterson",
     "expires": "1-1-2019",
@@ -354,14 +361,22 @@ var database = new MeshyDB({clientKey}, {publicKey});
 await database.ResetPasswordAsync(resetHash, newPassword);
 ```
 
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_username_   | **required** User name that is being reset.                           | _string_|
+|_expires_    | **required** Expiration of hash.                           | _date_|
+|_hash_       | **required** Forgot password hash.                           | _string_|
+|_newPassword_| **required** New password of user.                           | _string_|
+
 ## Change my Password
 Allows the logged in user to change their password.
 
 ``` REST fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/me/password
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
   {
     "newPassword": "newPassword",
     "previousPassword: "previousPassword"
@@ -374,3 +389,8 @@ var client = await database.LoginWithAnonymouslyAsync();
 
 await client.UpdatePasswordAsync(previousPassword, newPassword);
 ```
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_previousPassword_   | **required** Previous password of user.                           | _string_|
+|_newPassword_| **required** New password of user.                           | _string_|
