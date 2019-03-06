@@ -1,8 +1,42 @@
-# Meshes
-
+# Getting Started
 The Mesh end points can be used for retrieving, updating and deleting your custom information.
 
-All the endpoints require authorization before use.
+The following endpoints require to be authenticated.
+
+``` http  fct_label="REST"
+POST https://auth.meshydb.com/{clientKey}/connect/token
+Content-Type: application/x-www-form-urlencoded
+Body:
+  client_id={publicKey}&
+  grant_type=password&
+  username={username}&
+  password={password}&
+  scope=meshy.api offline_access
+  
+(Form-encoding removed and line breaks added for readability)
+```
+
+```c#
+  var database = new MeshyDB(clientKey, publicKey);
+  var client = database.LoginWithPassword(username, password);
+```
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_publicKey_  | Public accessor for application.                              | _string_|
+|_username_   | User name.                                                    | _string_|
+|_password_   | User password.                                                | _string_|
+
+Example Response:
+```
+  {
+    "access_token": "ey...",
+    "expires_in": 3600,
+    "token_type": "Bearer",
+    "refresh_token": "ab23cd3343e9328g"
+  }
+```
 
 ## Model Definition
 All meshes will have the following pieces  of information.
@@ -22,12 +56,12 @@ All meshes will have the following pieces  of information.
   }
 ```
 
-*_id*
-  Identifier of the mesh.
-  
-*_rid*
-  Reference url for more detailed data.
-  
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_id_  | Identifier of the mesh. | _string_|
+|_clientKey_  | Reference url for more detailed data. | _string_|
+
 ## Create data
 ``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
@@ -48,6 +82,9 @@ public class Person: MeshData
   public string FirstName { get; set; }
   public string LastName { get; set; }
 }
+
+var database = new MeshyDB(clientKey, publicKey);
+var client = database.LoginWithPassword(username, password);
 
 var person = await client.Meshes.CreateAsync(new Person(){
   FirstName="Bob",
@@ -87,6 +124,9 @@ Body:
 ```c#
 person.FirstName = "Bobbo";
 
+var database = new MeshyDB(clientKey, publicKey);
+var client = database.LoginWithPassword(username, password);
+
 person = await client.Meshes.UpdateAsync(person);
 ```
 
@@ -119,6 +159,9 @@ Authentication: Bearer {access_token}
 ```
 
 ```c#
+var database = new MeshyDB(clientKey, publicKey);
+var client = database.LoginWithPassword(username, password);
+
 var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
 ```
 
@@ -154,7 +197,10 @@ Authentication: Bearer {access_token}
 ```
 
 ```c#
-var pagedPersonResult = await client.Meshes.GetAsync<Person>({id});
+var database = new MeshyDB(clientKey, publicKey);
+var client = database.LoginWithPassword(username, password);
+
+var pagedPersonResult = await client.Meshes.GetAsync<Person>(id);
 ```
 | Parameter   | Description                                                   | Type    |
 |:------------|:--------------------------------------------------------------|:--------|
@@ -179,6 +225,9 @@ Authentication: Bearer {access_token}
 ```
 
 ```c#
+var database = new MeshyDB(clientKey, publicKey);
+var client = database.LoginWithPassword(username, password);
+
 await client.Meshes.DeleteAsync(person);
 ```
 
