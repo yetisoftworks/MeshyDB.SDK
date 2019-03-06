@@ -138,6 +138,8 @@ GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
                                                       page={page}&
                                                       pageSize={pageSize}
 Authentication: Bearer {access_token}
+
+(Line breaks added for readability)
 ```
 
 ```c#
