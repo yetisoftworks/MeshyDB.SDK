@@ -4,9 +4,30 @@ The following endpoints require to be authenticated.
 
 ``` REST fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
-Body(x-www-form-urlencoded):  
-  client_id={publicKey}&grant_type=password&username={username}&password={password}&scope=meshy.api%20offline_access
+Content-Type: application/x-www-form-urlencoded
+Body:
+  client_id={publicKey}&
+  grant_type=password&
+  username={username}&
+  password={password}&
+  scope=meshy.api offline_access
+  
+(Form-encoding removed and line breaks added for readability)
+```
 
+```c#
+  var database = new MeshyDB({clientKey}, {publicKey});
+  var client = database.LoginWithPassword({username}, {password});
+```
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_publicKey_  | Public accessor for application.                              | _string_|
+|_username_   | User name.                                                    | _string_|
+|_password_   | User password.                                                | _string_|
+
+```
 Example Response:
   {
     "access_token": "ey...",
@@ -16,20 +37,6 @@ Example Response:
   }
 ```
 
-```c#
-  var database = new MeshyDB({clientKey}, {publicKey});
-  var client = database.LoginWithPassword({username}, {password});
-```
-
-
-
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
-|_publicKey_  | Public accessor for application.                              | _string_|
-|_username_   | User name.                                                    | _string_|
-|_password_   | User password.                                                | _string_|
-  
 ## Create
 Creates a new user that can log into the system.
 
