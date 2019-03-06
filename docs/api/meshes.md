@@ -29,22 +29,15 @@ All meshes will have the following pieces  of information.
   Reference url for more detailed data.
   
 ## Create data
-``` REST fct_label="REST"
+``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
   {
     "firstName": "Bob",
     "lastName": "Bobberson"
-  }
-  
-Example Response:
-  {
-    "_id":"5c78cc81dd870827a8e7b6c4",
-    "firstName": "Bob",
-    "lastName": "Bobberson"
-    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 ```
 
@@ -62,32 +55,32 @@ var person = await client.Meshes.CreateAsync(new Person(){
 });
 ```
 
-_clientKey_: 
-  Indicates which tenant you are connecting for authentication.
- 
-_access_token_:
-  Token identifying authorization with MeshyDB requested during [Login](#login)
-  
-_mesh_:
-  Identifies name of mesh collection. e.g. person.
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_access_token_| Token identifying authorization with MeshyDB requested during [Login](#login)| _string_|
+|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
 
-## Update data
-``` REST fct_label="REST"
-PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
-  {
-    "firstName": "Bobbo",
-    "lastName": "Bobberson"
-  }
-  
 Example Response:
+```
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
-    "firstName": "Bobbo",
+    "firstName": "Bob",
     "lastName": "Bobberson"
     "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+  }
+```
+
+## Update data
+``` http  fct_label="REST"
+PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
+  {
+    "firstName": "Bobbo",
+    "lastName": "Bobberson"
   }
 ```
 
@@ -97,25 +90,51 @@ person.FirstName = "Bobbo";
 person = await client.Meshes.UpdateAsync(person);
 ```
 
-_clientKey_: 
-  Indicates which tenant you are connecting for authentication.
- 
-_access_token_:
-  Token identifying authorization with MeshyDB requested during [Login](#login)
-  
-_mesh_:
-  Identifies name of mesh collection. e.g. person.
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_access_token_| Token identifying authorization with MeshyDB requested during [Login](#login)| _string_|
+|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
+|_id_| Idenfities location of what Mesh data to replace.| _string_|
 
-_id_:
-  Idenfities location of what Mesh data to replace.
+Example Response:
+```
+  {
+    "_id":"5c78cc81dd870827a8e7b6c4",
+    "firstName": "Bobbo",
+    "lastName": "Bobberson"
+    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+  }
+```
 
 ## Search data
-``` REST fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&orderby={orderby}&page={page}&pageSize={pageSize}
-Headers:
-  Authentication: Bearer {access_token}
-  
+``` http  fct_label="REST"
+GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
+                                                      orderby={orderby}&
+                                                      page={page}&
+                                                      pageSize={pageSize}
+Authentication: Bearer {access_token}
+
+(Line breaks added for readability)
+```
+
+```c#
+var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
+```
+
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_access_token_| Token identifying authorization with MeshyDB requested during [Login](#login)| _string_|
+|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
+|_filter_| Filter criteria for search. Uses MongoDB format. | _string_|
+|_orderby_| How to order results. Uses MongoDB format. | _string_|
+|_page_  | Page number of users to bring back.                                           | _integer_|
+|_pageSize_  | Number of results to bring back per page. Maximum is 200.                                           | _integer_|
+
 Example Response:
+```
   {
     "page": 1,
     "pageSize": 25,
@@ -128,40 +147,24 @@ Example Response:
     "totalRecords": 1
   }
 ```
-
-```c#
-var pagedPersonResult = await client.Meshes.SearchAsync<Person>({filter},{page},{pageSize});
-```
-
-_clientKey_: 
-  Indicates which tenant you are connecting for authentication.
- 
-_access_token_:
-  Token identifying authorization with MeshyDB requested during [Login](#login)
-  
-_mesh_:
-  Identifies name of mesh collection. e.g. person.
-
-_filter_:
-  Filter criteria for search. Uses MongoDB format.
-  
-_orderby_:
-  How to order results.
-  
-_page_:
-  Which page to return
-
-_pageSize_:
-  Number of results to bring  back. Maximum is 200.
-  
-
 ## Get data by id
 ``` REST fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
-Headers:
-  Authentication: Bearer {access_token}
+Authentication: Bearer {access_token}
+```
+
+```c#
+var pagedPersonResult = await client.Meshes.GetAsync<Person>({id});
+```
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_access_token_| Token identifying authorization with MeshyDB requested during| _string_|
+|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
+|_id_| Idenfities location of what Mesh data to retrieve.| _string_|
   
 Example Response:
+```
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
@@ -169,42 +172,20 @@ Example Response:
     "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 ```
-
-```c#
-var pagedPersonResult = await client.Meshes.GetAsync<Person>({id});
-```
-
-_clientKey_: 
-  Indicates which tenant you are connecting for authentication.
- 
-_access_token_:
-  Token identifying authorization with MeshyDB requested during [Login](#login)
-  
-_mesh_:
-  Identifies name of mesh collection. e.g. person.
-
-_id_:
-  Identifier of mesh to retrieve.
-  
 ## Delete data
-``` REST fct_label="REST"
+``` http  fct_label="REST"
 DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
-Headers:
-  Authentication: Bearer {access_token}
+Authentication: Bearer {access_token}
 ```
 
 ```c#
 await client.Meshes.DeleteAsync(person);
 ```
 
-_clientKey_: 
-  Indicates which tenant you are connecting for authentication.
- 
-_access_token_:
-  Token identifying authorization with MeshyDB requested during [Login](#login)
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
+|_access_token_| Token identifying authorization with MeshyDB requested during [Login](#login)| _string_|
+|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
+|_id_| Idenfities location of what Mesh data to replace.| _string_|
   
-_mesh_:
-  Identifies name of mesh collection. e.g. person.
-
-_id_:
-  Idenfities location of what Mesh data to delete.
