@@ -8,7 +8,7 @@ Now that we have the required information let's jump in and see how easy it is t
 ## Login
 Let's log in using our MeshyDB credentials.
 
-``` HTTP
+``` HTTP  fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 
@@ -94,7 +94,7 @@ Example Response:
 ## Update data
 If we need to make a modificaiton let's update our Mesh!
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -132,7 +132,7 @@ Example Response:
 ## Search data
 Let's see if we can find Bobbo.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
                                                       orderby={orderby}&
                                                       page={page}&
@@ -174,7 +174,7 @@ Example Response:
 ## Delete data
 We are now done with our data, so let us clean up after ourselves.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 ```
@@ -193,7 +193,7 @@ await client.Meshes.DeleteAsync(person);
 ## Sign out
 Now the user is complete. Let us sign out so someone else can have a try.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 
