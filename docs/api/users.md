@@ -27,8 +27,8 @@ Body:
 |_username_   | User name.                                                    | _string_|
 |_password_   | User password.                                                | _string_|
 
-```
 Example Response:
+```
   {
     "access_token": "ey...",
     "expires_in": 3600,
