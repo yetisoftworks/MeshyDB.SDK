@@ -8,7 +8,7 @@ Now that we have the required information let's jump in and see how easy it is t
 ## Login
 Let's log in using our MeshyDB credentials.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 
@@ -49,7 +49,7 @@ Now that we are logged in we can use our Bearer token to authenticate requests w
 
 The data object can whatever information you would like to capture. The following example will have some data fields with example data.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
 Authentication: Bearer {access_token}
 Content-Type: application/json
