@@ -172,24 +172,10 @@ Update a specific  user based on supplied object.
 
 ``` REST fct_label="REST"
 PUT https://api.meshydb.com/{clientKey}/users/{id}
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-  
-Example Response:
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -209,22 +195,44 @@ Example Response:
 var database = new MeshyDB({clientKey}, {publicKey});
 var client = await database.LoginWithAnonymouslyAsync();
 
+var user = new User();
+
 await client.Users.UpdateUserAsync(id, user);
 ```
 
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_username_   | **required**  Username of user.                               | _string_|
+|_id_  		    | Identifier of user.                                           | _string_|
+|_firstName_  | First name of user.                                           | _string_|
+|_lastName_   | Last name of user.                                            | _string_|
+|_verified_   | Identifies whether or not the user is verified.               | _boolean_|
+|_isActive_   | Identifies whether or not the user is active.                 | _boolean_|
+|_phoneNumber_| Phone number of user.                                         | _string_|
+|_roles_      | Collection of roles user has access.                          | _string[]_|
+
+Example Response:
+```
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
+```
 ## Delete User
 Permanently deletes a user. It cannot be undone.
 
 ``` REST fct_label="REST"
 DELETE https://api.meshydb.com/{clientKey}/users/{id}
-Headers:
-  Authentication: Bearer {access_token}
-  
-Example Response:
-  {
-    "deletedCount": 1,
-    "isAcknowledged": true
-  }
+Authentication: Bearer {access_token}
 ```
 
 ``` c#
@@ -234,14 +242,48 @@ var client = await database.LoginWithAnonymouslyAsync();
 await client.Users.DeleteUserAsync(id);
 ```
 
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_id_  		    | Identifier of user.                                           | _string_|
+
+Example Response:
+```
+  {
+    "deletedCount": 1,
+    "isAcknowledged": true
+  }
+
+```
 ## Search
 Returns a paged result of users.
 
 ``` REST fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users?query={query}&roles={roles}&activeOnly={activeOnly}&page={page}&pageSize={pageSize}
-Headers:
-  Authentication: Bearer {access_token}
+GET https://api.meshydb.com/{clientKey}/users?query={query}&
+                                              roles={roles}&
+                                              activeOnly={activeOnly}&
+                                              page={page}&
+                                              pageSize={pageSize}
+Authentication: Bearer {access_token}
+
+(Line breaks added for readability)
+```
+``` c#
+  var database = new MeshyDB({clientKey}, {publicKey});
+  var client = await database.LoginWithAnonymouslyAsync();
+  
+  await client.Users.GetUsersAsync(query, roles, activeOnly, page, pageSize);
+```
+
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_query_      | Criteria is split on space and each  containing part must be  contained within a user's first, last or user name.                               | _string_|
+|_roles_  		    | Collection of roles where a user must contain at least one of the roles supplied.                                          | _string[]_|
+|_activeOnly_  | If false it will also bring back all inactive users.                                           | _boolean_|
+|_page_  | Page number of users to bring back.                                           | _boolean_|
+|_pageSize_  | Number of results to bring back per  page.                                           | _boolean_|
+
 Example Response:
+```
   {
     "page": 1,
     "pageSize": 25,
@@ -262,13 +304,6 @@ Example Response:
     ],
     "totalRecords": 1
   }
-```
-
-``` c#
-  var database = new MeshyDB({clientKey}, {publicKey});
-  var client = await database.LoginWithAnonymouslyAsync();
-  
-  await client.Users.GetUsersAsync(query, roles, activeOnly, page, pageSize);
 ```
 
 ## Forgot Password
