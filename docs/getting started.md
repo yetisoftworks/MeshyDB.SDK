@@ -49,7 +49,7 @@ Now that we are logged in we can use our Bearer token to authenticate requests w
 
 The data object can whatever information you would like to capture. The following example will have some data fields with example data.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -94,7 +94,7 @@ Example Response:
 ## Update data
 If we need to make a modificaiton let's update our Mesh!
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -132,7 +132,7 @@ Example Response:
 ## Search data
 Let's see if we can find Bobbo.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
                                                       orderby={orderby}&
                                                       page={page}&
@@ -174,7 +174,7 @@ Example Response:
 ## Delete data
 We are now done with our data, so let us clean up after ourselves.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 ```
@@ -193,7 +193,7 @@ await client.Meshes.DeleteAsync(person);
 ## Sign out
 Now the user is complete. Let us sign out so someone else can have a try.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 
