@@ -41,7 +41,7 @@ Example Response:
 ## Model Definition
 All meshes will have the following pieces  of information.
 
-``` REST fct_label="REST"
+``` http  fct_label="REST"
   {
     "_id":"...",
     "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/..."
@@ -191,7 +191,7 @@ Example Response:
   }
 ```
 ## Get data by id
-``` REST fct_label="REST"
+``` http  fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 ```
