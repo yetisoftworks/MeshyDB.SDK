@@ -1,7 +1,12 @@
 site_name: MeshyDB
     
-theme: readthedocs
-    
+theme: 
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - http
+        - c#
+        
 nav:
     - index.md
     - getting started.md
