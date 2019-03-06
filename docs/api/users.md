@@ -351,7 +351,7 @@ Body:
     "username": "username_testermctesterson",
     "expires": "1-1-2019",
     "hash": "randomlygeneratedhash",
-    "newPassword":"newPassword"
+    "newPassword": "newPassword"
   }
 ```
 
@@ -379,7 +379,7 @@ Content-Type: application/json
 Body:
   {
     "newPassword": "newPassword",
-    "previousPassword: "previousPassword"
+    "previousPassword": "previousPassword"
   }
 ```
 
