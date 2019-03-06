@@ -16,8 +16,8 @@ Body:
 ```
 
 ```c#
-  var database = new MeshyDB({clientKey}, {publicKey});
-  var client = database.LoginWithPassword({username}, {password});
+  var database = new MeshyDB(clientKey, publicKey);
+  var client = database.LoginWithPassword(username, password);
 ```
 
 | Parameter   | Description                                                   | Type    |
@@ -42,9 +42,10 @@ Creates a new user that can log into the system.
 
 ``` REST fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users
-Headers:
-  Authentication: Bearer {access_token}
-Body(json):
+Authentication: Bearer {access_token}
+Content-Type: application/json
+
+Body:
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -59,37 +60,21 @@ Body(json):
              ],
     "newPassword": "newPassword"
   }
-  
-Example Response:
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-
 ```
 
 ``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
+var database = new MeshyDB(clientKey, publicKey);
+
+var user = new NewUser();
 
 await database.CreateNewUserAsync(user);
 ```
 
-
-
 | Parameter   | Description                                                   | Type    |
 |:------------|:--------------------------------------------------------------|:--------|
 |_username_   | **required**  Username of user.                               | _string_|
-|_id_  		    | Identifier of user.                                           | _string_|
 |_newPassword_| **required**  Password of user to use for login.              | _string_|
+|_id_  		    | Identifier of user.                                           | _string_|
 |_firstName_  | First name of user.                                           | _string_|
 |_lastName_   | Last name of user.                                            | _string_|
 |_verified_   | Identifies whether or not the user is verified.               | _boolean_|
@@ -97,15 +82,8 @@ await database.CreateNewUserAsync(user);
 |_phoneNumber_| Phone number of user.                                         | _string_|
 |_roles_      | Collection of roles user has access.                          | _string[]_|
 
-    
-## Retrieve a single user
-Retrieves details about an existing user.
-
-``` REST fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users/{id}
-Headers:
-  Authentication: Bearer {access_token}
 Example Response:
+```
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -119,6 +97,14 @@ Example Response:
                 "test"
              ]
   }
+```
+
+## Retrieve a single user
+Retrieves details about an existing user.
+
+``` REST fct_label="REST"
+GET https://api.meshydb.com/{clientKey}/users/{id}
+Authentication: Bearer {access_token}
 ```
 
 ``` c#
@@ -128,14 +114,12 @@ var client = await database.LoginWithAnonymouslyAsync();
 await client.Users.GetUserAsync(id);
 ```
 
-## Retrieve myself
-Retrieve details about the logged in user.
+| Parameter   | Description                                                   | Type    |
+|:------------|:--------------------------------------------------------------|:--------|
+|_id_  		    | Identifier of user.                                           | _string_|
 
-``` REST fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users/me
-Headers:
-  Authentication: Bearer {access_token}
 Example Response:
+```
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -151,6 +135,14 @@ Example Response:
   }
 ```
 
+## Retrieve myself
+Retrieve details about the logged in user.
+
+``` REST fct_label="REST"
+GET https://api.meshydb.com/{clientKey}/users/me
+Authentication: Bearer {access_token}
+```
+
 ``` c#
 var database = new MeshyDB({clientKey}, {publicKey});
 var client = await database.LoginWithAnonymouslyAsync();
@@ -158,6 +150,23 @@ var client = await database.LoginWithAnonymouslyAsync();
 await client.Users.GetLoggedInUserAsync();
 ```
 
+Example Response:
+```
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": "Tester",
+    "lastName": "McTesterton",
+    "verified": true,
+    "isActive": true,
+    "phoneNumber": "5555555555",
+    "roles": [
+                "admin",
+                "test"
+             ]
+  }
+
+```
 ## Update User
 Update a specific  user based on supplied object.
 
