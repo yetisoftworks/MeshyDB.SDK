@@ -2,7 +2,7 @@
 
 The following endpoints require to be authenticated.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 Body:
@@ -40,7 +40,7 @@ Example Response:
 ## Create
 Creates a new user that can log into the system.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -102,7 +102,7 @@ Example Response:
 ## Retrieve a single user
 Retrieves details about an existing user.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users/{id}
 Authentication: Bearer {access_token}
 ```
@@ -138,7 +138,7 @@ Example Response:
 ## Retrieve myself
 Retrieve details about the logged in user.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users/me
 Authentication: Bearer {access_token}
 ```
@@ -170,7 +170,7 @@ Example Response:
 ## Update User
 Update a specific  user based on supplied object.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 PUT https://api.meshydb.com/{clientKey}/users/{id}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -230,7 +230,7 @@ Example Response:
 ## Delete User
 Permanently deletes a user. It cannot be undone.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 DELETE https://api.meshydb.com/{clientKey}/users/{id}
 Authentication: Bearer {access_token}
 ```
@@ -257,7 +257,7 @@ Example Response:
 ## Search
 Returns a paged result of users.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users?query={query}&
                                               roles={roles}&
                                               activeOnly={activeOnly}&
@@ -309,7 +309,7 @@ Example Response:
 ## Forgot Password
 Creates a request for password reset that must have the matching data to reset to ensure request parity.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/forgotpassword
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -341,7 +341,7 @@ Example Response:
 ## Reset Password
 Uses result from Forgot password to allow a user to reset their password.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/resetpassword
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -371,7 +371,7 @@ await database.ResetPasswordAsync(resetHash, newPassword);
 ## Change my Password
 Allows the logged in user to change their password.
 
-``` HTTP fct_label="REST"
+``` http  fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/me/password
 Authentication: Bearer {access_token}
 Content-Type: application/json
