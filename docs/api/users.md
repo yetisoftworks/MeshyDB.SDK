@@ -2,7 +2,7 @@
 
 The following endpoints require to be authenticated.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 Body:
@@ -40,7 +40,7 @@ Example Response:
 ## Create
 Creates a new user that can log into the system.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -102,7 +102,7 @@ Example Response:
 ## Retrieve a single user
 Retrieves details about an existing user.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users/{id}
 Authentication: Bearer {access_token}
 ```
@@ -138,7 +138,7 @@ Example Response:
 ## Retrieve myself
 Retrieve details about the logged in user.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users/me
 Authentication: Bearer {access_token}
 ```
@@ -170,7 +170,7 @@ Example Response:
 ## Update User
 Update a specific  user based on supplied object.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 PUT https://api.meshydb.com/{clientKey}/users/{id}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -230,7 +230,7 @@ Example Response:
 ## Delete User
 Permanently deletes a user. It cannot be undone.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 DELETE https://api.meshydb.com/{clientKey}/users/{id}
 Authentication: Bearer {access_token}
 ```
@@ -257,7 +257,7 @@ Example Response:
 ## Search
 Returns a paged result of users.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 GET https://api.meshydb.com/{clientKey}/users?query={query}&
                                               roles={roles}&
                                               activeOnly={activeOnly}&
@@ -279,8 +279,8 @@ Authentication: Bearer {access_token}
 |_query_      | Criteria is split on space and each  containing part must be  contained within a user's first, last or user name.                               | _string_|
 |_roles_  		    | Collection of roles where a user must contain at least one of the roles supplied.                                          | _string[]_|
 |_activeOnly_  | If false it will also bring back all inactive users.                                           | _boolean_|
-|_page_  | Page number of users to bring back.                                           | _boolean_|
-|_pageSize_  | Number of results to bring back per  page.                                           | _boolean_|
+|_page_  | Page number of users to bring back.                                           | _integer_|
+|_pageSize_  | Number of results to bring back per  page. Maximum is 200.                                           | _integer_|
 
 Example Response:
 ```
@@ -309,7 +309,7 @@ Example Response:
 ## Forgot Password
 Creates a request for password reset that must have the matching data to reset to ensure request parity.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/forgotpassword
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -341,7 +341,7 @@ Example Response:
 ## Reset Password
 Uses result from Forgot password to allow a user to reset their password.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/resetpassword
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -371,7 +371,7 @@ await database.ResetPasswordAsync(resetHash, newPassword);
 ## Change my Password
 Allows the logged in user to change their password.
 
-``` REST fct_label="REST"
+``` HTTP fct_label="REST"
 POST https://api.meshydb.com/{clientKey}/users/me/password
 Authentication: Bearer {access_token}
 Content-Type: application/json
