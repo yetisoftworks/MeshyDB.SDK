@@ -8,7 +8,7 @@ Now that we have the required information let's jump in and see how easy it is t
 ## Login
 Let's log in using our MeshyDB credentials.
 
-``` HTTP  fct_label="REST"
+``` http  fct_label="REST"
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 
