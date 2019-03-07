@@ -25,26 +25,30 @@ Let's log in using our MeshyDB credentials.
 
     (Form-encoding removed and line breaks added for readability)
   
-   .. code-tab:: http
+   .. code-tab:: c#
     var database = new MeshyDB(clientKey, publicKey);
     var client = database.LoginWithPassword(username, password);
 
++-------------+---------------------------------------------------------------+---------+
 | Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
-|_publicKey_  | Public accessor for application.                              | _string_|
-|_username_   | User name.                                                    | _string_|
-|_password_   | User password.                                                | _string_|
++=============+===============================================================+=========+
+|*clientKey*  | Indicates which tenant you are connecting for authentication. | *string*|
++-------------+---------------------------------------------------------------+---------+
+|*publicKey*  | Public accessor for application.                              | *string*|
++-------------+---------------------------------------------------------------+---------+
+|*username*   | User name.                                                    | *string*|
++-------------+---------------------------------------------------------------+---------+
+|*password*   | User password.                                                | *string*|
++-------------+---------------------------------------------------------------+---------+
 
 Example Response:
-``
+.. code-block:: json
   {
     "access_token": "ey...",
     "expires_in": 3600,
     "token_type": "Bearer",
     "refresh_token": "ab23cd3343e9328g"
   }
-``
  
 Create data
 ===========
