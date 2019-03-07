@@ -20,8 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'MeshyDB'
-copyright = '2019, Chris Pluta'
-author = 'Chris Pluta'
+copyright = '2019, Yetisoftworks'
+author = 'Yetisoftworks'
 
 # The short X.Y version
 version = ''
@@ -129,7 +129,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'MeshyDB.tex', 'MeshyDB Documentation',
-     'Chris Pluta', 'manual'),
+     'Yetisoftworks', 'manual'),
 ]
 
 
@@ -171,11 +171,3 @@ epub_title = project
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
-
-from recommonmark.parser import CommonMarkParser
-
-source_parsers = {
-    '.md': CommonMarkParser,
-}
-
-source_suffix = ['.rst', '.md']
