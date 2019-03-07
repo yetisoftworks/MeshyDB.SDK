@@ -10,7 +10,7 @@ Login
 =====
 Let's log in using our MeshyDB credentials.
 
-.. sourcecode:: http
+.. code-block:: http
 
    POST https://auth.meshydb.com/{clientKey}/connect/token
    Content-Type: application/x-www-form-urlencoded
