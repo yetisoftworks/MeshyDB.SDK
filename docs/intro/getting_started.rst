@@ -232,12 +232,14 @@ We are now done with our data, so let us clean up after ourselves.
    .. group-tab:: REST
    
       .. code-block:: http
+      
          DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
          Authentication: Bearer {access_token}
 
    .. group-tab:: C#
    
       .. code-block:: c#
+      
          await client.Meshes.DeleteAsync(person);
 
 Parameters
