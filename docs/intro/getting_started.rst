@@ -13,25 +13,27 @@ Let's log in using our MeshyDB credentials.
 .. tabs::
 
    .. group-tab:: REST
-   .. code-block:: http
    
-    POST https://auth.meshydb.com/{clientKey}/connect/token
-    Content-Type: application/x-www-form-urlencoded
+      .. code-block:: http
 
-    Body:
-      client_id={publicKey}&
-      grant_type=password&
-      username={username}&
-      password={password}&
-      scope=meshy.api offline_access
+       POST https://auth.meshydb.com/{clientKey}/connect/token
+       Content-Type: application/x-www-form-urlencoded
 
-    (Form-encoding removed and line breaks added for readability)
+       Body:
+         client_id={publicKey}&
+         grant_type=password&
+         username={username}&
+         password={password}&
+         scope=meshy.api offline_access
+
+       (Form-encoding removed and line breaks added for readability)
   
    .. group-tab:: C#
-   .. code-block:: c#
    
-    var database = new MeshyDB(clientKey, publicKey);
-    var client = database.LoginWithPassword(username, password);
+      .. code-block:: c#
+   
+       var database = new MeshyDB(clientKey, publicKey);
+       var client = database.LoginWithPassword(username, password);
 
 +-------------+---------------------------------------------------------------+---------+
 | Parameter   | Description                                                   | Type    |
