@@ -104,6 +104,8 @@ access_token: string
 mesh : string
    Identifies name of mesh collection. e.g. person.
 
+Example Response:
+
 .. code-block:: json
 
   {
@@ -117,40 +119,52 @@ Update data
 ===========
 If we need to make a modificaiton let's update our Mesh!
 
-``` http
-PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
-Authentication: Bearer {access_token}
-Content-Type: application/json
+.. tabs::
 
-Body:
-  {
-    "firstName": "Bobbo",
-    "lastName": "Bobberson"
-  }
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
 
-```c#
-person.FirstName = "Bobbo";
+         PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-person = await client.Meshes.UpdateAsync(person);
-```
+         Body:
+           {
+             "firstName": "Bobbo",
+             "lastName": "Bobberson"
+           }
+           
+   .. group-tab:: C#
+   
+      .. code-block:: c#
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
-|_access_token_| Token identifying authorization with MeshyDB requested during [Login](#login)| _string_|
-|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
-|_id_| Idenfities location of what Mesh data to replace.| _string_|
+         person.FirstName = "Bobbo";
+
+         person = await client.Meshes.UpdateAsync(person);
+
+
+Parameters
+----------
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during [Login](#login)
+mesh : string
+   Identifies name of mesh collection. e.g. person.
+id : string
+   Idenfities location of what Mesh data to replace.
 
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
-    "lastName": "Bobberson"
+    "lastName": "Bobberson",
     "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
-```
 
 Search data
 ===========
@@ -189,7 +203,7 @@ Example Response:
     "results": [{
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
-                 "lastName": "Bobberson"
+                 "lastName": "Bobberson",
                  "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
                }],
     "totalRecords": 1
