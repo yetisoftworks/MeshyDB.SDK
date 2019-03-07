@@ -12,6 +12,8 @@ Let's log in using our MeshyDB credentials.
 
 .. sourcecode:: http
 
+   POST https://auth.meshydb.com/{clientKey}/connect/token
+   Content-Type: application/x-www-form-urlencoded
    GET /users/123/posts/web HTTP/1.1
    Host: example.com
    Accept: application/json, text/javascript
