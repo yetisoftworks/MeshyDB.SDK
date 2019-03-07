@@ -1,12 +1,12 @@
 Getting started
 ===============
-The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at [MeshyDB.com](https://meshydb.com).
+The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at hyperlink:MeshyDB.com<https://meshydb.com>.
 
 Once we have done that we can go to Account and get our Client Key and Public Key.
 
 Now that we have the required information let's jump in and see how easy it is to start with MeshyDB.
 
-.. login:
+.. _login:
 
 Login
 =====
@@ -102,7 +102,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during :ref:`login`
+   Token identifying authorization with MeshyDB requested during login_
 mesh : string
    Identifies name of mesh collection. e.g. person.
 
@@ -151,7 +151,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during :ref:`login`
+   Token identifying authorization with MeshyDB requested during login_
 mesh : string
    Identifies name of mesh collection. e.g. person.
 id : string
