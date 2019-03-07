@@ -10,24 +10,23 @@ Login
 =====
 Let's log in using our MeshyDB credentials.
 
-``` http
-POST https://auth.meshydb.com/{clientKey}/connect/token
-Content-Type: application/x-www-form-urlencoded
+.. tab::
+  .. code-tab:: http
+    POST https://auth.meshydb.com/{clientKey}/connect/token
+    Content-Type: application/x-www-form-urlencoded
 
-Body:
-  client_id={publicKey}&
-  grant_type=password&
-  username={username}&
-  password={password}&
-  scope=meshy.api offline_access
+    Body:
+      client_id={publicKey}&
+      grant_type=password&
+      username={username}&
+      password={password}&
+      scope=meshy.api offline_access
+
+    (Form-encoding removed and line breaks added for readability)
   
-(Form-encoding removed and line breaks added for readability)
-```
-
-```c#
-  var database = new MeshyDB(clientKey, publicKey);
-  var client = database.LoginWithPassword(username, password);
-```
+  .. code-tab:: c#
+    var database = new MeshyDB(clientKey, publicKey);
+    var client = database.LoginWithPassword(username, password);
 
 | Parameter   | Description                                                   | Type    |
 |:------------|:--------------------------------------------------------------|:--------|
@@ -37,14 +36,14 @@ Body:
 |_password_   | User password.                                                | _string_|
 
 Example Response:
-```
+``
   {
     "access_token": "ey...",
     "expires_in": 3600,
     "token_type": "Bearer",
     "refresh_token": "ab23cd3343e9328g"
   }
-```
+``
  
 Create data
 ===========
