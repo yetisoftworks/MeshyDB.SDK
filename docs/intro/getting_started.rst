@@ -35,17 +35,16 @@ Let's log in using our MeshyDB credentials.
        var database = new MeshyDB(clientKey, publicKey);
        var client = database.LoginWithPassword(username, password);
 
-+-------------+---------------------------------------------------------------+---------+
-| Parameter   | Description                                                   | Type    |
-+=============+===============================================================+=========+
-|*clientKey*  | Indicates which tenant you are connecting for authentication. | *string*|
-+-------------+---------------------------------------------------------------+---------+
-|*publicKey*  | Public accessor for application.                              | *string*|
-+-------------+---------------------------------------------------------------+---------+
-|*username*   | User name.                                                    | *string*|
-+-------------+---------------------------------------------------------------+---------+
-|*password*   | User password.                                                | *string*|
-+-------------+---------------------------------------------------------------+---------+
+Parameters
+----------
+clientKey : string
+   Indicates which tenant you are connecting for authentication.
+publicKey : string
+   Public accessor for application.
+username : string
+   User name.
+password : string
+   User password.
 
 Example Response:
 
@@ -104,17 +103,6 @@ access_token: string
    Token identifying authorization with MeshyDB requested during [Login](#login)
 mesh : string
    Identifies name of mesh collection. e.g. person.
-   
-+--------------+------------------------------------------------------------------------------+---------+
-| Parameter    | Description                                                                  | Type    |
-+==============+==============================================================================+=========+
-|*clientKey*   | Indicates which tenant you are connecting for authentication.                | *string*|
-+--------------+------------------------------------------------------------------------------+---------+
-|*access_token*| Token identifying authorization with MeshyDB requested during [Login](#login)| *string*|
-+--------------+------------------------------------------------------------------------------+---------+
-|*mesh*        | Identifies name of mesh collection. e.g. person.                             | *string*|
-+--------------+------------------------------------------------------------------------------+---------+
-
 
 .. code-block:: json
 
