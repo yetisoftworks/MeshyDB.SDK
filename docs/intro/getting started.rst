@@ -52,7 +52,7 @@ Now that we are logged in we can use our Bearer token to authenticate requests w
 
 The data object can whatever information you would like to capture. The following example will have some data fields with example data.
 
-``` http  fct_label="REST"
+``` http
 POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -98,7 +98,7 @@ Update data
 ===========
 If we need to make a modificaiton let's update our Mesh!
 
-``` http  fct_label="REST"
+``` http
 PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 Content-Type: application/json
@@ -137,7 +137,7 @@ Search data
 ===========
 Let's see if we can find Bobbo.
 
-``` http  fct_label="REST"
+``` http
 GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
                                                       orderby={orderby}&
                                                       page={page}&
@@ -181,7 +181,7 @@ Delete data
 ===========
 We are now done with our data, so let us clean up after ourselves.
 
-``` http  fct_label="REST"
+``` http
 DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
 Authentication: Bearer {access_token}
 ```
@@ -201,7 +201,7 @@ Sign out
 ========
 Now the user is complete. Let us sign out so someone else can have a try.
 
-``` http  fct_label="REST"
+``` http
 POST https://auth.meshydb.com/{clientKey}/connect/token
 Content-Type: application/x-www-form-urlencoded
 
