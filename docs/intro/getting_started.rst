@@ -12,7 +12,7 @@ Let's log in using our MeshyDB credentials.
 
 .. tabs::
 
-   .. code-tab:: HTTP
+   .. code-tab:: rest
    
     POST https://auth.meshydb.com/{clientKey}/connect/token
     Content-Type: application/x-www-form-urlencoded
