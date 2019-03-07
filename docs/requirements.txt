@@ -1,3 +1,1 @@
-markdown-fenced-code-tabs
-pygments
-pymdown-extensions
+sphinx_rtd_theme
