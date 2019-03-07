@@ -6,6 +6,8 @@ Once we have done that we can go to Account and get our Client Key and Public Ke
 
 Now that we have the required information let's jump in and see how easy it is to start with MeshyDB.
 
+.. login:
+
 Login
 =====
 Let's log in using our MeshyDB credentials.
@@ -100,7 +102,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during [Login](#login)
+   Token identifying authorization with MeshyDB requested during :ref:`login`
 mesh : string
    Identifies name of mesh collection. e.g. person.
 
@@ -149,7 +151,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during [Login](#login)
+   Token identifying authorization with MeshyDB requested during :ref:`login`
 mesh : string
    Identifies name of mesh collection. e.g. person.
 id : string
