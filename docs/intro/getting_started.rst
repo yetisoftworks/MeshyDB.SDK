@@ -96,15 +96,15 @@ The data object can whatever information you would like to capture. The followin
            LastName="Bobberson"
          });
 
-+-------------+---------------------------------------------------------------+---------+
-| Parameter   | Description                                                   | Type    |
-+=============+===============================================================+=========+
-|*clientKey*  | Indicates which tenant you are connecting for authentication. | *string*|
-+-------------+---------------------------------------------------------------+---------+
++--------------+------------------------------------------------------------------------------+---------+
+| Parameter    | Description                                                                  | Type    |
++==============+==============================================================================+=========+
+|*clientKey*   | Indicates which tenant you are connecting for authentication.                | *string*|
++--------------+------------------------------------------------------------------------------+---------+
 |*access_token*| Token identifying authorization with MeshyDB requested during [Login](#login)| *string*|
-+-------------+---------------------------------------------------------------+---------+
-|*mesh*   | Identifies name of mesh collection. e.g. person.                  | *string*|
-+-------------+---------------------------------------------------------------+---------+
++--------------+------------------------------------------------------------------------------+---------+
+|*mesh*        | Identifies name of mesh collection. e.g. person.                             | *string*|
++--------------+------------------------------------------------------------------------------+---------+
 
 
 .. code-block:: json
@@ -112,7 +112,7 @@ The data object can whatever information you would like to capture. The followin
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
-    "lastName": "Bobberson"
+    "lastName": "Bobberson",
     "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 
