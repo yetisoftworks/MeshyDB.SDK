@@ -10,6 +10,11 @@ Login
 =====
 Let's log in using our MeshyDB credentials.
 
+.. code-block:: http
+
+   POST https://auth.meshydb.com/{clientKey}/connect/token
+   Content-Type: application/x-www-form-urlencoded
+
 .. tabs::
 
    .. group-tab:: REST
@@ -25,8 +30,6 @@ Let's log in using our MeshyDB credentials.
          username={username}&
          password={password}&
          scope=meshy.api offline_access
-
-       (Form-encoding removed and line breaks added for readability)
   
    .. group-tab:: C#
    
