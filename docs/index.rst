@@ -17,7 +17,7 @@ Data Storage
 ============
 Because a Mesh defines your data it is isolated from all other data. You can manipulate your definition to your hearts content without concern of interacting without worry.
 
-.. toctree:
+.. toctree::
    :maxdepth: 3
    :hidden:
    :caption: Introduction
