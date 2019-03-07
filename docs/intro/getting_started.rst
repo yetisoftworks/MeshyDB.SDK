@@ -69,15 +69,15 @@ The data object can whatever information you would like to capture. The followin
    
       .. code-block:: http
 
-         POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
-         Authentication: Bearer {access_token}
-         Content-Type: application/json
+       POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
+       Authentication: Bearer {access_token}
+       Content-Type: application/json
 
-         Body:
-           {
-             "firstName": "Bob",
-             "lastName": "Bobberson"
-           }
+       Body:
+         {
+            "firstName": "Bob",
+            "lastName": "Bobberson"
+         }
            
    .. group-tab:: C#
    
@@ -125,15 +125,15 @@ If we need to make a modificaiton let's update our Mesh!
    
       .. code-block:: http
 
-         PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
-         Authentication: Bearer {access_token}
-         Content-Type: application/json
+       PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
+       Authentication: Bearer {access_token}
+       Content-Type: application/json
 
-         Body:
-           {
+       Body:
+          {
              "firstName": "Bobbo",
              "lastName": "Bobberson"
-           }
+          }
            
    .. group-tab:: C#
    
