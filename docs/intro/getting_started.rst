@@ -35,11 +35,11 @@ Let's log in using our MeshyDB credentials.
        var database = new MeshyDB(clientKey, publicKey);
        var client = database.LoginWithPassword(username, password);
 
-+-------------+------------------------------------------------------------+---------+
++-------------+---------------------------------------------------------------+---------+
 | Parameter   | Description                                                   | Type    |
-+=============+=============================================================+=========+
++=============+===============================================================+=========+
 |*clientKey*  | Indicates which tenant you are connecting for authentication. | *string*|
-+-------------+--------------------------------------------------------------+---------+
++-------------+---------------------------------------------------------------+---------+
 |*publicKey*  | Public accessor for application.                              | *string*|
 +-------------+---------------------------------------------------------------+---------+
 |*username*   | User name.                                                    | *string*|
@@ -96,6 +96,15 @@ The data object can whatever information you would like to capture. The followin
            LastName="Bobberson"
          });
 
+Parameters
+----------
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during [Login](#login)
+mesh : string
+   Identifies name of mesh collection. e.g. person.
+   
 +--------------+------------------------------------------------------------------------------+---------+
 | Parameter    | Description                                                                  | Type    |
 +==============+==============================================================================+=========+
