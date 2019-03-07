@@ -25,7 +25,9 @@ Let's log in using our MeshyDB credentials.
          username={username}&
          password={password}&
          scope=meshy.api offline_access
-  
+
+      (Form-encoding removed and line breaks added for readability)
+
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -62,47 +64,57 @@ Now that we are logged in we can use our Bearer token to authenticate requests w
 
 The data object can whatever information you would like to capture. The following example will have some data fields with example data.
 
-``` http
-POST https://api.meshydb.com/{clientKey}/meshes/{mesh}
-Authentication: Bearer {access_token}
-Content-Type: application/json
+.. tabs::
 
-Body:
-  {
-    "firstName": "Bob",
-    "lastName": "Bobberson"
-  }
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
 
-```c#
-// Mesh is derived from class name
-public class Person: MeshData
-{
-  public string FirstName { get; set; }
-  public string LastName { get; set; }
-}
+         POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-var person = await client.Meshes.CreateAsync(new Person(){
-  FirstName="Bob",
-  LastName="Bobberson"
-});
-```
+         Body:
+           {
+             "firstName": "Bob",
+             "lastName": "Bobberson"
+           }
+           
+   .. group-tab:: C#
+   
+      .. code-block:: c#
 
+         // Mesh is derived from class name
+         public class Person: MeshData
+         {
+           public string FirstName { get; set; }
+           public string LastName { get; set; }
+         }
+
+         var person = await client.Meshes.CreateAsync(new Person(){
+           FirstName="Bob",
+           LastName="Bobberson"
+         });
+
++-------------+---------------------------------------------------------------+---------+
 | Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_clientKey_  | Indicates which tenant you are connecting for authentication. | _string_|
-|_access_token_| Token identifying authorization with MeshyDB requested during [Login](#login)| _string_|
-|_mesh_   | Identifies name of mesh collection. e.g. person.                                                    | _string_|
++=============+===============================================================+=========+
+|*clientKey*  | Indicates which tenant you are connecting for authentication. | *string*|
++-------------+---------------------------------------------------------------+---------+
+|*access_token*| Token identifying authorization with MeshyDB requested during [Login](#login)| *string*|
++-------------+---------------------------------------------------------------+---------+
+|*mesh*   | Identifies name of mesh collection. e.g. person.                  | *string*|
++-------------+---------------------------------------------------------------+---------+
 
-Example Response:
-```
+
+.. code-block:: json
+
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
     "lastName": "Bobberson"
     "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
-```
 
 Update data
 ===========
