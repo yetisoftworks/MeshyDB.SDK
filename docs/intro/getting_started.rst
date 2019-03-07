@@ -113,7 +113,7 @@ The data object can whatever information you would like to capture. The followin
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
     "lastName": "Bobberson"
-    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 
 Update data
