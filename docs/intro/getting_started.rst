@@ -10,8 +10,9 @@ Login
 =====
 Let's log in using our MeshyDB credentials.
 
-.. tab::
-  .. code-tab:: http
+.. tabs::
+
+   .. code-tab:: http
     POST https://auth.meshydb.com/{clientKey}/connect/token
     Content-Type: application/x-www-form-urlencoded
 
@@ -24,7 +25,7 @@ Let's log in using our MeshyDB credentials.
 
     (Form-encoding removed and line breaks added for readability)
   
-  .. code-tab:: c#
+   .. code-tab:: http
     var database = new MeshyDB(clientKey, publicKey);
     var client = database.LoginWithPassword(username, password);
 
