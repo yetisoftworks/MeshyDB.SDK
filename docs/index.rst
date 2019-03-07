@@ -22,4 +22,4 @@ Because a Mesh defines your data it is isolated from all other data. You can man
    :hidden:
    :caption: Introduction
    
-   intro/getting  started
+   intro/getting_started
