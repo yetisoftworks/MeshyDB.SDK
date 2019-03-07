@@ -19,7 +19,7 @@ Let's log in using our MeshyDB credentials.
 
    .. group-tab:: REST
    
-      .. code-block:: http
+      ..  http:example::
 
        POST https://auth.meshydb.com/{clientKey}/connect/token
        Content-Type: application/x-www-form-urlencoded
