@@ -261,7 +261,7 @@ Now the user is complete. Let us sign out so someone else can have a try.
 
    .. group-tab:: REST
    
-      .. code-block:: http
+      .. sourcecode:: http
 
          POST https://auth.meshydb.com/{clientKey}/connect/token
          Content-Type: application/x-www-form-urlencoded
