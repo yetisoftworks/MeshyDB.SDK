@@ -16,6 +16,7 @@ The following endpoints require to be authenticated.
       
         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
         Content-Type: application/x-www-form-urlencoded
+        
         Body:
           client_id={publicKey}&
           grant_type=password&
