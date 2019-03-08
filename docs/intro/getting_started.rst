@@ -146,7 +146,7 @@ If we need to make a modificaiton let's update our Mesh!
 
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
@@ -192,7 +192,7 @@ Let's see if we can find Bobbo.
          var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
@@ -244,7 +244,7 @@ We are now done with our data, so let us clean up after ourselves.
          await client.Meshes.DeleteAsync(person);
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
@@ -253,9 +253,10 @@ mesh : string
    Identifies name of mesh collection. e.g. person.
 id : string
    Idenfities location of what Mesh data to replace.
-  
+
+--------
 Sign out
-========
+--------
 Now the user is complete. Let us sign out so someone else can have a try.
 
 .. tabs::
@@ -267,7 +268,6 @@ Now the user is complete. Let us sign out so someone else can have a try.
          POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
 
-         Body:  
            client_id={clientKey}&
            grant_type=refresh_token&
            token={refresh_token}
@@ -281,7 +281,7 @@ Now the user is complete. Let us sign out so someone else can have a try.
          await client.SignoutAsync();
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 refresh_token: string
