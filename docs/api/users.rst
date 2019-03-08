@@ -50,9 +50,9 @@ Example Response:
     "refresh_token": "ab23cd3343e9328g"
   }
   
-======
+------
 Create
-======
+------
 Creates a new user that can log into the system.
 
 
