@@ -98,23 +98,23 @@ Creates a new user that can log into the system.
 
 Parameters
 ^^^^^^^^^^
-_username_ : string, required
+username : string, required
    Username of user.
-_newPassword_ : string, required
+newPassword : string, required
    Password of user to use for login.
-_id_ : string
+id : string
    Identifier of user.
-_firstName_ : string
+firstName : string
    First name of user.
-_lastName_ : string
+lastName : string
    Last name of user.
-_verified_ : boolean
+verified : boolean
    Identifies whether or not the user is verified.
-_isActive_ : boolean
+isActive : boolean
    Identifies whether or not the user is active.
-_phoneNumber_ : string
+phoneNumber : string
    Phone number of user.
-_roles_ : string[]
+roles : string[]
    Collection of roles user has access.
 
 Example Response:
@@ -135,11 +135,10 @@ Example Response:
              ]
   }
 
-======================
+----------------------
 Retrieve a single user
-======================
+----------------------
 Retrieves details about an existing user.
-
 
 .. tabs::
 
@@ -147,7 +146,7 @@ Retrieves details about an existing user.
    
       .. code-block:: http
       
-         GET https://api.meshydb.com/{clientKey}/users/{id}
+         GET https://api.meshydb.com/{clientKey}/users/{id} HTTP/1.1
          Authentication: Bearer {access_token}
 
    .. group-tab:: C#
@@ -161,7 +160,7 @@ Retrieves details about an existing user.
 
 Parameters
 ^^^^^^^^^^
-_id_ : string
+id : string
    Identifier of user.
 
 Example Response:
@@ -182,23 +181,33 @@ Example Response:
              ]
   }
 
-## Retrieve myself
+---------------
+Retrieve myself
+---------------
 Retrieve details about the logged in user.
 
-``` http  fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users/me
-Authentication: Bearer {access_token}
-```
+.. tabs::
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         GET https://api.meshydb.com/{clientKey}/users/me
+         Authentication: Bearer {access_token}
 
-await client.Users.GetLoggedInUserAsync();
-```
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
+         var client = await database.LoginWithAnonymouslyAsync();
+
+         await client.Users.GetLoggedInUserAsync();
 
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -213,53 +222,72 @@ Example Response:
              ]
   }
 
-```
-## Update User
+
+-----------
+Update User
+-----------
 Update a specific  user based on supplied object.
 
-``` http  fct_label="REST"
-PUT https://api.meshydb.com/{clientKey}/users/{id}
-Authentication: Bearer {access_token}
-Content-Type: application/json
+.. tabs::
 
-Body:
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         PUT https://api.meshydb.com/{clientKey}/users/{id} HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
+         Body:
+           {
+             "id": "5c78cc81dd870827a8e7b6c4",
+             "username": "username_testermctesterson",
+             "firstName": "Tester",
+             "lastName": "McTesterton",
+             "verified": true,
+             "isActive": true,
+             "phoneNumber": "5555555555",
+             "roles": [
+                         "admin",
+                         "test"
+                      ]
+           }
 
-var user = new User();
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
+         var client = await database.LoginWithAnonymouslyAsync();
 
-await client.Users.UpdateUserAsync(id, user);
-```
+         var user = new User();
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_username_   | **required**  Username of user.                               | _string_|
-|_id_  		    | Identifier of user.                                           | _string_|
-|_firstName_  | First name of user.                                           | _string_|
-|_lastName_   | Last name of user.                                            | _string_|
-|_verified_   | Identifies whether or not the user is verified.               | _boolean_|
-|_isActive_   | Identifies whether or not the user is active.                 | _boolean_|
-|_phoneNumber_| Phone number of user.                                         | _string_|
-|_roles_      | Collection of roles user has access.                          | _string[]_|
+         await client.Users.UpdateUserAsync(id, user);
+
+Parameters
+^^^^^^^^^^
+username : string, required
+   Username of user.
+id : string
+   Identifier of user.
+firstName : string
+   First name of user.
+lastName : string
+   Last name of user.
+verified : boolean
+   Identifies whether or not the user is verified.
+isActive : boolean
+   Identifies whether or not the user is active.
+phoneNumber : string
+   Phone number of user.
+roles : string[]
+   Collection of roles user has access.
+
 
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -273,64 +301,90 @@ Example Response:
                 "test"
              ]
   }
-```
-## Delete User
+
+-----------
+Delete User
+-----------
 Permanently deletes a user. It cannot be undone.
 
-``` http  fct_label="REST"
-DELETE https://api.meshydb.com/{clientKey}/users/{id}
-Authentication: Bearer {access_token}
-```
+.. tabs::
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         DELETE https://api.meshydb.com/{clientKey}/users/{id} HTTP/1.1
+         Authentication: Bearer {access_token}
 
-await client.Users.DeleteUserAsync(id);
-```
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
+         var client = await database.LoginWithAnonymouslyAsync();
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_id_  		    | Identifier of user.                                           | _string_|
+         await client.Users.DeleteUserAsync(id);
 
+Parameters
+^^^^^^^^^^
+id : string
+   Identifier of user.
+   
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "deletedCount": 1,
     "isAcknowledged": true
   }
 
-```
-## Search
+------
+Search
+------
 Returns a paged result of users.
 
-``` http  fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users?query={query}&
-                                              roles={roles}&
-                                              activeOnly={activeOnly}&
-                                              page={page}&
-                                              pageSize={pageSize}
-Authentication: Bearer {access_token}
+.. tabs::
 
-(Line breaks added for readability)
-```
-``` c#
-  var database = new MeshyDB({clientKey}, {publicKey});
-  var client = await database.LoginWithAnonymouslyAsync();
-  
-  await client.Users.GetUsersAsync(query, roles, activeOnly, page, pageSize);
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         GET https://api.meshydb.com/{clientKey}/users?query={query}&
+                                                 roles={roles}&
+                                                 activeOnly={activeOnly}&
+                                                 page={page}&
+                                                 pageSize={pageSize}
+         Authentication: Bearer {access_token}
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_query_      | Criteria is split on space and each  containing part must be  contained within a user's first, last or user name.                               | _string_|
-|_roles_  		    | Collection of roles where a user must contain at least one of the roles supplied.                                          | _string[]_|
-|_activeOnly_  | If false it will also bring back all inactive users.                                           | _boolean_|
-|_page_  | Page number of users to bring back.                                           | _integer_|
-|_pageSize_  | Number of results to bring back per  page. Maximum is 200.                                           | _integer_|
+         (Line breaks added for readability)
+
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+        var database = new MeshyDB({clientKey}, {publicKey});
+        var client = await database.LoginWithAnonymouslyAsync();
+
+        await client.Users.GetUsersAsync(query, roles, activeOnly, page, pageSize);
+
+Parameters
+^^^^^^^^^^
+query : string
+  Criteria is split on space and each  containing part must be  contained within a user's first, last or user name.
+roles : string
+  Collection of roles where a user must contain at least one of the roles supplied.
+activeOnly : string
+  If false it will also bring back all inactive users.
+page : integer, default: 1
+  Page number of users to bring back.
+pageSize : integer, default: 25, max: 200
+   Number of results to bring back per  page.
 
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "page": 1,
     "pageSize": 25,
@@ -351,93 +405,125 @@ Example Response:
     ],
     "totalRecords": 1
   }
-```
 
-## Forgot Password
+---------------
+Forgot Password
+---------------
 Creates a request for password reset that must have the matching data to reset to ensure request parity.
 
-``` http  fct_label="REST"
-POST https://api.meshydb.com/{clientKey}/users/forgotpassword
-Authentication: Bearer {access_token}
-Content-Type: application/json
+.. tabs::
 
-Body:
-  {
-    "username": "username_testermctesterson"
-  }
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         POST https://api.meshydb.com/{clientKey}/users/forgotpassword HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_username_   | **required** User name to be reset.                           | _string_|
+         Body:
+           {
+             "username": "username_testermctesterson"
+           }
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-  
-await database.ForgotPasswordAsync(username);
-```
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
+
+         await database.ForgotPasswordAsync(username);
+
+Parameters
+^^^^^^^^^^
+username : string
+  User name to be reset.
 
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "username": "username_testermctesterson",
     "expires": "1-1-2019",
     "hash": "randomlygeneratedhash"
   }
-```
-## Reset Password
+
+--------------
+Reset Password
+--------------
 Uses result from Forgot password to allow a user to reset their password.
 
-``` http  fct_label="REST"
-POST https://api.meshydb.com/{clientKey}/users/resetpassword
-Authentication: Bearer {access_token}
-Content-Type: application/json
+.. tabs::
 
-Body:
-  {
-    "username": "username_testermctesterson",
-    "expires": "1-1-2019",
-    "hash": "randomlygeneratedhash",
-    "newPassword": "newPassword"
-  }
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         POST https://api.meshydb.com/{clientKey}/users/resetpassword  HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
+         Body:
+           {
+             "username": "username_testermctesterson",
+             "expires": "1-1-2019",
+             "hash": "randomlygeneratedhash",
+             "newPassword": "newPassword"
+           }
+           
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
 
-await database.ResetPasswordAsync(resetHash, newPassword);
-```
+         await database.ResetPasswordAsync(resetHash, newPassword);
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_username_   | **required** User name that is being reset.                           | _string_|
-|_expires_    | **required** Expiration of hash.                           | _date_|
-|_hash_       | **required** Forgot password hash.                           | _string_|
-|_newPassword_| **required** New password of user.                           | _string_|
-
-## Change my Password
+Parameters
+^^^^^^^^^^
+username : string
+  User name that is being reset.
+expires : date
+  Expiration of hash.
+hash : string
+  Forgot password hash.
+newPassword : string
+  New password of user.
+  
+------------------
+Change my Password
+------------------
 Allows the logged in user to change their password.
 
-``` http  fct_label="REST"
-POST https://api.meshydb.com/{clientKey}/users/me/password
-Authentication: Bearer {access_token}
-Content-Type: application/json
+.. tabs::
 
-Body:
-  {
-    "newPassword": "newPassword",
-    "previousPassword": "previousPassword"
-  }
-```
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         POST https://api.meshydb.com/{clientKey}/users/me/password HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
+         Body:
+           {
+             "newPassword": "newPassword",
+             "previousPassword": "previousPassword"
+           }
 
-await client.UpdatePasswordAsync(previousPassword, newPassword);
-```
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
+         var client = await database.LoginWithAnonymouslyAsync();
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_previousPassword_   | **required** Previous password of user.                           | _string_|
-|_newPassword_| **required** New password of user.                           | _string_|
+         await client.UpdatePasswordAsync(previousPassword, newPassword);
+
+Parameters
+^^^^^^^^^^
+_previousPassword_ : string
+  Previous password of user.
+_newPassword_ : string
+  New password of user.
