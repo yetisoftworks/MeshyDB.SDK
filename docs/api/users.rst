@@ -2,6 +2,10 @@
 Users
 =====
 
+---------------
+Getting Started
+---------------
+
 The following endpoints require to be authenticated.
 
 .. tabs::
@@ -29,7 +33,7 @@ The following endpoints require to be authenticated.
         var client = database.LoginWithPassword(username, password);
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey : string
    Indicates which tenant you are connecting for authentication.
 publicKey : string
@@ -50,9 +54,9 @@ Example Response:
     "refresh_token": "ab23cd3343e9328g"
   }
   
-======
+------
 Create
-======
+------
 Creates a new user that can log into the system.
 
 
