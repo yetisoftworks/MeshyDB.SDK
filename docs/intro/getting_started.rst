@@ -1,3 +1,4 @@
+===============
 Getting started
 ===============
 The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at `MeshyDB.com <https://meshydb.com/>`_.
@@ -6,8 +7,9 @@ Once we have done that we can go to Account and get our Client Key and Public Ke
 
 Now that we have the required information let's jump in and see how easy it is to start with MeshyDB.
 
+-----
 Login
-=====
+-----
 Let's log in using our MeshyDB credentials.
 
 .. tabs::
@@ -19,7 +21,6 @@ Let's log in using our MeshyDB credentials.
        POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
        Content-Type: application/x-www-form-urlencoded
 
-       Body:
          client_id={publicKey}&
          grant_type=password&
          username={username}&
@@ -36,7 +37,7 @@ Let's log in using our MeshyDB credentials.
        var client = database.LoginWithPassword(username, password);
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey : string
    Indicates which tenant you are connecting for authentication.
 publicKey : string
@@ -57,8 +58,9 @@ Example Response:
     "refresh_token": "ab23cd3343e9328g"
   }
  
+-----------
 Create data
-===========
+-----------
 Now that we are logged in we can use our Bearer token to authenticate requests with MeshyDB and create some data.
 
 The data object can whatever information you would like to capture. The following example will have some data fields with example data.
@@ -73,7 +75,6 @@ The data object can whatever information you would like to capture. The followin
          Authentication: Bearer {access_token}
          Content-Type: application/json
 
-         Body:
             {
                "firstName": "Bob",
                "lastName": "Bobberson"
@@ -96,7 +97,7 @@ The data object can whatever information you would like to capture. The followin
          });
 
 Parameters
-----------
+^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
@@ -114,9 +115,10 @@ Example Response:
     "lastName": "Bobberson",
     "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
-
+  
+-----------
 Update data
-===========
+-----------
 If we need to make a modificaiton let's update our Mesh!
 
 .. tabs::
@@ -129,7 +131,6 @@ If we need to make a modificaiton let's update our Mesh!
        Authentication: Bearer {access_token}
        Content-Type: application/json
 
-       Body:
           {
              "firstName": "Bobbo",
              "lastName": "Bobberson"
@@ -179,7 +180,7 @@ Let's see if we can find Bobbo.
          GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
                                                                orderby={orderby}&
                                                                page={page}&
-                                                               pageSize={pageSize}
+                                                               pageSize={pageSize} HTTP/1.1
          Authentication: Bearer {access_token}
 
          (Line breaks added for readability)
@@ -233,7 +234,7 @@ We are now done with our data, so let us clean up after ourselves.
    
       .. code-block:: http
       
-         DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}
+         DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
          Authentication: Bearer {access_token}
 
    .. group-tab:: C#
@@ -263,7 +264,7 @@ Now the user is complete. Let us sign out so someone else can have a try.
    
       .. sourcecode:: http
 
-         POST https://auth.meshydb.com/{clientKey}/connect/token
+         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
 
          Body:  
