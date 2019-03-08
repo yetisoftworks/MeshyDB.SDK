@@ -23,3 +23,13 @@ Because a Mesh defines your data it is isolated from all other data. You can man
    :caption: Introduction
    
    intro/getting_started
+
+
+.. toctree::
+   :maxdepth: 3
+   :hidden:
+   :caption: API
+   
+   api/auth
+   api/meshes
+   api/users
