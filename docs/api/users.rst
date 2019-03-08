@@ -1,4 +1,4 @@
-Getting Started
+Users
 ###############
 
 The following endpoints require to be authenticated.
@@ -28,7 +28,7 @@ The following endpoints require to be authenticated.
         var client = database.LoginWithPassword(username, password);
 
 Parameters
-----------
+==========
 clientKey : string
    Indicates which tenant you are connecting for authentication.
 publicKey : string
@@ -50,7 +50,7 @@ Example Response:
   }
 
 Create
-======
+------
 Creates a new user that can log into the system.
 
 
@@ -90,7 +90,7 @@ Creates a new user that can log into the system.
         await database.CreateNewUserAsync(user);
 
 Parameters
-----------
+==========
 _username_ : string, required
    Username of user.
 _newPassword_ : string, required
