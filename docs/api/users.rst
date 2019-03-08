@@ -50,9 +50,9 @@ Example Response:
     "refresh_token": "ab23cd3343e9328g"
   }
   
-------
+======
 Create
-------
+======
 Creates a new user that can log into the system.
 
 
@@ -85,6 +85,7 @@ Creates a new user that can log into the system.
    .. group-tab:: C#
    
       .. code-block:: c#
+      
         var database = new MeshyDB(clientKey, publicKey);
 
         var user = new NewUser();
@@ -92,7 +93,7 @@ Creates a new user that can log into the system.
         await database.CreateNewUserAsync(user);
 
 Parameters
-^^^^^^^^^^
+----------
 _username_ : string, required
    Username of user.
 _newPassword_ : string, required
