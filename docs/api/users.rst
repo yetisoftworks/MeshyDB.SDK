@@ -12,7 +12,7 @@ The following endpoints require to be authenticated.
 
    .. group-tab:: REST
    
-      .. code-block:: http
+      .. highlight:: http
       
         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
         Content-Type: application/x-www-form-urlencoded
