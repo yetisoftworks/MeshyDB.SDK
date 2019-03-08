@@ -17,7 +17,6 @@ The following endpoints require to be authenticated.
         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
         Content-Type: application/x-www-form-urlencoded
         
-        Body:
           client_id={publicKey}&
           grant_type=password&
           username={username}&
@@ -71,7 +70,6 @@ Creates a new user that can log into the system.
         Authentication: Bearer {access_token}
         Content-Type: application/json
 
-        Body:
           {
             "id": "5c78cc81dd870827a8e7b6c4",
             "username": "username_testermctesterson",
@@ -239,7 +237,6 @@ Update a specific  user based on supplied object.
          Authentication: Bearer {access_token}
          Content-Type: application/json
 
-         Body:
            {
              "id": "5c78cc81dd870827a8e7b6c4",
              "username": "username_testermctesterson",
@@ -355,7 +352,7 @@ Returns a paged result of users.
                                                  roles={roles}&
                                                  activeOnly={activeOnly}&
                                                  page={page}&
-                                                 pageSize={pageSize}
+                                                 pageSize={pageSize} HTTP/1.1
          Authentication: Bearer {access_token}
 
          (Line breaks added for readability)
@@ -422,7 +419,6 @@ Creates a request for password reset that must have the matching data to reset t
          Authentication: Bearer {access_token}
          Content-Type: application/json
 
-         Body:
            {
              "username": "username_testermctesterson"
            }
@@ -465,7 +461,6 @@ Uses result from Forgot password to allow a user to reset their password.
          Authentication: Bearer {access_token}
          Content-Type: application/json
 
-         Body:
            {
              "username": "username_testermctesterson",
              "expires": "1-1-2019",
@@ -507,7 +502,6 @@ Allows the logged in user to change their password.
          Authentication: Bearer {access_token}
          Content-Type: application/json
 
-         Body:
            {
              "newPassword": "newPassword",
              "previousPassword": "previousPassword"
