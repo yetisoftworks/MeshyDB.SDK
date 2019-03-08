@@ -66,7 +66,7 @@ Creates a new user that can log into the system.
    
       .. code-block:: http
       
-        POST https://api.meshydb.com/{clientKey}/users
+        POST https://api.meshydb.com/{clientKey}/users HTTP/1.1
         Authentication: Bearer {access_token}
         Content-Type: application/json
 
@@ -97,7 +97,7 @@ Creates a new user that can log into the system.
         await database.CreateNewUserAsync(user);
 
 Parameters
-----------
+^^^^^^^^^^
 _username_ : string, required
    Username of user.
 _newPassword_ : string, required
@@ -135,27 +135,39 @@ Example Response:
              ]
   }
 
-## Retrieve a single user
+======================
+Retrieve a single user
+======================
 Retrieves details about an existing user.
 
-``` http  fct_label="REST"
-GET https://api.meshydb.com/{clientKey}/users/{id}
-Authentication: Bearer {access_token}
-```
 
-``` c#
-var database = new MeshyDB({clientKey}, {publicKey});
-var client = await database.LoginWithAnonymouslyAsync();
-  
-await client.Users.GetUserAsync(id);
-```
+.. tabs::
 
-| Parameter   | Description                                                   | Type    |
-|:------------|:--------------------------------------------------------------|:--------|
-|_id_  		    | Identifier of user.                                           | _string_|
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         GET https://api.meshydb.com/{clientKey}/users/{id}
+         Authentication: Bearer {access_token}
+
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         var database = new MeshyDB({clientKey}, {publicKey});
+         var client = await database.LoginWithAnonymouslyAsync();
+
+         await client.Users.GetUserAsync(id);
+
+Parameters
+^^^^^^^^^^
+_id_ : string
+   Identifier of user.
 
 Example Response:
-```
+
+.. code-block:: json
+
   {
     "id": "5c78cc81dd870827a8e7b6c4",
     "username": "username_testermctesterson",
@@ -169,7 +181,6 @@ Example Response:
                 "test"
              ]
   }
-```
 
 ## Retrieve myself
 Retrieve details about the logged in user.
