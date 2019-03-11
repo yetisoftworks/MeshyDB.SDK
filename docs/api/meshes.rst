@@ -2,36 +2,10 @@
 Meshes
 =====
 
----------------
-Getting Started
----------------
+The following endpoints are used to manage Mesh data. 
 
-The following endpoints require to be authenticated.
+A Mesh is a container that we use to store your data dynamically.
 
-.. tabs::
-
-   .. group-tab:: REST
-   
-      .. code-block:: http
-      
-        POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
-        Content-Type: application/x-www-form-urlencoded
-        
-          client_id={publicKey}&
-          grant_type=password&
-          username={username}&
-          password={password}&
-          scope=meshy.api offline_access
-
-        (Form-encoding removed and line breaks added for readability)
-
-   .. group-tab:: C#
-   
-      .. code-block:: c#
-
-        var database = new MeshyDB(clientKey, publicKey);
-        var client = database.LoginWithPassword(username, password);
-        
 -----------
 Create data
 -----------
