@@ -2,58 +2,10 @@
 Users
 =====
 
----------------
-Getting Started
----------------
+The following endpoints are used to manage Users.
 
-The following endpoints require to be authenticated.
+They can help update user information or reset credentials.
 
-.. tabs::
-
-   .. group-tab:: REST
-   
-      .. code-block:: http
-      
-        POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
-        Content-Type: application/x-www-form-urlencoded
-        
-          client_id={publicKey}&
-          grant_type=password&
-          username={username}&
-          password={password}&
-          scope=meshy.api offline_access
-
-        (Form-encoding removed and line breaks added for readability)
-
-   .. group-tab:: C#
-   
-      .. code-block:: c#
-
-        var database = new MeshyDB(clientKey, publicKey);
-        var client = database.LoginWithPassword(username, password);
-
-Parameters
-^^^^^^^^^^
-clientKey : string
-   Indicates which tenant you are connecting for authentication.
-publicKey : string
-   Public accessor for application.
-username : string
-   User name.
-password : string
-   User password.
-   
-Example Response:
-
-.. code-block:: json
-
-  {
-    "access_token": "ey...",
-    "expires_in": 3600,
-    "token_type": "Bearer",
-    "refresh_token": "ab23cd3343e9328g"
-  }
-  
 ------
 Create
 ------
