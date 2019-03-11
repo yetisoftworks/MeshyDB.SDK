@@ -168,7 +168,7 @@ Example Response:
   }
 
 Search data
-===========
+-----------
 Let's see if we can find Bobbo.
 
 .. tabs::
@@ -225,7 +225,7 @@ Example Response:
   }
 
 Delete data
-===========
+-----------
 We are now done with our data, so let us clean up after ourselves.
 
 .. tabs::
@@ -254,7 +254,6 @@ mesh : string
 id : string
    Idenfities location of what Mesh data to replace.
 
---------
 Sign out
 --------
 Now the user is complete. Let us sign out so someone else can have a try.
@@ -265,7 +264,7 @@ Now the user is complete. Let us sign out so someone else can have a try.
    
       .. sourcecode:: http
 
-         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
+         POST https://auth.meshydb.com/{clientKey}/connect/revocation HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
 
            client_id={clientKey}&
