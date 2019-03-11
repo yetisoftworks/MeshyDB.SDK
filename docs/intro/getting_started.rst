@@ -18,7 +18,7 @@ Let's log in using our MeshyDB credentials.
    
       .. code-block:: http
 
-       POST https://auth.meshydb.com/{clientKey}/connect/token
+       POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
        Content-Type: application/x-www-form-urlencoded
 
          client_id={publicKey}&
