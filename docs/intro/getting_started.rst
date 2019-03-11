@@ -167,6 +167,7 @@ Example Response:
     "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 
+-----------
 Search data
 -----------
 Let's see if we can find Bobbo.
@@ -224,6 +225,7 @@ Example Response:
     "totalRecords": 1
   }
 
+-----------
 Delete data
 -----------
 We are now done with our data, so let us clean up after ourselves.
@@ -254,6 +256,7 @@ mesh : string
 id : string
    Idenfities location of what Mesh data to replace.
 
+--------
 Sign out
 --------
 Now the user is complete. Let us sign out so someone else can have a try.
