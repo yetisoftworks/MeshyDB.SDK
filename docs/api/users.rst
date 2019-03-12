@@ -10,11 +10,6 @@ They can help update user information or reset credentials.
 
    <h4>Parameters</h4>
 
-.. |onemoretest| line-block::
-
-   How about this : string
-      And this is the description?
-      
 ------
 Create
 ------
@@ -47,7 +42,6 @@ Creates a new user that can log into the system.
           }
 
       |parameters|
-      |onemoretest|
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -104,33 +98,6 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-      
-
-|onemoretest|
-.. Parameters
-   ^^^^^^^^^^
-   clientKey: string
-      Indicates which tenant you are connecting for authentication.
-   access_token: string
-      Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-   username : string, required
-      Username of user.
-   newPassword : string, required
-      Password of user to use for login.
-   id : string
-      Identifier of user.
-   firstName : string
-      First name of user.
-   lastName : string
-      Last name of user.
-   verified : boolean
-      Identifies whether or not the user is verified.
-   isActive : boolean
-      Identifies whether or not the user is active.
-   phoneNumber : string
-      Phone number of user.
-   roles : string[]
-      Collection of roles user has access.
 
 Example Response:
 
@@ -164,6 +131,12 @@ Retrieve details about the logged in user.
          GET https://api.meshydb.com/{clientKey}/users/me HTTP/1.1
          Authentication: Bearer {access_token}
 
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -173,12 +146,11 @@ Retrieve details about the logged in user.
 
          await client.Users.GetLoggedInUserAsync();
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 
 Example Response:
 
@@ -228,6 +200,28 @@ Update details about the logged in user.
                       ]
            }
 
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      username : string, required
+         Username of user.
+      id : string
+         Identifier of user.
+      firstName : string
+         First name of user.
+      lastName : string
+         Last name of user.
+      verified : boolean
+         Identifies whether or not the user is verified.
+      isActive : boolean
+         Identifies whether or not the user is active.
+      phoneNumber : string
+         Phone number of user.
+      roles : string[]
+         Collection of roles user has access.
+
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -239,28 +233,27 @@ Update details about the logged in user.
 
          await client.Users.UpdateUserAsync(id, user);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-username : string, required
-   Username of user.
-id : string
-   Identifier of user.
-firstName : string
-   First name of user.
-lastName : string
-   Last name of user.
-verified : boolean
-   Identifies whether or not the user is verified.
-isActive : boolean
-   Identifies whether or not the user is active.
-phoneNumber : string
-   Phone number of user.
-roles : string[]
-   Collection of roles user has access.
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      username : string, required
+         Username of user.
+      id : string
+         Identifier of user.
+      firstName : string
+         First name of user.
+      lastName : string
+         Last name of user.
+      verified : boolean
+         Identifies whether or not the user is verified.
+      isActive : boolean
+         Identifies whether or not the user is active.
+      phoneNumber : string
+         Phone number of user.
+      roles : string[]
+         Collection of roles user has access.
 
 
 Example Response:
@@ -299,6 +292,12 @@ Creates a request for password reset that must have the matching data to reset t
              "username": "username_testermctesterson"
            }
 
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      username : string
+        User name to be reset.
+
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -307,12 +306,11 @@ Creates a request for password reset that must have the matching data to reset t
 
          await database.ForgotPasswordAsync(username);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-username : string
-  User name to be reset.
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      username : string
+        User name to be reset.
 
 Example Response:
 
@@ -344,7 +342,19 @@ Uses result from Forgot password to allow a user to reset their password.
              "hash": "randomlygeneratedhash",
              "newPassword": "newPassword"
            }
-           
+
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      username : string
+        User name that is being reset.
+      expires : date
+        Expiration of hash.
+      hash : string
+        Forgot password hash.
+      newPassword : string
+        New password of user.
+        
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -353,18 +363,17 @@ Uses result from Forgot password to allow a user to reset their password.
 
          await database.ResetPasswordAsync(resetHash, newPassword);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-username : string
-  User name that is being reset.
-expires : date
-  Expiration of hash.
-hash : string
-  Forgot password hash.
-newPassword : string
-  New password of user.
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      username : string
+        User name that is being reset.
+      expires : date
+        Expiration of hash.
+      hash : string
+        Forgot password hash.
+      newPassword : string
+        New password of user.
   
 ------------------
 Change my Password
@@ -386,6 +395,16 @@ Allows the logged in user to change their password.
              "previousPassword": "previousPassword"
            }
 
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      _previousPassword_ : string
+        Previous password of user.
+      _newPassword_ : string
+        New password of user.
+
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -395,13 +414,12 @@ Allows the logged in user to change their password.
 
          await client.UpdatePasswordAsync(previousPassword, newPassword);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-_previousPassword_ : string
-  Previous password of user.
-_newPassword_ : string
-  New password of user.
+      |parameters|
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      _previousPassword_ : string
+        Previous password of user.
+      _newPassword_ : string
+        New password of user.
