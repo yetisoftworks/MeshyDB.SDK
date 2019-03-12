@@ -6,6 +6,10 @@ The following endpoints are used to manage Users.
 
 They can help update user information or reset credentials.
 
+.. |parameters| raw:: html
+
+   <h4>Parameters</h4>
+
 ------
 Create
 ------
@@ -37,8 +41,7 @@ Creates a new user that can log into the system.
             "newPassword": "newPassword"
           }
 
-      .. raw:: html
-         <h4>Parameters</h4>
+      |parameters|
       
       clientKey: string
          Indicates which tenant you are connecting for authentication.
