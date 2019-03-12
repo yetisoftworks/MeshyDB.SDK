@@ -37,9 +37,7 @@ Creates a new user that can log into the system.
             "newPassword": "newPassword"
           }
 
-      ----------
-      Parameters
-      ----------
+      **Parameters**
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
