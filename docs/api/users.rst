@@ -10,7 +10,8 @@ They can help update user information or reset credentials.
 
    <h4>Parameters</h4>
    
-.. |letTryThis| raw:: ok
+.. |letTryThis| parsed-literal:: 
+   ok
 
 .. |clientKeyParameter| parsed-literal::
 
