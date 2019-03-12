@@ -233,7 +233,6 @@ Creates a request for password reset that must have the matching data to reset t
       .. code-block:: http
       
          POST https://api.meshydb.com/{clientKey}/users/forgotpassword HTTP/1.1
-         Authentication: Bearer {access_token}
          Content-Type: application/json
 
            {
@@ -252,8 +251,6 @@ Parameters
 ^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 username : string
   User name to be reset.
 
@@ -279,7 +276,6 @@ Uses result from Forgot password to allow a user to reset their password.
       .. code-block:: http
       
          POST https://api.meshydb.com/{clientKey}/users/resetpassword  HTTP/1.1
-         Authentication: Bearer {access_token}
          Content-Type: application/json
 
            {
@@ -301,8 +297,6 @@ Parameters
 ^^^^^^^^^^
 clientKey: string
    Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 username : string
   User name that is being reset.
 expires : date
