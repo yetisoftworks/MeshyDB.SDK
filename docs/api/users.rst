@@ -97,7 +97,7 @@ Retrieve details about the logged in user.
    
       .. code-block:: http
       
-         GET https://api.meshydb.com/{clientKey}/users/me
+         GET https://api.meshydb.com/{clientKey}/users/me HTTP/1.1
          Authentication: Bearer {access_token}
 
    .. group-tab:: C#
@@ -108,6 +108,10 @@ Retrieve details about the logged in user.
          var client = await database.LoginWithAnonymouslyAsync();
 
          await client.Users.GetLoggedInUserAsync();
+
+Parameters
+^^^^^^^^^^
+No parameters.
 
 Example Response:
 
