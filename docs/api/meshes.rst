@@ -49,7 +49,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <api/auth.html#generate-access-token>`_.
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 mesh : string
    Identifies name of mesh collection. e.g. person.
 
@@ -98,7 +98,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during `Login`_.
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 mesh : string
    Identifies name of mesh collection. e.g. person.
 id : string
@@ -145,7 +145,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during `Login`_.
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 mesh : string
    Identifies name of mesh collection. e.g. person.
 filter : string
@@ -198,7 +198,7 @@ Parameters
 clientKey: string
    Indicates which tenant you are connecting for authentication.
 access_token: string
-   Token identifying authorization with MeshyDB requested during `Login`_.
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 mesh : string
    Identifies name of mesh collection. e.g. person.
 id : string
