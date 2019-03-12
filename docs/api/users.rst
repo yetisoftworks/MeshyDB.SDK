@@ -37,7 +37,7 @@ Creates a new user that can log into the system.
             "newPassword": "newPassword"
           }
 
-      .. raw:: html
+      .. h4
          Parameters
       
       clientKey: string
