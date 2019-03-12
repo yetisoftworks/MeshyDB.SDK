@@ -214,3 +214,45 @@ Example Response:
                }],
     "totalRecords": 1
   }
+
+-----------
+Delete data
+-----------
+We are now done with our data, so let us clean up after ourselves.
+
+.. tabs::
+
+   .. group-tab:: REST
+   
+      .. code-block:: http
+      
+         DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
+         Authentication: Bearer {access_token}
+
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
+
+   .. group-tab:: C#
+   
+      .. code-block:: c#
+      
+         await client.Meshes.DeleteAsync(person);
+
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
