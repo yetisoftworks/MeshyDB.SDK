@@ -11,10 +11,7 @@ They can help update user information or reset credentials.
    <h4>Parameters</h4>
 
 .. |j2ee-cas| replace::
-   the Java `TM`:super: 2 Platform, Enterprise Edition Client
-   Access Services
-__ http://developer.java.sun.com/developer/earlyAccess/
-   j2eecas/
+   the Java `TM`:super: 2 Platform, Enterprise Edition Client Access Services __ http://developer.java.sun.com/developer/earlyAccess/j2eecas/
    
 .. glossary::
    how about this
