@@ -6,6 +6,10 @@ The following endpoints are used to manage Mesh data.
 
 A Mesh is a container that we use to store your data dynamically.
 
+.. |parameters| raw:: html
+
+   <h4>Parameters</h4>
+   
 -----------
 Create data
 -----------
@@ -27,7 +31,15 @@ The data object can whatever information you would like to capture. The followin
                "firstName": "Bob",
                "lastName": "Bobberson"
             }
-           
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+   
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -44,14 +56,14 @@ The data object can whatever information you would like to capture. The followin
            LastName="Bobberson"
          });
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-mesh : string
-   Identifies name of mesh collection. e.g. person.
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
 
 Example Response:
 
@@ -83,7 +95,18 @@ If we need to make a modificaiton let's update our Mesh!
              "firstName": "Bobbo",
              "lastName": "Bobberson"
           }
-           
+
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
+
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -91,18 +114,17 @@ If we need to make a modificaiton let's update our Mesh!
          person.FirstName = "Bobbo";
 
          person = await client.Meshes.UpdateAsync(person);
+         
+      |parameters|
 
-
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-mesh : string
-   Identifies name of mesh collection. e.g. person.
-id : string
-   Idenfities location of what Mesh data to replace.
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
 
 Example Response:
 
@@ -134,28 +156,46 @@ Let's see if we can find Bobbo.
 
          (Line breaks added for readability)
 
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      filter : string
+         Filter criteria for search. Uses MongoDB format.
+      orderby : string
+         How to order results. Uses MongoDB format.
+      page : integer
+         Page number of users to bring back.
+      pageSize : integer, max: 200
+         Number of results to bring back per page.
+
    .. group-tab:: C#
    
       .. code-block:: c#
 
          var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-mesh : string
-   Identifies name of mesh collection. e.g. person.
-filter : string
-   Filter criteria for search. Uses MongoDB format.
-orderby : string
-   How to order results. Uses MongoDB format.
-page : integer
-   Page number of users to bring back.
-pageSize : integer, max: 200
-   Number of results to bring back per page.
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      filter : string
+         Filter criteria for search. Uses MongoDB format.
+      orderby : string
+         How to order results. Uses MongoDB format.
+      page : integer
+         Page number of users to bring back.
+      pageSize : integer, max: 200
+         Number of results to bring back per page.
+
 
 Example Response:
 
@@ -187,19 +227,30 @@ We are now done with our data, so let us clean up after ourselves.
          DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
          Authentication: Bearer {access_token}
 
-   .. group-tab:: C#
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
+
+.. group-tab:: C#
    
       .. code-block:: c#
       
          await client.Meshes.DeleteAsync(person);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-mesh : string
-   Identifies name of mesh collection. e.g. person.
-id : string
-   Idenfities location of what Mesh data to replace.
+      |parameters|
+
+      clientKey: string
+         Indicates which tenant you are connecting for authentication.
+      access_token: string
+         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
