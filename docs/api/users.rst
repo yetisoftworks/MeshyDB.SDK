@@ -9,15 +9,14 @@ They can help update user information or reset credentials.
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
+.. glossary::
+   how about this
+      ok
    
-.. |letTryThis| raw:: 
-   ok
-
-.. |clientKeyParameter| parsed-literal::
-
-   clientKey : string
-      Indicates which tenant you are connecting for authentication.
-
+   clientKeyParameter
+      clientKey : string
+         Indicates which tenant you are connecting for authentication.
+         
 ------
 Create
 ------
@@ -53,9 +52,7 @@ Creates a new user that can log into the system.
       
       .. parsed-literal::
       
-         |letTryThis|
-         |clientKeyParameter|
-         |letTryThis|
+      :term:`clientKeyParameter`
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
