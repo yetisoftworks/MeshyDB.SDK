@@ -49,6 +49,10 @@ Creates a new user that can log into the system.
 
 Parameters
 ^^^^^^^^^^
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 username : string, required
    Username of user.
 newPassword : string, required
@@ -111,7 +115,10 @@ Retrieve details about the logged in user.
 
 Parameters
 ^^^^^^^^^^
-No parameters.
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 
 Example Response:
 
@@ -174,6 +181,10 @@ Update details about the logged in user.
 
 Parameters
 ^^^^^^^^^^
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 username : string, required
    Username of user.
 id : string
@@ -239,6 +250,10 @@ Creates a request for password reset that must have the matching data to reset t
 
 Parameters
 ^^^^^^^^^^
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 username : string
   User name to be reset.
 
@@ -284,6 +299,10 @@ Uses result from Forgot password to allow a user to reset their password.
 
 Parameters
 ^^^^^^^^^^
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 username : string
   User name that is being reset.
 expires : date
@@ -324,7 +343,11 @@ Allows the logged in user to change their password.
 
 Parameters
 ^^^^^^^^^^
+clientKey: string
+   Indicates which tenant you are connecting for authentication.
+access_token: string
+   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
 _previousPassword_ : string
   Previous password of user.
 _newPassword_ : string
-  New password of user.\
+  New password of user.
