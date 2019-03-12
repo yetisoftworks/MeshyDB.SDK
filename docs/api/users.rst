@@ -10,6 +10,10 @@ They can help update user information or reset credentials.
 
    <h4>Parameters</h4>
 
+.. |clientKeyParameter| parsed-literal::
+   clientKey : string
+      Indicates which tenant you are connecting for authentication.
+
 ------
 Create
 ------
@@ -42,7 +46,7 @@ Creates a new user that can log into the system.
           }
 
       |parameters|
-      
+      |clientKeyParameter|
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
