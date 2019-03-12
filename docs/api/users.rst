@@ -86,52 +86,6 @@ Example Response:
              ]
   }
 
-----------------------
-Retrieve a single user
-----------------------
-Retrieves details about an existing user.
-
-.. tabs::
-
-   .. group-tab:: REST
-   
-      .. code-block:: http
-      
-         GET https://api.meshydb.com/{clientKey}/users/{id} HTTP/1.1
-         Authentication: Bearer {access_token}
-
-   .. group-tab:: C#
-   
-      .. code-block:: c#
-      
-         var database = new MeshyDB({clientKey}, {publicKey});
-         var client = await database.LoginWithAnonymouslyAsync();
-
-         await client.Users.GetUserAsync(id);
-
-Parameters
-^^^^^^^^^^
-id : string
-   Identifier of user.
-
-Example Response:
-
-.. code-block:: json
-
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "5555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
-
 ---------------
 Retrieve myself
 ---------------
@@ -175,9 +129,9 @@ Example Response:
 
 
 -----------
-Update User
+Update Myself
 -----------
-Update a specific  user based on supplied object.
+Update details about the logged in user.
 
 .. tabs::
 
@@ -185,7 +139,7 @@ Update a specific  user based on supplied object.
    
       .. code-block:: http
       
-         PUT https://api.meshydb.com/{clientKey}/users/{id} HTTP/1.1
+         PUT https://api.meshydb.com/{clientKey}/users/me HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
 
@@ -251,111 +205,7 @@ Example Response:
                 "test"
              ]
   }
-
------------
-Delete User
------------
-Permanently deletes a user. It cannot be undone.
-
-.. tabs::
-
-   .. group-tab:: REST
-   
-      .. code-block:: http
-      
-         DELETE https://api.meshydb.com/{clientKey}/users/{id} HTTP/1.1
-         Authentication: Bearer {access_token}
-
-   .. group-tab:: C#
-   
-      .. code-block:: c#
-      
-         var database = new MeshyDB({clientKey}, {publicKey});
-         var client = await database.LoginWithAnonymouslyAsync();
-
-         await client.Users.DeleteUserAsync(id);
-
-Parameters
-^^^^^^^^^^
-id : string
-   Identifier of user.
-   
-Example Response:
-
-.. code-block:: json
-
-  {
-    "deletedCount": 1,
-    "isAcknowledged": true
-  }
-
-------
-Search
-------
-Returns a paged result of users.
-
-.. tabs::
-
-   .. group-tab:: REST
-   
-      .. code-block:: http
-      
-         GET https://api.meshydb.com/{clientKey}/users?query={query}&
-                                                 roles={roles}&
-                                                 activeOnly={activeOnly}&
-                                                 page={page}&
-                                                 pageSize={pageSize} HTTP/1.1
-         Authentication: Bearer {access_token}
-
-         (Line breaks added for readability)
-
-   .. group-tab:: C#
-   
-      .. code-block:: c#
-      
-        var database = new MeshyDB({clientKey}, {publicKey});
-        var client = await database.LoginWithAnonymouslyAsync();
-
-        await client.Users.GetUsersAsync(query, roles, activeOnly, page, pageSize);
-
-Parameters
-^^^^^^^^^^
-query : string
-  Criteria is split on space and each  containing part must be  contained within a user's first, last or user name.
-roles : string
-  Collection of roles where a user must contain at least one of the roles supplied.
-activeOnly : string
-  If false it will also bring back all inactive users.
-page : integer, default: 1
-  Page number of users to bring back.
-pageSize : integer, default: 25, max: 200
-   Number of results to bring back per  page.
-
-Example Response:
-
-.. code-block:: json
-
-  {
-    "page": 1,
-    "pageSize": 25,
-    "resultss": [
-      {
-        "id": "5c78cc81dd870827a8e7b6c4",
-        "username": "username_testermctesterson",
-        "firstName": "Tester",
-        "lastName": "McTesterton",
-        "verified": true,
-        "isActive": true,
-        "phoneNumber": "5555555555",
-        "roles": [
-                    "admin",
-                    "test"
-                 ]
-      }
-    ],
-    "totalRecords": 1
-  }
-
+  
 ---------------
 Forgot Password
 ---------------
@@ -394,7 +244,7 @@ Example Response:
 
   {
     "username": "username_testermctesterson",
-    "expires": "1-1-2019",
+    "expires": "1900-01-01T00:00:00.000Z",
     "hash": "randomlygeneratedhash"
   }
 
@@ -473,4 +323,4 @@ Parameters
 _previousPassword_ : string
   Previous password of user.
 _newPassword_ : string
-  New password of user.
+  New password of user.\
