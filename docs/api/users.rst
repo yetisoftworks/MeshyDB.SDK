@@ -9,6 +9,13 @@ They can help update user information or reset credentials.
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
+
+.. |j2ee-cas| replace::
+   the Java `TM`:super: 2 Platform, Enterprise Edition Client
+   Access Services
+__ http://developer.java.sun.com/developer/earlyAccess/
+   j2eecas/
+   
 .. glossary::
    how about this
       ok
@@ -50,9 +57,7 @@ Creates a new user that can log into the system.
 
       |parameters|
       
-      .. parsed-literal::
-      
-      :term:`clientKeyParameter`
+      But still, that's nothing compared to a name like |j2ee-cas|__.
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
