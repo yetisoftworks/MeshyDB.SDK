@@ -4,6 +4,8 @@ Authorization
 
 The following supported endpoints conform to the `OIDC <https://openid.net/developers/specs/>`_ protocol.
 
+Currently MeshyDB only supports the password grant flow.
+
 ------
 Generate Access Token
 ------
