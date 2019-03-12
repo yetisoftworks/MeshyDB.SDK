@@ -10,7 +10,7 @@ They can help update user information or reset credentials.
 
    <h4>Parameters</h4>
 
-.. |clientKeyParameter| replace::
+.. |clientKeyParameter| parsed-literal::
 
    clientKey : string
       Indicates which tenant you are connecting for authentication.
