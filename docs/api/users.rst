@@ -103,7 +103,9 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-         
+      
+
+|onemoretest|
 .. Parameters
    ^^^^^^^^^^
    clientKey: string
