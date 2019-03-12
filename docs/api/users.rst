@@ -37,7 +37,8 @@ Creates a new user that can log into the system.
             "newPassword": "newPassword"
           }
 
-      <h4>Parameters</h4>
+      .. h4::
+         Parameters
       
       clientKey: string
          Indicates which tenant you are connecting for authentication.
