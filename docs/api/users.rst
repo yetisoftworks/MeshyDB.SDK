@@ -42,6 +42,7 @@ Creates a new user that can log into the system.
           }
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -76,6 +77,7 @@ Creates a new user that can log into the system.
         await database.CreateNewUserAsync(user);
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -132,6 +134,7 @@ Retrieve details about the logged in user.
          Authentication: Bearer {access_token}
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -147,6 +150,7 @@ Retrieve details about the logged in user.
          await client.Users.GetLoggedInUserAsync();
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -201,6 +205,7 @@ Update details about the logged in user.
            }
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -234,6 +239,7 @@ Update details about the logged in user.
          await client.Users.UpdateUserAsync(id, user);
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -293,6 +299,7 @@ Creates a request for password reset that must have the matching data to reset t
            }
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       username : string
@@ -307,6 +314,7 @@ Creates a request for password reset that must have the matching data to reset t
          await database.ForgotPasswordAsync(username);
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       username : string
@@ -344,6 +352,7 @@ Uses result from Forgot password to allow a user to reset their password.
            }
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       username : string
@@ -364,6 +373,7 @@ Uses result from Forgot password to allow a user to reset their password.
          await database.ResetPasswordAsync(resetHash, newPassword);
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       username : string
@@ -396,6 +406,7 @@ Allows the logged in user to change their password.
            }
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -415,6 +426,7 @@ Allows the logged in user to change their password.
          await client.UpdatePasswordAsync(previousPassword, newPassword);
 
       |parameters|
+      
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
