@@ -88,14 +88,14 @@ If we need to make a modificaiton let's update our Mesh!
    
       .. code-block:: http
 
-       PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
-       Authentication: Bearer {access_token}
-       Content-Type: application/json
+         PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
+         Authentication: Bearer {access_token}
+         Content-Type: application/json
 
-          {
-             "firstName": "Bobbo",
-             "lastName": "Bobberson"
-          }
+         {
+          "firstName": "Bobbo",
+          "lastName": "Bobberson"
+         }
 
       |parameters|
 
@@ -155,7 +155,8 @@ Let's see if we can find Bobbo.
                                                                pageSize={pageSize} HTTP/1.1
          Authentication: Bearer {access_token}
 
-         (Line breaks added for readability)
+         
+      (Line breaks added for readability)
 
       |parameters|
 
