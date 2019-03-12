@@ -37,9 +37,9 @@ Creates a new user that can log into the system.
             "newPassword": "newPassword"
           }
 
-
+      ----------
       Parameters
-      ^^^^^^^^^^
+      ----------
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
@@ -73,30 +73,30 @@ Creates a new user that can log into the system.
 
         await database.CreateNewUserAsync(user);
 
-Parameters
-^^^^^^^^^^
-clientKey: string
-   Indicates which tenant you are connecting for authentication.
-access_token: string
-   Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-username : string, required
-   Username of user.
-newPassword : string, required
-   Password of user to use for login.
-id : string
-   Identifier of user.
-firstName : string
-   First name of user.
-lastName : string
-   Last name of user.
-verified : boolean
-   Identifies whether or not the user is verified.
-isActive : boolean
-   Identifies whether or not the user is active.
-phoneNumber : string
-   Phone number of user.
-roles : string[]
-   Collection of roles user has access.
+.. Parameters
+   ^^^^^^^^^^
+   clientKey: string
+      Indicates which tenant you are connecting for authentication.
+   access_token: string
+      Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+   username : string, required
+      Username of user.
+   newPassword : string, required
+      Password of user to use for login.
+   id : string
+      Identifier of user.
+   firstName : string
+      First name of user.
+   lastName : string
+      Last name of user.
+   verified : boolean
+      Identifies whether or not the user is verified.
+   isActive : boolean
+      Identifies whether or not the user is active.
+   phoneNumber : string
+      Phone number of user.
+   roles : string[]
+      Collection of roles user has access.
 
 Example Response:
 
