@@ -52,6 +52,9 @@ The data object can whatever information you would like to capture. The followin
            public string LastName { get; set; }
          }
 
+         var database = new MeshyDB(clientKey, publicKey);
+         var client = await database.LoginWithAnonymouslyAsync();
+         
          var person = await client.Meshes.CreateAsync(new Person(){
            FirstName="Bob",
            LastName="Bobberson"
@@ -61,8 +64,8 @@ The data object can whatever information you would like to capture. The followin
 
       clientKey: string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      publicKey : string
+         Public accessor for application.
       mesh : string
          Identifies name of mesh collection. e.g. person.
 
@@ -112,6 +115,9 @@ If we need to make a modificaiton let's update our Mesh!
    
       .. code-block:: c#
 
+         var database = new MeshyDB(clientKey, publicKey);
+         var client = await database.LoginWithAnonymouslyAsync();
+         
          person.FirstName = "Bobbo";
 
          person = await client.Meshes.UpdateAsync(person);
@@ -120,8 +126,8 @@ If we need to make a modificaiton let's update our Mesh!
 
       clientKey: string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      publicKey : string
+         Public accessor for application.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string
@@ -178,6 +184,9 @@ Let's see if we can find Bobbo.
    .. group-tab:: C#
    
       .. code-block:: c#
+      
+         var database = new MeshyDB(clientKey, publicKey);
+         var client = await database.LoginWithAnonymouslyAsync();
 
          var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
@@ -185,8 +194,8 @@ Let's see if we can find Bobbo.
 
       clientKey: string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      publicKey : string
+         Public accessor for application.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       filter : string
@@ -243,6 +252,9 @@ We are now done with our data, so let us clean up after ourselves.
    .. group-tab:: C#
    
       .. code-block:: c#
+         
+         var database = new MeshyDB(clientKey, publicKey);
+         var client = await database.LoginWithAnonymouslyAsync();
       
          await client.Meshes.DeleteAsync(person);
 
@@ -250,8 +262,8 @@ We are now done with our data, so let us clean up after ourselves.
 
       clientKey: string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+      publicKey : string
+         Public accessor for application.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string
