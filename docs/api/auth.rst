@@ -22,17 +22,17 @@ The following endpoints require to be authenticated.
    
       .. code-block:: http
       
-        POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
-        Content-Type: application/x-www-form-urlencoded
-        
-          client_id={publicKey}&
-          grant_type=password&
-          username={username}&
-          password={password}&
-          scope=meshy.api offline_access
+         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
+         Content-Type: application/x-www-form-urlencoded
+
+            client_id={publicKey}&
+            grant_type=password&
+            username={username}&
+            password={password}&
+            scope=meshy.api offline_access
 
         
-     (Form-encoding removed and line breaks added for readability)
+      (Form-encoding removed and line breaks added for readability)
 
       |parameters|
       
@@ -87,15 +87,15 @@ The following endpoints require to be authenticated.
    
       .. code-block:: http
       
-        POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
-        Content-Type: application/x-www-form-urlencoded
-        
-          client_id={publicKey}&
-          grant_type=refresh_token&
-          refresh_token={refresh_token}
+         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
+         Content-Type: application/x-www-form-urlencoded
+
+            client_id={publicKey}&
+            grant_type=refresh_token&
+            refresh_token={refresh_token}
 
         
-     (Form-encoding removed and line breaks added for readability)
+      (Form-encoding removed and line breaks added for readability)
 
       |parameters|
 
