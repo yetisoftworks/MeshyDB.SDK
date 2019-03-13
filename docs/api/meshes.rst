@@ -36,7 +36,7 @@ The data object can whatever information you would like to capture. The followin
 
       clientKey: string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
+      access_token : string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
@@ -62,7 +62,7 @@ The data object can whatever information you would like to capture. The followin
 
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -102,9 +102,9 @@ If we need to make a modificaiton let's update our Mesh!
 
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
+      access_token : string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
@@ -124,7 +124,7 @@ If we need to make a modificaiton let's update our Mesh!
          
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -166,9 +166,9 @@ Let's see if we can find Bobbo.
 
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
+      access_token : string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
@@ -192,7 +192,7 @@ Let's see if we can find Bobbo.
 
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -240,9 +240,9 @@ We are now done with our data, so let us clean up after ourselves.
 
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
-      access_token: string
+      access_token : string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
@@ -260,11 +260,11 @@ We are now done with our data, so let us clean up after ourselves.
 
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string
-         Idenfities location of what Mesh data to replace.
+         Idenfities location of what Mesh data to delete. In this case it will be from the Person mesh.
