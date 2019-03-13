@@ -13,9 +13,7 @@ A Mesh is a container that we use to store your data dynamically.
 -----------
 Create data
 -----------
-Now that we are logged in we can use our Bearer token to authenticate requests with MeshyDB and create some data.
-
-The data object can whatever information you would like to capture. The following example will have some data fields with example data.
+Create new data into Mesh collection. If it is the first time this Mesh is being used a new collection will be created automatically.
 
 .. tabs::
 
@@ -83,7 +81,7 @@ Example Response:
 -----------
 Update data
 -----------
-If we need to make a modificaiton let's update our Mesh!
+Update Mesh data in collection by id.
 
 .. tabs::
 
@@ -147,7 +145,7 @@ Example Response:
 -----------
 Search data
 -----------
-Let's see if we can find Bobbo.
+Filter Mesh data from collection based on query parameters.
 
 .. tabs::
 
@@ -227,7 +225,7 @@ Example Response:
 -----------
 Delete data
 -----------
-We are now done with our data, so let us clean up after ourselves.
+Permanently remove Mesh data from collection.
 
 .. tabs::
 
