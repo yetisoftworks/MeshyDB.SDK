@@ -34,7 +34,7 @@ The data object can whatever information you would like to capture. The followin
             
       |parameters|
 
-      clientKey: string
+      clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
