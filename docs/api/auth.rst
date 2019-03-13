@@ -122,6 +122,10 @@ The following endpoints require to be authenticated.
          Indicates which tenant you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
       refresh_token : string
          Refresh token generated from  previous access token generation.
    
