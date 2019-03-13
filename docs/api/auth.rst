@@ -14,7 +14,7 @@ Currently MeshyDB only supports the password grant flow.
 Generate Access Token
 ---------------------
 
-The following endpoints require to be authenticated.
+Create a shortlived access token to be used for authorized API calls. Typically a token will last 3600 seconds(one hour).
 
 .. tabs::
 
@@ -79,7 +79,7 @@ Example Response:
 Generate Refresh Token
 ----------------------
 
-The following endpoints require to be authenticated.
+Using the token request made to generate an access token, a refresh token will also be generated. Once the token expires the refresh token can be used to generate a new set of credentials for authorized calls.
 
 .. tabs::
 
