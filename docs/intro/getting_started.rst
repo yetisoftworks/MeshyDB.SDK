@@ -126,10 +126,6 @@ The data object can whatever information you would like to capture. The followin
 
       |parameters|
 
-      clientKey: string
-         Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
 
@@ -185,14 +181,8 @@ If we need to make a modificaiton let's update our Mesh!
 
       |parameters|
 
-      clientKey: string
-         Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
-         Identifies name of mesh collection. e.g. person.
-      id : string
-         Idenfities location of what Mesh data to replace.
+         Identifies name of mesh collection. e.g. person. The id of the person to be updated will be derived from the object.
 
 Example Response:
 
@@ -250,10 +240,6 @@ Let's see if we can find Bobbo.
 
       |parameters|
 
-      clientKey: string
-         Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       filter : string
@@ -314,14 +300,8 @@ We are now done with our data, so let us clean up after ourselves.
 
       |parameters|
 
-      clientKey: string
-         Indicates which tenant you are connecting for authentication.
-      access_token: string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       mesh : string
-         Identifies name of mesh collection. e.g. person.
-      id : string
-         Idenfities location of what Mesh data to replace.
+         Identifies name of mesh collection. e.g. person. The id of the person to be deleted will be derived from the object.
 
 --------
 Sign out
@@ -363,11 +343,4 @@ Now the user is complete. Let us sign out so someone else can have a try.
          
       |parameters|
 
-      clientKey: string
-         Indicates which tenant you are connecting for authentication.
-      refresh_token: string
-        Token to allow reauthorization with MeshyDB after the access token expires requested during `Login`_.
-      mesh : string
-         Identifies name of mesh collection. e.g. person.
-      id : string
-         Idenfities location of what Mesh data to replace.
+      No parameters provided. The client is aware of who needs to be signed out.
