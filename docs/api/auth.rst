@@ -6,9 +6,13 @@ The following supported endpoints conform to the `OIDC <https://openid.net/devel
 
 Currently MeshyDB only supports the password grant flow.
 
-------
+.. |parameters| raw:: html
+
+   <h4>Parameters</h4>
+   
+---------------------
 Generate Access Token
-------
+---------------------
 
 The following endpoints require to be authenticated.
 
@@ -27,8 +31,20 @@ The following endpoints require to be authenticated.
           password={password}&
           scope=meshy.api offline_access
 
-        (Form-encoding removed and line breaks added for readability)
+        
+     (Form-encoding removed and line breaks added for readability)
 
+      |parameters|
+      
+      clientKey : string
+         Indicates which tenant you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
+   
    .. group-tab:: C#
    
       .. code-block:: c#
@@ -36,16 +52,17 @@ The following endpoints require to be authenticated.
         var database = new MeshyDB(clientKey, publicKey);
         var client = database.LoginWithPassword(username, password);
 
-Parameters
-^^^^^^^^^^
-clientKey : string
-   Indicates which tenant you are connecting for authentication.
-publicKey : string
-   Public accessor for application.
-username : string
-   User name.
-password : string
-   User password.
+      |parameters|
+      
+      clientKey : string
+         Indicates which tenant you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
+
    
 Example Response:
 
@@ -58,9 +75,9 @@ Example Response:
     "refresh_token": "ab23cd3343e9328g"
   }
   
-------
+----------------------
 Generate Refresh Token
-------
+----------------------
 
 The following endpoints require to be authenticated.
 
@@ -77,7 +94,17 @@ The following endpoints require to be authenticated.
           grant_type=refresh_token&
           refresh_token={refresh_token}
 
-        (Form-encoding removed and line breaks added for readability)
+        
+     (Form-encoding removed and line breaks added for readability)
+
+      |parameters|
+
+      clientKey : string
+         Indicates which tenant you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      refresh_token : string
+         Refresh token generated from  previous access token generation.
 
    .. group-tab:: C#
    
@@ -89,14 +116,14 @@ The following endpoints require to be authenticated.
         
         client = await database.LoginWithPersistanceAsync(refreshToken);
 
-Parameters
-^^^^^^^^^^
-clientKey : string
-   Indicates which tenant you are connecting for authentication.
-publicKey : string
-   Public accessor for application.
-refresh_token : string
-   Refresh token generated from  previous access token generation.
+      |parameters|
+
+      clientKey : string
+         Indicates which tenant you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      refresh_token : string
+         Refresh token generated from  previous access token generation.
    
 Example Response:
 
