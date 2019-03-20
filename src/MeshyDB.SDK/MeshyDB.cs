@@ -151,10 +151,11 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Login anonymously with randomly generated user
         /// </summary>
+        /// <param name="username">Identify anonymous user. If nothing is provided it will be automatically generated.</param>
         /// <returns>Meshy client for user upon successful login</returns>
-        public async Task<IMeshyClient> LoginWithAnonymouslyAsync()
+        public async Task<IMeshyClient> LoginAnonymouslyAsync(string username = null)
         {
-            var identifier = await AuthenticationService.LoginAnonymouslyAsync();
+            var identifier = await AuthenticationService.LoginAnonymouslyAsync(username);
             var services = this.GenerateAPIRequestService(identifier);
 
             return new MeshyClient(services.Item1, services.Item2, identifier);
@@ -163,10 +164,11 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Login anonymously with randomly generated user
         /// </summary>
+        /// <param name="username">Identify anonymous user. If nothing is provided it will be automatically generated.</param>
         /// <returns>Meshy client for user upon successful login</returns>
-        public IMeshyClient LoginWithAnonymously()
+        public IMeshyClient LoginAnonymously(string username = null)
         {
-            var t = this.LoginWithAnonymouslyAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.LoginAnonymouslyAsync(username).ConfigureAwait(true).GetAwaiter();
 
             return t.GetResult();
         }

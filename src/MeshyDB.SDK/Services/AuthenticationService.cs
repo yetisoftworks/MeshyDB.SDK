@@ -74,18 +74,19 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task<string> LoginAnonymouslyAsync()
+        public async Task<string> LoginAnonymouslyAsync(string username = null)
         {
-            var username = Guid.NewGuid().ToString();
+            var generatedUsername = username ?? Guid.NewGuid().ToString();
             var user = await this.CreateUserAsync(new NewUser()
             {
                 IsActive = true,
                 Verified = true,
                 NewPassword = "nopassword",
-                Username = username
+                Username = generatedUsername,
+                Roles = new List<string>()
             });
 
-            return await this.tokenService.GenerateAccessToken(username, "nopassword");
+            return await LoginWithPasswordAsync(generatedUsername, "nopassword");
         }
 
         /// <inheritdoc/>

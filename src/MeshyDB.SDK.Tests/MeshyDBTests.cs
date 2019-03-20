@@ -75,14 +75,14 @@ namespace MeshyDB.SDK.Tests
         {
             var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
-            authService.Setup(x => x.LoginAnonymouslyAsync())
+            authService.Setup(x => x.LoginAnonymouslyAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(Generator.RandomString(25));
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginWithAnonymously();
+            var client = database.LoginAnonymously();
             Assert.NotNull(client.Users);
         }
 
@@ -91,14 +91,14 @@ namespace MeshyDB.SDK.Tests
         {
             var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
-            authService.Setup(x => x.LoginAnonymouslyAsync())
+            authService.Setup(x => x.LoginAnonymouslyAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(Generator.RandomString(25));
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginWithAnonymously();
+            var client = database.LoginAnonymously();
             Assert.NotNull(client.Meshes);
         }
 
@@ -109,14 +109,14 @@ namespace MeshyDB.SDK.Tests
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
-            authService.Setup(x => x.LoginAnonymouslyAsync())
+            authService.Setup(x => x.LoginAnonymouslyAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(identifier);
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginWithAnonymouslyAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+            var client = database.LoginAnonymouslyAsync().ConfigureAwait(true).GetAwaiter().GetResult();
             Assert.NotNull(client);
         }
 
@@ -127,14 +127,14 @@ namespace MeshyDB.SDK.Tests
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
-            authService.Setup(x => x.LoginAnonymouslyAsync())
+            authService.Setup(x => x.LoginAnonymouslyAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(identifier);
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginWithAnonymously();
+            var client = database.LoginAnonymously();
             Assert.NotNull(client);
         }
 

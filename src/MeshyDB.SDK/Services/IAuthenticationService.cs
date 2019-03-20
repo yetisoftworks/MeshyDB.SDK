@@ -14,8 +14,9 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Log in anonymously to authenticate with client
         /// </summary>
+        /// <param name="username">Specify known user name for anonymous user</param>
         /// <returns>Authentication id upon success</returns>
-        Task<string> LoginAnonymouslyAsync();
+        Task<string> LoginAnonymouslyAsync(string username = null);
 
         /// <summary>
         /// Log in with provided user name and password
