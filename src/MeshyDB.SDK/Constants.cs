@@ -15,6 +15,9 @@
         /// </summary>
         internal const string TemplateAuthUrl = "https://auth.meshydb.com/{clientKey}";
 
-        internal const string ApiScopes = "meshy.api offline_access";
+        /// <summary>
+        /// Defines Api scoes for user when generating token
+        /// </summary>
+        internal const string ApiScopes = "meshy.api offline_access openid";
     }
 }

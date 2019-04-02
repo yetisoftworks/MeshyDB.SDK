@@ -25,7 +25,7 @@ namespace MeshyDB.SDK
         /// <param name="newPassword">New password of user to log in with next</param>
         /// <returns>Task to await password success</returns>
         Task UpdatePasswordAsync(string previousPassword, string newPassword);
-        
+
         /// <summary>
         /// Updates password for logged in user
         /// </summary>
@@ -55,5 +55,18 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <returns>Persistance token to be used for a later login</returns>
         string RetrievePersistanceToken();
+
+        /// <summary>
+        /// Gets my user information
+        /// </summary>
+        /// <returns>Dictionary of user claim info</returns>
+        IDictionary<string, string> GetMyUserInfo();
+
+        /// <summary>
+        /// Gets my user information
+        /// </summary>
+        /// <returns>Dictionary of user claim info</returns>
+        Task<IDictionary<string, string>> GetMyUserInfoAsync();
+
     }
 }

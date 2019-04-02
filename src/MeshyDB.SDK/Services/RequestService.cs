@@ -59,7 +59,13 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public async Task<T> GetRequest<T>(string path)
         {
-            var request = await GetDefaultRequestMessageAsync(path, HttpMethod.Get);
+            return await GetRequest<T>(path, null);
+        }
+
+        /// <inheritdoc/>
+        public async Task<T> GetRequest<T>(string path, IDictionary<string, string> headers)
+        {
+            var request = await GetDefaultRequestMessageAsync(path, HttpMethod.Get, headers);
 
             return await SendRequest<T>(request);
         }
@@ -129,10 +135,10 @@ namespace MeshyDB.SDK.Services
             return await SendRequest<T>(request);
         }
 
-        private async Task<HttpServiceRequest> GetDefaultRequestMessageAsync(string path, HttpMethod method = null)
+        private async Task<HttpServiceRequest> GetDefaultRequestMessageAsync(string path, HttpMethod method = null, IDictionary<string, string> headers = null)
         {
             var request = new HttpServiceRequest();
-            await PopulateHeadersAsync(request.Headers);
+            await PopulateHeadersAsync(request.Headers, headers);
 
             if (!Uri.TryCreate($"{baseUrl}/{path}", UriKind.Absolute, out var validatedUri))
             {
@@ -146,7 +152,7 @@ namespace MeshyDB.SDK.Services
             return request;
         }
 
-        private async Task PopulateHeadersAsync(IDictionary<string, string> headers)
+        private async Task PopulateHeadersAsync(IDictionary<string, string> headers, IDictionary<string, string> overrideHeaders)
         {
             if (this.tokenService != null && !string.IsNullOrWhiteSpace(this.authenticationId))
             {
@@ -154,6 +160,21 @@ namespace MeshyDB.SDK.Services
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     headers.Add("Authorization", $"Bearer {token}");
+                }
+            }
+
+            if (overrideHeaders != null)
+            {
+                foreach (var item in overrideHeaders)
+                {
+                    if (headers.ContainsKey(item.Key))
+                    {
+                        headers[item.Key] = item.Value;
+                    }
+                    else
+                    {
+                        headers.Add(item.Key, item.Value);
+                    }
                 }
             }
         }

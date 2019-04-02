@@ -20,6 +20,15 @@ namespace MeshyDB.SDK.Services
         Task<T> GetRequest<T>(string path);
 
         /// <summary>
+        /// Performs HTTP GET request
+        /// </summary>
+        /// <typeparam name="T">Type of data to be returned from request</typeparam>
+        /// <param name="path">Endpoint path to request</param>
+        /// <param name="headers">Custom headers to append with request</param>
+        /// <returns>Data result made from request</returns>
+        Task<T> GetRequest<T>(string path, IDictionary<string, string> headers);
+        
+        /// <summary>
         /// Performs HTTP DELETE request
         /// </summary>
         /// <typeparam name="T">Type of data to be returned from request</typeparam>

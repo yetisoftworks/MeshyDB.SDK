@@ -79,5 +79,19 @@ namespace MeshyDB.SDK
 
             return t.GetResult();
         }
+
+        /// <inheritdoc/>
+        public IDictionary<string, string> GetMyUserInfo()
+        {
+            var t = this.GetMyUserInfoAsync().ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public async Task<IDictionary<string, string>> GetMyUserInfoAsync()
+        {
+            return await this.TokenService.GetUserInfoAsync(this.AuthenticationId);
+        }
     }
 }

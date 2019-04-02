@@ -233,7 +233,7 @@ namespace MeshyDB.SDK.Tests
             {
                 ClientId = publicKey,
                 GrantType = "password",
-                Scope = "meshy.api offline_access",
+                Scope = "meshy.api offline_access openid",
                 Username = username,
                 Password = password
             };
@@ -451,6 +451,56 @@ namespace MeshyDB.SDK.Tests
 
             requestService.VerifyAll();
             requestService.Verify(x => x.PostRequest<object>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()), Times.Exactly(1));
+        }
+
+        [Fact]
+        public void ShouldGetUserInfoAsyncSuccessfully()
+        {
+            var requestService = new Mock<IRequestService>();
+            var token = Generator.RandomString(25);
+            var refreshToken = Generator.RandomString(25);
+
+            var passedPath = string.Empty;
+
+            requestService.Setup(x => x.PostRequest<TokenResponse>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Returns(
+                () =>
+                {
+                    return Task.FromResult(new TokenResponse()
+                    {
+                        AccessToken = token,
+                        Expires = 500,
+                        TokenType = Generator.RandomString(15),
+                        RefreshToken = refreshToken
+                    });
+                })
+                .Verifiable();
+
+            var passedHeaders = default(IDictionary<string, string>);
+            requestService.Setup(x => x.GetRequest<Dictionary<string, string>>(It.IsAny<string>(), It.IsAny<IDictionary<string, string>>()))
+                          .Callback<string, IDictionary<string, string>>((path, headers) =>
+                          {
+                              passedPath = path;
+                              passedHeaders = headers;
+                          })
+                          .ReturnsAsync(() =>
+                          {
+                              return null;
+                          })
+                          .Verifiable();
+
+            var publicKey = Generator.RandomString(36);
+            var service = new TokenService(requestService.Object, publicKey);
+            var authenticationId = Generator.RandomString(10);
+            var resultId = service.GenerateAccessTokenWithRefreshToken(Generator.RandomString(10), authenticationId).Result;
+
+            service.GetUserInfoAsync(resultId).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("/connect/userinfo", passedPath);
+            Assert.Equal(1, passedHeaders.Count);
+            Assert.True(passedHeaders.ContainsKey("Authorization"));
+
+            requestService.VerifyAll();
         }
     }
 }

@@ -116,7 +116,7 @@ namespace MeshyDB.SDK.Services
                 TokenTypeHint = "refresh_token",
                 ClientId = publicKey
             }, RequestDataFormat.Form);
-            
+
             TokenCache.Remove(authenticationId);
         }
 
@@ -143,6 +143,17 @@ namespace MeshyDB.SDK.Services
             var tokenCacheData = await RefreshUserToken(refreshToken);
             TokenCache.Add(authenticationId, tokenCacheData);
             return authenticationId;
+        }
+
+        /// <inheritdoc/>
+        public async Task<IDictionary<string, string>> GetUserInfoAsync(string authenticationId)
+        {
+            var headers = new Dictionary<string, string>();
+
+            headers.Add("Authorization", $"Bearer {TokenCache[authenticationId].Token}");
+
+            var response = await this.requestService.GetRequest<Dictionary<string, string>>($"/connect/userinfo", headers);
+            return response;
         }
     }
 }

@@ -3,6 +3,7 @@ using MeshyDB.SDK.Services;
 using Moq;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -174,6 +175,112 @@ namespace MeshyDB.SDK.Tests
             Assert.True(!passedRequest.Headers.ContainsKey("Authorization"));
         }
 
+        [Fact]
+        public async void ShouldSendGetRequestWithNoExtraHeaders()
+        {
+            var httpService = new Mock<IHttpService>();
+            var tokenService = new Mock<ITokenService>();
+            var baseUrl = $"http://{Generator.RandomString(25)}";
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+
+            var passedRequest = default(HttpServiceRequest);
+
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
+            {
+                passedRequest = request;
+            }).Returns(() =>
+            {
+                return Task.FromResult(new TestData());
+            }).Verifiable();
+
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
+            {
+                return Task.FromResult(Generator.RandomString(25));
+            }).Verifiable();
+
+            await service.GetRequest<TestData>("test/path", null);
+            httpService.VerifyAll();
+            tokenService.VerifyAll();
+            Assert.Equal("GET", passedRequest.Method.Method);
+            Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal(1, passedRequest.Headers.Count);
+        }
+
+        [Fact]
+        public async void ShouldSendGetRequestWithOneExtraHeaders()
+        {
+            var httpService = new Mock<IHttpService>();
+            var tokenService = new Mock<ITokenService>();
+            var baseUrl = $"http://{Generator.RandomString(25)}";
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+
+            var passedRequest = default(HttpServiceRequest);
+
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
+            {
+                passedRequest = request;
+            }).Returns(() =>
+            {
+                return Task.FromResult(new TestData());
+            }).Verifiable();
+
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
+            {
+                return Task.FromResult(Generator.RandomString(25));
+            }).Verifiable();
+
+            var headers = new Dictionary<string, string>();
+            headers.Add("Test", "Test");
+
+            await service.GetRequest<TestData>("test/path", headers);
+            httpService.VerifyAll();
+            tokenService.VerifyAll();
+            Assert.Equal("GET", passedRequest.Method.Method);
+            Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.True(passedRequest.Headers.ContainsKey("Test"));
+            Assert.Equal(2, passedRequest.Headers.Count);
+        }
+
+        [Fact]
+        public async void ShouldSendGetRequestAndOverwriteAuthorizationWithSameHeaderKey()
+        {
+            var httpService = new Mock<IHttpService>();
+            var tokenService = new Mock<ITokenService>();
+            var baseUrl = $"http://{Generator.RandomString(25)}";
+            var authenticationId = Generator.RandomString(10);
+            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+
+            var passedRequest = default(HttpServiceRequest);
+
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
+            {
+                passedRequest = request;
+            }).Returns(() =>
+            {
+                return Task.FromResult(new TestData());
+            }).Verifiable();
+
+            tokenService.Setup(x => x.GetAccessTokenAsync(It.IsAny<string>())).Returns(() =>
+            {
+                return Task.FromResult(Generator.RandomString(25));
+            }).Verifiable();
+
+            var headers = new Dictionary<string, string>();
+            headers.Add("Authorization", "Test");
+
+            await service.GetRequest<TestData>("test/path", headers);
+            httpService.VerifyAll();
+            tokenService.VerifyAll();
+            Assert.Equal("GET", passedRequest.Method.Method);
+            Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
+            Assert.True(passedRequest.Headers.ContainsKey("Authorization"));
+            Assert.Equal("Test", passedRequest.Headers["Authorization"]);
+            Assert.Equal(1, passedRequest.Headers.Count);
+        }
         #endregion
 
         #region Delete Request
