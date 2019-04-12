@@ -99,7 +99,7 @@ html_static_path = ['_static', 'scripts/requirehttps.js']
 #
 # html_sidebars = {}
 
-#  html_js_files = ['scripts/requirehttps.js']
+html_js_files = ['scripts/requirehttps.js']
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
