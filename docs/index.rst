@@ -3,14 +3,14 @@ Welcome
 
 Meshy DB is a relational json solution as a backend for rapid and flexible implementation.
 
-**Authorization**
-Utilize OpenID Connect authentication to allow access to your application.
+| **Authorization**
+| Utilize OpenID Connect authentication to allow access to your application.
 
-**Data Management**
-Create, Update, Retrieval and Deletion of your tenanted data.
+| **Data Management**
+| Create, Update, Retrieval and Deletion of your tenanted data.
 
-**User Management**
-Create new users to allow access. Allow logged in users to manage their information and passwords.
+| **User Management**
+| Create new users to allow access. Allow logged in users to manage their information and passwords.
 
 .. toctree::
    :maxdepth: 3
