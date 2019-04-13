@@ -45,6 +45,18 @@ Because a Mesh defines your data it is isolated from all other data. You can man
 .. toctree::
    :maxdepth: 3
    :hidden:
+   :caption: Users
+   
+   users/creating_user
+   users/retrieving_self
+   users/updating_self
+   users/forgetting_password
+   users/resetting_password
+   users/changing_password
+   
+.. toctree::
+   :maxdepth: 3
+   :hidden:
    :caption: API
    
    api/auth
