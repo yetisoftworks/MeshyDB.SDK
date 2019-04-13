@@ -38,7 +38,7 @@ Creates a new user that can log into the system.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token  : string
-         Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
+         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
       newPassword : string, required
