@@ -27,7 +27,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
-         Token identifying authorization with MeshyDB requested during `Generating Token <generating_token.html>`_.
+         Token identifying authorization with MeshyDB requested during `Generating Token <authorization/generating_token.html#generating-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
    
