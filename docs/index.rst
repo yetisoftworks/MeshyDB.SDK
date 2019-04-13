@@ -35,7 +35,7 @@ Because a Mesh defines your data it is isolated from all other data. You can man
 .. toctree::
    :maxdepth: 3
    :hidden:
-   :caption: Authorization
+   :caption: Data
    
    data/creating
    data/updating
