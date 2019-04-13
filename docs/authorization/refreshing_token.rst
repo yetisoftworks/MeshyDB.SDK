@@ -2,9 +2,9 @@
 
    <h4>Parameters</h4>
    
-----------------------
-Generate Refresh Token
-----------------------
+----------------
+Refreshing Token
+----------------
 
 Using the token request made to generate an access token, a refresh token will also be generated. Once the token expires the refresh token can be used to generate a new set of credentials for authorized calls.
 
