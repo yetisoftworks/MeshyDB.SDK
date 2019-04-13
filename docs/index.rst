@@ -53,6 +53,8 @@ Because a Mesh defines your data it is isolated from all other data. You can man
    users/forgetting_password
    users/resetting_password
    users/changing_password
+   users/retrieving_userinfo
+   users/logging_out
    
 .. toctree::
    :maxdepth: 3
