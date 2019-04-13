@@ -27,7 +27,7 @@ Filter Mesh data from collection based on query parameters.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
-         Token identifying authorization with MeshyDB requested during `Generating Token <authorization/generating_token.html#generating-token>`_.
+         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       filter : string
