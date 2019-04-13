@@ -2,9 +2,9 @@
 
    <h4>Parameters</h4>
    
----------------------
-Generating Access Token
----------------------
+----------------
+Generating Token
+----------------
 
 Create a shortlived access token to be used for authorized API calls. Typically a token will last 3600 seconds(one hour).
 
