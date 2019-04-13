@@ -24,7 +24,14 @@ Because a Mesh defines your data it is isolated from all other data. You can man
    
    intro/getting_started
 
-
+.. toctree::
+   :maxdepth: 3
+   :hidden:
+   :caption: Authorization
+   
+   authorization/getting_token
+   authorization/refreshing_token
+   
 .. toctree::
    :maxdepth: 3
    :hidden:
