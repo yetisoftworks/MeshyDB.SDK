@@ -29,7 +29,7 @@ Because a Mesh defines your data it is isolated from all other data. You can man
    :hidden:
    :caption: Authorization
    
-   authorization/getting_token
+   authorization/generating_token
    authorization/refreshing_token
    
 .. toctree::
