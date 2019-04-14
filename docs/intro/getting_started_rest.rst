@@ -82,7 +82,7 @@ The data object can whatever information you would like to capture. The followin
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
-         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
+         Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
 
@@ -122,7 +122,7 @@ If we need to make a modificaiton let's update our Mesh!
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
-         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
+         Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string
@@ -164,7 +164,7 @@ Let's see if we can find Bobbo.
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
-         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
+         Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       filter : string
@@ -211,7 +211,7 @@ We are now done with our data, so let us clean up after ourselves.
       clientKey: string
          Indicates which tenant you are connecting for authentication.
       access_token: string
-         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
+         Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string
