@@ -1,6 +1,6 @@
-===============
-Getting started
-===============
+==
+C#
+==
 The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at `MeshyDB.com <https://meshydb.com/>`_.
 
 Once we have done that we can go to Account and get our Client Key and Public Key.
@@ -10,7 +10,15 @@ Now that we have the required information let's jump in and see how easy it is t
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
-   
+  
+-----------
+Install SDK
+-----------
+Now that we have the required information let's start coding!
+
+Let's install the `MeshyDB.SDK <https://www.nuget.org/packages/MeshyDB.SDK/>`_ NuGet package with the following command: ::
+   Install-Package MeshyDb.SDK
+
 -----
 Login
 -----
