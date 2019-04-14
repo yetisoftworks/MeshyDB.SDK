@@ -16,8 +16,10 @@ Install SDK
 -----------
 Now that we have the required information let's start coding!
 
-Let's install the `MeshyDB.SDK <https://www.nuget.org/packages/MeshyDB.SDK/>`_ NuGet package with the following command: ::
-   Install-Package MeshyDb.SDK
+Let's install the `MeshyDB.SDK <https://www.nuget.org/packages/MeshyDB.SDK/>`_ NuGet package with the following command:
+   .. code-block: powershell
+   
+      Install-Package MeshyDb.SDK
 
 -----
 Login
