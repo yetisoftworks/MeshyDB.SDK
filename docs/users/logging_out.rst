@@ -14,13 +14,12 @@ Log user out.
       .. code-block:: http
       
         POST https://api.meshydb.com/{clientKey}/connect/revocation HTTP/1.1
-        Content-Type: application/json
+        Content-Type: application/x-www-form-urlencoded
+          token={refresh_token}&
+          token_type_hint=refresh_token&
+          client_id={publicKey}
 
-          {
-            "token": {refresh_token},
-            "token_type_hint": "refresh_token",
-            "client_id": {publicKey}
-          }
+        (Form-encoding removed and line breaks added for readability)
 
       |parameters|
       
