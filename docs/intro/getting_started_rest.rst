@@ -1,6 +1,6 @@
-===============
-Getting started
-===============
+====
+REST
+====
 The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at `MeshyDB.com <https://meshydb.com/>`_.
 
 Once we have done that we can go to Account and get our Client Key and Public Key.
