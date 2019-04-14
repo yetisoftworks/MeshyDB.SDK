@@ -15,10 +15,10 @@ Meshy DB is a relational json solution as a backend for rapid and flexible imple
 .. toctree::
    :maxdepth: 1
    :hidden:
-   :caption: Introduction
+   :caption: Getting Started
    
-   intro/getting_started_csharp
    intro/getting_started_rest
+   intro/getting_started_csharp
 
 .. toctree::
    :maxdepth: 3
