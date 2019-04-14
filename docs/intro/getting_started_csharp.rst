@@ -22,6 +22,8 @@ Let's install the `MeshyDB.SDK <https://www.nuget.org/packages/MeshyDB.SDK/>`_ N
 
    Install-Package MeshyDb.SDK
 
+Now we are configured and we can get started!
+
 -----
 Login
 -----
