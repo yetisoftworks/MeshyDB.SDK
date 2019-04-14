@@ -16,6 +16,8 @@ Install SDK
 -----------
 Now that we have the required information let's start coding!
 
+The  supporting SDK is open source and your able to use .Net Framework 4.7.1+ or .Net Core 2.x.
+
 Let's install the `MeshyDB.SDK <https://www.nuget.org/packages/MeshyDB.SDK/>`_ NuGet package with the following command:
 
 .. code-block:: powershell
