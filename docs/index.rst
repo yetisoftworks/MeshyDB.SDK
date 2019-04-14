@@ -13,11 +13,12 @@ Meshy DB is a relational json solution as a backend for rapid and flexible imple
 | Create new users to allow access. Allow logged in users to manage their information and passwords.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :hidden:
    :caption: Introduction
    
-   intro/getting_started
+   intro/getting_started_csharp
+   intro/getting_started_rest
 
 .. toctree::
    :maxdepth: 3
