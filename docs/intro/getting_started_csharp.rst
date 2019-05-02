@@ -48,7 +48,7 @@ Let's log in using our MeshyDB credentials.
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string
