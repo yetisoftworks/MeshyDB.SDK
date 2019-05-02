@@ -16,7 +16,8 @@ Using the token request made to generate an access token, a refresh token will a
       
          POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
-
+         tenant: {tenant}
+         
             client_id={publicKey}&
             grant_type=refresh_token&
             refresh_token={refresh_token}
@@ -26,6 +27,8 @@ Using the token request made to generate an access token, a refresh token will a
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
@@ -37,7 +40,7 @@ Using the token request made to generate an access token, a refresh token will a
    
       .. code-block:: c#
 
-        var database = new MeshyDB(clientKey, publicKey);
+        var database = new MeshyDB(clientKey, tenant, publicKey);
         var client = database.LoginWithPassword(username, password);
         var refreshToken = client.RetrievePersistanceToken();
         
@@ -45,6 +48,8 @@ Using the token request made to generate an access token, a refresh token will a
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
