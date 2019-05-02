@@ -22,19 +22,9 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <param name="httpService">Service to make http requests against</param>
         /// <param name="baseUrl">Base Api Url to make requests for</param>
-        public RequestService(IHttpService httpService, string baseUrl) : this(httpService, baseUrl, null) { }
-
-        /// <summary>
-        /// Instantiates an instance of the <see cref="RequestService"/> class.
-        /// </summary>
-        /// <param name="httpService">Service to make http requests against</param>
-        /// <param name="baseUrl">Base Api Url to make requests for</param>
-        /// <param name="tokenService">Service to get token to add authentication to endpoint</param>
-        public RequestService(IHttpService httpService, string baseUrl, ITokenService tokenService)
+        /// <param name="tenant">Tenant of data used for partitioning</param>
+        public RequestService(IHttpService httpService, string baseUrl, string tenant = null) : this(httpService, baseUrl, tenant, null, null)
         {
-            this.tokenService = tokenService;
-            this.httpService = httpService ?? throw new ArgumentNullException(nameof(httpService));
-            this.baseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
         }
 
         /// <summary>
@@ -42,19 +32,23 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <param name="httpService">Service to make http requests against</param>
         /// <param name="baseUrl">Base Api Url to make requests for</param>
+        /// <param name="tenant">Tenant of data used for partitioning</param>
         /// <param name="tokenService">Service to get token to add authentication to endpoint</param>
-        public RequestService(IHttpService httpService, string baseUrl, ITokenService tokenService, string authenticationId)
+        /// <param name="authenticationId"></param>
+        public RequestService(IHttpService httpService, string baseUrl, string tenant, ITokenService tokenService, string authenticationId)
         {
             this.tokenService = tokenService;
             this.httpService = httpService ?? throw new ArgumentNullException(nameof(httpService));
             this.baseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
-            this.authenticationId = authenticationId ?? throw new ArgumentNullException(nameof(authenticationId));
+            this.authenticationId = authenticationId;
+            this.tenant = tenant;
         }
 
         private readonly ITokenService tokenService;
         private readonly IHttpService httpService;
         private readonly string baseUrl;
         private readonly string authenticationId;
+        private readonly string tenant;
 
         /// <inheritdoc/>
         public async Task<T> GetRequest<T>(string path)
@@ -161,6 +155,11 @@ namespace MeshyDB.SDK.Services
                 {
                     headers.Add("Authorization", $"Bearer {token}");
                 }
+            }
+
+            if (!string.IsNullOrEmpty(tenant))
+            {
+                headers.Add("tenant", tenant);
             }
 
             if (overrideHeaders != null)

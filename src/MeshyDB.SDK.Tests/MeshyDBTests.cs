@@ -17,6 +17,13 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
+        public void ShouldCreateWithNullTenant()
+        {
+            var client = new MeshyDB(Generator.RandomString(5), null, Generator.RandomString(36));
+            Assert.NotNull(client);
+        }
+
+        [Fact]
         public void ShouldThrowArgumentExceptionWithNullClientKey()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDB(null, Generator.RandomString(36)));
@@ -68,6 +75,22 @@ namespace MeshyDB.SDK.Tests
             var client = new MeshyDB(clientKey, Generator.RandomString(36));
 
             Assert.Equal($"https://auth.meshydb.com/{clientKey}".ToLower(), client.GetAuthUrl().ToLower());
+        }
+
+        [Fact]
+        public void ShouldHaveTenantWhenCreated()
+        {
+            var tenant = Generator.RandomString(5);
+            var client = new MeshyDB(Generator.RandomString(5), tenant, Generator.RandomString(36));
+            Assert.Equal(tenant, client.Tenant);
+        }
+
+        [Fact]
+        public void ShouldHaveTenantTrimmedWhenCreated()
+        {
+            var tenant = Generator.RandomString(5);
+            var client = new MeshyDB(Generator.RandomString(5), $" {tenant} ", Generator.RandomString(36));
+            Assert.Equal(tenant, client.Tenant);
         }
 
         [Fact]

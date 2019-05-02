@@ -32,15 +32,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Throws<ArgumentNullException>(() => new RequestService(httpService.Object, null));
         }
 
-        [Fact]
-        public void ShouldAllowOptionalTokenService()
-        {
-            var httpService = new Mock<IHttpService>();
-            var tokenService = new Mock<ITokenService>();
-            var service = new RequestService(httpService.Object, Generator.RandomString(25), tokenService.Object);
-            Assert.NotNull(service);
-        }
-
         #region Get Request
 
         [Fact]
@@ -50,7 +41,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -84,7 +75,7 @@ namespace MeshyDB.SDK.Tests
             // Forcing bad base url for error
             var baseUrl = $"http{Generator.RandomString(25)}";
 
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, null);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () => await service.GetRequest<TestData>("test/path"));
         }
@@ -120,7 +111,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -151,7 +142,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -182,7 +173,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -215,7 +206,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -252,7 +243,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -281,6 +272,86 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal("Test", passedRequest.Headers["Authorization"]);
             Assert.Equal(1, passedRequest.Headers.Count);
         }
+        
+        [Fact]
+        public async void ShouldNotAddTenantWithNullTenantForGetRequest()
+        {
+            var httpService = new Mock<IHttpService>();
+            var baseUrl = $"http://{Generator.RandomString(25)}";
+            var service = new RequestService(httpService.Object, baseUrl, null);
+
+            var passedRequest = default(HttpServiceRequest);
+
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
+            {
+                passedRequest = request;
+            }).Returns(() =>
+            {
+                return Task.FromResult(new TestData());
+            }).Verifiable();
+
+            await service.GetRequest<TestData>("test/path");
+            httpService.VerifyAll();
+            Assert.Equal("GET", passedRequest.Method.Method);
+            Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
+            Assert.True(!passedRequest.Headers.ContainsKey("tenant"));
+            Assert.Equal(0, passedRequest.Headers.Count);
+        }
+
+        [Fact]
+        public async void ShouldAddTenantWithTenantForGetRequest()
+        {
+            var httpService = new Mock<IHttpService>();
+            var baseUrl = $"http://{Generator.RandomString(25)}";
+            var tenant = Generator.RandomString(25);
+            var service = new RequestService(httpService.Object, baseUrl, tenant);
+
+            var passedRequest = default(HttpServiceRequest);
+
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
+            {
+                passedRequest = request;
+            }).Returns(() =>
+            {
+                return Task.FromResult(new TestData());
+            }).Verifiable();
+
+            await service.GetRequest<TestData>("test/path");
+            httpService.VerifyAll();
+            Assert.Equal("GET", passedRequest.Method.Method);
+            Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
+            Assert.True(passedRequest.Headers.ContainsKey("tenant"));
+            Assert.Equal(tenant, passedRequest.Headers["tenant"]);
+            Assert.Equal(1, passedRequest.Headers.Count);
+        }
+
+        [Fact]
+        public async void ShouldOverwriteTenantWithTenantForGetRequest()
+        {
+            var httpService = new Mock<IHttpService>();
+            var baseUrl = $"http://{Generator.RandomString(25)}";
+            var tenant = Generator.RandomString(25);
+            var service = new RequestService(httpService.Object, baseUrl, tenant);
+
+            var passedRequest = default(HttpServiceRequest);
+
+            httpService.Setup(x => x.SendRequestAsync<TestData>(It.IsAny<HttpServiceRequest>())).Callback((HttpServiceRequest request) =>
+            {
+                passedRequest = request;
+            }).Returns(() =>
+            {
+                return Task.FromResult(new TestData());
+            }).Verifiable();
+            var tenantOverwrite = Generator.RandomString(25);
+            await service.GetRequest<TestData>("test/path", new Dictionary<string, string>() { { "tenant", tenantOverwrite } });
+            httpService.VerifyAll();
+            Assert.Equal("GET", passedRequest.Method.Method);
+            Assert.Equal($"{baseUrl}/test/path".ToLower(), passedRequest.RequestUri.ToString());
+            Assert.True(passedRequest.Headers.ContainsKey("tenant"));
+            Assert.Equal(tenantOverwrite, passedRequest.Headers["tenant"]);
+            Assert.Equal(1, passedRequest.Headers.Count);
+        }
+
         #endregion
 
         #region Delete Request
@@ -292,7 +363,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -326,7 +397,7 @@ namespace MeshyDB.SDK.Tests
             // Forcing bad base url for error
             var baseUrl = $"http{Generator.RandomString(25)}";
 
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, null);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () => await service.DeleteRequest<TestData>("test/path"));
         }
@@ -362,7 +433,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -393,7 +464,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -428,7 +499,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -470,7 +541,7 @@ namespace MeshyDB.SDK.Tests
             // Forcing bad base url for error
             var baseUrl = $"http{Generator.RandomString(25)}";
 
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, null);
             var data = new TestData()
             {
                 Id = 5,
@@ -519,7 +590,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -557,7 +628,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -595,7 +666,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = default(TestData);
@@ -633,7 +704,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -673,7 +744,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -713,7 +784,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
 
@@ -755,7 +826,7 @@ namespace MeshyDB.SDK.Tests
             // Forcing bad base url for error
             var baseUrl = $"http{Generator.RandomString(25)}";
 
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, null);
             var data = new TestData()
             {
                 Id = 5,
@@ -804,7 +875,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object, authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -842,7 +913,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object,authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = new TestData()
@@ -880,7 +951,7 @@ namespace MeshyDB.SDK.Tests
             var baseUrl = $"http://{Generator.RandomString(25)}";
             var tokenService = new Mock<ITokenService>();
             var authenticationId = Generator.RandomString(10);
-            var service = new RequestService(httpService.Object, baseUrl, tokenService.Object,authenticationId);
+            var service = new RequestService(httpService.Object, baseUrl, null, tokenService.Object, authenticationId);
 
             var passedRequest = default(HttpServiceRequest);
             var data = default(TestData);

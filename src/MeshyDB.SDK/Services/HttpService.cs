@@ -16,7 +16,7 @@ namespace MeshyDB.SDK.Services
     internal class HttpService : IHttpService
     {
         HttpClient _client = new HttpClient();
-     
+
         /// <inheritdoc/>
         public async Task<T> SendRequestAsync<T>(HttpServiceRequest request)
         {
@@ -34,9 +34,9 @@ namespace MeshyDB.SDK.Services
                 message.Content = new StringContent(request.Content, Encoding.UTF8, request.ContentType);
             }
 
-            if (request.Headers.TryGetValue("Authorization", out var token))
+            foreach (var item in request.Headers)
             {
-                message.Headers.Add("Authorization", token);
+                message.Headers.Add(item.Key, item.Value);
             }
 
             var response = await httpClient.SendAsync(message);

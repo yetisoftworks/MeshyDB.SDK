@@ -20,7 +20,19 @@ namespace MeshyDB.SDK
         /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with client</param>
         /// <param name="privateKey">Private Api credential supplied from MeshyDB to communicate with client</param>
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured</exception>
-        public MeshyDB(string clientKey, string publicKey, IHttpService httpService = null)
+        public MeshyDB(string clientKey, string publicKey, IHttpService httpService = null) : this(clientKey, null, publicKey, httpService)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <seealso cref="MeshyDB"/> that is used to communicate with the MeshyDB REST API
+        /// </summary>
+        /// <param name="clientKey">Name of MeshyDB client key required for communication</param>
+        /// <param name="tenant">Tenant of data used for partitioning</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with client</param>
+        /// <param name="httpService">Http Service to use for making requests</param>
+        /// <exception cref="ArgumentException">Thrown if any parameter is not configured</exception>
+        public MeshyDB(string clientKey, string tenant, string publicKey, IHttpService httpService = null)
         {
             if (string.IsNullOrWhiteSpace(clientKey))
             {
@@ -33,7 +45,7 @@ namespace MeshyDB.SDK
             }
 
             ClientKey = clientKey.Trim();
-
+            Tenant = tenant?.Trim();
             _publicKey = publicKey.Trim();
 
             HttpService = httpService ?? new HttpService();
@@ -66,9 +78,9 @@ namespace MeshyDB.SDK
             {
                 if (_authenticationService == null)
                 {
-                    var authRequestService = new RequestService(HttpService, this.GetAuthUrl());
+                    var authRequestService = new RequestService(HttpService, this.GetAuthUrl(), this.Tenant);
                     var tokenService = new TokenService(authRequestService, _publicKey);
-                    var apiRequestService = new RequestService(HttpService, this.GetApiUrl());
+                    var apiRequestService = new RequestService(HttpService, this.GetApiUrl(), this.Tenant);
 
                     _authenticationService = new AuthenticationService(tokenService, apiRequestService);
                 }
@@ -85,6 +97,11 @@ namespace MeshyDB.SDK
         /// Gets the name of the client key for MeshyDB communication
         /// </summary>
         internal string ClientKey { get; }
+
+        /// <summary>
+        /// Gets the name of the tenant for MeshyDB communication
+        /// </summary>
+        internal string Tenant { get; }
 
         /// <summary>
         /// Gets the Api Url configured for the supplied Client
@@ -112,9 +129,9 @@ namespace MeshyDB.SDK
         private Tuple<ITokenService, IRequestService> GenerateAPIRequestService(string identifier)
         {
             var httpService = this.HttpService;
-            var authRequestService = new RequestService(httpService, this.GetAuthUrl());
+            var authRequestService = new RequestService(httpService, this.GetAuthUrl(), this.Tenant);
             var tokenService = new TokenService(authRequestService, _publicKey);
-            var requestService = new RequestService(httpService, this.GetApiUrl(), tokenService, identifier);
+            var requestService = new RequestService(httpService, this.GetApiUrl(), this.Tenant, tokenService, identifier);
 
             return new Tuple<ITokenService, IRequestService>(tokenService, requestService);
         }
