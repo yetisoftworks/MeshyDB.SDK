@@ -24,7 +24,8 @@ Let's log in using our MeshyDB credentials.
 
          POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
-
+         tenant: {tenant}
+         
             client_id={publicKey}&
             grant_type=password&
             username={username}&
@@ -35,8 +36,10 @@ Let's log in using our MeshyDB credentials.
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string
@@ -71,7 +74,8 @@ The data object can whatever information you would like to capture. The followin
          POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
-
+         tenant: {tenant}
+         
             {
                "firstName": "Bob",
                "lastName": "Bobberson"
@@ -79,8 +83,10 @@ The data object can whatever information you would like to capture. The followin
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey: string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
@@ -111,7 +117,8 @@ If we need to make a modificaiton let's update our Mesh!
        PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
        Authentication: Bearer {access_token}
        Content-Type: application/json
-
+       tenant: {tenant}
+         
           {
              "firstName": "Bobbo",
              "lastName": "Bobberson"
@@ -119,8 +126,10 @@ If we need to make a modificaiton let's update our Mesh!
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey: string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
@@ -155,14 +164,16 @@ Let's see if we can find Bobbo.
                                                                page={page}&
                                                                pageSize={pageSize} HTTP/1.1
          Authentication: Bearer {access_token}
-
+         tenant: {tenant}
          
       (Line breaks added for readability)
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey: string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
@@ -205,11 +216,14 @@ We are now done with our data, so let us clean up after ourselves.
       
          DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
          Authentication: Bearer {access_token}
-
+         tenant: {tenant}
+         
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey: string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
       mesh : string
@@ -230,7 +244,8 @@ Now the user is complete. Let us sign out so someone else can have a try.
 
          POST https://auth.meshydb.com/{clientKey}/connect/revocation HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
-
+         tenant: {tenant}
+         
            client_id={clientKey}&
            grant_type=refresh_token&
            token={refresh_token}
@@ -240,8 +255,10 @@ Now the user is complete. Let us sign out so someone else can have a try.
          
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey: string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       refresh_token: string
         Token to allow reauthorization with MeshyDB after the access token expires requested during `Login`_.
       mesh : string
