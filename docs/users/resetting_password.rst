@@ -15,7 +15,8 @@ Uses result from Forgot password to allow a user to reset their password.
       
          POST https://api.meshydb.com/{clientKey}/users/resetpassword  HTTP/1.1
          Content-Type: application/json
-
+         tenant: {tenant}
+         
            {
              "username": "username_testermctesterson",
              "expires": "1-1-2019",
@@ -25,8 +26,10 @@ Uses result from Forgot password to allow a user to reset their password.
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       username : string
         User name that is being reset.
       expires : date
@@ -40,14 +43,16 @@ Uses result from Forgot password to allow a user to reset their password.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
 
          await database.ResetPasswordAsync(resetHash, newPassword);
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string
