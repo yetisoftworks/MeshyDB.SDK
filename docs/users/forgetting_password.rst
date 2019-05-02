@@ -34,7 +34,7 @@ Creates a request for password reset that must have the matching data to reset t
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
 
          await database.ForgotPasswordAsync(username);
 
