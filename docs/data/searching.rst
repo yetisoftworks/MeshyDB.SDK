@@ -18,12 +18,14 @@ Filter Mesh data from collection based on query parameters.
                                                                page={page}&
                                                                pageSize={pageSize} HTTP/1.1
          Authentication: Bearer {access_token}
-
+         tenant: {tenant}
          
       (Line breaks added for readability)
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
@@ -43,13 +45,15 @@ Filter Mesh data from collection based on query parameters.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
