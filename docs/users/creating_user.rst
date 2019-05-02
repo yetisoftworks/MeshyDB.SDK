@@ -17,7 +17,8 @@ Creates a new user that can log into the system.
         POST https://api.meshydb.com/{clientKey}/users HTTP/1.1
         Authentication: Bearer {access_token}
         Content-Type: application/json
-
+        tenant: {tenant}
+         
           {
             "id": "5c78cc81dd870827a8e7b6c4",
             "username": "username_testermctesterson",
@@ -35,8 +36,10 @@ Creates a new user that can log into the system.
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token  : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
@@ -62,7 +65,7 @@ Creates a new user that can log into the system.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(clientKey, publicKey);
+        var database = new MeshyDB(clientKey, tenant, publicKey);
 
         var user = new NewUser();
 
@@ -70,8 +73,10 @@ Creates a new user that can log into the system.
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string, required
