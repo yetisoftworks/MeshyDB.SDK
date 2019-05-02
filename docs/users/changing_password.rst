@@ -16,7 +16,8 @@ Allows the logged in user to change their password.
          POST https://api.meshydb.com/{clientKey}/users/me/password HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
-
+         tenant: {tenant}
+         
            {
              "newPassword": "newPassword",
              "previousPassword": "previousPassword"
@@ -24,8 +25,10 @@ Allows the logged in user to change their password.
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
       previousPassword : string
@@ -37,15 +40,17 @@ Allows the logged in user to change their password.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          await client.UpdatePasswordAsync(previousPassword, newPassword);
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       previousPassword : string
