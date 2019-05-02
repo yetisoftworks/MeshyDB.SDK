@@ -15,9 +15,12 @@ Permanently remove Mesh data from collection.
       
          DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
          Authentication: Bearer {access_token}
-
+         tenant: {tenant}
+         
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
@@ -31,13 +34,15 @@ Permanently remove Mesh data from collection.
    
       .. code-block:: c#
          
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
       
          await client.Meshes.DeleteAsync(person);
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
