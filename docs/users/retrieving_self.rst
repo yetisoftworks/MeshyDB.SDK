@@ -15,11 +15,14 @@ Retrieve details about the logged in user.
       
          GET https://api.meshydb.com/{clientKey}/users/me HTTP/1.1
          Authentication: Bearer {access_token}
-
+         tenant: {tenant}
+         
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey: string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
 
@@ -27,15 +30,17 @@ Retrieve details about the logged in user.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          await client.Users.GetLoggedInUserAsync();
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
          
