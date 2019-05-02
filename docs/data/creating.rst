@@ -28,7 +28,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which acciybt you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       mesh : string
