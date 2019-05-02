@@ -16,7 +16,8 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
-
+         tenant: {tenant}
+         
             {
                "firstName": "Bob",
                "lastName": "Bobberson"
@@ -24,6 +25,8 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
             
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
@@ -42,7 +45,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
            public string LastName { get; set; }
          }
 
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
          
          var person = await client.Meshes.CreateAsync(new Person(){
@@ -52,6 +55,8 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
