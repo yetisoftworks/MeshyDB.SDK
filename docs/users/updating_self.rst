@@ -16,7 +16,8 @@ Update details about the logged in user.
          PUT https://api.meshydb.com/{clientKey}/users/me HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
-
+         tenant: {tenant}
+         
            {
              "id": "5c78cc81dd870827a8e7b6c4",
              "username": "username_testermctesterson",
@@ -33,8 +34,10 @@ Update details about the logged in user.
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
@@ -58,7 +61,7 @@ Update details about the logged in user.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          var user = new User();
@@ -67,8 +70,10 @@ Update details about the logged in user.
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey  : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string, required
