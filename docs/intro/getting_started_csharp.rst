@@ -37,7 +37,7 @@ Let's log in using our MeshyDB credentials.
    
       .. code-block:: c#
    
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = database.LoginWithPassword(username, password);
          
          // Or log in anonomously
@@ -45,6 +45,8 @@ Let's log in using our MeshyDB credentials.
          
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
