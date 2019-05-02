@@ -15,15 +15,18 @@ Creates a request for password reset that must have the matching data to reset t
       
          POST https://api.meshydb.com/{clientKey}/users/forgotpassword HTTP/1.1
          Content-Type: application/json
-
+         tenant: {tenant}
+         
            {
              "username": "username_testermctesterson"
            }
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       username : string
         User name to be reset.
 
@@ -37,8 +40,10 @@ Creates a request for password reset that must have the matching data to reset t
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string
