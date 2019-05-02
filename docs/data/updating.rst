@@ -16,6 +16,7 @@ Update Mesh data in collection by id.
          PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
+         tenant: {tenant}
 
          {
           "firstName": "Bobbo",
@@ -24,6 +25,8 @@ Update Mesh data in collection by id.
 
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       access_token : string
@@ -37,7 +40,7 @@ Update Mesh data in collection by id.
    
       .. code-block:: c#
 
-         var database = new MeshyDB(clientKey, publicKey);
+         var database = new MeshyDB(clientKey, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
          
          person.FirstName = "Bobbo";
@@ -46,6 +49,8 @@ Update Mesh data in collection by id.
          
       |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
          Indicates which tenant you are connecting for authentication.
       publicKey : string
