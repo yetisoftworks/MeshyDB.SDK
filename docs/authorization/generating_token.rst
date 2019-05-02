@@ -16,6 +16,7 @@ Create a shortlived access token to be used for authorized API calls. Typically 
       
          POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
+         tenant: {tenant}
 
             client_id={publicKey}&
             grant_type=password&
@@ -28,8 +29,10 @@ Create a shortlived access token to be used for authorized API calls. Typically 
 
       |parameters|
       
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string
@@ -41,13 +44,15 @@ Create a shortlived access token to be used for authorized API calls. Typically 
    
       .. code-block:: c#
 
-        var database = new MeshyDB(clientKey, publicKey);
+        var database = new MeshyDB(clientKey, tenant, publicKey);
         var client = database.LoginWithPassword(username, password);
 
       |parameters|
-      
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
       clientKey : string
-         Indicates which tenant you are connecting for authentication.
+         Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
       username : string
