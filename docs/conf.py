@@ -101,6 +101,7 @@ html_static_path = ['_static', 'scripts/requirehttps.js']
 
 html_js_files = ['requirehttps.js']
 
+html_favicon = 'https://test.meshydb.com/images/favicon-32.png'
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
