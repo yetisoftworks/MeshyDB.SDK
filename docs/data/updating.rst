@@ -60,6 +60,37 @@ Update Mesh data in collection by id.
       id : string
          Idenfities location of what Mesh data to replace.
 
+
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.loginAnonymously()
+                 .then(function (meshyDBClient){
+                     var refreshToken = meshyDBClient.meshes.update(meshName, 
+                                                                    {
+                                                                        firstName:"Bob",
+                                                                        lastName:"Bobberson"
+                                                                    },
+                                                                    id)
+                                                             .then(function(result){ });
+                  }); 
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      meshName : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
+         
 Example Response:
 
 .. code-block:: json
