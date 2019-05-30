@@ -64,6 +64,32 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       mesh : string
          Identifies name of mesh collection. e.g. person.
 
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.loginAnonymously()
+                  .then(function (meshyDBClient){
+                     var refreshToken = meshyDBClient.meshes.create(meshName,{
+                                                                              FirstName:"Bob",
+                                                                              LastName:"Bobberson"
+                                                                             })
+                                                             .then(function(result){ });
+                  });
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      mesh : string
+         Identifies name of mesh collection. e.g. person.
+         
 Example Response:
 
 .. code-block:: json
