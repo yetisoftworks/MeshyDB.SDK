@@ -75,16 +75,17 @@ Filter Mesh data from collection based on query parameters.
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+
          database.loginAnonymously()
                  .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.meshes.search(meshName, {
-                                                                                 filter: filter,
-                                                                                 orderby: orderby,
-                                                                                 pageNumber: page,
-                                                                                 pageSize: pageSize
-                                                                              })
-                                                             .then(function(results){ });
+                     meshyDBClient.meshes.search(meshName, 
+                                                {
+                                                   filter: filter,
+                                                   orderby: orderby,
+                                                   pageNumber: page,
+                                                   pageSize: pageSize
+                                                })
+                                         .then(function(results){ });
                   }); 
       
       |parameters|
