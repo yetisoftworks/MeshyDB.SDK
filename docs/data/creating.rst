@@ -71,13 +71,13 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
          var client;
          database.loginAnonymously()
-                  .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.meshes.create(meshName,{
-                                                                              FirstName:"Bob",
-                                                                              LastName:"Bobberson"
-                                                                             })
+                 .then(function (meshyDBClient){
+                     var refreshToken = meshyDBClient.meshes.create(meshName, {
+                                                                                 firstName:"Bob",
+                                                                                 lastName:"Bobberson"
+                                                                              })
                                                              .then(function(result){ });
-                  });
+                  }); 
       
       |parameters|
 
@@ -87,7 +87,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-      mesh : string
+      meshName : string
          Identifies name of mesh collection. e.g. person.
          
 Example Response:
