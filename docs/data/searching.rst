@@ -70,6 +70,41 @@ Filter Mesh data from collection based on query parameters.
          Number of results to bring back per page.
 
 
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.loginAnonymously()
+                 .then(function (meshyDBClient){
+                     var refreshToken = meshyDBClient.meshes.search(meshName, {
+                                                                                 filter: filter,
+                                                                                 orderby: orderby,
+                                                                                 pageNumber: page,
+                                                                                 pageSize: pageSize
+                                                                              })
+                                                             .then(function(results){ });
+                  }); 
+      
+      |parameters|
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      meshName : string
+         Identifies name of mesh collection. e.g. person.
+      filter : string
+         Filter criteria for search. Uses MongoDB format.
+      orderby : string
+         How to order results. Uses MongoDB format.
+      page : integer
+         Page number of users to bring back.
+      pageSize : integer, max: 200
+         Number of results to bring back per page.
+         
 Example Response:
 
 .. code-block:: json
