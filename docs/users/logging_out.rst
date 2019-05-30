@@ -62,7 +62,7 @@ Log user out.
          database.loginAnonymously()
                  .then(function (meshyDBClient){
                      meshyDBClient.signout()
-                                  .then(function(result){ });
+                                  .then(function(result) { });
                   }); 
       
       |parameters|
