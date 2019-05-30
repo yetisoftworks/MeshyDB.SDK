@@ -65,11 +65,9 @@ Create a shortlived access token to be used for authorized API calls. Typically 
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+
          database.login(username,password)
-                  .then(function (meshyDBClient){
-                     client = meshyDBClient;
-                  });
+                 .then(function (meshyDBClient) { });
       
       |parameters|
 
