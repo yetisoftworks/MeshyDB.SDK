@@ -50,7 +50,7 @@ Retrieve details about the logged in user.
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+         
          database.loginAnonymously()
                  .then(function (meshyDBClient){
                      meshyDBClient.usersService.getSelf()
