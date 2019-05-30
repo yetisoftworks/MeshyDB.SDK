@@ -103,17 +103,19 @@ Creates a new user that can log into the system.
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         
          database.createUser({
-            username: username,
-            newPassword: newPassword,
-            id: id,
-            firstName: firstName,
-            lastName: lastName,
-            verified: verified,
-            isActive: isActive,
-            phoneNumber: phoneNumber,
-            roles: roles
-         }).then(function(user){ });
+                                 username: username,
+                                 newPassword: newPassword,
+                                 id: id,
+                                 firstName: firstName,
+                                 lastName: lastName,
+                                 verified: verified,
+                                 isActive: isActive,
+                                 phoneNumber: phoneNumber,
+                                 roles: roles
+                             })
+                 .then(function(user) { });
       
       |parameters|
 
