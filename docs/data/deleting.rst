@@ -39,6 +39,32 @@ Permanently remove Mesh data from collection.
       
          await client.Meshes.DeleteAsync(person);
 
+
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.loginAnonymously()
+                 .then(function (meshyDBClient){
+                     var refreshToken = meshyDBClient.meshes.delete(meshName, id)
+                                                            .then(function(_){ });
+                  }); 
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      meshName : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
+         
       |parameters|
 
       tenant : string
