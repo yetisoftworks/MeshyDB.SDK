@@ -45,12 +45,12 @@ Permanently remove Mesh data from collection.
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+         
          database.loginAnonymously()
                  .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.meshes.delete(meshName, id)
-                                                            .then(function(_){ });
-                  }); 
+                           meshyDBClient.meshes.delete(meshName, id)
+                                               .then(function(_){ });
+                      }); 
       
       |parameters|
 
