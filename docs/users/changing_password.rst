@@ -79,5 +79,7 @@ Allows the logged in user to change their password.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-      meshName : string
-         Identifies name of mesh collection. e.g. person.
+      previousPassword : string
+        Previous password of user.
+      newPassword : string
+        New password of user.
