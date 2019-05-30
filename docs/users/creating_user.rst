@@ -98,6 +98,51 @@ Creates a new user that can log into the system.
       roles : string[]
          Collection of roles user has access.
 
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         database.createUser({
+            username: username,
+            newPassword: newPassword,
+            id: id,
+            firstName: firstName,
+            lastName: lastName,
+            verified: verified,
+            isActive: isActive,
+            phoneNumber: phoneNumber,
+            roles: roles
+         }).then(function(user){ });
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string, required
+         Username of user.
+      newPassword : string, required
+         Password of user to use for login.
+      id : string
+         Identifier of user.
+      firstName : string
+         First name of user.
+      lastName : string
+         Last name of user.
+      verified : boolean
+         Identifies whether or not the user is verified.
+      isActive : boolean
+         Identifies whether or not the user is active.
+      phoneNumber : string
+         Phone number of user.
+      roles : string[]
+         Collection of roles user has access.
+
+         
 Example Response:
 
 .. code-block:: json
