@@ -58,9 +58,38 @@ Using the token request made to generate an access token, a refresh token will a
          User name.
       password : string
          User password.
-      refresh_token : string
+      refreshToken : string
          Refresh token generated from  previous access token generation.
-   
+         
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.login(username,password)
+                  .then(function (meshyDBClient){
+                     var refreshToken = meshyDBClient.retrievePersistanceToken();
+                     
+                     database.loginWithPersistance(refreshToken)
+                             .then(function(refreshedMeshyDBClient){
+                                 client = refreshedMeshyDBClient;
+                             });
+                  });
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
+         
 Example Response:
 
 .. code-block:: json
