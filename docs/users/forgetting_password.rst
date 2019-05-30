@@ -49,6 +49,26 @@ Creates a request for password reset that must have the matching data to reset t
       username : string
         User name to be reset.
 
+
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         database.forgotPassword(username)
+                 .then(function(passwordResetHash){ });
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+        User name to be reset.
+         
 Example Response:
 
 .. code-block:: json
