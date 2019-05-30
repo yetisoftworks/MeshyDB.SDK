@@ -69,14 +69,15 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+
          database.loginAnonymously()
                  .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.meshes.create(meshName, {
-                                                                                 firstName:"Bob",
-                                                                                 lastName:"Bobberson"
-                                                                              })
-                                                             .then(function(result){ });
+                     var refreshToken = meshyDBClient.meshes.create(meshName, 
+                                                                   {
+                                                                        firstName:"Bob",
+                                                                        lastName:"Bobberson"
+                                                                   })
+                                                            .then(function(result) { });
                   }); 
       
       |parameters|
