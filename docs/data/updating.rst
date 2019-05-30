@@ -66,16 +66,16 @@ Update Mesh data in collection by id.
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+         
          database.loginAnonymously()
                  .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.meshes.update(meshName, 
-                                                                    {
-                                                                        firstName:"Bob",
-                                                                        lastName:"Bobberson"
-                                                                    },
-                                                                    id)
-                                                             .then(function(result){ });
+                        meshyDBClient.meshes.update(meshName, 
+                                                    {
+                                                         firstName:"Bob",
+                                                         lastName:"Bobberson"
+                                                    },
+                                                    id)
+                                            .then(function(result){ });
                   }); 
       
       |parameters|
