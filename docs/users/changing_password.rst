@@ -64,11 +64,11 @@ Allows the logged in user to change their password.
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+         
          database.loginAnonymously()
                  .then(function (meshyDBClient){
                      meshyDBClient.updatePassword(previousPassword, newPassword)
-                                  .then(function(_){ });
+                                  .then(function(_) { });
                   }); 
       
       |parameters|
