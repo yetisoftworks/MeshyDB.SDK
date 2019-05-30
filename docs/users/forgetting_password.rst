@@ -55,8 +55,9 @@ Creates a request for password reset that must have the matching data to reset t
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         
          database.forgotPassword(username)
-                 .then(function(passwordResetHash){ });
+                 .then(function(passwordResetHash) { });
       
       |parameters|
 
