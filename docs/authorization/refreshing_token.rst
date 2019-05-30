@@ -66,16 +66,14 @@ Using the token request made to generate an access token, a refresh token will a
       .. code-block:: javascript
          
          var database = initializeMeshyDB(clientKey, tenant, publicKey);
-         var client;
+         
          database.login(username,password)
-                  .then(function (meshyDBClient){
+                 .then(function (meshyDBClient){
                      var refreshToken = meshyDBClient.retrievePersistanceToken();
                      
                      database.loginWithPersistance(refreshToken)
-                             .then(function(refreshedMeshyDBClient){
-                                 client = refreshedMeshyDBClient;
-                             });
-                  });
+                             .then(function(refreshedMeshyDBClient) { });
+                 });
       
       |parameters|
 
