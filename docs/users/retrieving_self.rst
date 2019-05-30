@@ -43,6 +43,28 @@ Retrieve details about the logged in user.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+        
+
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.loginAnonymously()
+                 .then(function (meshyDBClient){
+                     meshyDBClient.usersService.getSelf()
+                                               .then(function(self) { });
+                  }); 
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
          
 Example Response:
 
