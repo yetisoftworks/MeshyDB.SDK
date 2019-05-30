@@ -63,3 +63,33 @@ Uses result from Forgot password to allow a user to reset their password.
         Forgot password hash.
       newPassword : string
         New password of user.
+
+
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         
+         database.forgotPassword(username)
+                 .then(function(passwordResetHash){
+                     database.resetPassword(passwordResetHash, newPassword)
+                             .then(function(_){ });
+                 });
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+        User name that is being reset.
+      expires : date
+        Expiration of hash.
+      hash : string
+        Forgot password hash.
+      newPassword : string
+        New password of user.
