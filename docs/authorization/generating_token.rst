@@ -60,6 +60,29 @@ Create a shortlived access token to be used for authorized API calls. Typically 
       password : string
          User password.
 
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
+         
+         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var client;
+         database.login(username,password)
+                  .then(function (meshyDBClient){
+                     client = meshyDBClient;
+                  });
+      
+      |parameters|
+
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      clientKey : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
    
 Example Response:
 
