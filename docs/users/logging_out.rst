@@ -73,5 +73,3 @@ Log user out.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-      meshName : string
-         Identifies name of mesh collection. e.g. person.
