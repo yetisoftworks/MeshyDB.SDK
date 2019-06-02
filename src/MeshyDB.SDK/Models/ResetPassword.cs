@@ -7,7 +7,7 @@ namespace MeshyDB.SDK.Models
     /// <summary>
     /// Class the allows a password to be reset when forgotten
     /// </summary>
-    internal class ResetPassword : PasswordResetHash
+    public class ResetPassword : UserVerificationCheck
     {
         /// <summary>
         /// Defines the new password for the user to be able to log in

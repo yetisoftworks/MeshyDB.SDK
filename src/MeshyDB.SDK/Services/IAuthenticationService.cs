@@ -45,15 +45,14 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <param name="username">User name to request a reset</param>
         /// <returns>Hash object to verify parity in requests</returns>
-        Task<PasswordResetHash> ForgotPasswordAsync(string username);
+        Task<UserVerificationHash> ForgotPasswordAsync(string username);
 
         /// <summary>
         /// Reset password for user parity hash object
         /// </summary>
-        /// <param name="resetHash">Hash object with parity information</param>
-        /// <param name="newPassword">New password for user</param>
+        /// <param name="resetPassword">Hash object with parity information</param>
         /// <returns>Task indicating when operation is complete</returns>
-        Task ResetPasswordAsync(PasswordResetHash resetHash, string newPassword);
+        Task ResetPasswordAsync(ResetPassword resetPassword);
 
         /// <summary>
         /// Updates the password of the requesting user
@@ -64,11 +63,11 @@ namespace MeshyDB.SDK.Services
         Task UpdatePasswordAsync(string previousPassword, string newPassword);
 
         /// <summary>
-        /// Creates user
+        /// Register user
         /// </summary>
         /// <param name="user">User definition with password for login</param>
         /// <returns>Resulting user based on save</returns>
-        Task<User> CreateUserAsync(NewUser user);
+        Task<UserVerificationHash> RegisterAsync(RegisterUser user);
 
         /// <summary>
         /// Signout the targeted user based on authentication id
@@ -76,5 +75,8 @@ namespace MeshyDB.SDK.Services
         /// <param name="authenticationId">Internal identifier provided from login process</param>
         /// <returns>Task indicating when operation is complete</returns>
         Task Signout(string authenticationId);
+
+        Task VerifyAsync(UserVerificationCheck userVerificationCheck);
+        Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck);
     }
 }

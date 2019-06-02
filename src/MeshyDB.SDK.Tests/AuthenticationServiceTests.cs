@@ -12,57 +12,6 @@ namespace MeshyDB.SDK.Tests
 {
     public class AuthenticationServiceTests
     {
-        //Task<string> LoginAnonymouslyAsync();
-        [Fact]
-        public void ShouldLoginAnonymouslyAsyncSuccessfully()
-        {
-            var tokenService = new Mock<ITokenService>();
-
-            var passedUsername = string.Empty;
-            var passedPassword = string.Empty;
-            var authenticationId = Generator.RandomString(10);
-            tokenService.Setup(x => x.GenerateAccessToken(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback<string, string>((username, password) =>
-                {
-                    passedUsername = username;
-                    passedPassword = password;
-                })
-                .Returns(() =>
-                {
-                    return Task.FromResult(authenticationId);
-                });
-
-            var requestService = new Mock<IRequestService>();
-            var passedPath = string.Empty;
-            var passedModel = default(NewUser);
-            var passedFormat = RequestDataFormat.Json;
-            var user = new User();
-
-            requestService.Setup(x => x.PostRequest<User>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
-                .Callback<string, object, RequestDataFormat>((path, model, format) =>
-                {
-                    passedPath = path;
-                    passedModel = model as NewUser;
-                    passedFormat = format;
-                }).Returns(() =>
-                {
-                    return Task.FromResult(user);
-                });
-            var service = new AuthenticationService(tokenService.Object, requestService.Object);
-            var resultId = service.LoginAnonymouslyAsync().Result;
-
-            Assert.NotNull(passedUsername);
-            Assert.Equal("nopassword", passedPassword);
-
-            Assert.Equal("users", passedPath);
-            Assert.True(passedModel.IsActive);
-            Assert.True(passedModel.Verified);
-            Assert.Equal(passedUsername, passedModel.Username);
-            Assert.Equal(passedPassword, passedModel.NewPassword);
-
-            tokenService.VerifyAll();
-            requestService.VerifyAll();
-        }
 
         //Task<string> LoginWithPasswordAsync(string username, string password);
         [Fact]
@@ -163,85 +112,6 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             requestService.VerifyAll();
         }
-        //Task<PasswordResetHash> ForgotPasswordAsync(string username);
-        [Fact]
-        public void ShouldForgotPasswordAsyncSuccessfully()
-        {
-            var tokenService = new Mock<ITokenService>();
-
-            var requestService = new Mock<IRequestService>();
-            var passedPath = string.Empty;
-            var passedModel = default(ForgotPassword);
-            var passedFormat = RequestDataFormat.Json;
-
-            requestService.Setup(x => x.PostRequest<PasswordResetHash>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
-                .Callback<string, object, RequestDataFormat>((path, model, format) =>
-                {
-                    passedPath = path;
-                    passedModel = model as ForgotPassword;
-                    passedFormat = format;
-                })
-                .Returns(() =>
-                {
-                    return Task.FromResult(new PasswordResetHash());
-                });
-
-            var service = new AuthenticationService(tokenService.Object, requestService.Object);
-            var generatedUserName = Generator.RandomString(10);
-            var resultId = service.ForgotPasswordAsync(generatedUserName).Result;
-
-            Assert.Equal("users/forgotpassword", passedPath);
-            Assert.Equal(generatedUserName, passedModel.Username);
-
-            tokenService.VerifyAll();
-            requestService.VerifyAll();
-        }
-
-        //Task ResetPasswordAsync(PasswordResetHash resetHash, string newPassword);
-        [Fact]
-        public void ShouldResetPasswordAsyncSuccessfully()
-        {
-            var tokenService = new Mock<ITokenService>();
-
-            var requestService = new Mock<IRequestService>();
-            var passedPath = string.Empty;
-            var passedModel = default(ResetPassword);
-            var passedFormat = RequestDataFormat.Json;
-
-            requestService.Setup(x => x.PostRequest<object>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
-                .Callback<string, object, RequestDataFormat>((path, model, format) =>
-                {
-                    passedPath = path;
-                    passedModel = model as ResetPassword;
-                    passedFormat = format;
-                })
-                .Returns(() =>
-                {
-                    return Task.FromResult<object>(null);
-                });
-
-            var service = new AuthenticationService(tokenService.Object, requestService.Object);
-            var generatedUsername = Generator.RandomString(10);
-            var generatedPassword = Generator.RandomString(10);
-            var generatedHash = Generator.RandomString(36);
-            var now = DateTimeOffset.Now;
-
-            service.ResetPasswordAsync(new PasswordResetHash()
-            {
-                Expires = now,
-                Username = generatedUsername,
-                Hash = generatedHash
-            }, generatedPassword).ConfigureAwait(true).GetAwaiter().GetResult();
-
-            Assert.Equal("users/resetpassword", passedPath);
-            Assert.Equal(generatedUsername, passedModel.Username);
-            Assert.Equal(now, passedModel.Expires);
-            Assert.Equal(generatedPassword, passedModel.NewPassword);
-            Assert.Equal(generatedHash, passedModel.Hash);
-
-            tokenService.VerifyAll();
-            requestService.VerifyAll();
-        }
 
         //Task UpdatePasswordAsync(string previousPassword, string newPassword);
         [Fact]
@@ -280,45 +150,6 @@ namespace MeshyDB.SDK.Tests
             requestService.VerifyAll();
         }
 
-        //Task<User> CreateUserAsync(NewUser user);
-        [Fact]
-        public void ShouldCreateUserAsyncSuccessfully()
-        {
-            var tokenService = new Mock<ITokenService>();
-
-            var requestService = new Mock<IRequestService>();
-            var passedPath = string.Empty;
-            var passedModel = default(NewUser);
-            var passedFormat = RequestDataFormat.Json;
-            var user = new User();
-
-            requestService.Setup(x => x.PostRequest<User>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
-                .Callback<string, object, RequestDataFormat>((path, model, format) =>
-                {
-                    passedPath = path;
-                    passedModel = model as NewUser;
-                    passedFormat = format;
-                }).Returns(() =>
-                {
-                    return Task.FromResult(user);
-                });
-
-            var service = new AuthenticationService(tokenService.Object, requestService.Object);
-
-            var generatedUsername = Generator.RandomString(10);
-            var generatedPassword = Generator.RandomString(10);
-            var resultId = service.CreateUserAsync(new NewUser(generatedUsername, generatedPassword)).Result;
-
-            Assert.Equal("users", passedPath);
-            Assert.False(passedModel.IsActive);
-            Assert.False(passedModel.Verified);
-            Assert.Equal(generatedUsername, passedModel.Username);
-            Assert.Equal(generatedPassword, passedModel.NewPassword);
-
-            tokenService.VerifyAll();
-            requestService.VerifyAll();
-        }
-
         //Task SignOut(string authenticationId);
         [Fact]
         public void ShouldSignoutSuccessfully()
@@ -344,6 +175,317 @@ namespace MeshyDB.SDK.Tests
             service.Signout(generatedAuthenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldRegisterSuccessfully()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(RegisterUser);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<UserVerificationHash>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as RegisterUser;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<UserVerificationHash>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            var user = new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), Generator.RandomString(5));
+
+            service.RegisterAsync(user).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/register", passedPath);
+            Assert.Equal(user.Username, passedModel.Username);
+            Assert.Equal(user.PhoneNumber, passedModel.PhoneNumber);
+            Assert.Equal(user.NewPassword, passedModel.NewPassword);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldForgotPasswordSuccessfully()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(ForgotPassword);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<UserVerificationHash>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as ForgotPassword;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<UserVerificationHash>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            var username = Generator.RandomString(5);
+
+            service.ForgotPasswordAsync(username).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/forgotpassword", passedPath);
+            Assert.Equal(username, passedModel.Username);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldResetPasswordSuccessfully()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(ResetPassword);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<object>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as ResetPassword;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<object>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            var data = new ResetPassword()
+            {
+                Expires = DateTimeOffset.Now,
+                Hash = Generator.RandomString(5),
+                Hint = Generator.RandomString(5),
+                NewPassword = Generator.RandomString(5),
+                Username = Generator.RandomString(5),
+                VerificationCode = 32134
+            };
+
+            service.ResetPasswordAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/resetpassword", passedPath);
+            Assert.Equal(data.Username, passedModel.Username);
+            Assert.Equal(data.Expires, passedModel.Expires);
+            Assert.Equal(data.Hash, passedModel.Hash);
+            Assert.Equal(data.Hint, passedModel.Hint);
+            Assert.Equal(data.NewPassword, passedModel.NewPassword);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldVerifySuccessfully()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(UserVerificationCheck);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<object>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as UserVerificationCheck;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<object>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            var data = new UserVerificationCheck()
+            {
+                Expires = DateTimeOffset.Now,
+                Hash = Generator.RandomString(5),
+                Hint = Generator.RandomString(5),
+                Username = Generator.RandomString(5),
+                VerificationCode = 32134
+            };
+
+            service.VerifyAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/verify", passedPath);
+            Assert.Equal(data.Username, passedModel.Username);
+            Assert.Equal(data.Expires, passedModel.Expires);
+            Assert.Equal(data.Hash, passedModel.Hash);
+            Assert.Equal(data.Hint, passedModel.Hint);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldCheckHashSuccessfully()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(UserVerificationCheck);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<bool>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as UserVerificationCheck;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<bool>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            var data = new UserVerificationCheck()
+            {
+                Expires = DateTimeOffset.Now,
+                Hash = Generator.RandomString(5),
+                Hint = Generator.RandomString(5),
+                Username = Generator.RandomString(5),
+                VerificationCode = 32134
+            };
+
+            service.CheckHashAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/checkhash", passedPath);
+            Assert.Equal(data.Username, passedModel.Username);
+            Assert.Equal(data.Expires, passedModel.Expires);
+            Assert.Equal(data.Hash, passedModel.Hash);
+            Assert.Equal(data.Hint, passedModel.Hint);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldLoginAnonymouslySuccessfully()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var passedUsername = string.Empty;
+            var passedPassword = string.Empty;
+            var authenticationId = Generator.RandomString(10);
+
+            tokenService.Setup(x => x.GenerateAccessToken(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback<string, string>((username, password) =>
+                {
+                    passedUsername = username;
+                    passedPassword = password;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(authenticationId);
+                });
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(AnonymousRegistration);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<User>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as AnonymousRegistration;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<User>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            var generatedUsername = Generator.RandomString(5);
+
+            service.LoginAnonymouslyAsync(generatedUsername).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/register/anonymous", passedPath);
+            Assert.Equal(generatedUsername, passedModel.Username);
+            Assert.Equal(generatedUsername, passedUsername);
+            Assert.Equal("nopassword", passedPassword);
+
+            tokenService.VerifyAll();
+            requestService.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldLoginAnonymouslyAutomaticallyGenerateUsername()
+        {
+            var tokenService = new Mock<ITokenService>();
+
+            var passedUsername = string.Empty;
+            var passedPassword = string.Empty;
+            var authenticationId = Generator.RandomString(10);
+
+            tokenService.Setup(x => x.GenerateAccessToken(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback<string, string>((username, password) =>
+                {
+                    passedUsername = username;
+                    passedPassword = password;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(authenticationId);
+                });
+
+            var requestService = new Mock<IRequestService>();
+            var passedPath = string.Empty;
+            var passedModel = default(AnonymousRegistration);
+            var passedFormat = RequestDataFormat.Json;
+
+            requestService.Setup(x => x.PostRequest<User>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+                .Callback<string, object, RequestDataFormat>((path, model, format) =>
+                {
+                    passedPath = path;
+                    passedModel = model as AnonymousRegistration;
+                    passedFormat = format;
+                })
+                .Returns(() =>
+                {
+                    return Task.FromResult(It.IsAny<User>());
+                });
+
+            var service = new AuthenticationService(tokenService.Object, requestService.Object);
+
+            service.LoginAnonymouslyAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+
+            Assert.Equal("users/register/anonymous", passedPath);
+            Assert.True(Guid.TryParse(passedModel.Username, out var _));
+            Assert.Equal(passedModel.Username, passedUsername);
+            Assert.Equal("nopassword", passedPassword);
 
             tokenService.VerifyAll();
             requestService.VerifyAll();

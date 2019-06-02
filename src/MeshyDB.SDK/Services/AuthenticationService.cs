@@ -28,31 +28,23 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task<User> CreateUserAsync(NewUser user)
+        public async Task<UserVerificationHash> RegisterAsync(RegisterUser user)
         {
-            return await this.requestService.PostRequest<User>("users", user);
+            return await this.requestService.PostRequest<UserVerificationHash>("users/register", user);
         }
 
         /// <inheritdoc/>
-        public async Task<PasswordResetHash> ForgotPasswordAsync(string username)
+        public async Task<UserVerificationHash> ForgotPasswordAsync(string username)
         {
             var forgotPassword = new ForgotPassword { Username = username };
-            var resetHash = await this.requestService.PostRequest<PasswordResetHash>("users/forgotpassword", forgotPassword);
+            var resetHash = await this.requestService.PostRequest<UserVerificationHash>("users/forgotpassword", forgotPassword);
             return resetHash;
         }
 
         /// <inheritdoc/>
-        public async Task ResetPasswordAsync(PasswordResetHash resetHash, string newPassword)
+        public async Task ResetPasswordAsync(ResetPassword resetPassword)
         {
-            var reset = new ResetPassword
-            {
-                Expires = resetHash.Expires,
-                Hash = resetHash.Hash,
-                Username = resetHash.Username,
-                NewPassword = newPassword,
-            };
-
-            await this.requestService.PostRequest<object>("users/resetpassword", reset);
+            await this.requestService.PostRequest<object>("users/resetpassword", resetPassword);
         }
 
         /// <inheritdoc/>
@@ -77,14 +69,12 @@ namespace MeshyDB.SDK.Services
         public async Task<string> LoginAnonymouslyAsync(string username = null)
         {
             var generatedUsername = username ?? Guid.NewGuid().ToString();
-            var user = await this.CreateUserAsync(new NewUser()
+            var anonymousUser = new AnonymousRegistration()
             {
-                IsActive = true,
-                Verified = true,
-                NewPassword = "nopassword",
-                Username = generatedUsername,
-                Roles = new List<string>()
-            });
+                Username = generatedUsername
+            };
+
+            await this.requestService.PostRequest<User>("users/register/anonymous", anonymousUser);
 
             return await LoginWithPasswordAsync(generatedUsername, "nopassword");
         }
@@ -99,6 +89,16 @@ namespace MeshyDB.SDK.Services
         public Task<string> RetrievePersistanceTokenAsync(string authenticationId)
         {
             return this.tokenService.GetRefreshTokenAsync(authenticationId);
+        }
+
+        public async Task VerifyAsync(UserVerificationCheck userVerificationCheck)
+        {
+            await this.requestService.PostRequest<object>("users/verify", userVerificationCheck);
+        }
+
+        public async Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck)
+        {
+            return await this.requestService.PostRequest<bool>("users/checkhash", userVerificationCheck);
         }
     }
 }
