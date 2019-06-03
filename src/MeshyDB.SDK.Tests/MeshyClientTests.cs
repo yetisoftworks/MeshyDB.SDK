@@ -170,7 +170,7 @@ namespace MeshyDB.SDK.Tests
 
             var passedAuthenticationId = string.Empty;
 
-            tokenService.Setup(x => x.Signout(It.IsAny<string>()))
+            tokenService.Setup(x => x.SignoutAsync(It.IsAny<string>()))
                 .Callback<string>((authenticationId) =>
                 {
                     passedAuthenticationId = authenticationId;
@@ -198,7 +198,7 @@ namespace MeshyDB.SDK.Tests
 
             var passedAuthenticationId = string.Empty;
 
-            tokenService.Setup(x => x.Signout(It.IsAny<string>()))
+            tokenService.Setup(x => x.SignoutAsync(It.IsAny<string>()))
                 .Callback<string>((authenticationId) =>
                 {
                     passedAuthenticationId = authenticationId;

@@ -157,7 +157,7 @@ namespace MeshyDB.SDK.Tests
             var tokenService = new Mock<ITokenService>();
             var passedAuthenticationId = string.Empty;
 
-            tokenService.Setup(x => x.Signout(It.IsAny<string>())).Callback<string>((authenticationId) =>
+            tokenService.Setup(x => x.SignoutAsync(It.IsAny<string>())).Callback<string>((authenticationId) =>
             {
                 passedAuthenticationId = authenticationId;
             })
@@ -172,7 +172,7 @@ namespace MeshyDB.SDK.Tests
 
             var generatedAuthenticationId = Generator.RandomString(10);
 
-            service.Signout(generatedAuthenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.SignoutAsync(generatedAuthenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
 

@@ -1,0 +1,1464 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MeshyDB.SDK</name>
+    </assembly>
+    <members>
+        <member name="T:MeshyDB.SDK.Attributes.IgnoreJsonSerializeAttribute">
+            <summary>
+            Class used to mark a property that should not be serialized during Json Serialization process.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Attributes.MeshNameAttribute">
+            <summary>
+            Attribute used to override the name of the mesh.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Attributes.MeshNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Attributes.MeshNameAttribute"/> class.
+            </summary>
+            <param name="name">Name of the mesh.</param>
+        </member>
+        <member name="P:MeshyDB.SDK.Attributes.MeshNameAttribute.Name">
+            <summary>
+            Gets or sets mesh name.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Constants">
+            <summary>
+            Class containing any static text used within the SDK.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Constants.TemplateApiUrl">
+            <summary>
+            Defines Template Api Url with client location for replacement when account name is supplied.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Constants.TemplateAuthUrl">
+            <summary>
+            Defines Template Auth Url with client location for replacement when account name is supplied.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Constants.ApiScopes">
+            <summary>
+            Defines Api scoes for user when generating token.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Enums.RequestDataFormat">
+            <summary>
+            List of supported data formats to be sent as part of a HTTP request.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Enums.RequestDataFormat.Json">
+            <summary>
+            Json format. This is used when the API should serialize as json data to be sent in the request
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Enums.RequestDataFormat.Form">
+            <summary>
+            Form format. This is used when the API should serialize as form data to be sent in the request
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Enums.SortDirection">
+            <summary>
+            List of sort directions used for MongoDB.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Enums.SortDirection.Ascending">
+            <summary>
+            This shoiuld be used when wanting to sort in ascending order.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Enums.SortDirection.Desending">
+            <summary>
+            This shoiuld be used when wanting to sort in desending order.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Enums.TokenGrantType">
+            <summary>
+            List of supported grant types to be requested for a token.
+            </summary>
+        </member>
+        <member name="F:MeshyDB.SDK.Enums.TokenGrantType.Password">
+            <summary>
+            Password. This is used to generate token using password.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.IMeshyClient">
+            <summary>
+            Represents Meshy Client.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.IMeshyClient.Meshes">
+            <summary>
+            Gets service to interact with Meshes for the logged in user.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.IMeshyClient.Users">
+            <summary>
+            Gets service to interact with Users for the logged in user.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.UpdatePasswordAsync(System.String,System.String)">
+            <summary>
+            Updates password for logged in user.
+            </summary>
+            <param name="previousPassword">Previous password of user to change.</param>
+            <param name="newPassword">New password of user to log in with next.</param>
+            <returns>Task to await password success.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.UpdatePassword(System.String,System.String)">
+            <summary>
+            Updates password for logged in user.
+            </summary>
+            <param name="previousPassword">Previous password of user to change.</param>
+            <param name="newPassword">New password of user to log in with next.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.SignoutAsync">
+            <summary>
+            Sign out currently logged in user.
+            </summary>
+            <returns>Task to await success of sign out.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.Signout">
+            <summary>
+            Sign out currently logged in user.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.RetrievePersistanceTokenAsync">
+            <summary>
+            Retrieves persistance token of logged in user to refresh their session at a later time.
+            </summary>
+            <returns>Persistance token to be used for a later login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.RetrievePersistanceToken">
+            <summary>
+            Retrieves persistance token of logged in user to refresh their session at a later time.
+            </summary>
+            <returns>Persistance token to be used for a later login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.GetMyUserInfo">
+            <summary>
+            Gets my user information.
+            </summary>
+            <returns>Dictionary of user claim info.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.IMeshyClient.GetMyUserInfoAsync">
+            <summary>
+            Gets my user information.
+            </summary>
+            <returns>Dictionary of user claim info.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.MeshyClient">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.IMeshyClient"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.#ctor(MeshyDB.SDK.Services.ITokenService,MeshyDB.SDK.Services.IRequestService,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.MeshyClient"/> class.
+            </summary>
+            <param name="tokenService">Service used to make token calls.</param>
+            <param name="requestService">Service used to make request calls.</param>
+            <param name="authenticationId">Authentication Id reference of currently logged in user.</param>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyClient.Meshes">
+            <inheritdoc/>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyClient.AuthenticationId">
+            <summary>
+            Gets Authentication Id for establisehd user.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyClient.Users">
+            <inheritdoc/>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyClient.AuthenticationService">
+            <summary>
+            Gets or sets Authentication Service.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyClient.TokenService">
+            <summary>
+            Gets or sets Token Service.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyClient.RequestService">
+            <summary>
+            Gets or sets Request Service.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.SignoutAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.Signout">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.UpdatePasswordAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.RetrievePersistanceTokenAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.UpdatePassword(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.RetrievePersistanceToken">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.GetMyUserInfo">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyClient.GetMyUserInfoAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.MeshyDB">
+            <summary>
+            MeshyDB Client is used to connect with the MeshyDB REST API.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.#ctor(System.String,System.String,MeshyDB.SDK.Services.IHttpService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.MeshyDB"/> class that is used to communicate with the MeshyDB REST API.
+            </summary>
+            <param name="accountName">Name of MeshyDB account required for communication.</param>
+            <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
+            <param name="httpService">Http Service to use for making requests.</param>
+            <exception cref="T:System.ArgumentException">Thrown if any parameter is not configured.</exception>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.#ctor(System.String,System.String,System.String,MeshyDB.SDK.Services.IHttpService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.MeshyDB"/> class that is used to communicate with the MeshyDB REST API.
+            </summary>
+            <param name="accountName">Name of MeshyDB account required for communication.</param>
+            <param name="tenant">Tenant of data used for partitioning.</param>
+            <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
+            <param name="httpService">Http Service to use for making requests.</param>
+            <exception cref="T:System.ArgumentException">Thrown if any parameter is not configured.</exception>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyDB.HttpService">
+            <summary>
+            Gets or sets Http Service used for making web request calls.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyDB.AuthenticationService">
+            <summary>
+            Gets or sets Authentication Service.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyDB.AccountName">
+            <summary>
+            Gets the name of the client key for MeshyDB communication.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.MeshyDB.Tenant">
+            <summary>
+            Gets the name of the tenant for MeshyDB communication.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.LoginWithPasswordAsync(System.String,System.String)">
+            <summary>
+            Log user in with username and password.
+            </summary>
+            <param name="username">User name of user to login.</param>
+            <param name="password">Password of user to log in.</param>
+            <returns>Meshy client for user upon successful login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.LoginWithPassword(System.String,System.String)">
+            <summary>
+            Log user in with username and password.
+            </summary>
+            <param name="username">User name of user to login.</param>
+            <param name="password">Password of user to log in.</param>
+            <returns>Meshy client for user upon successful login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.LoginAnonymouslyAsync(System.String)">
+            <summary>
+            Login anonymously with randomly generated user.
+            </summary>
+            <param name="username">Identify anonymous user. If nothing is provided it will be automatically generated.</param>
+            <returns>Meshy client for user upon successful login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.LoginAnonymously(System.String)">
+            <summary>
+            Login anonymously with randomly generated user.
+            </summary>
+            <param name="username">Identify anonymous user. If nothing is provided it will be automatically generated.</param>
+            <returns>Meshy client for user upon successful login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.RegisterUserAsync(MeshyDB.SDK.Models.RegisterUser)">
+            <summary>
+            Register new user.
+            </summary>
+            <param name="user">User to be created with login credentials.</param>
+            <returns>User that was newly created.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.RegisterUser(MeshyDB.SDK.Models.RegisterUser)">
+            <summary>
+            Register new user.
+            </summary>
+            <param name="user">User to be created with login credentials.</param>
+            <returns>User that was newly created.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.ForgotPasswordAsync(System.String)">
+            <summary>
+            Request forgot password based on username.
+            </summary>
+            <param name="username">Username of forgotton user.</param>
+            <returns>Hashed object to ensure forgot password parity request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.ForgotPassword(System.String)">
+            <summary>
+            Request forgot password based on username.
+            </summary>
+            <param name="username">Username of forgotton user.</param>
+            <returns>Hashed object to ensure forgot password parity request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.ResetPasswordAsync(MeshyDB.SDK.Models.ResetPassword)">
+            <summary>
+            Resets password for forgot password request.
+            </summary>
+            <param name="resetPassword">Reset password object to ensure forgot password was requested.</param>
+            <returns>Task to await success of reset.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.ResetPassword(MeshyDB.SDK.Models.ResetPassword)">
+            <summary>
+            Resets password for forgot password request.
+            </summary>
+            <param name="resetPassword">Reset password object to ensure forgot password was requested.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.LoginWithPersistanceAsync(System.String)">
+            <summary>
+            Login with peristance token from another session.
+            </summary>
+            <param name="persistanceToken">Persistance token of previous session for login.</param>
+            <returns>Meshy client for user upon successful login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.LoginWithPersistance(System.String)">
+            <summary>
+            Login with peristance token from another session.
+            </summary>
+            <param name="persistanceToken">Persistance token of previous session for login.</param>
+            <returns>Meshy client for user upon successful login.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.Verify(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Verify user to allow them to log in.
+            </summary>
+            <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.VerifyAsync(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Verify user to allow them to log in.
+            </summary>
+            <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+            <returns>Task to await success of sign out.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.CheckHash(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Check user hash to verify user request.
+            </summary>
+            <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+            <returns>Whether or not check was successful.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.CheckHashAsync(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Check user hash to verify user request.
+            </summary>
+            <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+            <returns>Whether or not check was successful.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.GetApiUrl">
+            <summary>
+            Gets the Api Url configured for the supplied account.
+            </summary>
+            <returns>The configured account Api Url communication.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.GetAuthUrl">
+            <summary>
+            Gets the Auth Url configured for the supplied account.
+            </summary>
+            <returns>The configured account Auth Url communication.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.MeshyDB.GenerateAPIRequestService(System.String)">
+            <summary>
+            Instantiates services used for api communication with required dependencies.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.AnonymousRegistration">
+            <summary>
+            Class defining elements for allowing anonymous registration.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.AnonymousRegistration.Username">
+            <summary>
+            Gets or sets username of anonymous user.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.Authentication.TokenCacheData">
+            <summary>
+            Class used for storing token data used in a cache.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenCacheData.Token">
+            <summary>
+            Gets or sets token generated from the auth url.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenCacheData.RefreshToken">
+            <summary>
+            Gets or sets refresh token from the auth url.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenCacheData.Expires">
+            <summary>
+            Gets or sets date and time the token will expire.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.Authentication.TokenRequest">
+            <summary>
+            Class defining elements required for generating a token request with the auth url.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.ClientId">
+            <summary>
+            Gets or sets public identifier of client to authenticate on behalf of.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.ClientSecret">
+            <summary>
+            Gets or sets private secret of client to authenticate on behalf of.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.GrantType">
+            <summary>
+            Gets or sets OAuth grant type to request authentication.
+            </summary>
+            <remarks>Client Credentials is currently the only supported grant type.</remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.Username">
+            <summary>
+            Gets or sets username registered with the supplied client id to authenticate on behalf of.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.Password">
+            <summary>
+            Gets or sets password of user registered with the supplied client id to authenticate on behalf of.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.Scope">
+            <summary>
+            Gets or sets scope(s) to request access to communicate with apis.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRequest.RefreshToken">
+            <summary>
+            Gets or sets OAuth refresh token to allow reauthentication of a user.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.Authentication.TokenResponse">
+            <summary>
+            Class defining elements supplied when a token request has been fulfilled.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenResponse.AccessToken">
+            <summary>
+            Gets or sets OAuth access token to allow authenticated requests with the api.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenResponse.Expires">
+            <summary>
+            Gets or sets number of seconds until the token expires.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenResponse.TokenType">
+            <summary>
+            Gets or sets OAuth token type describing what kind of token was generated.
+            </summary>
+            <remarks>Most likely this will be "Bearer".</remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenResponse.RefreshToken">
+            <summary>
+            Gets or sets OAuth refresh token to allow reauthentication of a user.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.Authentication.TokenRevocation">
+            <summary>
+            Class to identifiy what token to revoke.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRevocation.Token">
+            <summary>
+            Gets or sets token to revoke.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRevocation.TokenTypeHint">
+            <summary>
+            Gets or sets type of token to revoke.
+            </summary>
+            <remarks>Revoking refresh token.</remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.Authentication.TokenRevocation.ClientId">
+            <summary>
+            Gets or sets public identifier of client to revoke on behalf of.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.ForgotPassword">
+            <summary>
+            Class defining elements required while forgetting a password.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.ForgotPassword.Username">
+            <summary>
+            Gets or sets username that is requested which a password was forgotten.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.HttpServiceRequest">
+            <summary>
+            Class defining elements of a Http Service Request to abstract away any http specific information.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.HttpServiceRequest.RequestUri">
+            <summary>
+            Gets or sets request Uri to make a request for.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.HttpServiceRequest.Method">
+            <summary>
+            Gets or sets the HTTP Verb to make the request for the Uri.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.HttpServiceRequest.Content">
+            <summary>
+            Gets or sets the Content to send to the request.
+            </summary>
+            <remarks>
+                Primarily used in a POST or PUT request.
+            </remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.HttpServiceRequest.ContentType">
+            <summary>
+            Gets or sets the Content type of the Content supplied.
+            </summary>
+            <remarks>
+                Current examples are application/json and application/x-www-form-urlencoded.
+            </remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.HttpServiceRequest.RequestDataFormat">
+            <summary>
+            Gets or sets the expected data format coming back from the request.
+            </summary>
+            <remarks>
+                Defaulted to Json.
+            </remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.HttpServiceRequest.Headers">
+            <summary>
+            Gets or sets headers to be added to request.
+            </summary>
+            <remarks>
+            Example would be Authentication.
+            </remarks>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.MeshData">
+            <summary>
+            Abstract class defining required data pieces and format for web requests.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.MeshData.Id">
+            <summary>
+            Gets identifier of the mesh data.
+            </summary>
+            <remarks>This field is auto generated when a mesh is created.</remarks>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.MeshData.ReferenceId">
+            <summary>
+            Gets reference identifier of the mesh.
+            </summary>
+            <remarks>
+            This will be a url reference to this object.
+            </remarks>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.PageResult`1">
+            <summary>
+            Class getting paged result of mesh data.
+            </summary>
+            <typeparam name="TData">The type of data returned result.</typeparam>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.PageResult`1.Page">
+            <summary>
+            Gets page number of the data retrieved.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.PageResult`1.PageSize">
+            <summary>
+            Gets page size of the data retrieved.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.PageResult`1.Results">
+            <summary>
+            Gets collection of data results for the given page and page size of the mesh data type.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.PageResult`1.TotalRecords">
+            <summary>
+            Gets total number of records of the data retrieved.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.RegisterUser">
+            <summary>
+            Class defining a New User to be created.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.RegisterUser.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.RegisterUser"/> class.
+            </summary>
+            <param name="username">Username for user to log in with.</param>
+            <param name="newPassword">Password for user to log in with.</param>
+            <param name="phoneNumber">Phone number of user to verify against.</param>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.RegisterUser.Username">
+            <summary>
+            Gets or sets username.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.RegisterUser.FirstName">
+            <summary>
+            Gets or sets first name.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.RegisterUser.LastName">
+            <summary>
+            Gets or sets last name.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.RegisterUser.PhoneNumber">
+            <summary>
+            Gets or sets hone number.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.RegisterUser.NewPassword">
+            <summary>
+            Gets or sets a New Password for user to be able to log in with.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.ResetPassword">
+            <summary>
+            Class the allows a password to be reset when forgotten.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.ResetPassword.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.ResetPassword"/> class.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.ResetPassword.#ctor(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.ResetPassword"/> class.
+            </summary>
+            <param name="userVerificationCheck">User verfication check to copy into a new instance.</param>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.ResetPassword.NewPassword">
+            <summary>
+            Gets or sets the new password for the user to be able to log in.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.User">
+            <summary>
+            Class that defines a user.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.Id">
+            <summary>
+            Gets or sets the id of the user.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.Verified">
+            <summary>
+            Gets or sets a value indicating whether the user is verified or not.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the user is active.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.User.Roles">
+            <summary>
+            Gets or sets the roles assigned.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.UserPasswordUpdate">
+            <summary>
+            Class defining the ability to update the users password.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserPasswordUpdate.NewPassword">
+            <summary>
+            Gets or sets the new password to use.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserPasswordUpdate.PreviousPassword">
+            <summary>
+            Gets or sets the previous password to valdiate it was correct.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.UserVerification">
+            <summary>
+            Class defining elements for user verification.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserVerification.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.UserVerificationCheck">
+            <summary>
+            Class defining elements for user verification check.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.UserVerificationCheck.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.UserVerificationCheck"/> class.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.UserVerificationCheck.#ctor(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.UserVerificationCheck"/> class.
+            </summary>
+            <param name="userVerificationCheck">User verfication hash to copy into a new instance.</param>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserVerificationCheck.VerificationCode">
+            <summary>
+            Gets or sets verification code.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Models.UserVerificationHash">
+            <summary>
+            Class defining user verification hash.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.UserVerificationHash.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.UserVerificationHash"/> class.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Models.UserVerificationHash.#ctor(MeshyDB.SDK.Models.UserVerificationHash)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Models.UserVerificationHash"/> class.
+            </summary>
+            <param name="userVerificationHash">User verfication hash to copy into a new instance.</param>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserVerificationHash.Hash">
+            <summary>
+            Gets or sets hash.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserVerificationHash.Expires">
+            <summary>
+            Gets or sets expires.
+            </summary>
+        </member>
+        <member name="P:MeshyDB.SDK.Models.UserVerificationHash.Hint">
+            <summary>
+            Gets or sets hint.
+            </summary>
+        </member>
+        <member name="T:MeshyDB.SDK.Resolvers.MeshyDBJsonContractResolver">
+            <summary>
+            Class resolving a json contract for Meshy.
+            </summary>
+            <remarks>Used for implementing logic around custom json attributes.</remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Resolvers.MeshyDBJsonContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.AuthenticationService">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.Services.IAuthenticationService"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.#ctor(MeshyDB.SDK.Services.ITokenService,MeshyDB.SDK.Services.IRequestService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Services.AuthenticationService"/> class.
+            </summary>
+            <param name="tokenService">Service used to make token calls.</param>
+            <param name="requestService">Service used to make request calls.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.LoginWithPasswordAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.RegisterAsync(MeshyDB.SDK.Models.RegisterUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.ForgotPasswordAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.ResetPasswordAsync(MeshyDB.SDK.Models.ResetPassword)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.UpdatePasswordAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.SignoutAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.LoginAnonymouslyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.LoginWithPersistanceAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.RetrievePersistanceTokenAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.VerifyAsync(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.AuthenticationService.CheckHashAsync(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.HttpService">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.Services.IHttpService"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.HttpService.SendRequestAsync``1(MeshyDB.SDK.Models.HttpServiceRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.IAuthenticationService">
+            <summary>
+            Defines method of Authentication.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.LoginAnonymouslyAsync(System.String)">
+            <summary>
+            Log in anonymously to authenticate with client.
+            </summary>
+            <param name="username">Specify known username for anonymous user.</param>
+            <returns>Authentication id upon success.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.LoginWithPasswordAsync(System.String,System.String)">
+            <summary>
+            Log in with provided user name and password.
+            </summary>
+            <param name="username">User name provided for login.</param>
+            <param name="password">Password provided for login.</param>
+            <returns>Authentication id upon success.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.LoginWithPersistanceAsync(System.String)">
+            <summary>
+            Log in with persistance token provided from a previous session.
+            </summary>
+            <param name="persistanceToken">Persistance token from a previous session.</param>
+            <returns>Authentication id upon success.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.RetrievePersistanceTokenAsync(System.String)">
+            <summary>
+            Retrieves persistance token so a user can log in at a later time without requiring credentials.
+            </summary>
+            <param name="authenticationId">Internal identifier provided from login process.</param>
+            <returns>Persistance token used for persistance login at a later time.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.ForgotPasswordAsync(System.String)">
+            <summary>
+            Forgot Password for user.
+            </summary>
+            <param name="username">User name to request a reset.</param>
+            <returns>Hash object to verify parity in requests.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.ResetPasswordAsync(MeshyDB.SDK.Models.ResetPassword)">
+            <summary>
+            Reset password for user parity hash object.
+            </summary>
+            <param name="resetPassword">Hash object with parity information.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.UpdatePasswordAsync(System.String,System.String)">
+            <summary>
+            Updates the password of the requesting user.
+            </summary>
+            <param name="previousPassword">Previous password of user.</param>
+            <param name="newPassword">New password for user.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.RegisterAsync(MeshyDB.SDK.Models.RegisterUser)">
+            <summary>
+            Register user.
+            </summary>
+            <param name="user">User definition with password for login.</param>
+            <returns>Resulting user based on save.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.SignoutAsync(System.String)">
+            <summary>
+            Signout the targeted user based on authentication id.
+            </summary>
+            <param name="authenticationId">Internal identifier provided from login process.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.VerifyAsync(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Verify user to allow login after establishing identity.
+            </summary>
+            <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IAuthenticationService.CheckHashAsync(MeshyDB.SDK.Models.UserVerificationCheck)">
+            <summary>
+            Check hash to ensure established identity.
+            </summary>
+            <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+            <returns>Whether or not the check was successful.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.IHttpService">
+            <summary>
+            Defines methods for http requests via a service.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IHttpService.SendRequestAsync``1(MeshyDB.SDK.Models.HttpServiceRequest)">
+            <summary>
+            Sends http request message.
+            </summary>
+            <typeparam name="T">The type of data to be returned after a request is made.</typeparam>
+            <param name="request">Message data required to make an http request.</param>
+            <returns>Result of data generated from http request.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.IMeshesService">
+            <summary>
+            Defines methods for meshes.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Get``1(System.String)">
+            <summary>
+            Get mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="id">Identifier of mesh record to be retrieved.</param>
+            <returns>Data result of request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.GetAsync``1(System.String)">
+            <summary>
+            Get mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="id">Identifier of mesh record to be retrieved.</param>
+            <returns>Data result of request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Search``1(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Searches mesh data for a given filter.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="filter">Filter of data in mongo db filter format.</param>
+            <param name="sort">Sort data in mongo db sort format.</param>
+            <param name="page">Page number to find results on.</param>
+            <param name="pageSize">Number of items to bring back from search.</param>
+            <returns>Page result data for the given mesh with applied filter.</returns>
+            <remarks>
+            The maximum page size is 200.
+            </remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.SearchAsync``1(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Searches mesh data for a given filter.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="filter">Filter of data in mongo db filter format.</param>
+            <param name="sort">Sort data in mongo db sort format.</param>
+            <param name="page">Page number to find results on.</param>
+            <param name="pageSize">Number of items to bring back from search.</param>
+            <returns>Page result data for the given mesh with applied filter.</returns>
+            <remarks>
+            The maximum page size is 200.
+            </remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Search``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <summary>
+            Searches mesh data for a given filter.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="filter">Filter predicate for data.</param>
+            <param name="sort">Collection of sort for data.</param>
+            <param name="page">Page number to find results on.</param>
+            <param name="pageSize">Number of items to bring back from search.</param>
+            <returns>Page result data for the given mesh with applied filter.</returns>
+            <remarks>
+            The maximum page size is 200.
+            </remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.SearchAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <summary>
+            Searches mesh data for a given filter.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="filter">Filter predicate for data.</param>
+            <param name="sort">Collection of sort for data.</param>
+            <param name="page">Page number to find results on.</param>
+            <param name="pageSize">Number of items to bring back from search.</param>
+            <returns>Page result data for the given mesh with applied filter.</returns>
+            <remarks>
+            The maximum page size is 200.
+            </remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Search``1(System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <summary>
+            Searches mesh data for a given filter.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="filters">Enumerable of filters that all must be met for data.</param>
+            <param name="sort">Collection of sort for data.</param>
+            <param name="page">Page number to find results on.</param>
+            <param name="pageSize">Number of items to bring back from search.</param>
+            <returns>Page result data for the given mesh with applied filter.</returns>
+            <remarks>
+            The maximum page size is 200.
+            </remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.SearchAsync``1(System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <summary>
+            Searches mesh data for a given filter.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+            <param name="filters">Enumerable of filters that all must be met for data.</param>
+            <param name="sort">Collection of sort for data.</param>
+            <param name="page">Page number to find results on.</param>
+            <param name="pageSize">Number of items to bring back from search.</param>
+            <returns>Page result data for the given mesh with applied filter.</returns>
+            <remarks>
+            The maximum page size is 200.
+            </remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Create``1(``0)">
+            <summary>
+            Create mesh data.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned and created.</typeparam>
+            <param name="model">Mesh data to be commited.</param>
+            <returns>Result of committed mesh data.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.CreateAsync``1(``0)">
+            <summary>
+            Create mesh data.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned and created.</typeparam>
+            <param name="model">Mesh data to be commited.</param>
+            <returns>Result of committed mesh data.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Update``1(System.String,``0)">
+            <summary>
+            Update mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned and updated.</typeparam>
+            <param name="id">Identifier of mesh record to be updated.</param>
+            <param name="model">Mesh data to be updated.</param>
+            <returns>Result of updated mesh data.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.UpdateAsync``1(System.String,``0)">
+            <summary>
+            Update mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned and updated.</typeparam>
+            <param name="id">Identifier of mesh record to be updated.</param>
+            <param name="model">Mesh data to be updated.</param>
+            <returns>Result of updated mesh data.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Update``1(``0)">
+            <summary>
+            Update mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned and updated.</typeparam>
+            <param name="model">Mesh data to be updated.</param>
+            <returns>Result of updated mesh data.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.UpdateAsync``1(``0)">
+            <summary>
+            Update mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be returned and updated.</typeparam>
+            <param name="model">Mesh data to be updated.</param>
+            <returns>Result of updated mesh data.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Delete``1(System.String)">
+            <summary>
+            Get mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+            <param name="id">Identifier of mesh record to be deleted.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.DeleteAsync``1(System.String)">
+            <summary>
+            Get mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+            <param name="id">Identifier of mesh record to be deleted.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Delete``1(``0)">
+            <summary>
+            Get mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+            <param name="model">Mesh data to be deleted.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.DeleteAsync``1(``0)">
+            <summary>
+            Get mesh data for a given id.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+            <param name="model">Mesh data to be deleted.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.Delete``1">
+            <summary>
+            Remove entire mesh collection.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IMeshesService.DeleteAsync``1">
+            <summary>
+            Remove entire mesh collection.
+            </summary>
+            <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.IRequestService">
+            <summary>
+            Defines methods for http requests actions.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IRequestService.GetRequest``1(System.String)">
+            <summary>
+            Performs HTTP GET request.
+            </summary>
+            <typeparam name="T">Type of data to be returned from request.</typeparam>
+            <param name="path">Endpoint path to request.</param>
+            <returns>Data result made from request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IRequestService.GetRequest``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Performs HTTP GET request.
+            </summary>
+            <typeparam name="T">Type of data to be returned from request.</typeparam>
+            <param name="path">Endpoint path to request.</param>
+            <param name="headers">Custom headers to append with request.</param>
+            <returns>Data result made from request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IRequestService.DeleteRequest``1(System.String)">
+            <summary>
+            Performs HTTP DELETE request.
+            </summary>
+            <typeparam name="T">Type of data to be returned from request.</typeparam>
+            <param name="path">Endpoint path to request.</param>
+            <returns>Data result made from request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IRequestService.PostRequest``1(System.String,System.Object,MeshyDB.SDK.Enums.RequestDataFormat)">
+            <summary>
+            Performs HTTP POST request.
+            </summary>
+            <typeparam name="T">Type of data to be returned from request.</typeparam>
+            <param name="path">Endpoint path to request.</param>
+            <param name="model">Mesh data to be comitted.</param>
+            <param name="format">Data format to serialize data for the request.</param>
+            <returns>Data result made from request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IRequestService.PutRequest``1(System.String,System.Object)">
+            <summary>
+            Performs HTTP PUT request.
+            </summary>
+            <typeparam name="T">Type of data to be returned from request.</typeparam>
+            <param name="path">Endpoint path to request.</param>
+            <param name="model">Mesh data to be comitted.</param>
+            <returns>Data result made from request.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.ITokenService">
+            <summary>
+            Defines methods for authentication tokens.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GenerateAccessToken(System.String,System.String)">
+            <summary>
+            Generates Access token for provided user name and password.
+            </summary>
+            <param name="username">Username to generate token for.</param>
+            <param name="password">Password to generate token with.</param>
+            <returns>Authentication id upon success.</returns>
+            <remarks>Generates random authentication id for login.</remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GenerateAccessToken(System.String,System.String,System.String)">
+            <summary>
+            Generates User token for provided user name and password.
+            </summary>
+            <param name="username">Username to generate token for.</param>
+            <param name="password">Password to generate token with.</param>
+            <param name="authenticationId">Defined authentication id supplied.</param>
+            <returns>Authentication id upon success.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GetAccessTokenAsync(System.String)">
+            <summary>
+            Gets access token for specified authentication id.
+            </summary>
+            <param name="authenticationId">Authentication id to locate access token for.</param>
+            <returns>Access token for given authentication id.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GetRefreshTokenAsync(System.String)">
+            <summary>
+            Gets refresh token for specified authentication id.
+            </summary>
+            <param name="authenticationId">Authentication id to locate refresh token for.</param>
+            <returns>Refresh token for given authentication id.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GenerateAccessTokenWithRefreshToken(System.String)">
+            <summary>
+            Generate user token for provided refresh token.
+            </summary>
+            <param name="refreshToken">Refresh token to generate new credentials.</param>
+            <returns>Authentication id upon success.</returns>
+            <remarks>Generates random authentication id for login.</remarks>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GenerateAccessTokenWithRefreshToken(System.String,System.String)">
+            <summary>
+            Generate user token for provided refresh token.
+            </summary>
+            <param name="refreshToken">Refresh token to generate new credentials.</param>
+            <param name="authenticationId">Defined authentication id supplied.</param>
+            <returns>Authentication id upon success.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.SignoutAsync(System.String)">
+            <summary>
+            Sign out of application.
+            </summary>
+            <param name="authenticationId">Authentication id to sign out.</param>
+            <returns>Task indicating when operation is complete.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.ITokenService.GetUserInfoAsync(System.String)">
+            <summary>
+            Get User Info from user's access token.
+            </summary>
+            <param name="authenticationId">Authentication id to look up.</param>
+            <returns>Key value pair collection of user information.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.IUsersService">
+            <summary>
+            Defines methods for users.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IUsersService.GetSelfAsync">
+            <summary>
+            Gets the user information based on the requesting client.
+            </summary>
+            <returns>User that made the request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IUsersService.GetSelf">
+            <summary>
+            Gets the user information based on the requesting client.
+            </summary>
+            <returns>User that made the request.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IUsersService.UpdateSelfAsync(MeshyDB.SDK.Models.User)">
+            <summary>
+            Updates self.
+            </summary>
+            <param name="user">Updated user data.</param>
+            <returns>User with updated information.</returns>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.IUsersService.UpdateSelf(MeshyDB.SDK.Models.User)">
+            <summary>
+            Updates self.
+            </summary>
+            <param name="user">Updated user data.</param>
+            <returns>User with updated information.</returns>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.MeshesService">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.Services.IMeshesService"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.#ctor(MeshyDB.SDK.Services.IRequestService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Services.MeshesService"/> class.
+            </summary>
+            <param name="requestService">Service used to make request calls.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.GetAsync``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.SearchAsync``1(System.String,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.SearchAsync``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.SearchAsync``1(System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.CreateAsync``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.UpdateAsync``1(System.String,``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.UpdateAsync``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.DeleteAsync``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.DeleteAsync``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Get``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Search``1(System.String,System.String,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Search``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Search``1(System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,MeshyDB.SDK.Enums.SortDirection}},System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Create``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Update``1(System.String,``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Update``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Delete``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Delete``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.Delete``1">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.MeshesService.DeleteAsync``1">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.RequestService">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.Services.IRequestService"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.#ctor(MeshyDB.SDK.Services.IHttpService,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Services.RequestService"/> class.
+            </summary>
+            <param name="httpService">Service to make http requests against.</param>
+            <param name="baseUrl">Base Api Url to make requests for.</param>
+            <param name="tenant">Tenant of data used for partitioning.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.#ctor(MeshyDB.SDK.Services.IHttpService,System.String,System.String,MeshyDB.SDK.Services.ITokenService,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Services.RequestService"/> class.
+            </summary>
+            <param name="httpService">Service to make http requests against.</param>
+            <param name="baseUrl">Base Api Url to make requests for.</param>
+            <param name="tenant">Tenant of data used for partitioning.</param>
+            <param name="tokenService">Service to get token to add authentication to endpoint.</param>
+            <param name="authenticationId">Internal identifier provided from login process.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.GetRequest``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.GetRequest``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.DeleteRequest``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.PostRequest``1(System.String,System.Object,MeshyDB.SDK.Enums.RequestDataFormat)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.RequestService.PutRequest``1(System.String,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.TokenService">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.Services.ITokenService"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.#ctor(MeshyDB.SDK.Services.IRequestService,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Services.TokenService"/> class.
+            </summary>
+            <param name="requestService">Service to make requests against.</param>
+            <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with client.</param>
+            <exception cref="T:System.ArgumentException">Thrown if any parameter is not configured.</exception>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GenerateAccessToken(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GenerateAccessToken(System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GetAccessTokenAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.SignoutAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GetRefreshTokenAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GenerateAccessTokenWithRefreshToken(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GenerateAccessTokenWithRefreshToken(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.TokenService.GetUserInfoAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MeshyDB.SDK.Services.UsersService">
+            <summary>
+            Implementation of <see cref="T:MeshyDB.SDK.Services.IUsersService"/>.
+            </summary>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.UsersService.#ctor(MeshyDB.SDK.Services.IRequestService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MeshyDB.SDK.Services.UsersService"/> class.
+            </summary>
+            <param name="requestService">Service used to make request calls.</param>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.UsersService.GetSelfAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.UsersService.UpdateSelfAsync(MeshyDB.SDK.Models.User)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.UsersService.GetSelf">
+            <inheritdoc/>
+        </member>
+        <member name="M:MeshyDB.SDK.Services.UsersService.UpdateSelf(MeshyDB.SDK.Models.User)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

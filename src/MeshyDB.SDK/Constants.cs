@@ -1,22 +1,26 @@
-﻿namespace MeshyDB.SDK
+﻿// <copyright file="Constants.cs" company="Yetisoftworks LLC">
+// Copyright (c) Yetisoftworks LLC. All rights reserved.
+// </copyright>
+
+namespace MeshyDB.SDK
 {
     /// <summary>
-    /// Class containing any static text used within the SDK
+    /// Class containing any static text used within the SDK.
     /// </summary>
     internal static class Constants
     {
         /// <summary>
-        /// Defines Template Api Url with client location for replacement when client key is supplied
+        /// Defines Template Api Url with client location for replacement when account name is supplied.
         /// </summary>
-        internal const string TemplateApiUrl = "https://api.meshydb.com/{clientKey}";
+        internal const string TemplateApiUrl = "https://api.meshydb.com/{accountName}";
 
         /// <summary>
-        /// Defines Template Auth Url with client location for replacement when client key is supplied
+        /// Defines Template Auth Url with client location for replacement when account name is supplied.
         /// </summary>
-        internal const string TemplateAuthUrl = "https://auth.meshydb.com/{clientKey}";
+        internal const string TemplateAuthUrl = "https://auth.meshydb.com/{accountName}";
 
         /// <summary>
-        /// Defines Api scoes for user when generating token
+        /// Defines Api scoes for user when generating token.
         /// </summary>
         internal const string ApiScopes = "meshy.api offline_access openid";
     }

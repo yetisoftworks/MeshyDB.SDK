@@ -24,19 +24,19 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithNullClientKey()
+        public void ShouldThrowArgumentExceptionWithNullAccountName()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDB(null, Generator.RandomString(36)));
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithEmptyClientKey()
+        public void ShouldThrowArgumentExceptionWithEmptyAccountName()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDB(string.Empty, Generator.RandomString(36)));
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithWhitespaceClientKey()
+        public void ShouldThrowArgumentExceptionWithWhitespaceAccountName()
         {
             Assert.Throws<ArgumentException>(() => new MeshyDB(new string(' ', 5), Generator.RandomString(36)));
         }
@@ -60,21 +60,21 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldIncludeClientKeyInApiUrl()
+        public void ShouldIncludeAccountNameInApiUrl()
         {
-            var clientKey = Generator.RandomString(5);
-            var client = new MeshyDB(clientKey, Generator.RandomString(36));
+            var accountName = Generator.RandomString(5);
+            var client = new MeshyDB(accountName, Generator.RandomString(36));
 
-            Assert.Equal($"https://api.meshydb.com/{clientKey}".ToLower(), client.GetApiUrl().ToLower());
+            Assert.Equal($"https://api.meshydb.com/{accountName}".ToLower(), client.GetApiUrl().ToLower());
         }
 
         [Fact]
-        public void ShouldIncludeClientKeyInAuthUrl()
+        public void ShouldIncludeAccountNameInAuthUrl()
         {
-            var clientKey = Generator.RandomString(5);
-            var client = new MeshyDB(clientKey, Generator.RandomString(36));
+            var accountName = Generator.RandomString(5);
+            var client = new MeshyDB(accountName, Generator.RandomString(36));
 
-            Assert.Equal($"https://auth.meshydb.com/{clientKey}".ToLower(), client.GetAuthUrl().ToLower());
+            Assert.Equal($"https://auth.meshydb.com/{accountName}".ToLower(), client.GetAuthUrl().ToLower());
         }
 
         [Fact]

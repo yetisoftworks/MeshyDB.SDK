@@ -18,17 +18,28 @@
   <PropertyGroup>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove=".stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include=".stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="licenses\LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <Optimize>false</Optimize>
+    <DocumentationFile>D:\GIT\MeshyDB.SDK-csharp\src\MeshyDB.SDK\MeshyDB.SDK.xml</DocumentationFile>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 </Project>

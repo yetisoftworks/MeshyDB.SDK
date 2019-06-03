@@ -1,5 +1,7 @@
-﻿using MeshyDB.SDK.Models;
-using Newtonsoft.Json;
+﻿// <copyright file="HttpService.cs" company="Yetisoftworks LLC">
+// Copyright (c) Yetisoftworks LLC. All rights reserved.
+// </copyright>
+
 using System;
 using System.IO;
 using System.Net;
@@ -7,23 +9,26 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using MeshyDB.SDK.Models;
+using Newtonsoft.Json;
 
 namespace MeshyDB.SDK.Services
 {
     /// <summary>
-    /// Implementation of <see cref="IHttpService"/>
+    /// Implementation of <see cref="IHttpService"/>.
     /// </summary>
     internal class HttpService : IHttpService
     {
-        HttpClient _client = new HttpClient();
+        private readonly HttpClient client = new HttpClient();
 
         /// <inheritdoc/>
         public async Task<T> SendRequestAsync<T>(HttpServiceRequest request)
         {
-            var httpClient = _client;
-            var message = new HttpRequestMessage();
-
-            message.Method = request.Method;
+            var httpClient = this.client;
+            var message = new HttpRequestMessage
+            {
+                Method = request.Method,
+            };
 
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

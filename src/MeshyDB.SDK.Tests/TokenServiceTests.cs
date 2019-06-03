@@ -439,7 +439,7 @@ namespace MeshyDB.SDK.Tests
             var authenticationId = Generator.RandomString(10);
             var resultId = service.GenerateAccessTokenWithRefreshToken(Generator.RandomString(10), authenticationId).Result;
 
-            service.Signout(resultId).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.SignoutAsync(resultId).ConfigureAwait(true).GetAwaiter().GetResult();
 
             var signedoutToken = service.GetAccessTokenAsync(resultId).Result;
 

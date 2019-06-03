@@ -1,17 +1,31 @@
-﻿using System;
+﻿// <copyright file="MeshNameAttribute.cs" company="Yetisoftworks LLC">
+// Copyright (c) Yetisoftworks LLC. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MeshyDB.SDK.Attributes
 {
+    /// <summary>
+    /// Attribute used to override the name of the mesh.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-
     public class MeshNameAttribute : Attribute
     {
-        internal string Name { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeshNameAttribute"/> class.
+        /// </summary>
+        /// <param name="name">Name of the mesh.</param>
         public MeshNameAttribute(string name)
         {
-            Name = name;
+            this.Name = name;
         }
+
+        /// <summary>
+        /// Gets or sets mesh name.
+        /// </summary>
+        internal string Name { get; set; }
     }
 }

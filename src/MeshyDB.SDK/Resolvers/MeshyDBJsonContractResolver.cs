@@ -1,17 +1,21 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿// <copyright file="MeshyDBJsonContractResolver.cs" company="Yetisoftworks LLC">
+// Copyright (c) Yetisoftworks LLC. All rights reserved.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MeshyDB.SDK.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace MeshyDB.SDK.Resolvers
 {
     /// <summary>
-    /// Class resolving a json contract for Meshy
+    /// Class resolving a json contract for Meshy.
     /// </summary>
-    /// <remarks>Used for implementing logic around custom json attributes</remarks>
+    /// <remarks>Used for implementing logic around custom json attributes.</remarks>
     internal class MeshyDBJsonContractResolver : DefaultContractResolver
     {
         /// <inheritdoc/>
