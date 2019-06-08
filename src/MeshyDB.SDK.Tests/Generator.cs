@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MeshyDB.SDK.Tests
 {
-    public class Generator
+    public sealed class Generator
     {
         private static Random random = new Random();
         public static string RandomString(int length)

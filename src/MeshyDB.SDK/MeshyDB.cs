@@ -1,5 +1,5 @@
-﻿// <copyright file="MeshyDB.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="MeshyDB.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -44,16 +44,6 @@ namespace MeshyDB.SDK
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured.</exception>
         public MeshyDB(string accountName, string tenant, string publicKey, IHttpService httpService = null)
         {
-            if (string.IsNullOrWhiteSpace(accountName))
-            {
-                throw new ArgumentException($"{nameof(accountName)} was not supplied", nameof(accountName));
-            }
-
-            if (string.IsNullOrWhiteSpace(publicKey))
-            {
-                throw new ArgumentException($"{nameof(publicKey)} was not supplied", nameof(publicKey));
-            }
-
             this.AccountName = accountName.Trim();
             this.Tenant = tenant?.Trim();
             this.publicKey = publicKey.Trim();
@@ -123,7 +113,7 @@ namespace MeshyDB.SDK
         /// <returns>Meshy client for user upon successful login.</returns>
         public async Task<IMeshyClient> LoginWithPasswordAsync(string username, string password)
         {
-            var identifier = await this.AuthenticationService.LoginWithPasswordAsync(username, password);
+            var identifier = await this.AuthenticationService.LoginWithPasswordAsync(username, password).ConfigureAwait(true);
             var services = this.GenerateAPIRequestService(identifier);
 
             return new MeshyClient(services.Item1, services.Item2, identifier);
@@ -149,7 +139,7 @@ namespace MeshyDB.SDK
         /// <returns>Meshy client for user upon successful login.</returns>
         public async Task<IMeshyClient> LoginAnonymouslyAsync(string username = null)
         {
-            var identifier = await this.AuthenticationService.LoginAnonymouslyAsync(username);
+            var identifier = await this.AuthenticationService.LoginAnonymouslyAsync(username).ConfigureAwait(true);
             var services = this.GenerateAPIRequestService(identifier);
 
             return new MeshyClient(services.Item1, services.Item2, identifier);
@@ -172,24 +162,9 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="user">User to be created with login credentials.</param>
         /// <returns>User that was newly created.</returns>
-        public async Task<UserVerificationHash> RegisterUserAsync(RegisterUser user)
+        public Task<UserVerificationHash> RegisterUserAsync(RegisterUser user)
         {
-            if (string.IsNullOrWhiteSpace(user.Username))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(user.Username)}");
-            }
-
-            if (string.IsNullOrWhiteSpace(user.NewPassword))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(user.Username)}");
-            }
-
-            if (string.IsNullOrWhiteSpace(user.PhoneNumber))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(user.PhoneNumber)}");
-            }
-
-            return await this.AuthenticationService.RegisterAsync(user);
+            return this.AuthenticationService.RegisterAsync(user);
         }
 
         /// <summary>
@@ -208,23 +183,20 @@ namespace MeshyDB.SDK
         /// Request forgot password based on username.
         /// </summary>
         /// <param name="username">Username of forgotton user.</param>
+        /// <param name="attempt">Forgot password attempt.</param>
         /// <returns>Hashed object to ensure forgot password parity request.</returns>
-        public async Task<UserVerificationHash> ForgotPasswordAsync(string username)
+        public Task<UserVerificationHash> ForgotPasswordAsync(string username, int attempt = 1)
         {
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(username)}");
-            }
-
-            return await this.AuthenticationService.ForgotPasswordAsync(username);
+            return this.AuthenticationService.ForgotPasswordAsync(username, attempt);
         }
 
         /// <summary>
         /// Request forgot password based on username.
         /// </summary>
         /// <param name="username">Username of forgotton user.</param>
+        /// <param name="attempt">Forgot password attempt.</param>
         /// <returns>Hashed object to ensure forgot password parity request.</returns>
-        public UserVerificationHash ForgotPassword(string username)
+        public UserVerificationHash ForgotPassword(string username, int attempt = 1)
         {
             var t = this.ForgotPasswordAsync(username).ConfigureAwait(true).GetAwaiter();
 
@@ -236,24 +208,9 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="resetPassword">Reset password object to ensure forgot password was requested.</param>
         /// <returns>Task to await success of reset.</returns>
-        public async Task ResetPasswordAsync(ResetPassword resetPassword)
+        public Task ResetPasswordAsync(ResetPassword resetPassword)
         {
-            if (string.IsNullOrWhiteSpace(resetPassword.Username))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(resetPassword.Username)}");
-            }
-
-            if (string.IsNullOrWhiteSpace(resetPassword.Hash))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(resetPassword.Hash)}");
-            }
-
-            if (string.IsNullOrWhiteSpace(resetPassword.NewPassword))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(resetPassword.NewPassword)}");
-            }
-
-            await this.AuthenticationService.ResetPasswordAsync(resetPassword);
+            return this.AuthenticationService.ResetPasswordAsync(resetPassword);
         }
 
         /// <summary>
@@ -274,7 +231,7 @@ namespace MeshyDB.SDK
         /// <returns>Meshy client for user upon successful login.</returns>
         public async Task<IMeshyClient> LoginWithPersistanceAsync(string persistanceToken)
         {
-            var identifier = await this.AuthenticationService.LoginWithPersistanceAsync(persistanceToken);
+            var identifier = await this.AuthenticationService.LoginWithPersistanceAsync(persistanceToken).ConfigureAwait(true);
             var services = this.GenerateAPIRequestService(identifier);
 
             return new MeshyClient(services.Item1, services.Item2, identifier);
@@ -308,19 +265,9 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
         /// <returns>Task to await success of sign out.</returns>
-        public async Task VerifyAsync(UserVerificationCheck userVerificationCheck)
+        public Task VerifyAsync(UserVerificationCheck userVerificationCheck)
         {
-            if (string.IsNullOrWhiteSpace(userVerificationCheck.Username))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(userVerificationCheck.Username)}");
-            }
-
-            if (string.IsNullOrWhiteSpace(userVerificationCheck.Hash))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(userVerificationCheck.Hash)}");
-            }
-
-            await this.AuthenticationService.VerifyAsync(userVerificationCheck);
+            return this.AuthenticationService.VerifyAsync(userVerificationCheck);
         }
 
         /// <summary>
@@ -340,19 +287,9 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
         /// <returns>Whether or not check was successful.</returns>
-        public async Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck)
+        public Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck)
         {
-            if (string.IsNullOrWhiteSpace(userVerificationCheck.Username))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(userVerificationCheck.Username)}");
-            }
-
-            if (string.IsNullOrWhiteSpace(userVerificationCheck.Hash))
-            {
-                throw new ArgumentException($"Missing required information: {nameof(userVerificationCheck.Hash)}");
-            }
-
-            return await this.AuthenticationService.CheckHashAsync(userVerificationCheck);
+            return this.AuthenticationService.CheckHashAsync(userVerificationCheck);
         }
 
         /// <summary>

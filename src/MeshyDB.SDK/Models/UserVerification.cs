@@ -1,5 +1,5 @@
-﻿// <copyright file="UserVerification.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="UserVerification.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -17,5 +17,10 @@ namespace MeshyDB.SDK.Models
         /// Gets or sets the username.
         /// </summary>
         public string Username { get; set; }
+
+        /// <summary>
+        /// Gets or sets the password reset attempt.
+        /// </summary>
+        public int Attempt { get; set; }
     }
 }

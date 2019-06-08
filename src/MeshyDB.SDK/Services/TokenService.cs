@@ -1,5 +1,5 @@
-﻿// <copyright file="TokenService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="TokenService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -29,19 +29,14 @@ namespace MeshyDB.SDK.Services
         /// <exception cref="ArgumentException">Thrown if any parameter is not configured.</exception>
         public TokenService(IRequestService requestService, string publicKey)
         {
-            if (string.IsNullOrWhiteSpace(publicKey))
-            {
-                throw new ArgumentException($"{nameof(publicKey)} was not supplied", nameof(publicKey));
-            }
-
             this.requestService = requestService ?? throw new ArgumentNullException(nameof(requestService));
             this.publicKey = publicKey;
         }
 
         /// <inheritdoc/>
-        public async Task<string> GenerateAccessToken(string username, string password)
+        public Task<string> GenerateAccessToken(string username, string password)
         {
-            return await this.GenerateAccessToken(username, password, Guid.NewGuid().ToString());
+            return this.GenerateAccessToken(username, password, Guid.NewGuid().ToString());
         }
 
         /// <inheritdoc/>
@@ -54,7 +49,7 @@ namespace MeshyDB.SDK.Services
                     ClientId = this.publicKey,
                     Username = username,
                     Password = password,
-                }, RequestDataFormat.Form);
+                }, RequestDataFormat.Form).ConfigureAwait(true);
 
             TokenCache.Add(authenticationId, new TokenCacheData()
             {
@@ -77,7 +72,7 @@ namespace MeshyDB.SDK.Services
                 }
                 else
                 {
-                    value = await this.RefreshUserToken(value.RefreshToken);
+                    value = await this.RefreshUserToken(value.RefreshToken).ConfigureAwait(true);
                     TokenCache.Remove(authenticationId);
                     TokenCache.Add(authenticationId, value);
                 }
@@ -105,46 +100,46 @@ namespace MeshyDB.SDK.Services
                     Token = value.RefreshToken,
                     TokenTypeHint = "refresh_token",
                     ClientId = this.publicKey,
-                }, RequestDataFormat.Form);
+                }, RequestDataFormat.Form)
+                .ConfigureAwait(true);
 
             TokenCache.Remove(authenticationId);
         }
 
         /// <inheritdoc/>
-        public async Task<string> GetRefreshTokenAsync(string authenticationId)
+        public Task<string> GetRefreshTokenAsync(string authenticationId)
         {
             if (!string.IsNullOrWhiteSpace(authenticationId) && TokenCache.TryGetValue(authenticationId, out TokenCacheData value))
             {
-                return await Task.FromResult(value.RefreshToken);
+                return Task.FromResult(value.RefreshToken);
             }
 
-            return await Task.FromResult(null as string);
+            return Task.FromResult(null as string);
         }
 
         /// <inheritdoc/>
-        public async Task<string> GenerateAccessTokenWithRefreshToken(string refreshToken)
+        public Task<string> GenerateAccessTokenWithRefreshToken(string refreshToken)
         {
-            return await this.GenerateAccessTokenWithRefreshToken(refreshToken, Guid.NewGuid().ToString());
+            return this.GenerateAccessTokenWithRefreshToken(refreshToken, Guid.NewGuid().ToString());
         }
 
         /// <inheritdoc/>
         public async Task<string> GenerateAccessTokenWithRefreshToken(string refreshToken, string authenticationId)
         {
-            var tokenCacheData = await this.RefreshUserToken(refreshToken);
+            var tokenCacheData = await this.RefreshUserToken(refreshToken).ConfigureAwait(true);
             TokenCache.Add(authenticationId, tokenCacheData);
             return authenticationId;
         }
 
         /// <inheritdoc/>
-        public async Task<IDictionary<string, string>> GetUserInfoAsync(string authenticationId)
+        public Task<IDictionary<string, string>> GetUserInfoAsync(string authenticationId)
         {
             var headers = new Dictionary<string, string>
             {
                 { "Authorization", $"Bearer {TokenCache[authenticationId].Token}" },
             };
 
-            var response = await this.requestService.GetRequest<Dictionary<string, string>>($"/connect/userinfo", headers);
-            return response;
+            return this.requestService.GetRequest<IDictionary<string, string>>($"/connect/userinfo", headers);
         }
 
         private async Task<TokenCacheData> RefreshUserToken(string refreshToken)
@@ -156,7 +151,8 @@ namespace MeshyDB.SDK.Services
                     ClientId = this.publicKey,
                     GrantType = "refresh_token",
                     RefreshToken = refreshToken,
-                }, RequestDataFormat.Form);
+                }, RequestDataFormat.Form)
+                .ConfigureAwait(true);
 
             return new TokenCacheData()
             {

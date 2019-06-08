@@ -48,7 +48,7 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
-            service.Get<TestMeshNameFromClass>(id);
+            service.GetData<TestMeshNameFromClass>(id);
 
             Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
             requestService.VerifyAll();
@@ -71,7 +71,7 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
-            await service.GetAsync<TestMeshNameFromClass>(id);
+            await service.GetDataAsync<TestMeshNameFromClass>(id).ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
             requestService.VerifyAll();
@@ -94,9 +94,9 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
-            service.Get<MeshNameAttributeClassTest>(id);
+            service.GetData<MeshNameAttributeClassTest>(id);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
             requestService.VerifyAll();
         }
 
@@ -117,9 +117,9 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
-            await service.GetAsync<MeshNameAttributeClassTest>(id);
+            await service.GetDataAsync<MeshNameAttributeClassTest>(id).ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
             requestService.VerifyAll();
         }
 
@@ -178,7 +178,7 @@ namespace MeshyDB.SDK.Tests
             }).Verifiable();
 
             var service = new MeshesService(requestService.Object);
-            await service.CreateAsync(expectedModel);
+            await service.CreateAsync(expectedModel).ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass", passedUrl);
             Assert.Equal(expectedModel, passedModel);
@@ -210,7 +210,7 @@ namespace MeshyDB.SDK.Tests
             var service = new MeshesService(requestService.Object);
             service.Create(expectedModel);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
             Assert.Equal(RequestDataFormat.Json, passedFormat);
 
@@ -238,9 +238,9 @@ namespace MeshyDB.SDK.Tests
             }).Verifiable();
 
             var service = new MeshesService(requestService.Object);
-            await service.CreateAsync(expectedModel);
+            await service.CreateAsync(expectedModel).ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
             Assert.Equal(RequestDataFormat.Json, passedFormat);
 
@@ -301,7 +301,7 @@ namespace MeshyDB.SDK.Tests
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
 
-            await service.UpdateAsync(id, expectedModel);
+            await service.UpdateAsync(id, expectedModel).ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
@@ -332,7 +332,7 @@ namespace MeshyDB.SDK.Tests
 
             service.Update(id, expectedModel);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
 
             requestService.VerifyAll();
@@ -359,9 +359,9 @@ namespace MeshyDB.SDK.Tests
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
 
-            await service.UpdateAsync(id, expectedModel);
+            await service.UpdateAsync(id, expectedModel).ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
 
             requestService.VerifyAll();
@@ -421,7 +421,7 @@ namespace MeshyDB.SDK.Tests
 
             expectedModel.Id = id;
 
-            await service.UpdateAsync(expectedModel);
+            await service.UpdateAsync(expectedModel).ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
@@ -454,7 +454,7 @@ namespace MeshyDB.SDK.Tests
 
             service.Update(expectedModel);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
 
             requestService.VerifyAll();
@@ -483,9 +483,9 @@ namespace MeshyDB.SDK.Tests
 
             expectedModel.Id = id;
 
-            await service.UpdateAsync(expectedModel);
+            await service.UpdateAsync(expectedModel).ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
             Assert.Equal(expectedModel, passedModel);
 
             requestService.VerifyAll();
@@ -538,7 +538,7 @@ namespace MeshyDB.SDK.Tests
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
 
-            await service.DeleteAsync<TestMeshNameFromClass>(id);
+            await service.DeleteAsync<TestMeshNameFromClass>(id).ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
 
@@ -565,7 +565,7 @@ namespace MeshyDB.SDK.Tests
 
             service.Delete<MeshNameAttributeClassTest>(id);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -588,9 +588,9 @@ namespace MeshyDB.SDK.Tests
             var service = new MeshesService(requestService.Object);
             var id = Generator.RandomString(25);
 
-            await service.DeleteAsync<MeshNameAttributeClassTest>(id);
+            await service.DeleteAsync<MeshNameAttributeClassTest>(id).ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -644,7 +644,7 @@ namespace MeshyDB.SDK.Tests
 
             data.Id = id;
 
-            await service.DeleteAsync<TestMeshNameFromClass>(data);
+            await service.DeleteAsync<TestMeshNameFromClass>(data).ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass/{id}", passedUrl);
 
@@ -674,7 +674,7 @@ namespace MeshyDB.SDK.Tests
 
             service.Delete<MeshNameAttributeClassTest>(data);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -700,9 +700,9 @@ namespace MeshyDB.SDK.Tests
 
             data.Id = id;
 
-            await service.DeleteAsync<MeshNameAttributeClassTest>(data);
+            await service.DeleteAsync<MeshNameAttributeClassTest>(data).ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}/{id}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}/{id}", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -753,7 +753,7 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
 
-            await service.SearchAsync<TestMeshNameFromClass>();
+            await service.SearchAsync<TestMeshNameFromClass>().ConfigureAwait(true);
 
             Assert.Equal($"meshes/testmeshnamefromclass?filter=&orderby=&page=1&pageSize=200", passedUrl);
 
@@ -779,7 +779,7 @@ namespace MeshyDB.SDK.Tests
 
             service.Search<MeshNameAttributeClassTest>();
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}?filter=&orderby=&page=1&pageSize=200", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter=&orderby=&page=1&pageSize=200", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -801,9 +801,9 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
 
-            await service.SearchAsync<MeshNameAttributeClassTest>();
+            await service.SearchAsync<MeshNameAttributeClassTest>().ConfigureAwait(true);
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}?filter=&orderby=&page=1&pageSize=200", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter=&orderby=&page=1&pageSize=200", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -855,7 +855,7 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
 
-            await service.SearchAsync<TestMeshNameFromClass>(x => true);
+            await service.SearchAsync<TestMeshNameFromClass>(x => true).ConfigureAwait(true);
             var encodedFilter = WebUtility.UrlEncode("{ }");
 
             Assert.Equal($"meshes/testmeshnamefromclass?filter={encodedFilter}&orderby=&page=1&pageSize=200", passedUrl);
@@ -883,7 +883,7 @@ namespace MeshyDB.SDK.Tests
             service.Search<MeshNameAttributeClassTest>(x => true);
             var encodedFilter = WebUtility.UrlEncode("{ }");
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}?filter={encodedFilter}&orderby=&page=1&pageSize=200", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby=&page=1&pageSize=200", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -905,10 +905,10 @@ namespace MeshyDB.SDK.Tests
 
             var service = new MeshesService(requestService.Object);
 
-            await service.SearchAsync<MeshNameAttributeClassTest>(x => true);
+            await service.SearchAsync<MeshNameAttributeClassTest>(x => true).ConfigureAwait(true);
             var encodedFilter = WebUtility.UrlEncode("{ }");
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}?filter={encodedFilter}&orderby=&page=1&pageSize=200", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby=&page=1&pageSize=200", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -943,7 +943,7 @@ namespace MeshyDB.SDK.Tests
             var encodedFilter = WebUtility.UrlEncode(searchFilter);
             var encodedSort = WebUtility.UrlEncode("{ FavoriteNumber: -1 }");
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}?filter={encodedFilter}&orderby={encodedSort}&page={pageNumber}&pageSize={pageSize}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby={encodedSort}&page={pageNumber}&pageSize={pageSize}", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -968,11 +968,11 @@ namespace MeshyDB.SDK.Tests
             var pageSize = new Random().Next();
 
 
-            await service.SearchAsync<MeshNameAttributeClassTest>(x => x.FavoriteNumber > 5000, new List<KeyValuePair<string, SortDirection>>() { new KeyValuePair<string, SortDirection>("FavoriteNumber", SortDirection.Desending) }, pageNumber, pageSize);
+            await service.SearchAsync<MeshNameAttributeClassTest>(x => x.FavoriteNumber > 5000, new List<KeyValuePair<string, SortDirection>>() { new KeyValuePair<string, SortDirection>("FavoriteNumber", SortDirection.Desending) }, pageNumber, pageSize).ConfigureAwait(true);
             var encodedFilter = WebUtility.UrlEncode("{ \"FavoriteNumber\" : { \"$gt\" : 5000 } }");
             var encodedSort = WebUtility.UrlEncode("{ FavoriteNumber:-1 }");
 
-            Assert.Equal($"meshes/{MeshName.ToLower()}?filter={encodedFilter}&orderby={encodedSort}&page={pageNumber}&pageSize={pageSize}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby={encodedSort}&page={pageNumber}&pageSize={pageSize}", passedUrl);
 
             requestService.VerifyAll();
         }

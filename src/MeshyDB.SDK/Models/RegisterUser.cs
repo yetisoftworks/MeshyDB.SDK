@@ -1,5 +1,5 @@
-﻿// <copyright file="RegisterUser.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="RegisterUser.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -18,12 +18,10 @@ namespace MeshyDB.SDK.Models
         /// </summary>
         /// <param name="username">Username for user to log in with.</param>
         /// <param name="newPassword">Password for user to log in with.</param>
-        /// <param name="phoneNumber">Phone number of user to verify against.</param>
-        public RegisterUser(string username, string newPassword, string phoneNumber)
+        public RegisterUser(string username, string newPassword)
         {
             this.Username = username;
             this.NewPassword = newPassword;
-            this.PhoneNumber = phoneNumber;
         }
 
         /// <summary>
@@ -50,5 +48,10 @@ namespace MeshyDB.SDK.Models
         /// Gets or sets a New Password for user to be able to log in with.
         /// </summary>
         public string NewPassword { get; set; }
+
+        /// <summary>
+        /// Gets or sets Security Questions for a registering user.
+        /// </summary>
+        public IEnumerable<SecurityQuestion> SecurityQuestions { get; set; } = new List<SecurityQuestion>();
     }
 }

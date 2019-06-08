@@ -69,15 +69,6 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldThrowExceptionIfAuthenticationIdIsEmpty()
-        {
-            var tokenService = new Mock<ITokenService>();
-            var requestService = new Mock<IRequestService>();
-
-            Assert.Throws<ArgumentException>(() => new MeshyClient(tokenService.Object, requestService.Object, new string(' ', 5)));
-        }
-
-        [Fact]
         public void ShouldSetAuthenticationIdDuringCreation()
         {
             var tokenService = new Mock<ITokenService>();

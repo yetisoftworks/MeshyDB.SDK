@@ -24,48 +24,12 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldThrowArgumentExceptionWithNullAccountName()
-        {
-            Assert.Throws<ArgumentException>(() => new MeshyDB(null, Generator.RandomString(36)));
-        }
-
-        [Fact]
-        public void ShouldThrowArgumentExceptionWithEmptyAccountName()
-        {
-            Assert.Throws<ArgumentException>(() => new MeshyDB(string.Empty, Generator.RandomString(36)));
-        }
-
-        [Fact]
-        public void ShouldThrowArgumentExceptionWithWhitespaceAccountName()
-        {
-            Assert.Throws<ArgumentException>(() => new MeshyDB(new string(' ', 5), Generator.RandomString(36)));
-        }
-
-        [Fact]
-        public void ShouldThrowArgumentExceptionWithNullPublicKey()
-        {
-            Assert.Throws<ArgumentException>(() => new MeshyDB(Generator.RandomString(5), null));
-        }
-
-        [Fact]
-        public void ShouldThrowArgumentExceptionWithEmptyPublicKey()
-        {
-            Assert.Throws<ArgumentException>(() => new MeshyDB(Generator.RandomString(5), string.Empty));
-        }
-
-        [Fact]
-        public void ShouldThrowArgumentExceptionWithWhitespacePublicKey()
-        {
-            Assert.Throws<ArgumentException>(() => new MeshyDB(Generator.RandomString(5), new string(' ', 5)));
-        }
-
-        [Fact]
         public void ShouldIncludeAccountNameInApiUrl()
         {
             var accountName = Generator.RandomString(5);
             var client = new MeshyDB(accountName, Generator.RandomString(36));
 
-            Assert.Equal($"https://api.meshydb.com/{accountName}".ToLower(), client.GetApiUrl().ToLower());
+            Assert.Equal($"https://api.meshydb.com/{accountName}".ToLowerInvariant(), client.GetApiUrl().ToLowerInvariant());
         }
 
         [Fact]
@@ -74,7 +38,7 @@ namespace MeshyDB.SDK.Tests
             var accountName = Generator.RandomString(5);
             var client = new MeshyDB(accountName, Generator.RandomString(36));
 
-            Assert.Equal($"https://auth.meshydb.com/{accountName}".ToLower(), client.GetAuthUrl().ToLower());
+            Assert.Equal($"https://auth.meshydb.com/{accountName}".ToLowerInvariant(), client.GetAuthUrl().ToLowerInvariant());
         }
 
         [Fact]
@@ -248,57 +212,10 @@ namespace MeshyDB.SDK.Tests
 
             database.AuthenticationService = authService.Object;
 
-            var actual = database.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), Generator.RandomString(25))).ConfigureAwait(true).GetAwaiter().GetResult();
+            var actual = database.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5))).ConfigureAwait(true).GetAwaiter().GetResult();
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void ShouldRegisterUserAsyncThrowArgumentExceptionWithNullUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUserAsync(new RegisterUser(null, Generator.RandomString(5), Generator.RandomString(25))).ConfigureAwait(true).GetAwaiter().GetResult(); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserAsyncThrowArgumentExceptionWithEmptyUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUserAsync(new RegisterUser(string.Empty, Generator.RandomString(5), Generator.RandomString(25))).ConfigureAwait(true).GetAwaiter().GetResult(); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserAsyncThrowArgumentExceptionWithNullPassword()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), null, Generator.RandomString(25))).ConfigureAwait(true).GetAwaiter().GetResult(); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserAsyncThrowArgumentExceptionWithEmptyPassword()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), string.Empty, Generator.RandomString(25))).ConfigureAwait(true).GetAwaiter().GetResult(); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserAsyncThrowArgumentExceptionWithNullPhoneNumber()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), null)).ConfigureAwait(true).GetAwaiter().GetResult(); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserAsyncThrowArgumentExceptionWithEmptyPhoneNumber()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), string.Empty)).ConfigureAwait(true).GetAwaiter().GetResult(); });
-        }
         #endregion
 
         #region RegisterUser
@@ -315,57 +232,10 @@ namespace MeshyDB.SDK.Tests
 
             database.AuthenticationService = authService.Object;
 
-            var actual = database.RegisterUser(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), Generator.RandomString(25)));
+            var actual = database.RegisterUser(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5)));
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void ShouldRegisterUserThrowArgumentExceptionWithNullUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUser(new RegisterUser(null, Generator.RandomString(5), Generator.RandomString(25))); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserThrowArgumentExceptionWithEmptyUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUser(new RegisterUser(string.Empty, Generator.RandomString(5), Generator.RandomString(25))); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserThrowArgumentExceptionWithNullPassword()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUser(new RegisterUser(Generator.RandomString(5), null, Generator.RandomString(25))); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserThrowArgumentExceptionWithEmptyPassword()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUser(new RegisterUser(Generator.RandomString(5), string.Empty, Generator.RandomString(25))); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserThrowArgumentExceptionWithNullPhoneNumber()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUser(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), null)); });
-        }
-
-        [Fact]
-        public void ShouldRegisterUserThrowArgumentExceptionWithEmptyPhoneNumber()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => { database.RegisterUser(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), string.Empty)); });
-        }
         #endregion RegisterUser
 
         #region ForgotPasswordAsync
@@ -378,11 +248,11 @@ namespace MeshyDB.SDK.Tests
             var expected = new UserVerificationHash();
             var passedUsername = string.Empty;
 
-            authService.Setup(x => x.ForgotPasswordAsync(It.IsAny<string>()))
-                .Callback<string>((sentUsername) =>
-                {
-                    passedUsername = sentUsername;
-                })
+            authService.Setup(x => x.ForgotPasswordAsync(It.IsAny<string>(), It.IsAny<int>()))
+                .Callback<string, int>((sentUsername, sentAttempt) =>
+                 {
+                     passedUsername = sentUsername;
+                 })
                 .Returns(() =>
                 {
                     return Task.FromResult(expected);
@@ -396,21 +266,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(username, passedUsername);
         }
 
-        [Fact]
-        public void ShouldForgotPasswordAsyncThrowArgumentExceptionWithNullUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => database.ForgotPasswordAsync(null).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldForgotPasswordAsyncThrowArgumentExceptionWithEmptyUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => database.ForgotPasswordAsync(string.Empty).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
         #endregion
 
         #region ForgotPassword
@@ -423,11 +278,11 @@ namespace MeshyDB.SDK.Tests
             var expected = new UserVerificationHash();
             var passedUsername = string.Empty;
 
-            authService.Setup(x => x.ForgotPasswordAsync(It.IsAny<string>()))
-                .Callback<string>((sentUsername) =>
-                {
-                    passedUsername = sentUsername;
-                })
+            authService.Setup(x => x.ForgotPasswordAsync(It.IsAny<string>(), It.IsAny<int>()))
+                .Callback<string, int>((sentUsername, sentAttempt) =>
+                 {
+                     passedUsername = sentUsername;
+                 })
                 .Returns(() =>
                 {
                     return Task.FromResult(expected);
@@ -441,21 +296,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(username, passedUsername);
         }
 
-        [Fact]
-        public void ShouldForgotPasswordThrowArgumentExceptionWithNullUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => database.ForgotPassword(null));
-        }
-
-        [Fact]
-        public void ShouldForgotPasswordThrowArgumentExceptionWithEmptyUsername()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            Assert.Throws<ArgumentException>(() => database.ForgotPassword(string.Empty));
-        }
         #endregion
 
         #region ResetPasswordAsync
@@ -487,7 +327,7 @@ namespace MeshyDB.SDK.Tests
                 Hint = Generator.RandomString(5),
                 NewPassword = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 1234
+                VerificationCode = Generator.RandomString(5)
             };
 
             database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult();
@@ -497,120 +337,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(resetPassword.NewPassword, passedResetPassword.NewPassword);
             Assert.Equal(resetPassword.Username, passedResetPassword.Username);
             Assert.Equal(resetPassword.VerificationCode, passedResetPassword.VerificationCode);
-        }
-
-        [Fact]
-        public void ShouldResetPasswordAsyncThrowArgumentExceptionWhenUsernameIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = null,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldResetPasswordAsyncThrowArgumentExceptionWhenUsernameIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = string.Empty,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldResetPasswordAsyncThrowArgumentExceptionWhenHashIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = null,
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldResetPasswordAsyncThrowArgumentExceptionWhenHashIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = string.Empty,
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldResetPasswordAsyncThrowArgumentExceptionWhenNewPasswordIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = null,
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldResetPasswordAsyncThrowArgumentExceptionWhenNewPasswordIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = string.Empty,
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult());
         }
 
         #endregion
@@ -644,7 +370,7 @@ namespace MeshyDB.SDK.Tests
                 Hint = Generator.RandomString(5),
                 NewPassword = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 1234
+                VerificationCode = Generator.RandomString(5)
             };
 
             database.ResetPassword(resetPassword);
@@ -656,119 +382,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(resetPassword.VerificationCode, passedResetPassword.VerificationCode);
         }
 
-        [Fact]
-        public void ShouldResetPasswordThrowArgumentExceptionWhenUsernameIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = null,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPassword(resetPassword));
-        }
-
-        [Fact]
-        public void ShouldResetPasswordThrowArgumentExceptionWhenUsernameIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = string.Empty,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPassword(resetPassword));
-        }
-
-        [Fact]
-        public void ShouldResetPasswordThrowArgumentExceptionWhenHashIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = null,
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPassword(resetPassword));
-        }
-
-        [Fact]
-        public void ShouldResetPasswordThrowArgumentExceptionWhenHashIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = string.Empty,
-                Hint = Generator.RandomString(5),
-                NewPassword = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPassword(resetPassword));
-        }
-
-        [Fact]
-        public void ShouldResetPasswordThrowArgumentExceptionWhenNewPasswordIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = null,
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPassword(resetPassword));
-        }
-
-        [Fact]
-        public void ShouldResetPasswordThrowArgumentExceptionWhenNewPasswordIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var resetPassword = new ResetPassword()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                NewPassword = string.Empty,
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.ResetPassword(resetPassword));
-        }
         #endregion
 
         #region VerifyAsync
@@ -799,7 +412,7 @@ namespace MeshyDB.SDK.Tests
                 Hash = Generator.RandomString(5),
                 Hint = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 1234
+                VerificationCode = Generator.RandomString(5)
             };
 
             database.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult();
@@ -808,78 +421,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);
             Assert.Equal(userVerificationCheck.Username, passedUserVerificationCheck.Username);
             Assert.Equal(userVerificationCheck.VerificationCode, passedUserVerificationCheck.VerificationCode);
-        }
-
-        [Fact]
-        public void ShouldVerifyAsyncThrowArgumentExceptionWhenUsernameIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = null,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldVerifyAsyncThrowArgumentExceptionWhenUsernameIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = string.Empty,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldVerifyAsyncThrowArgumentExceptionWhenHashIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = null,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldVerifyAsyncThrowArgumentExceptionWhenHashIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = string.Empty,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
         }
 
         #endregion
@@ -912,7 +453,7 @@ namespace MeshyDB.SDK.Tests
                 Hash = Generator.RandomString(5),
                 Hint = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 1234
+                VerificationCode = Generator.RandomString(5)
             };
 
             database.Verify(userVerificationCheck);
@@ -921,78 +462,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);
             Assert.Equal(userVerificationCheck.Username, passedUserVerificationCheck.Username);
             Assert.Equal(userVerificationCheck.VerificationCode, passedUserVerificationCheck.VerificationCode);
-        }
-
-        [Fact]
-        public void ShouldVerifyThrowArgumentExceptionWhenUsernameIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = null,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.Verify(userVerificationCheck));
-        }
-
-        [Fact]
-        public void ShouldVerifyThrowArgumentExceptionWhenUsernameIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = string.Empty,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.Verify(userVerificationCheck));
-        }
-
-        [Fact]
-        public void ShouldVerifyThrowArgumentExceptionWhenHashIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = null,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.Verify(userVerificationCheck));
-        }
-
-        [Fact]
-        public void ShouldVerifyThrowArgumentExceptionWhenHashIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = string.Empty,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.Verify(userVerificationCheck));
         }
 
         #endregion
@@ -1025,7 +494,7 @@ namespace MeshyDB.SDK.Tests
                 Hash = Generator.RandomString(5),
                 Hint = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 1234
+                VerificationCode = Generator.RandomString(5)
             };
 
             var result = database.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult();
@@ -1035,78 +504,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);
             Assert.Equal(userVerificationCheck.Username, passedUserVerificationCheck.Username);
             Assert.Equal(userVerificationCheck.VerificationCode, passedUserVerificationCheck.VerificationCode);
-        }
-
-        [Fact]
-        public void ShouldCheckHashAsyncThrowArgumentExceptionWhenUsernameIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = null,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldCheckHashAsyncThrowArgumentExceptionWhenUsernameIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = string.Empty,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldCheckHashAsyncThrowArgumentExceptionWhenHashIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = null,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
-        }
-
-        [Fact]
-        public void ShouldCheckHashAsyncThrowArgumentExceptionWhenHashIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = string.Empty,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult());
         }
 
         #endregion
@@ -1139,7 +536,7 @@ namespace MeshyDB.SDK.Tests
                 Hash = Generator.RandomString(5),
                 Hint = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 1234
+                VerificationCode = Generator.RandomString(5)
             };
 
             var result = database.CheckHash(userVerificationCheck);
@@ -1149,78 +546,6 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);
             Assert.Equal(userVerificationCheck.Username, passedUserVerificationCheck.Username);
             Assert.Equal(userVerificationCheck.VerificationCode, passedUserVerificationCheck.VerificationCode);
-        }
-
-        [Fact]
-        public void ShouldCheckHashThrowArgumentExceptionWhenUsernameIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = null,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHash(userVerificationCheck));
-        }
-
-        [Fact]
-        public void ShouldCheckHashThrowArgumentExceptionWhenUsernameIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = Generator.RandomString(5),
-                Hint = Generator.RandomString(5),
-                Username = string.Empty,
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHash(userVerificationCheck));
-        }
-
-        [Fact]
-        public void ShouldCheckHashThrowArgumentExceptionWhenHashIsNull()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = null,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHash(userVerificationCheck));
-        }
-
-        [Fact]
-        public void ShouldCheckHashThrowArgumentExceptionWhenHashIsEmpty()
-        {
-            var database = new MeshyDB(Generator.RandomString(5), Generator.RandomString(36));
-
-            var now = DateTimeOffset.Now;
-            var userVerificationCheck = new UserVerificationCheck()
-            {
-                Expires = now,
-                Hash = string.Empty,
-                Hint = Generator.RandomString(5),
-                Username = Generator.RandomString(5),
-                VerificationCode = 1234
-            };
-
-            Assert.Throws<ArgumentException>(() => database.CheckHash(userVerificationCheck));
         }
 
         #endregion

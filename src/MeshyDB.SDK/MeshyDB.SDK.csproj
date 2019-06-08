@@ -30,7 +30,7 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <Optimize>false</Optimize>
-    <DocumentationFile>D:\GIT\MeshyDB.SDK-csharp\src\MeshyDB.SDK\MeshyDB.SDK.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   
   <ItemGroup>

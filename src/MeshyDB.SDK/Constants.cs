@@ -1,5 +1,5 @@
-﻿// <copyright file="Constants.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="Constants.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 namespace MeshyDB.SDK
@@ -12,12 +12,12 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Defines Template Api Url with client location for replacement when account name is supplied.
         /// </summary>
-        internal const string TemplateApiUrl = "https://api.meshydb.com/{accountName}";
+        internal const string TemplateApiUrl = "http://localhost:59487/{accountName}";
 
         /// <summary>
         /// Defines Template Auth Url with client location for replacement when account name is supplied.
         /// </summary>
-        internal const string TemplateAuthUrl = "https://auth.meshydb.com/{accountName}";
+        internal const string TemplateAuthUrl = "http://localhost:15333/{accountName}";
 
         /// <summary>
         /// Defines Api scoes for user when generating token.

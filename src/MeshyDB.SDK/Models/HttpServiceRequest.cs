@@ -1,5 +1,5 @@
-﻿// <copyright file="HttpServiceRequest.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="HttpServiceRequest.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -50,11 +50,11 @@ namespace MeshyDB.SDK.Models
         public RequestDataFormat RequestDataFormat { get; set; } = RequestDataFormat.Json;
 
         /// <summary>
-        /// Gets or sets headers to be added to request.
+        /// Gets headers to be added to request.
         /// </summary>
         /// <remarks>
         /// Example would be Authentication.
         /// </remarks>
-        public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
+        public IDictionary<string, string> Headers { get; private set; } = new Dictionary<string, string>();
     }
 }

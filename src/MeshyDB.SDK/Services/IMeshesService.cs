@@ -1,5 +1,5 @@
-﻿// <copyright file="IMeshesService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="IMeshesService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -23,7 +23,7 @@ namespace MeshyDB.SDK.Services
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
         /// <param name="id">Identifier of mesh record to be retrieved.</param>
         /// <returns>Data result of request.</returns>
-        TModel Get<TModel>(string id)
+        TModel GetData<TModel>(string id)
             where TModel : MeshData;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace MeshyDB.SDK.Services
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
         /// <param name="id">Identifier of mesh record to be retrieved.</param>
         /// <returns>Data result of request.</returns>
-        Task<TModel> GetAsync<TModel>(string id)
+        Task<TModel> GetDataAsync<TModel>(string id)
             where TModel : MeshData;
 
         /// <summary>

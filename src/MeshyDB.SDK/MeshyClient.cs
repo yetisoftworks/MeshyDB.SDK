@@ -1,5 +1,5 @@
-﻿// <copyright file="MeshyClient.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="MeshyClient.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -26,11 +26,6 @@ namespace MeshyDB.SDK
             this.TokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
             this.RequestService = requestService ?? throw new ArgumentNullException(nameof(requestService));
             this.AuthenticationId = authenticationId ?? throw new ArgumentNullException(nameof(authenticationId));
-
-            if (string.IsNullOrWhiteSpace(authenticationId))
-            {
-                throw new ArgumentException(nameof(authenticationId));
-            }
 
             this.Meshes = new MeshesService(requestService);
             this.Users = new UsersService(requestService);
@@ -64,9 +59,9 @@ namespace MeshyDB.SDK
         internal IRequestService RequestService { get; set; }
 
         /// <inheritdoc/>
-        public async Task SignoutAsync()
+        public Task SignoutAsync()
         {
-            await this.TokenService.SignoutAsync(this.AuthenticationId);
+            return this.TokenService.SignoutAsync(this.AuthenticationId);
         }
 
         /// <inheritdoc/>
@@ -78,15 +73,15 @@ namespace MeshyDB.SDK
         }
 
         /// <inheritdoc/>
-        public async Task UpdatePasswordAsync(string previousPassword, string newPassword)
+        public Task UpdatePasswordAsync(string previousPassword, string newPassword)
         {
-            await this.AuthenticationService.UpdatePasswordAsync(previousPassword, newPassword);
+            return this.AuthenticationService.UpdatePasswordAsync(previousPassword, newPassword);
         }
 
         /// <inheritdoc/>
-        public async Task<string> RetrievePersistanceTokenAsync()
+        public Task<string> RetrievePersistanceTokenAsync()
         {
-            return await this.AuthenticationService.RetrievePersistanceTokenAsync(this.AuthenticationId);
+            return this.AuthenticationService.RetrievePersistanceTokenAsync(this.AuthenticationId);
         }
 
         /// <inheritdoc/>
@@ -114,9 +109,9 @@ namespace MeshyDB.SDK
         }
 
         /// <inheritdoc/>
-        public async Task<IDictionary<string, string>> GetMyUserInfoAsync()
+        public Task<IDictionary<string, string>> GetMyUserInfoAsync()
         {
-            return await this.TokenService.GetUserInfoAsync(this.AuthenticationId);
+            return this.TokenService.GetUserInfoAsync(this.AuthenticationId);
         }
     }
 }

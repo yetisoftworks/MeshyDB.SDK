@@ -1,5 +1,5 @@
-﻿// <copyright file="IAuthenticationService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="IAuthenticationService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -48,8 +48,9 @@ namespace MeshyDB.SDK.Services
         /// Forgot Password for user.
         /// </summary>
         /// <param name="username">User name to request a reset.</param>
+        /// <param name="attempt">Forgot password attempt.</param>
         /// <returns>Hash object to verify parity in requests.</returns>
-        Task<UserVerificationHash> ForgotPasswordAsync(string username);
+        Task<UserVerificationHash> ForgotPasswordAsync(string username, int attempt);
 
         /// <summary>
         /// Reset password for user parity hash object.

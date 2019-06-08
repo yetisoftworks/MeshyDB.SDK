@@ -1,5 +1,5 @@
-﻿// <copyright file="RequestService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="RequestService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -56,33 +56,33 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task<T> GetRequest<T>(string path)
+        public Task<T> GetRequest<T>(string path)
         {
-            return await this.GetRequest<T>(path, null);
+            return this.GetRequest<T>(path, null);
         }
 
         /// <inheritdoc/>
-        public async Task<T> GetRequest<T>(string path, IDictionary<string, string> headers)
+        public Task<T> GetRequest<T>(string path, IDictionary<string, string> headers)
         {
-            var request = await this.GetDefaultRequestMessageAsync(path, HttpMethod.Get, headers);
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Get, headers).ConfigureAwait(true).GetAwaiter().GetResult();
 
-            return await this.SendRequest<T>(request);
+            return this.SendRequest<T>(request);
         }
 
         /// <inheritdoc/>
-        public async Task<T> DeleteRequest<T>(string path)
+        public Task<T> DeleteRequest<T>(string path)
         {
-            var request = await this.GetDefaultRequestMessageAsync(path, HttpMethod.Delete);
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Delete).ConfigureAwait(true).GetAwaiter().GetResult();
 
-            return await this.SendRequest<T>(request);
+            return this.SendRequest<T>(request);
         }
 
         /// <inheritdoc/>
-        public async Task<T> PostRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json)
+        public Task<T> PostRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json)
         {
-            var request = await this.GetDefaultRequestMessageAsync(path, HttpMethod.Post);
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Post).ConfigureAwait(true).GetAwaiter().GetResult();
 
-            request.Content = await this.GetContent(model, format);
+            request.Content = this.GetContent(model, format).ConfigureAwait(true).GetAwaiter().GetResult();
             request.RequestDataFormat = format;
 
             if (format == RequestDataFormat.Form)
@@ -90,31 +90,31 @@ namespace MeshyDB.SDK.Services
                 request.ContentType = "application/x-www-form-urlencoded";
             }
 
-            return await this.SendRequest<T>(request);
+            return this.SendRequest<T>(request);
         }
 
         /// <inheritdoc/>
-        public async Task<T> PutRequest<T>(string path, object model)
+        public Task<T> PutRequest<T>(string path, object model)
         {
-            var request = await this.GetDefaultRequestMessageAsync(path, HttpMethod.Put);
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Put).ConfigureAwait(true).GetAwaiter().GetResult();
 
             request.Content = JsonConvert.SerializeObject(model, new JsonSerializerSettings()
             {
                 ContractResolver = new MeshyDBJsonContractResolver(),
             });
 
-            return await this.SendRequest<T>(request);
+            return this.SendRequest<T>(request);
         }
 
-        private async Task<string> GetContent<T>(T model, RequestDataFormat format)
+        private Task<string> GetContent<T>(T model, RequestDataFormat format)
         {
             switch (format)
             {
                 case RequestDataFormat.Json:
-                    return JsonConvert.SerializeObject(model, new JsonSerializerSettings()
+                    return Task.FromResult(JsonConvert.SerializeObject(model, new JsonSerializerSettings()
                     {
                         ContractResolver = new MeshyDBJsonContractResolver(),
-                    });
+                    }));
                 case RequestDataFormat.Form:
                     var content = new FormUrlEncodedContent(model.GetType()
                                          .GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -128,16 +128,16 @@ namespace MeshyDB.SDK.Services
 
                     content.Headers.ContentType.CharSet = Encoding.UTF8.BodyName;
 
-                    return await content.ReadAsStringAsync();
+                    return content.ReadAsStringAsync();
                 default:
-                    return null;
+                    return Task.FromResult<string>(null);
             }
         }
 
-        private async Task<HttpServiceRequest> GetDefaultRequestMessageAsync(string path, HttpMethod method = null, IDictionary<string, string> headers = null)
+        private Task<HttpServiceRequest> GetDefaultRequestMessageAsync(string path, HttpMethod method = null, IDictionary<string, string> headers = null)
         {
             var request = new HttpServiceRequest();
-            await this.PopulateHeadersAsync(request.Headers, headers);
+            this.PopulateHeadersAsync(request.Headers, headers);
 
             if (!Uri.TryCreate($"{this.baseUrl}/{path}", UriKind.Absolute, out var validatedUri))
             {
@@ -148,14 +148,14 @@ namespace MeshyDB.SDK.Services
             request.RequestUri = validatedUri;
             request.ContentType = "application/json";
 
-            return request;
+            return Task.FromResult(request);
         }
 
-        private async Task PopulateHeadersAsync(IDictionary<string, string> headers, IDictionary<string, string> overrideHeaders)
+        private void PopulateHeadersAsync(IDictionary<string, string> headers, IDictionary<string, string> overrideHeaders)
         {
             if (this.tokenService != null && !string.IsNullOrWhiteSpace(this.authenticationId))
             {
-                var token = await this.tokenService.GetAccessTokenAsync(this.authenticationId);
+                var token = this.tokenService.GetAccessTokenAsync(this.authenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     headers.Add("Authorization", $"Bearer {token}");
@@ -183,9 +183,9 @@ namespace MeshyDB.SDK.Services
             }
         }
 
-        private async Task<T> SendRequest<T>(HttpServiceRequest requestMessage)
+        private Task<T> SendRequest<T>(HttpServiceRequest requestMessage)
         {
-            return await this.httpService.SendRequestAsync<T>(requestMessage);
+            return this.httpService.SendRequestAsync<T>(requestMessage);
         }
     }
 }

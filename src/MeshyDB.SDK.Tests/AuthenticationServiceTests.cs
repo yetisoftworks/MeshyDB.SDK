@@ -204,14 +204,13 @@ namespace MeshyDB.SDK.Tests
 
             var service = new AuthenticationService(tokenService.Object, requestService.Object);
 
-            var user = new RegisterUser(Generator.RandomString(5), Generator.RandomString(5), Generator.RandomString(5));
+            var user = new RegisterUser(Generator.RandomString(5), Generator.RandomString(5));
 
             service.RegisterAsync(user).ConfigureAwait(true).GetAwaiter().GetResult();
 
             Assert.Equal("users/register", passedPath);
             Assert.Equal(user.Username, passedModel.Username);
             Assert.Equal(user.PhoneNumber, passedModel.PhoneNumber);
-            Assert.Equal(user.NewPassword, passedModel.NewPassword);
 
             tokenService.VerifyAll();
             requestService.VerifyAll();
@@ -283,7 +282,7 @@ namespace MeshyDB.SDK.Tests
                 Hint = Generator.RandomString(5),
                 NewPassword = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 32134
+                VerificationCode = Generator.RandomString(5)
             };
 
             service.ResetPasswordAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
@@ -329,7 +328,7 @@ namespace MeshyDB.SDK.Tests
                 Hash = Generator.RandomString(5),
                 Hint = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 32134
+                VerificationCode = Generator.RandomString(5)
             };
 
             service.VerifyAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
@@ -374,7 +373,7 @@ namespace MeshyDB.SDK.Tests
                 Hash = Generator.RandomString(5),
                 Hint = Generator.RandomString(5),
                 Username = Generator.RandomString(5),
-                VerificationCode = 32134
+                VerificationCode = Generator.RandomString(5)
             };
 
             service.CheckHashAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();

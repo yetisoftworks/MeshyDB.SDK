@@ -1,5 +1,5 @@
-﻿// <copyright file="UsersService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="UsersService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -31,15 +31,15 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task<User> GetSelfAsync()
+        public Task<User> GetSelfAsync()
         {
-            return await this.requestService.GetRequest<User>("users/me");
+            return this.requestService.GetRequest<User>("users/me");
         }
 
         /// <inheritdoc/>
-        public async Task<User> UpdateSelfAsync(User user)
+        public Task<User> UpdateSelfAsync(User user)
         {
-            return await this.requestService.PutRequest<User>($"users/me", user);
+            return this.requestService.PutRequest<User>($"users/me", user);
         }
 
         /// <inheritdoc/>

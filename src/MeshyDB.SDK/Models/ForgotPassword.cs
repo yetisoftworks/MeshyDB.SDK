@@ -1,5 +1,5 @@
-﻿// <copyright file="ForgotPassword.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="ForgotPassword.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -17,5 +17,10 @@ namespace MeshyDB.SDK.Models
         /// Gets or sets username that is requested which a password was forgotten.
         /// </summary>
         public string Username { get; set; }
+
+        /// <summary>
+        /// Gets or sets attempt number of forgot password.
+        /// </summary>
+        public int Attempt { get; set; }
     }
 }

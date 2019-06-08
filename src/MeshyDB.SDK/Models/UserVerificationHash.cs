@@ -1,5 +1,5 @@
-﻿// <copyright file="UserVerificationHash.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="UserVerificationHash.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -30,6 +30,7 @@ namespace MeshyDB.SDK.Models
             this.Expires = userVerificationHash.Expires;
             this.Hint = userVerificationHash.Hint;
             this.Hash = userVerificationHash.Hash;
+            this.Attempt = userVerificationHash.Attempt;
         }
 
         /// <summary>

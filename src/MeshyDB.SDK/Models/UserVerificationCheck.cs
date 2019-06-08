@@ -1,5 +1,5 @@
-﻿// <copyright file="UserVerificationCheck.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="UserVerificationCheck.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -23,19 +23,19 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="UserVerificationCheck"/> class.
         /// </summary>
-        /// <param name="userVerificationCheck">User verfication hash to copy into a new instance.</param>
-        public UserVerificationCheck(UserVerificationCheck userVerificationCheck)
+        /// <param name="userVerificationHash">User verfication hash to copy into a new instance.</param>
+        public UserVerificationCheck(UserVerificationHash userVerificationHash)
         {
-            this.Username = userVerificationCheck.Username;
-            this.Expires = userVerificationCheck.Expires;
-            this.Hint = userVerificationCheck.Hint;
-            this.Hash = userVerificationCheck.Hash;
-            this.VerificationCode = userVerificationCheck.VerificationCode;
+            this.Username = userVerificationHash.Username;
+            this.Expires = userVerificationHash.Expires;
+            this.Hint = userVerificationHash.Hint;
+            this.Hash = userVerificationHash.Hash;
+            this.Attempt = userVerificationHash.Attempt;
         }
 
         /// <summary>
         /// Gets or sets verification code.
         /// </summary>
-        public int VerificationCode { get; set; }
+        public string VerificationCode { get; set; }
     }
 }

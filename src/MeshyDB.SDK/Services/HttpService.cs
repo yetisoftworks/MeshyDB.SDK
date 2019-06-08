@@ -1,5 +1,5 @@
-﻿// <copyright file="HttpService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="HttpService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
@@ -19,35 +19,35 @@ namespace MeshyDB.SDK.Services
     /// </summary>
     internal class HttpService : IHttpService
     {
-        private readonly HttpClient client = new HttpClient();
-
         /// <inheritdoc/>
         public async Task<T> SendRequestAsync<T>(HttpServiceRequest request)
         {
-            var httpClient = this.client;
-            var message = new HttpRequestMessage
+            using (var httpClient = new HttpClient())
             {
-                Method = request.Method,
-            };
+                var message = new HttpRequestMessage
+                {
+                    Method = request.Method,
+                };
 
-            message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            message.RequestUri = request.RequestUri;
+                message.RequestUri = request.RequestUri;
 
-            if (!string.IsNullOrEmpty(request.Content))
-            {
-                message.Content = new StringContent(request.Content, Encoding.UTF8, request.ContentType);
+                if (!string.IsNullOrEmpty(request.Content))
+                {
+                    message.Content = new StringContent(request.Content, Encoding.UTF8, request.ContentType);
+                }
+
+                foreach (var item in request.Headers)
+                {
+                    message.Headers.Add(item.Key, item.Value);
+                }
+
+                var response = await httpClient.SendAsync(message).ConfigureAwait(true);
+                response = response.EnsureSuccessStatusCode();
+                var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+                return JsonConvert.DeserializeObject<T>(responseString);
             }
-
-            foreach (var item in request.Headers)
-            {
-                message.Headers.Add(item.Key, item.Value);
-            }
-
-            var response = await httpClient.SendAsync(message);
-            response = response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(responseString);
         }
     }
 }

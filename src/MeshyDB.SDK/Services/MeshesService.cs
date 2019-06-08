@@ -1,9 +1,10 @@
-﻿// <copyright file="MeshesService.cs" company="Yetisoftworks LLC">
-// Copyright (c) Yetisoftworks LLC. All rights reserved.
+﻿// <copyright file="MeshesService.cs" company="Yeti Softworks LLC">
+// Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
@@ -33,25 +34,25 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task<TModel> GetAsync<TModel>(string id)
+        public Task<TModel> GetDataAsync<TModel>(string id)
             where TModel : MeshData
         {
-            return await this.requestService.GetRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}/{id}");
+            return this.requestService.GetRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}/{id}");
         }
 
         /// <inheritdoc/>
-        public async Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 200)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData
         {
             var encodedUrl = WebUtility.UrlEncode(filter);
 
             var encodedSort = WebUtility.UrlEncode(sort);
 
-            return await this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedSort}&page={page}&pageSize={pageSize}");
+            return this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedSort}&page={page}&pageSize={pageSize}");
         }
 
         /// <inheritdoc/>
-        public async Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, IEnumerable<KeyValuePair<string, Enums.SortDirection>> sort = null, int page = 1, int pageSize = 200)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, IEnumerable<KeyValuePair<string, Enums.SortDirection>> sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData
         {
             var mongoFilter = Builders<TModel>.Filter.Where(filter).Render(BsonSerializer.SerializerRegistry.GetSerializer<TModel>(), BsonSerializer.SerializerRegistry);
@@ -65,58 +66,58 @@ namespace MeshyDB.SDK.Services
                 encodedSort = WebUtility.UrlEncode($"{{ {string.Join(",", sort.Select(x => $"{x.Key}:{(int)x.Value}"))} }}");
             }
 
-            return await this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedSort}&page={page}&pageSize={pageSize}");
+            return this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedSort}&page={page}&pageSize={pageSize}");
         }
 
         /// <inheritdoc/>
-        public async Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, IEnumerable<KeyValuePair<string, Enums.SortDirection>> sort = null, int page = 1, int pageSize = 200)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, IEnumerable<KeyValuePair<string, Enums.SortDirection>> sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData
         {
             var filter = PredicateBuilder.CombineExpressions(filters);
 
-            return await this.SearchAsync(filter, sort, page, pageSize);
+            return this.SearchAsync(filter, sort, page, pageSize);
         }
 
         /// <inheritdoc/>
-        public async Task<TModel> CreateAsync<TModel>(TModel model)
+        public Task<TModel> CreateAsync<TModel>(TModel model)
             where TModel : MeshData
         {
-            return await this.requestService.PostRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}", model);
+            return this.requestService.PostRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}", model);
         }
 
         /// <inheritdoc/>
-        public async Task<TModel> UpdateAsync<TModel>(string id, TModel model)
+        public Task<TModel> UpdateAsync<TModel>(string id, TModel model)
             where TModel : MeshData
         {
-            return await this.requestService.PutRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}/{id}", model);
+            return this.requestService.PutRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}/{id}", model);
         }
 
         /// <inheritdoc/>
-        public async Task<TModel> UpdateAsync<TModel>(TModel model)
+        public Task<TModel> UpdateAsync<TModel>(TModel model)
             where TModel : MeshData
         {
-            return await this.requestService.PutRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}/{model.Id}", model);
+            return this.requestService.PutRequest<TModel>($"meshes/{this.GetMeshName<TModel>()}/{model.Id}", model);
         }
 
         /// <inheritdoc/>
-        public async Task DeleteAsync<TModel>(string id)
+        public Task DeleteAsync<TModel>(string id)
             where TModel : MeshData
         {
-            await this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}/{id}");
+            return this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}/{id}");
         }
 
         /// <inheritdoc/>
-        public async Task DeleteAsync<TModel>(TModel model)
+        public Task DeleteAsync<TModel>(TModel model)
             where TModel : MeshData
         {
-            await this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}/{model.Id}");
+            return this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}/{model.Id}");
         }
 
         /// <inheritdoc/>
-        public TModel Get<TModel>(string id)
+        public TModel GetData<TModel>(string id)
             where TModel : MeshData
         {
-            var t = this.GetAsync<TModel>(id);
+            var t = this.GetDataAsync<TModel>(id);
             return t.ConfigureAwait(true).GetAwaiter().GetResult();
         }
 
@@ -194,16 +195,18 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task DeleteAsync<TModel>()
+        public Task DeleteAsync<TModel>()
             where TModel : MeshData
         {
-            await this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}");
+            return this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}");
         }
 
         private string GetMeshName<TModel>()
         {
             var meshName = (MeshNameAttribute)Attribute.GetCustomAttribute(typeof(TModel), typeof(MeshNameAttribute));
-            return meshName?.Name.ToLower() ?? typeof(TModel).Name.ToLower();
+            #pragma warning disable CA1308 // Normalize strings to uppercase
+            return meshName?.Name.ToLowerInvariant() ?? typeof(TModel).Name.ToLowerInvariant();
+            #pragma warning restore CA1308 // Normalize strings to uppercase
         }
     }
 }
