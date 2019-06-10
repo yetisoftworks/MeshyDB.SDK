@@ -13,7 +13,7 @@ Filter Mesh data from collection based on query parameters.
    
       .. code-block:: http
 
-         GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
+         GET https://api.meshydb.com/{accountName}/meshes/{mesh}?filter={filter}&
                                                                orderby={orderby}&
                                                                page={page}&
                                                                pageSize={pageSize} HTTP/1.1
@@ -26,7 +26,7 @@ Filter Mesh data from collection based on query parameters.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -45,7 +45,7 @@ Filter Mesh data from collection based on query parameters.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
@@ -54,7 +54,7 @@ Filter Mesh data from collection based on query parameters.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -74,7 +74,7 @@ Filter Mesh data from collection based on query parameters.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
 
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -91,7 +91,7 @@ Filter Mesh data from collection based on query parameters.
       |parameters|
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -117,7 +117,7 @@ Example Response:
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
                  "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
                }],
     "totalRecords": 1
   }

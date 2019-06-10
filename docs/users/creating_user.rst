@@ -14,7 +14,7 @@ Creates a new user that can log into the system.
    
       .. code-block:: http
       
-        POST https://api.meshydb.com/{clientKey}/users HTTP/1.1
+        POST https://api.meshydb.com/{accountName}/users HTTP/1.1
         Authentication: Bearer {access_token}
         Content-Type: application/json
         tenant: {tenant}
@@ -38,7 +38,7 @@ Creates a new user that can log into the system.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token  : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -65,7 +65,7 @@ Creates a new user that can log into the system.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(clientKey, tenant, publicKey);
+        var database = new MeshyDB(accountName, tenant, publicKey);
 
         var user = new NewUser();
 
@@ -75,7 +75,7 @@ Creates a new user that can log into the system.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -102,7 +102,7 @@ Creates a new user that can log into the system.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.createUser({
                                  username: username,
@@ -121,7 +121,7 @@ Creates a new user that can log into the system.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

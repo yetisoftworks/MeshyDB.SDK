@@ -22,7 +22,7 @@ Let's log in using our MeshyDB credentials.
    
       .. code-block:: http
 
-         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
+         POST https://auth.meshydb.com/{accountName}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
          tenant: {tenant}
          
@@ -38,7 +38,7 @@ Let's log in using our MeshyDB credentials.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -71,7 +71,7 @@ The data object can whatever information you would like to capture. The followin
    
       .. code-block:: http
 
-         POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
+         POST https://api.meshydb.com/{accountName}/meshes/{mesh} HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
          tenant: {tenant}
@@ -85,7 +85,7 @@ The data object can whatever information you would like to capture. The followin
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey: string
+      accountName: string
          Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
@@ -100,7 +100,7 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
     "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
   
 -----------
@@ -114,7 +114,7 @@ If we need to make a modificaiton let's update our Mesh!
    
       .. code-block:: http
 
-       PUT https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id}  HTTP/1.1
+       PUT https://api.meshydb.com/{accountName}/meshes/{mesh}/{id}  HTTP/1.1
        Authentication: Bearer {access_token}
        Content-Type: application/json
        tenant: {tenant}
@@ -128,7 +128,7 @@ If we need to make a modificaiton let's update our Mesh!
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey: string
+      accountName: string
          Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
@@ -145,7 +145,7 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
     "lastName": "Bobberson",
-    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 
 -----------
@@ -159,7 +159,7 @@ Let's see if we can find Bobbo.
    
       .. code-block:: http
 
-         GET https://api.meshydb.com/{clientKey}/meshes/{mesh}?filter={filter}&
+         GET https://api.meshydb.com/{accountName}/meshes/{mesh}?filter={filter}&
                                                                orderby={orderby}&
                                                                page={page}&
                                                                pageSize={pageSize} HTTP/1.1
@@ -172,7 +172,7 @@ Let's see if we can find Bobbo.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey: string
+      accountName: string
          Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
@@ -198,7 +198,7 @@ Example Response:
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
                  "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
                }],
     "totalRecords": 1
   }
@@ -214,7 +214,7 @@ We are now done with our data, so let us clean up after ourselves.
    
       .. code-block:: http
       
-         DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
+         DELETE https://api.meshydb.com/{accountName}/meshes/{mesh}/{id} HTTP/1.1
          Authentication: Bearer {access_token}
          tenant: {tenant}
          
@@ -222,7 +222,7 @@ We are now done with our data, so let us clean up after ourselves.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey: string
+      accountName: string
          Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Login`_.
@@ -242,11 +242,11 @@ Now the user is complete. Let us sign out so someone else can have a try.
    
       .. sourcecode:: http
 
-         POST https://auth.meshydb.com/{clientKey}/connect/revocation HTTP/1.1
+         POST https://auth.meshydb.com/{accountName}/connect/revocation HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
          tenant: {tenant}
          
-           client_id={clientKey}&
+           client_id={accountName}&
            grant_type=refresh_token&
            token={refresh_token}
 
@@ -257,7 +257,7 @@ Now the user is complete. Let us sign out so someone else can have a try.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey: string
+      accountName: string
          Indicates which account you are connecting for authentication.
       refresh_token: string
         Token to allow reauthorization with MeshyDB after the access token expires requested during `Login`_.

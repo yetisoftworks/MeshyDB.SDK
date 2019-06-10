@@ -14,7 +14,7 @@ Retrieve user information.
    
       .. code-block:: http
       
-        GET https://auth.meshydb.com/{clientKey}/connect/userinfo HTTP/1.1
+        GET https://auth.meshydb.com/{accountName}/connect/userinfo HTTP/1.1
         Authentication: Bearer {access_token}
         tenant: {tenant}
          
@@ -22,7 +22,7 @@ Retrieve user information.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token  : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -31,7 +31,7 @@ Retrieve user information.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(clientKey, tenant, publicKey);
+        var database = new MeshyDB(accountName, tenant, publicKey);
         var client = await database.LoginWithAnonymouslyAsync();
 
         var userInfo = await client.GetMyUserInfoAsync();
@@ -40,7 +40,7 @@ Retrieve user information.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -50,7 +50,7 @@ Retrieve user information.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -61,7 +61,7 @@ Retrieve user information.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

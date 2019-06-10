@@ -13,7 +13,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
    
       .. code-block:: http
 
-         POST https://api.meshydb.com/{clientKey}/meshes/{mesh} HTTP/1.1
+         POST https://api.meshydb.com/{accountName}/meshes/{mesh} HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
          tenant: {tenant}
@@ -27,7 +27,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -45,7 +45,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
            public string LastName { get; set; }
          }
 
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
          
          var person = await client.Meshes.CreateAsync(new Person(){
@@ -57,7 +57,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -68,7 +68,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
 
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -84,7 +84,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -99,5 +99,5 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
     "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }

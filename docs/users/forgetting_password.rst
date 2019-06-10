@@ -13,7 +13,7 @@ Creates a request for password reset that must have the matching data to reset t
    
       .. code-block:: http
       
-         POST https://api.meshydb.com/{clientKey}/users/forgotpassword HTTP/1.1
+         POST https://api.meshydb.com/{accountName}/users/forgotpassword HTTP/1.1
          Content-Type: application/json
          tenant: {tenant}
          
@@ -25,7 +25,7 @@ Creates a request for password reset that must have the matching data to reset t
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       username : string
         User name to be reset.
@@ -34,7 +34,7 @@ Creates a request for password reset that must have the matching data to reset t
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
 
          await database.ForgotPasswordAsync(username);
 
@@ -42,7 +42,7 @@ Creates a request for password reset that must have the matching data to reset t
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -54,7 +54,7 @@ Creates a request for password reset that must have the matching data to reset t
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.forgotPassword(username)
                  .then(function(passwordResetHash) { });
@@ -63,7 +63,7 @@ Creates a request for password reset that must have the matching data to reset t
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
