@@ -1,11 +1,12 @@
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
-   
--------------------
-Forgetting Password
--------------------
-Creates a request for password reset that must have the matching data to reset to ensure request parity.
+
+--------------------------
+Registering Anonymous User
+--------------------------
+Creates an anonymous user that can log into the system.
+
 
 .. tabs::
 
@@ -13,14 +14,13 @@ Creates a request for password reset that must have the matching data to reset t
    
       .. code-block:: http
       
-         POST https://api.meshydb.com/{accountName}/users/forgotpassword HTTP/1.1
-         Content-Type: application/json
-         tenant: {tenant}
+        POST https://api.meshydb.com/{accountName}/users/register/anonymous HTTP/1.1
+        Content-Type: application/json
+        tenant: {tenant}
          
-           {
-             "username": "username_testermctesterson",
-			 "attempt": 1
-           }
+          {
+            "username": "username_testermctesterson"
+          }
 
       |parameters|
       
@@ -28,18 +28,18 @@ Creates a request for password reset that must have the matching data to reset t
          Indicates which tenant data to use. If not provided, it will use the configured default.
       accountName : string
          Indicates which account you are connecting for authentication.
+      access_token  : string
+         Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
-        User name to be reset.
-	  attempt: int, required
-		Identifies which number of times of request.
+         Username of user.
 
    .. group-tab:: C#
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
+        var database = new MeshyDB(accountName, tenant, publicKey);
 
-         await database.ForgotPasswordAsync(username, attempt);
+        var anonymousUser = await database.LoginAnonymouslyAsync(userName);
 
       |parameters|
       
@@ -49,20 +49,17 @@ Creates a request for password reset that must have the matching data to reset t
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-      username : string
-        User name to be reset.
-	  attempt: int, required
-		Identifies which number of times of request.
-
-
+      username : string, optional
+         Username of user.
+		
    .. group-tab:: NodeJS
       
       .. code-block:: javascript
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.forgotPassword(username, attempt)
-                 .then(function(passwordResetHash) { });
+         database.registerAnonymousUser(username)
+                 .then(function(anonymousUser) { });
       
       |parameters|
 
@@ -72,20 +69,20 @@ Creates a request for password reset that must have the matching data to reset t
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-      username : string
-        User name to be reset.
-	  attempt: int, required
-		Identifies which number of times of request.
-
+      username : string, optional
+         Username of user.
          
 Example Response:
 
 .. code-block:: json
 
-	{
-		username: "username_testermctesterson",
-		attempt: 1:
-		hash: "1900-01-01T00:00:00.000Z",
-		expires: "1900-01-01T00:00:00.000Z",
-		hint: "xxxx"
-	}
+  {
+    "id": "5c78cc81dd870827a8e7b6c4",
+    "username": "username_testermctesterson",
+    "firstName": null,
+    "lastName": null,
+    "verified": false,
+    "isActive": true,
+    "phoneNumber": null,
+    "roles": []
+  }
