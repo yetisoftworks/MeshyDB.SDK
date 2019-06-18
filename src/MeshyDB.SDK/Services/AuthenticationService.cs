@@ -74,7 +74,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<string> LoginAnonymouslyAsync(string username = null)
+        public Task<User> RegisterAnonymousUserAsync(string username = null)
         {
             var generatedUsername = username ?? Guid.NewGuid().ToString();
             var anonymousUser = new AnonymousRegistration()
@@ -82,9 +82,13 @@ namespace MeshyDB.SDK.Services
                 Username = generatedUsername,
             };
 
-            this.requestService.PostRequest<User>("users/register/anonymous", anonymousUser).ConfigureAwait(false).GetAwaiter().GetResult();
+            return this.requestService.PostRequest<User>("users/register/anonymous", anonymousUser);
+        }
 
-            return this.LoginWithPasswordAsync(generatedUsername, "nopassword");
+        /// <inheritdoc/>
+        public Task<string> LoginAnonymouslyAsync(string username)
+        {
+            return this.LoginWithPasswordAsync(username, "nopassword");
         }
 
         /// <inheritdoc/>

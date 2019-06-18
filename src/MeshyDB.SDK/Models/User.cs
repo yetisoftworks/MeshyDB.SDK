@@ -52,5 +52,15 @@ namespace MeshyDB.SDK.Models
         /// Gets or sets the roles assigned.
         /// </summary>
         public IEnumerable<string> Roles { get; set; }
+
+        /// <summary>
+        /// Gets or sets the security questions for user.
+        /// </summary>
+        public IEnumerable<SecurityQuestion> SecurityQuestions { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether a user is anonymous.
+        /// </summary>
+        public bool Anonymous { get; set; }
     }
 }

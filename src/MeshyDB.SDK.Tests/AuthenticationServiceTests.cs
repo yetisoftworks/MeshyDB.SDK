@@ -409,21 +409,6 @@ namespace MeshyDB.SDK.Tests
                 });
 
             var requestService = new Mock<IRequestService>();
-            var passedPath = string.Empty;
-            var passedModel = default(AnonymousRegistration);
-            var passedFormat = RequestDataFormat.Json;
-
-            requestService.Setup(x => x.PostRequest<User>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
-                .Callback<string, object, RequestDataFormat>((path, model, format) =>
-                {
-                    passedPath = path;
-                    passedModel = model as AnonymousRegistration;
-                    passedFormat = format;
-                })
-                .Returns(() =>
-                {
-                    return Task.FromResult(It.IsAny<User>());
-                });
 
             var service = new AuthenticationService(tokenService.Object, requestService.Object);
 
@@ -431,63 +416,10 @@ namespace MeshyDB.SDK.Tests
 
             service.LoginAnonymouslyAsync(generatedUsername).ConfigureAwait(true).GetAwaiter().GetResult();
 
-            Assert.Equal("users/register/anonymous", passedPath);
-            Assert.Equal(generatedUsername, passedModel.Username);
             Assert.Equal(generatedUsername, passedUsername);
             Assert.Equal("nopassword", passedPassword);
 
             tokenService.VerifyAll();
-            requestService.VerifyAll();
-        }
-
-        [Fact]
-        public void ShouldLoginAnonymouslyAutomaticallyGenerateUsername()
-        {
-            var tokenService = new Mock<ITokenService>();
-
-            var passedUsername = string.Empty;
-            var passedPassword = string.Empty;
-            var authenticationId = Generator.RandomString(10);
-
-            tokenService.Setup(x => x.GenerateAccessToken(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback<string, string>((username, password) =>
-                {
-                    passedUsername = username;
-                    passedPassword = password;
-                })
-                .Returns(() =>
-                {
-                    return Task.FromResult(authenticationId);
-                });
-
-            var requestService = new Mock<IRequestService>();
-            var passedPath = string.Empty;
-            var passedModel = default(AnonymousRegistration);
-            var passedFormat = RequestDataFormat.Json;
-
-            requestService.Setup(x => x.PostRequest<User>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
-                .Callback<string, object, RequestDataFormat>((path, model, format) =>
-                {
-                    passedPath = path;
-                    passedModel = model as AnonymousRegistration;
-                    passedFormat = format;
-                })
-                .Returns(() =>
-                {
-                    return Task.FromResult(It.IsAny<User>());
-                });
-
-            var service = new AuthenticationService(tokenService.Object, requestService.Object);
-
-            service.LoginAnonymouslyAsync().ConfigureAwait(true).GetAwaiter().GetResult();
-
-            Assert.Equal("users/register/anonymous", passedPath);
-            Assert.True(Guid.TryParse(passedModel.Username, out var _));
-            Assert.Equal(passedModel.Username, passedUsername);
-            Assert.Equal("nopassword", passedPassword);
-
-            tokenService.VerifyAll();
-            requestService.VerifyAll();
         }
     }
 }

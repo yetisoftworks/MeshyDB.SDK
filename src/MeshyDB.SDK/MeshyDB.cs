@@ -158,6 +158,28 @@ namespace MeshyDB.SDK
         }
 
         /// <summary>
+        /// Register Anonymous User.
+        /// </summary>
+        /// <param name="username">Specify known username for anonymous user.</param>
+        /// <returns>New anonymous user.</returns>
+        public Task<User> RegisterAnonymousUserAsync(string username = null)
+        {
+            return this.AuthenticationService.RegisterAnonymousUserAsync(username);
+        }
+
+        /// <summary>
+        /// Register Anonymous User.
+        /// </summary>
+        /// <param name="username">Specify known username for anonymous user.</param>
+        /// <returns>New anonymous user.</returns>
+        public User RegisterAnonymousUser(string username = null)
+        {
+            var t = this.RegisterAnonymousUserAsync(username).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <summary>
         /// Register new user.
         /// </summary>
         /// <param name="user">User to be created with login credentials.</param>

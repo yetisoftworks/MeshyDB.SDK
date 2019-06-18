@@ -20,7 +20,7 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <param name="username">Specify known username for anonymous user.</param>
         /// <returns>Authentication id upon success.</returns>
-        Task<string> LoginAnonymouslyAsync(string username = null);
+        Task<string> LoginAnonymouslyAsync(string username);
 
         /// <summary>
         /// Log in with provided user name and password.
@@ -73,6 +73,13 @@ namespace MeshyDB.SDK.Services
         /// <param name="user">User definition with password for login.</param>
         /// <returns>Resulting user based on save.</returns>
         Task<UserVerificationHash> RegisterAsync(RegisterUser user);
+
+        /// <summary>
+        /// Register Anonymous User.
+        /// </summary>
+        /// <param name="username">Specify known username for anonymous user.</param>
+        /// <returns>New anonymous user.</returns>
+        Task<User> RegisterAnonymousUserAsync(string username = null);
 
         /// <summary>
         /// Signout the targeted user based on authentication id.
