@@ -2,9 +2,9 @@
 
    <h4>Parameters</h4>
 
--------------
-Creating User
--------------
+----------------
+Registering User
+----------------
 Creates a new user that can log into the system.
 
 
@@ -14,8 +14,7 @@ Creates a new user that can log into the system.
    
       .. code-block:: http
       
-        POST https://api.meshydb.com/{clientKey}/users HTTP/1.1
-        Authentication: Bearer {access_token}
+        POST https://api.meshydb.com/{accountName}/users/register HTTP/1.1
         Content-Type: application/json
         tenant: {tenant}
          
@@ -26,11 +25,17 @@ Creates a new user that can log into the system.
             "lastName": "McTesterton",
             "verified": true,
             "isActive": true,
-            "phoneNumber": "5555555555",
+            "phoneNumber": "+15555555555",
             "roles": [
                         "admin",
                         "test"
                      ],
+			"securityQuestions": [
+									{
+										"question": "What would you say to this question?",
+										"answer": "mceasy123"
+									}
+								 ],
             "newPassword": "newPassword"
           }
 
@@ -38,7 +43,7 @@ Creates a new user that can log into the system.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token  : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -60,22 +65,24 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
+	  securityQuestions : object[]
+		Collection of questions and answers used for password recovery if question security is configured.
 
    .. group-tab:: C#
    
       .. code-block:: c#
       
-        var database = new MeshyDB(clientKey, tenant, publicKey);
+        var database = new MeshyDB(accountName, tenant, publicKey);
 
-        var user = new NewUser();
+        var user = new RegisterUser();
 
-        await database.CreateNewUserAsync(user);
+        await database.RegisterUserAsync(user);
 
       |parameters|
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -97,14 +104,16 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-
+	  securityQuestions : object[]
+		Collection of questions and answers used for password recovery if question security is configured.
+		
    .. group-tab:: NodeJS
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.createUser({
+         database.registerUser({
                                  username: username,
                                  newPassword: newPassword,
                                  id: id,
@@ -113,7 +122,8 @@ Creates a new user that can log into the system.
                                  verified: verified,
                                  isActive: isActive,
                                  phoneNumber: phoneNumber,
-                                 roles: roles
+                                 roles: roles,
+								 securityQuestions: securityQuestions
                              })
                  .then(function(user) { });
       
@@ -121,7 +131,7 @@ Creates a new user that can log into the system.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -143,7 +153,8 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-
+	  securityQuestions : object[]
+		Collection of questions and answers used for password recovery if question security is configured.
          
 Example Response:
 
@@ -156,7 +167,7 @@ Example Response:
     "lastName": "McTesterton",
     "verified": true,
     "isActive": true,
-    "phoneNumber": "5555555555",
+    "phoneNumber": "+15555555555",
     "roles": [
                 "admin",
                 "test"

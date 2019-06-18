@@ -13,7 +13,7 @@ Log user out.
    
       .. code-block:: http
       
-        POST https://api.meshydb.com/{clientKey}/connect/revocation HTTP/1.1
+        POST https://api.meshydb.com/{accountName}/connect/revocation HTTP/1.1
         Content-Type: application/x-www-form-urlencoded
         tenant: {tenant}
          
@@ -27,7 +27,7 @@ Log user out.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       refresh_token  : string
          Refresh token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -38,7 +38,7 @@ Log user out.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(clientKey, tenant, publicKey);
+        var database = new MeshyDB(accountName, tenant, publicKey);
         var client = await database.LoginWithAnonymouslyAsync();
 
         await client.SignoutAsync();
@@ -47,7 +47,7 @@ Log user out.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -57,7 +57,7 @@ Log user out.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
 
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -69,7 +69,7 @@ Log user out.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

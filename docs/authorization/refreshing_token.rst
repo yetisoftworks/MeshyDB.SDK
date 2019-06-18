@@ -14,7 +14,7 @@ Using the token request made to generate an access token, a refresh token will a
    
       .. code-block:: http
       
-         POST https://auth.meshydb.com/{clientKey}/connect/token HTTP/1.1
+         POST https://auth.meshydb.com/{accountName}/connect/token HTTP/1.1
          Content-Type: application/x-www-form-urlencoded
          tenant: {tenant}
          
@@ -29,7 +29,7 @@ Using the token request made to generate an access token, a refresh token will a
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -40,7 +40,7 @@ Using the token request made to generate an access token, a refresh token will a
    
       .. code-block:: c#
 
-        var database = new MeshyDB(clientKey, tenant, publicKey);
+        var database = new MeshyDB(accountName, tenant, publicKey);
         var client = database.LoginWithPassword(username, password);
         var refreshToken = client.RetrievePersistanceToken();
         
@@ -50,7 +50,7 @@ Using the token request made to generate an access token, a refresh token will a
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -65,7 +65,7 @@ Using the token request made to generate an access token, a refresh token will a
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.login(username,password)
                  .then(function (meshyDBClient){
@@ -79,7 +79,7 @@ Using the token request made to generate an access token, a refresh token will a
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

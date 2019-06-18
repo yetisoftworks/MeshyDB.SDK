@@ -13,7 +13,7 @@ Update details about the logged in user.
    
       .. code-block:: http
       
-         PUT https://api.meshydb.com/{clientKey}/users/me HTTP/1.1
+         PUT https://api.meshydb.com/{accountName}/users/me HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
          tenant: {tenant}
@@ -36,7 +36,7 @@ Update details about the logged in user.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -61,7 +61,7 @@ Update details about the logged in user.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          var user = new User();
@@ -72,7 +72,7 @@ Update details about the logged in user.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey  : string
+      accountName  : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -97,7 +97,7 @@ Update details about the logged in user.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          var client;
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -118,7 +118,7 @@ Update details about the logged in user.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey  : string
+      accountName  : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

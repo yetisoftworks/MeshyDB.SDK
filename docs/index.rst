@@ -44,7 +44,8 @@ Meshy DB is a relational json solution as a backend for rapid and flexible imple
    :hidden:
    :caption: Users
    
-   users/creating_user
+   users/registering_user
+   users/registering_anonymoususer
    users/retrieving_self
    users/updating_self
    users/forgetting_password
@@ -52,3 +53,5 @@ Meshy DB is a relational json solution as a backend for rapid and flexible imple
    users/changing_password
    users/retrieving_userinfo
    users/logging_out
+   users/verifying_user
+   users/checking_hash

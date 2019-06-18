@@ -13,7 +13,7 @@ Permanently remove Mesh data from collection.
    
       .. code-block:: http
       
-         DELETE https://api.meshydb.com/{clientKey}/meshes/{mesh}/{id} HTTP/1.1
+         DELETE https://api.meshydb.com/{accountName}/meshes/{mesh}/{id} HTTP/1.1
          Authentication: Bearer {access_token}
          tenant: {tenant}
          
@@ -21,7 +21,7 @@ Permanently remove Mesh data from collection.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token : string
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
@@ -34,7 +34,7 @@ Permanently remove Mesh data from collection.
    
       .. code-block:: c#
          
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
       
          await client.Meshes.DeleteAsync(person);
@@ -44,7 +44,7 @@ Permanently remove Mesh data from collection.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -56,7 +56,7 @@ Permanently remove Mesh data from collection.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -69,7 +69,7 @@ Permanently remove Mesh data from collection.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

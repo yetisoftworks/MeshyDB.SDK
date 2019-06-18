@@ -37,18 +37,22 @@ Let's log in using our MeshyDB credentials.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
 
          var meshyDBClient;
         
          database.login(username,password)
                  .then(function (client) { meshyDBClient = client; });
+				 
+		// Or log in anonomously
+		database.loginAnonmously()
+				.then(function (client) { meshyDBClient = client; });
       
       |parameters|
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -103,7 +107,7 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
     "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
   
 -----------
@@ -136,7 +140,7 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
     "lastName": "Bobberson",
-    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 
 -----------
@@ -184,7 +188,7 @@ Example Response:
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
                  "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
                }],
     "totalRecords": 1
   }

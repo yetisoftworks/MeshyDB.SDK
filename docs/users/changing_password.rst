@@ -13,7 +13,7 @@ Allows the logged in user to change their password.
    
       .. code-block:: http
       
-         POST https://api.meshydb.com/{clientKey}/users/me/password HTTP/1.1
+         POST https://api.meshydb.com/{accountName}/users/me/password HTTP/1.1
          Authentication: Bearer {access_token}
          Content-Type: application/json
          tenant: {tenant}
@@ -27,7 +27,7 @@ Allows the logged in user to change their password.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       access_token: string
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
@@ -40,7 +40,7 @@ Allows the logged in user to change their password.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
          var client = await database.LoginWithAnonymouslyAsync();
 
          await client.UpdatePasswordAsync(previousPassword, newPassword);
@@ -49,7 +49,7 @@ Allows the logged in user to change their password.
       
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -63,7 +63,7 @@ Allows the logged in user to change their password.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(clientKey, tenant, publicKey);
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.loginAnonymously()
                  .then(function (meshyDBClient){
@@ -75,7 +75,7 @@ Allows the logged in user to change their password.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.

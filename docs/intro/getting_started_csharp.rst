@@ -37,7 +37,7 @@ Let's log in using our MeshyDB credentials.
    
       .. code-block:: c#
    
-         var database = new MeshyDB(clientKey, tenant, publicKey);
+         var database = new MeshyDB(accountName, tenant, publicKey);
          var client = database.LoginWithPassword(username, password);
          
          // Or log in anonomously
@@ -47,7 +47,7 @@ Let's log in using our MeshyDB credentials.
 
       tenant : string
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      clientKey : string
+      accountName : string
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
@@ -106,7 +106,7 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
     "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
   
 -----------
@@ -137,7 +137,7 @@ Example Response:
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
     "lastName": "Bobberson",
-    "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
   }
 
 -----------
@@ -177,7 +177,7 @@ Example Response:
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
                  "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{clientKey}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
                }],
     "totalRecords": 1
   }
