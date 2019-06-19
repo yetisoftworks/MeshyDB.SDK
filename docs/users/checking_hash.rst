@@ -2,9 +2,9 @@
 
    <h4>Parameters</h4>
 
-----------
-Check hash
-----------
+-------------
+Checking hash
+-------------
 Verifies user verification hash request.
 
 
@@ -19,12 +19,12 @@ Verifies user verification hash request.
         tenant: {tenant}
          
           {
-            "username": "username_testermctesterson",
-			"attempt": 1,
-			"hash": "...",
-			"expires": "1/1/1900",
-			"hint": "...",
-			"verificationCode": "...",
+             "username": "username_testermctesterson",
+             "attempt": 1,
+             "hash": "...",
+             "expires": "1/1/1900",
+             "hint": "...",
+             "verificationCode": "...",
           }
 
       |parameters|
@@ -37,16 +37,16 @@ Verifies user verification hash request.
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
-	  attempt: int, required
-		 Identifies which attempt hash was generated against.
-	  hash: string, required
-		 Generated hash from verification request.
-	  expires: date, required
-		 Identifies when the request expires.
-	  hint: string
-		Hint for verification code was generated
-	  verificationCode: string, required
-		Value to verify against verification request.
+      attempt: int, required
+         Identifies which attempt hash was generated against.
+      hash: string, required
+         Generated hash from verification request.
+      expires: date, required
+         Identifies when the request expires.
+      hint: string
+         Hint for verification code was generated
+      verificationCode: string, required
+         Value to verify against verification request.
 
    .. group-tab:: C#
    
@@ -54,7 +54,7 @@ Verifies user verification hash request.
       
         var database = new MeshyDB(accountName, tenant, publicKey);
 
-		var check = new UserVerificationCheck();
+        var check = new UserVerificationCheck();
 		
         var isValid = await database.CheckHashAsync(check);
 
@@ -68,16 +68,16 @@ Verifies user verification hash request.
          Public accessor for application.
       username : string, required
          Username of user.
-	  attempt: int, required
-		 Identifies which attempt hash was generated against.
-	  hash: string, required
-		 Generated hash from verification request.
-	  expires: date, required
-		 Identifies when the request expires.
-	  hint: string
-		Hint for verification code was generated
-	  verificationCode: string, required
-		Value to verify against verification request.
+      attempt: int, required
+         Identifies which attempt hash was generated against.
+      hash: string, required
+         Generated hash from verification request.
+      expires: date, required
+         Identifies when the request expires.
+      hint: string
+         Hint for verification code was generated
+      verificationCode: string, required
+         Value to verify against verification request.
 		
    .. group-tab:: NodeJS
       
@@ -86,13 +86,13 @@ Verifies user verification hash request.
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
          database.checkHash({
-								username: username,
-								attempt: attempt:
-								hash: hash,
-								expires: expires,
-								hint: hint,
-								verificationCode: verificationCode
-						   })
+                               username: username,
+                               attempt: attempt:
+                               hash: hash,
+                               expires: expires,
+                               hint: hint,
+                               verificationCode: verificationCode
+						    })
                  .then(function(isValid) { });
       
       |parameters|
@@ -105,16 +105,16 @@ Verifies user verification hash request.
          Public accessor for application.
       username : string, required
          Username of user.
-	  attempt: int, required
-		 Identifies which attempt hash was generated against.
-	  hash: string, required
-		 Generated hash from verification request.
-	  expires: date, required
-		 Identifies when the request expires.
-	  hint: string
-		Hint for verification code was generated
-	  verificationCode: string, required
-		Value to verify against verification request.
+      attempt: int, required
+         Identifies which attempt hash was generated against.
+      hash: string, required
+         Generated hash from verification request.
+      expires: date, required
+         Identifies when the request expires.
+      hint: string
+         Hint for verification code was generated
+      verificationCode: string, required
+         Value to verify against verification request.
 		
 Example Response:
 

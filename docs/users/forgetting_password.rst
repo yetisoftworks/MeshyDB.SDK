@@ -19,7 +19,7 @@ Creates a request for password reset that must have the matching data to reset t
          
            {
              "username": "username_testermctesterson",
-			 "attempt": 1
+             "attempt": 1
            }
 
       |parameters|

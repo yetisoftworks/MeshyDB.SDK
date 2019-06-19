@@ -81,5 +81,12 @@ Example Response:
     "roles": [
                 "admin",
                 "test"
-             ]
+             ],
+    "securityQuestions": [
+                            {
+                               "question": "What would you say to this question?",
+                               "answer": "mceasy123"
+                            }
+                         ],
+    "anonymous": true
   }
