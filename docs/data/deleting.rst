@@ -35,7 +35,7 @@ Permanently remove Mesh data from collection.
       .. code-block:: c#
          
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
       
          await client.Meshes.DeleteAsync(person);
 
@@ -58,7 +58,7 @@ Permanently remove Mesh data from collection.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                            meshyDBClient.meshes.delete(meshName, id)
                                                .then(function(_){ });

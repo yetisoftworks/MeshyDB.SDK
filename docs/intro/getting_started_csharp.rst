@@ -41,7 +41,7 @@ Let's log in using our MeshyDB credentials.
          var client = database.LoginWithPassword(username, password);
          
          // Or log in anonomously
-         client = database.LoginWithAnonymouslyAsync();
+         client = database.LoginAnonymouslyAsync(username);
          
       |parameters|
 

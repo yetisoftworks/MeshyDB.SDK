@@ -73,7 +73,7 @@ Update details about the logged in user.
       .. code-block:: c#
       
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
 
          var user = new User();
 
@@ -114,7 +114,7 @@ Update details about the logged in user.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      meshyDBClient.usersService.updateSelf({
                                                                username: username,

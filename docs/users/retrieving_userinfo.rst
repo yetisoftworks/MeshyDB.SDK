@@ -32,7 +32,7 @@ Retrieve user information.
       .. code-block:: c#
       
         var database = new MeshyDB(accountName, tenant, publicKey);
-        var client = await database.LoginWithAnonymouslyAsync();
+        var client = await database.LoginAnonymouslyAsync(username);
 
         var userInfo = await client.GetMyUserInfoAsync();
 
@@ -44,7 +44,8 @@ Retrieve user information.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-
+      username : string
+         User name.
 
    .. group-tab:: NodeJS
       
@@ -52,7 +53,7 @@ Retrieve user information.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      meshyDBClient.getMyUserInfo().then(function(info) { });
                  }); 
@@ -65,7 +66,9 @@ Retrieve user information.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-         
+      username : string
+         User name.
+		 
 Example Response:
 
 .. code-block:: json
