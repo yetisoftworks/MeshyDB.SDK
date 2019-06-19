@@ -39,19 +39,6 @@ Permanently remove Mesh data from collection.
       
          await client.Meshes.DeleteAsync(person);
 
-
-   .. group-tab:: NodeJS
-      
-      .. code-block:: javascript
-         
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
-         
-         database.loginAnonymously()
-                 .then(function (meshyDBClient){
-                           meshyDBClient.meshes.delete(meshName, id)
-                                               .then(function(_){ });
-                      }); 
-      
       |parameters|
 
       tenant : string
@@ -64,7 +51,19 @@ Permanently remove Mesh data from collection.
          Identifies name of mesh collection. e.g. person.
       id : string
          Idenfities location of what Mesh data to replace.
+		 
+   .. group-tab:: NodeJS
+      
+      .. code-block:: javascript
          
+         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         
+         database.loginAnonymously()
+                 .then(function (meshyDBClient){
+                           meshyDBClient.meshes.delete(meshName, id)
+                                               .then(function(_){ });
+                      }); 
+      
       |parameters|
 
       tenant : string

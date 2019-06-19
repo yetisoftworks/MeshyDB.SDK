@@ -29,9 +29,9 @@ Creates a request for password reset that must have the matching data to reset t
       accountName : string
          Indicates which account you are connecting for authentication.
       username : string, required
-        User name to be reset.
-	  attempt: int, required
-		Identifies which number of times of request.
+         User name to be reset.
+      attempt: int, required
+         Identifies which number of times of request.
 
    .. group-tab:: C#
    
@@ -50,9 +50,9 @@ Creates a request for password reset that must have the matching data to reset t
       publicKey : string
          Public accessor for application.
       username : string
-        User name to be reset.
-	  attempt: int, required
-		Identifies which number of times of request.
+         User name to be reset.
+      attempt: int, required
+         Identifies which number of times of request.
 
 
    .. group-tab:: NodeJS
@@ -73,9 +73,9 @@ Creates a request for password reset that must have the matching data to reset t
       publicKey : string
          Public accessor for application.
       username : string
-        User name to be reset.
-	  attempt: int, required
-		Identifies which number of times of request.
+         User name to be reset.
+      attempt: int, required
+         Identifies which number of times of request.
 
          
 Example Response:
@@ -83,9 +83,9 @@ Example Response:
 .. code-block:: json
 
 	{
-		username: "username_testermctesterson",
-		attempt: 1:
-		hash: "1900-01-01T00:00:00.000Z",
-		expires: "1900-01-01T00:00:00.000Z",
-		hint: "xxxx"
+		"username": "username_testermctesterson",
+		"attempt": 1:
+		"hash": "...",
+		"expires": "1900-01-01T00:00:00.000Z",
+		"hint": "xxxx"
 	}

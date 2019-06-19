@@ -30,11 +30,11 @@ Creates a new user that can log into the system.
                         "admin",
                         "test"
                      ],
-			"securityQuestions": [
+            "securityQuestions": [
                                     {
-                                        "question": "What would you say to this question?",
-                                        "answer": "mceasy123"
-								    }
+                                       "question": "What would you say to this question?",
+                                       "answer": "mceasy123"
+                                    }
                                  ],
             "newPassword": "newPassword"
           }
@@ -65,8 +65,8 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-	  securityQuestions : object[]
-		Collection of questions and answers used for password recovery if question security is configured.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
 
    .. group-tab:: C#
    
@@ -151,10 +151,6 @@ Creates a new user that can log into the system.
          Identifies whether or not the user is active.
       phoneNumber : string
          Phone number of user.
-      roles : string[]
-         Collection of roles user has access.
-	  securityQuestions : object[]
-		 Collection of questions and answers used for password recovery if question security is configured.
       roles : string[]
          Collection of roles user has access.
       securityQuestions : object[]
