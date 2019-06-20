@@ -41,7 +41,7 @@ Allows the logged in user to change their password.
       .. code-block:: c#
       
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginWithPasswordAsync(username, password);
 
          await client.UpdatePasswordAsync(previousPassword, newPassword);
 
@@ -53,6 +53,10 @@ Allows the logged in user to change their password.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
       previousPassword : string
         Previous password of user.
       newPassword : string
@@ -65,7 +69,7 @@ Allows the logged in user to change their password.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.login(username, password)
                  .then(function (meshyDBClient){
                      meshyDBClient.updatePassword(previousPassword, newPassword)
                                   .then(function(_) { });
@@ -79,6 +83,10 @@ Allows the logged in user to change their password.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
+      password : string
+         User password.
       previousPassword : string
         Previous password of user.
       newPassword : string

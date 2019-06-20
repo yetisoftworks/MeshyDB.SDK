@@ -31,7 +31,7 @@ Retrieve details about the logged in user.
       .. code-block:: c#
       
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
 
          await client.Users.GetLoggedInUserAsync();
 
@@ -43,7 +43,8 @@ Retrieve details about the logged in user.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-        
+      username : string
+         User name.
 
    .. group-tab:: NodeJS
       
@@ -51,7 +52,7 @@ Retrieve details about the logged in user.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      meshyDBClient.usersService.getSelf()
                                                .then(function(self) { });
@@ -65,7 +66,9 @@ Retrieve details about the logged in user.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-         
+      username : string
+         User name.
+		 
 Example Response:
 
 .. code-block:: json
@@ -81,5 +84,12 @@ Example Response:
     "roles": [
                 "admin",
                 "test"
-             ]
+             ],
+    "securityQuestions": [
+                            {
+                               "question": "What would you say to this question?",
+                               "answer": "mceasy123"
+                            }
+                         ],
+    "anonymous": true
   }

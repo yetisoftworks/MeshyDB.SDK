@@ -45,7 +45,7 @@ Let's log in using our MeshyDB credentials.
                  .then(function (client) { meshyDBClient = client; });
 				 
 		// Or log in anonomously
-		database.loginAnonmously()
+		database.loginAnonmously(username)
 				.then(function (client) { meshyDBClient = client; });
       
       |parameters|

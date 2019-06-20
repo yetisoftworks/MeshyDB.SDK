@@ -41,7 +41,7 @@ Update Mesh data in collection by id.
       .. code-block:: c#
 
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
          
          person.FirstName = "Bobbo";
 
@@ -55,6 +55,8 @@ Update Mesh data in collection by id.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string
@@ -67,7 +69,7 @@ Update Mesh data in collection by id.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                         meshyDBClient.meshes.update(meshName, 
                                                     {
@@ -86,6 +88,8 @@ Update Mesh data in collection by id.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
       meshName : string
          Identifies name of mesh collection. e.g. person.
       id : string

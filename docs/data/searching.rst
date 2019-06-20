@@ -46,7 +46,7 @@ Filter Mesh data from collection based on query parameters.
       .. code-block:: c#
       
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
 
          var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
@@ -58,6 +58,8 @@ Filter Mesh data from collection based on query parameters.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       filter : string
@@ -76,7 +78,7 @@ Filter Mesh data from collection based on query parameters.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
 
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      meshyDBClient.meshes.search(meshName, 
                                                 {
@@ -97,6 +99,8 @@ Filter Mesh data from collection based on query parameters.
          Public accessor for application.
       meshName : string
          Identifies name of mesh collection. e.g. person.
+      username : string
+         User name.
       filter : string
          Filter criteria for search. Uses MongoDB format.
       orderby : string

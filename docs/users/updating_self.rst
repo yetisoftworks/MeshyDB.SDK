@@ -29,7 +29,14 @@ Update details about the logged in user.
              "roles": [
                          "admin",
                          "test"
-                      ]
+                      ],
+             "securityQuestions": [
+                                    {
+                                        "question": "What would you say to this question?",
+                                        "answer": "mceasy123"
+                                    }
+                                  ],
+             "anonymous": false
            }
 
       |parameters|
@@ -56,13 +63,17 @@ Update details about the logged in user.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
+      anonymous : boolean
+         Identifies whether or not the user is anonymous.
 
    .. group-tab:: C#
    
       .. code-block:: c#
       
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
 
          var user = new User();
 
@@ -92,14 +103,18 @@ Update details about the logged in user.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
+      anonymous : boolean
+         Identifies whether or not the user is anonymous.
 
    .. group-tab:: NodeJS
       
       .. code-block:: javascript
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
-         var client;
-         database.loginAnonymously()
+         
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      meshyDBClient.usersService.updateSelf({
                                                                username: username,
@@ -109,7 +124,9 @@ Update details about the logged in user.
                                                                verified:  verified,
                                                                isActive: isActive,
                                                                phoneNumber: phoneNumber,
-                                                               roles: roles
+                                                               roles: roles,
+															   securityQuestions: securityQuestions,
+															   anonymous:  anonymous
                                                           })
                                                .then(function(self) { });
                   }); 
@@ -138,6 +155,10 @@ Update details about the logged in user.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
+      anonymous : boolean
+         Identifies whether or not the user is anonymous.
          
 Example Response:
 
@@ -154,5 +175,12 @@ Example Response:
     "roles": [
                 "admin",
                 "test"
-             ]
+             ],
+    "securityQuestions": [
+                            {
+                               "question": "What would you say to this question?",
+                               "answer": "mceasy123"
+                            }
+                         ],
+    "anonymous": false
   }

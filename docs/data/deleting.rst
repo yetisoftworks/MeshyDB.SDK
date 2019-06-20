@@ -35,18 +35,32 @@ Permanently remove Mesh data from collection.
       .. code-block:: c#
          
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
       
          await client.Meshes.DeleteAsync(person);
 
+      |parameters|
 
+      tenant : string
+         Indicates which tenant data to use. If not provided, it will use the configured default.
+      accountName : string
+         Indicates which account you are connecting for authentication.
+      publicKey : string
+         Public accessor for application.
+      username : string
+         User name.
+      meshName : string
+         Identifies name of mesh collection. e.g. person.
+      id : string
+         Idenfities location of what Mesh data to replace.
+		 
    .. group-tab:: NodeJS
       
       .. code-block:: javascript
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
          
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                            meshyDBClient.meshes.delete(meshName, id)
                                                .then(function(_){ });
@@ -60,19 +74,8 @@ Permanently remove Mesh data from collection.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-      meshName : string
-         Identifies name of mesh collection. e.g. person.
-      id : string
-         Idenfities location of what Mesh data to replace.
-         
-      |parameters|
-
-      tenant : string
-         Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
-         Indicates which account you are connecting for authentication.
-      publicKey : string
-         Public accessor for application.
+      username : string
+         User name.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string

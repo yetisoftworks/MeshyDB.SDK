@@ -39,7 +39,7 @@ Creates an anonymous user that can log into the system.
       
         var database = new MeshyDB(accountName, tenant, publicKey);
 
-        var anonymousUser = await database.LoginAnonymouslyAsync(userName);
+        var anonymousUser = await database.RegisterAnonymousUserAsync(userName);
 
       |parameters|
       
@@ -84,5 +84,7 @@ Example Response:
     "verified": false,
     "isActive": true,
     "phoneNumber": null,
-    "roles": []
+    "roles": [],
+    "securityQuestions": [],
+	"anonymous": true
   }

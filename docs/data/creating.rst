@@ -46,7 +46,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          }
 
          var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithAnonymouslyAsync();
+         var client = await database.LoginAnonymouslyAsync(username);
          
          var person = await client.Meshes.CreateAsync(new Person(){
            FirstName="Bob",
@@ -61,6 +61,8 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         Username of user.
       mesh : string
          Identifies name of mesh collection. e.g. person.
 
@@ -70,7 +72,7 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
 
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      var refreshToken = meshyDBClient.meshes.create(meshName, 
                                                                    {
@@ -88,6 +90,8 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         Username of user.
       meshName : string
          Identifies name of mesh collection. e.g. person.
          

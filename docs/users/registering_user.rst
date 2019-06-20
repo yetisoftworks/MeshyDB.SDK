@@ -30,12 +30,12 @@ Creates a new user that can log into the system.
                         "admin",
                         "test"
                      ],
-			"securityQuestions": [
-									{
-										"question": "What would you say to this question?",
-										"answer": "mceasy123"
-									}
-								 ],
+            "securityQuestions": [
+                                    {
+                                       "question": "What would you say to this question?",
+                                       "answer": "mceasy123"
+                                    }
+                                 ],
             "newPassword": "newPassword"
           }
 
@@ -65,8 +65,8 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-	  securityQuestions : object[]
-		Collection of questions and answers used for password recovery if question security is configured.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
 
    .. group-tab:: C#
    
@@ -104,8 +104,8 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-	  securityQuestions : object[]
-		Collection of questions and answers used for password recovery if question security is configured.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
 		
    .. group-tab:: NodeJS
       
@@ -123,7 +123,7 @@ Creates a new user that can log into the system.
                                  isActive: isActive,
                                  phoneNumber: phoneNumber,
                                  roles: roles,
-								 securityQuestions: securityQuestions
+                                 securityQuestions: securityQuestions
                              })
                  .then(function(user) { });
       
@@ -153,23 +153,17 @@ Creates a new user that can log into the system.
          Phone number of user.
       roles : string[]
          Collection of roles user has access.
-	  securityQuestions : object[]
-		Collection of questions and answers used for password recovery if question security is configured.
+      securityQuestions : object[]
+         Collection of questions and answers used for password recovery if question security is configured.
          
 Example Response:
 
 .. code-block:: json
 
-  {
-    "id": "5c78cc81dd870827a8e7b6c4",
-    "username": "username_testermctesterson",
-    "firstName": "Tester",
-    "lastName": "McTesterton",
-    "verified": true,
-    "isActive": true,
-    "phoneNumber": "+15555555555",
-    "roles": [
-                "admin",
-                "test"
-             ]
-  }
+   {
+      "username": "username_testermctesterson",
+      "attempt": 1,
+      "hash": "...",
+      "expires": "1/1/1900",
+      "hint": "..."
+   }

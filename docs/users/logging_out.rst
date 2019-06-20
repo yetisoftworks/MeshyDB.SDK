@@ -39,7 +39,7 @@ Log user out.
       .. code-block:: c#
       
         var database = new MeshyDB(accountName, tenant, publicKey);
-        var client = await database.LoginWithAnonymouslyAsync();
+        var client = await database.LoginAnonymouslyAsync(username);
 
         await client.SignoutAsync();
 
@@ -51,7 +51,8 @@ Log user out.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
-
+      username : string
+         User name.
 
    .. group-tab:: NodeJS
       
@@ -59,7 +60,7 @@ Log user out.
          
          var database = initializeMeshyDB(accountName, tenant, publicKey);
 
-         database.loginAnonymously()
+         database.loginAnonymously(username)
                  .then(function (meshyDBClient){
                      meshyDBClient.signout()
                                   .then(function(result) { });
@@ -73,3 +74,5 @@ Log user out.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
