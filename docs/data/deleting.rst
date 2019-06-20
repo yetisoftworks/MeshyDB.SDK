@@ -47,6 +47,8 @@ Permanently remove Mesh data from collection.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
       meshName : string
          Identifies name of mesh collection. e.g. person.
       id : string
@@ -72,6 +74,8 @@ Permanently remove Mesh data from collection.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       id : string

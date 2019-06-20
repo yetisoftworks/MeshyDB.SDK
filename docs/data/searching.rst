@@ -58,6 +58,8 @@ Filter Mesh data from collection based on query parameters.
          Indicates which account you are connecting for authentication.
       publicKey : string
          Public accessor for application.
+      username : string
+         User name.
       mesh : string
          Identifies name of mesh collection. e.g. person.
       filter : string
@@ -97,6 +99,8 @@ Filter Mesh data from collection based on query parameters.
          Public accessor for application.
       meshName : string
          Identifies name of mesh collection. e.g. person.
+      username : string
+         User name.
       filter : string
          Filter criteria for search. Uses MongoDB format.
       orderby : string
