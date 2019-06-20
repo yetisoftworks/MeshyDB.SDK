@@ -69,7 +69,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginAnonymously();
+            var client = database.LoginAnonymously(Generator.RandomString(5));
             Assert.NotNull(client.Users);
         }
 
@@ -85,7 +85,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginAnonymously();
+            var client = database.LoginAnonymously(Generator.RandomString(5));
             Assert.NotNull(client.Meshes);
         }
 
@@ -103,7 +103,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginAnonymouslyAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+            var client = database.LoginAnonymouslyAsync(Generator.RandomString(5)).ConfigureAwait(true).GetAwaiter().GetResult();
             Assert.NotNull(client);
         }
 
@@ -121,7 +121,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             database.AuthenticationService = authService.Object;
-            var client = database.LoginAnonymously();
+            var client = database.LoginAnonymously(Generator.RandomString(5));
             Assert.NotNull(client);
         }
 

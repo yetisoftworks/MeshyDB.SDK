@@ -28,7 +28,6 @@ namespace MeshyDB.SDK
         /// <param name="accountName">Name of MeshyDB account required for communication.</param>
         /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
         /// <param name="httpService">Http Service to use for making requests.</param>
-        /// <exception cref="ArgumentException">Thrown if any parameter is not configured.</exception>
         public MeshyDB(string accountName, string publicKey, IHttpService httpService = null)
             : this(accountName, null, publicKey, httpService)
         {
@@ -41,7 +40,6 @@ namespace MeshyDB.SDK
         /// <param name="tenant">Tenant of data used for partitioning.</param>
         /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
         /// <param name="httpService">Http Service to use for making requests.</param>
-        /// <exception cref="ArgumentException">Thrown if any parameter is not configured.</exception>
         public MeshyDB(string accountName, string tenant, string publicKey, IHttpService httpService = null)
         {
             this.AccountName = accountName.Trim();
@@ -108,8 +106,8 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Log user in with username and password.
         /// </summary>
-        /// <param name="username">User name of user to login.</param>
-        /// <param name="password">Password of user to log in.</param>
+        /// <param name="username">User name of user used during login.</param>
+        /// <param name="password">Password of user used during login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
         public async Task<IMeshyClient> LoginWithPasswordAsync(string username, string password)
         {
@@ -122,8 +120,8 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Log user in with username and password.
         /// </summary>
-        /// <param name="username">User name of user to login.</param>
-        /// <param name="password">Password of user to log in.</param>
+        /// <param name="username">User name of user used during login.</param>
+        /// <param name="password">Password of user used during login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
         public IMeshyClient LoginWithPassword(string username, string password)
         {
@@ -133,11 +131,11 @@ namespace MeshyDB.SDK
         }
 
         /// <summary>
-        /// Login anonymously with randomly generated user.
+        /// Login anonymous user.
         /// </summary>
-        /// <param name="username">Identify anonymous user. If nothing is provided it will be automatically generated.</param>
+        /// <param name="username">User name of user used during login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
-        public async Task<IMeshyClient> LoginAnonymouslyAsync(string username = null)
+        public async Task<IMeshyClient> LoginAnonymouslyAsync(string username)
         {
             var identifier = await this.AuthenticationService.LoginAnonymouslyAsync(username).ConfigureAwait(true);
             var services = this.GenerateAPIRequestService(identifier);
@@ -146,11 +144,11 @@ namespace MeshyDB.SDK
         }
 
         /// <summary>
-        /// Login anonymously with randomly generated user.
+        /// Login anonymous user.
         /// </summary>
-        /// <param name="username">Identify anonymous user. If nothing is provided it will be automatically generated.</param>
+        /// <param name="username">User name of user used during login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
-        public IMeshyClient LoginAnonymously(string username = null)
+        public IMeshyClient LoginAnonymously(string username)
         {
             var t = this.LoginAnonymouslyAsync(username).ConfigureAwait(true).GetAwaiter();
 
@@ -158,9 +156,9 @@ namespace MeshyDB.SDK
         }
 
         /// <summary>
-        /// Register Anonymous User.
+        /// Register anonymous user.
         /// </summary>
-        /// <param name="username">Specify known username for anonymous user.</param>
+        /// <param name="username">Specify known username for anonymous user. If username is not provided a random username will be generated.</param>
         /// <returns>New anonymous user.</returns>
         public Task<User> RegisterAnonymousUserAsync(string username = null)
         {
@@ -168,9 +166,9 @@ namespace MeshyDB.SDK
         }
 
         /// <summary>
-        /// Register Anonymous User.
+        /// Register anonymous user.
         /// </summary>
-        /// <param name="username">Specify known username for anonymous user.</param>
+        /// <param name="username">Specify known username for anonymous user. If username is not provided a random username will be generated.</param>
         /// <returns>New anonymous user.</returns>
         public User RegisterAnonymousUser(string username = null)
         {
@@ -183,7 +181,7 @@ namespace MeshyDB.SDK
         /// Register new user.
         /// </summary>
         /// <param name="user">User to be created with login credentials.</param>
-        /// <returns>User that was newly created.</returns>
+        /// <returns>If verification is required <see cref="UserVerificationHash"/> will be returned. Otherwise nothing will be.</returns>
         public Task<UserVerificationHash> RegisterUserAsync(RegisterUser user)
         {
             return this.AuthenticationService.RegisterAsync(user);
@@ -193,7 +191,7 @@ namespace MeshyDB.SDK
         /// Register new user.
         /// </summary>
         /// <param name="user">User to be created with login credentials.</param>
-        /// <returns>User that was newly created.</returns>
+        /// <returns>If verification is required <see cref="UserVerificationHash"/> will be returned. Otherwise nothing will be.</returns>
         public UserVerificationHash RegisterUser(RegisterUser user)
         {
             var t = this.RegisterUserAsync(user).ConfigureAwait(true).GetAwaiter();
@@ -229,7 +227,7 @@ namespace MeshyDB.SDK
         /// Resets password for forgot password request.
         /// </summary>
         /// <param name="resetPassword">Reset password object to ensure forgot password was requested.</param>
-        /// <returns>Task to await success of reset.</returns>
+        /// <returns>Task to await completion of reset.</returns>
         public Task ResetPasswordAsync(ResetPassword resetPassword)
         {
             return this.AuthenticationService.ResetPasswordAsync(resetPassword);
@@ -286,7 +284,7 @@ namespace MeshyDB.SDK
         /// Verify user to allow them to log in.
         /// </summary>
         /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
-        /// <returns>Task to await success of sign out.</returns>
+        /// <returns>Task to await completion of verification.</returns>
         public Task VerifyAsync(UserVerificationCheck userVerificationCheck)
         {
             return this.AuthenticationService.VerifyAsync(userVerificationCheck);

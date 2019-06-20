@@ -30,7 +30,7 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="previousPassword">Previous password of user to change.</param>
         /// <param name="newPassword">New password of user to log in with next.</param>
-        /// <returns>Task to await password success.</returns>
+        /// <returns>Task to await password completion.</returns>
         Task UpdatePasswordAsync(string previousPassword, string newPassword);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Sign out currently logged in user.
         /// </summary>
-        /// <returns>Task to await success of sign out.</returns>
+        /// <returns>Task to await completion of sign out.</returns>
         Task SignoutAsync();
 
         /// <summary>
