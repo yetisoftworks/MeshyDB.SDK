@@ -3,7 +3,7 @@
    <h4>Parameters</h4>
    
 --------------
-Retieving self
+Retieving Self
 --------------
 Retrieve details about the logged in user.
 

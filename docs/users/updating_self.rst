@@ -3,7 +3,7 @@
    <h4>Parameters</h4>
    
 -------------
-Updating self
+Updating Self
 -------------
 Update details about the logged in user.
 
