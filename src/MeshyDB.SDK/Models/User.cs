@@ -56,10 +56,10 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Gets or sets the security questions for user.
         /// </summary>
-        public IEnumerable<SecurityQuestion> SecurityQuestions { get; set; }
+        public IEnumerable<SecurityQuestionHash> SecurityQuestions { get; set; }
 
         /// <summary>
-        /// Gets or sets whether a user is anonymous.
+        /// Gets or sets a value indicating whether a user is anonymous.
         /// </summary>
         public bool Anonymous { get; set; }
     }

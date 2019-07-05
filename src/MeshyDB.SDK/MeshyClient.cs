@@ -1,4 +1,4 @@
-﻿// <copyright file="MeshyDB.cs" company="Yeti Softworks LLC">
+﻿// <copyright file="MeshyClient.cs" company="Yeti Softworks LLC">
 // Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 

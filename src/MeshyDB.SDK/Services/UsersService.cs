@@ -55,5 +55,18 @@ namespace MeshyDB.SDK.Services
             var t = this.UpdateSelfAsync(user).ConfigureAwait(true).GetAwaiter();
             return t.GetResult();
         }
+
+        /// <inheritdoc/>
+        public Task UpdateSecurityQuestionsAsync(UserSecurityQuestionUpdate userSecurityQuestionUpdate)
+        {
+            return this.requestService.PostRequest<object>($"users/me/questions", userSecurityQuestionUpdate);
+        }
+
+        /// <inheritdoc/>
+        public void UpdateSecurityQuestions(UserSecurityQuestionUpdate userSecurityQuestionUpdate)
+        {
+            var t = this.UpdateSecurityQuestionsAsync(userSecurityQuestionUpdate).ConfigureAwait(true).GetAwaiter();
+            t.GetResult();
+        }
     }
 }

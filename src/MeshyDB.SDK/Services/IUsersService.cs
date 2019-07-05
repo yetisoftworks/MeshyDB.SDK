@@ -39,5 +39,18 @@ namespace MeshyDB.SDK.Services
         /// <param name="user">Updated user data.</param>
         /// <returns>User with updated information.</returns>
         User UpdateSelf(User user);
+
+        /// <summary>
+        /// Replaces users security questions with questions provided.
+        /// </summary>
+        /// <param name="userSecurityQuestionUpdate">Set of data to be updated.</param>
+        /// <returns>Task defining whether action was successful.</returns>
+        Task UpdateSecurityQuestionsAsync(UserSecurityQuestionUpdate userSecurityQuestionUpdate);
+
+        /// <summary>
+        /// Replaces users security questions with questions provided.
+        /// </summary>
+        /// <param name="userSecurityQuestionUpdate">Set of data to be updated.</param>
+        void UpdateSecurityQuestions(UserSecurityQuestionUpdate userSecurityQuestionUpdate);
     }
 }
