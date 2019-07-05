@@ -23,15 +23,5 @@ namespace MeshyDB.SDK.Models
         [JsonProperty("_id")]
         [IgnoreJsonSerialize]
         public string Id { get; internal set; }
-
-        /// <summary>
-        /// Gets reference identifier of the mesh.
-        /// </summary>
-        /// <remarks>
-        /// This will be a url reference to this object.
-        /// </remarks>
-        [JsonProperty("_rid")]
-        [IgnoreJsonSerialize]
-        public string ReferenceId { get; internal set; }
     }
 }
