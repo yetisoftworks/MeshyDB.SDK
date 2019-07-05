@@ -44,8 +44,17 @@ namespace MeshyDB.SDK.Services
                 }
 
                 var response = await httpClient.SendAsync(message).ConfigureAwait(true);
-                response = response.EnsureSuccessStatusCode();
                 var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+
+                try
+                {
+                    response = response.EnsureSuccessStatusCode();
+                }
+                catch (HttpRequestException e)
+                {
+                    throw new Exception(responseString, e);
+                }
+
                 return JsonConvert.DeserializeObject<T>(responseString);
             }
         }

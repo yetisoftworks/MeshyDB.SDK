@@ -1,117 +1,346 @@
-﻿// <copyright file="MeshyClient.cs" company="Yeti Softworks LLC">
+﻿// <copyright file="MeshyDB.cs" company="Yeti Softworks LLC">
 // Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using MeshyDB.SDK.Models;
 using MeshyDB.SDK.Services;
+
+[assembly: InternalsVisibleTo("MeshyDB.SDK.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace MeshyDB.SDK
 {
     /// <summary>
-    /// Implementation of <see cref="IMeshyClient"/>.
+    /// MeshyDB Client is used to connect with the MeshyDB REST API.
     /// </summary>
-    internal class MeshyClient : IMeshyClient
+    public class MeshyClient
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MeshyClient"/> class.
-        /// </summary>
-        /// <param name="tokenService">Service used to make token calls.</param>
-        /// <param name="requestService">Service used to make request calls.</param>
-        /// <param name="authenticationId">Authentication Id reference of currently logged in user.</param>
-        public MeshyClient(ITokenService tokenService, IRequestService requestService, string authenticationId)
-        {
-            this.TokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
-            this.RequestService = requestService ?? throw new ArgumentNullException(nameof(requestService));
-            this.AuthenticationId = authenticationId ?? throw new ArgumentNullException(nameof(authenticationId));
+        private readonly string publicKey;
+        private IHttpService httpService;
+        private IAuthenticationService authenticationService;
 
-            this.Meshes = new MeshesService(requestService);
-            this.Users = new UsersService(requestService);
-            this.AuthenticationService = new AuthenticationService(tokenService, requestService);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeshyClient"/> class that is used to communicate with the MeshyDB REST API.
+        /// </summary>
+        /// <param name="accountName">Name of MeshyDB account required for communication.</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
+        /// <param name="httpService">Http Service to use for making requests.</param>
+        public MeshyClient(string accountName, string publicKey, IHttpService httpService = null)
+            : this(accountName, null, publicKey, httpService)
+        {
         }
 
-        /// <inheritdoc/>
-        public IMeshesService Meshes { get; private set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeshyClient"/> class that is used to communicate with the MeshyDB REST API.
+        /// </summary>
+        /// <param name="accountName">Name of MeshyDB account required for communication.</param>
+        /// <param name="tenant">Tenant of data used for partitioning.</param>
+        /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
+        /// <param name="httpService">Http Service to use for making requests.</param>
+        public MeshyClient(string accountName, string tenant, string publicKey, IHttpService httpService = null)
+        {
+            this.AccountName = accountName.Trim();
+            this.Tenant = tenant?.Trim();
+            this.publicKey = publicKey.Trim();
+
+            this.HttpService = httpService ?? new HttpService();
+        }
 
         /// <summary>
-        /// Gets Authentication Id for establisehd user.
+        /// Gets or sets Http Service used for making web request calls.
         /// </summary>
-        public string AuthenticationId { get; private set; }
+        internal IHttpService HttpService
+        {
+            get
+            {
+                return this.httpService;
+            }
 
-        /// <inheritdoc/>
-        public IUsersService Users { get; private set; }
+            set
+            {
+                if (value != null)
+                {
+                    this.httpService = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets Authentication Service.
         /// </summary>
-        internal IAuthenticationService AuthenticationService { get; set; }
+        internal IAuthenticationService AuthenticationService
+        {
+            get
+            {
+                if (this.authenticationService == null)
+                {
+                    var authRequestService = new RequestService(this.HttpService, this.GetAuthUrl(), this.Tenant);
+                    var tokenService = new TokenService(authRequestService, this.publicKey);
+                    var apiRequestService = new RequestService(this.HttpService, this.GetApiUrl(), this.Tenant);
+
+                    this.authenticationService = new AuthenticationService(tokenService, apiRequestService);
+                }
+
+                return this.authenticationService;
+            }
+
+            set
+            {
+                this.authenticationService = value;
+            }
+        }
 
         /// <summary>
-        /// Gets or sets Token Service.
+        /// Gets the name of the client key for MeshyDB communication.
         /// </summary>
-        internal ITokenService TokenService { get; set; }
+        internal string AccountName { get; }
 
         /// <summary>
-        /// Gets or sets Request Service.
+        /// Gets the name of the tenant for MeshyDB communication.
         /// </summary>
-        internal IRequestService RequestService { get; set; }
+        internal string Tenant { get; }
 
-        /// <inheritdoc/>
-        public Task SignoutAsync()
+        /// <summary>
+        /// Log user in with username and password.
+        /// </summary>
+        /// <param name="username">User name of user used during login.</param>
+        /// <param name="password">Password of user used during login.</param>
+        /// <returns>Meshy client for user upon successful login.</returns>
+        public async Task<IMeshyConnection> LoginWithPasswordAsync(string username, string password)
         {
-            return this.TokenService.SignoutAsync(this.AuthenticationId);
+            var identifier = await this.AuthenticationService.LoginWithPasswordAsync(username, password).ConfigureAwait(true);
+            var services = this.GenerateAPIRequestService(identifier);
+
+            return new MeshyConnection(services.Item1, services.Item2, identifier);
         }
 
-        /// <inheritdoc/>
-        public void Signout()
+        /// <summary>
+        /// Log user in with username and password.
+        /// </summary>
+        /// <param name="username">User name of user used during login.</param>
+        /// <param name="password">Password of user used during login.</param>
+        /// <returns>Meshy client for user upon successful login.</returns>
+        public IMeshyConnection LoginWithPassword(string username, string password)
         {
-            var t = this.SignoutAsync().ConfigureAwait(true).GetAwaiter();
-
-            t.GetResult();
-        }
-
-        /// <inheritdoc/>
-        public Task UpdatePasswordAsync(string previousPassword, string newPassword)
-        {
-            return this.AuthenticationService.UpdatePasswordAsync(previousPassword, newPassword);
-        }
-
-        /// <inheritdoc/>
-        public Task<string> RetrievePersistanceTokenAsync()
-        {
-            return this.AuthenticationService.RetrievePersistanceTokenAsync(this.AuthenticationId);
-        }
-
-        /// <inheritdoc/>
-        public void UpdatePassword(string previousPassword, string newPassword)
-        {
-            var t = this.UpdatePasswordAsync(previousPassword, newPassword).ConfigureAwait(true).GetAwaiter();
-
-            t.GetResult();
-        }
-
-        /// <inheritdoc/>
-        public string RetrievePersistanceToken()
-        {
-            var t = this.RetrievePersistanceTokenAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.LoginWithPasswordAsync(username, password).ConfigureAwait(true).GetAwaiter();
 
             return t.GetResult();
         }
 
-        /// <inheritdoc/>
-        public IDictionary<string, string> GetMyUserInfo()
+        /// <summary>
+        /// Login anonymous user.
+        /// </summary>
+        /// <param name="username">User name of user used during login.</param>
+        /// <returns>Meshy client for user upon successful login.</returns>
+        public async Task<IMeshyConnection> LoginAnonymouslyAsync(string username)
         {
-            var t = this.GetMyUserInfoAsync().ConfigureAwait(true).GetAwaiter();
+            var identifier = await this.AuthenticationService.LoginAnonymouslyAsync(username).ConfigureAwait(true);
+            var services = this.GenerateAPIRequestService(identifier);
+
+            return new MeshyConnection(services.Item1, services.Item2, identifier);
+        }
+
+        /// <summary>
+        /// Login anonymous user.
+        /// </summary>
+        /// <param name="username">User name of user used during login.</param>
+        /// <returns>Meshy client for user upon successful login.</returns>
+        public IMeshyConnection LoginAnonymously(string username)
+        {
+            var t = this.LoginAnonymouslyAsync(username).ConfigureAwait(true).GetAwaiter();
 
             return t.GetResult();
         }
 
-        /// <inheritdoc/>
-        public Task<IDictionary<string, string>> GetMyUserInfoAsync()
+        /// <summary>
+        /// Register anonymous user.
+        /// </summary>
+        /// <param name="username">Specify known username for anonymous user. If username is not provided a random username will be generated.</param>
+        /// <returns>New anonymous user.</returns>
+        public Task<User> RegisterAnonymousUserAsync(string username = null)
         {
-            return this.TokenService.GetUserInfoAsync(this.AuthenticationId);
+            return this.AuthenticationService.RegisterAnonymousUserAsync(username);
+        }
+
+        /// <summary>
+        /// Register anonymous user.
+        /// </summary>
+        /// <param name="username">Specify known username for anonymous user. If username is not provided a random username will be generated.</param>
+        /// <returns>New anonymous user.</returns>
+        public User RegisterAnonymousUser(string username = null)
+        {
+            var t = this.RegisterAnonymousUserAsync(username).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <summary>
+        /// Register new user.
+        /// </summary>
+        /// <param name="user">User to be created with login credentials.</param>
+        /// <returns>If verification is required <see cref="UserVerificationHash"/> will be returned. Otherwise nothing will be.</returns>
+        public Task<UserVerificationHash> RegisterUserAsync(RegisterUser user)
+        {
+            return this.AuthenticationService.RegisterAsync(user);
+        }
+
+        /// <summary>
+        /// Register new user.
+        /// </summary>
+        /// <param name="user">User to be created with login credentials.</param>
+        /// <returns>If verification is required <see cref="UserVerificationHash"/> will be returned. Otherwise nothing will be.</returns>
+        public UserVerificationHash RegisterUser(RegisterUser user)
+        {
+            var t = this.RegisterUserAsync(user).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <summary>
+        /// Request forgot password based on username.
+        /// </summary>
+        /// <param name="username">Username of forgotton user.</param>
+        /// <param name="attempt">Forgot password attempt.</param>
+        /// <returns>Hashed object to ensure forgot password parity request.</returns>
+        public Task<UserVerificationHash> ForgotPasswordAsync(string username, int attempt = 1)
+        {
+            return this.AuthenticationService.ForgotPasswordAsync(username, attempt);
+        }
+
+        /// <summary>
+        /// Request forgot password based on username.
+        /// </summary>
+        /// <param name="username">Username of forgotton user.</param>
+        /// <param name="attempt">Forgot password attempt.</param>
+        /// <returns>Hashed object to ensure forgot password parity request.</returns>
+        public UserVerificationHash ForgotPassword(string username, int attempt = 1)
+        {
+            var t = this.ForgotPasswordAsync(username).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <summary>
+        /// Resets password for forgot password request.
+        /// </summary>
+        /// <param name="resetPassword">Reset password object to ensure forgot password was requested.</param>
+        /// <returns>Task to await completion of reset.</returns>
+        public Task ResetPasswordAsync(ResetPassword resetPassword)
+        {
+            return this.AuthenticationService.ResetPasswordAsync(resetPassword);
+        }
+
+        /// <summary>
+        /// Resets password for forgot password request.
+        /// </summary>
+        /// <param name="resetPassword">Reset password object to ensure forgot password was requested.</param>
+        public void ResetPassword(ResetPassword resetPassword)
+        {
+            var t = this.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter();
+
+            t.GetResult();
+        }
+
+        /// <summary>
+        /// Login with peristance token from another session.
+        /// </summary>
+        /// <param name="persistanceToken">Persistance token of previous session for login.</param>
+        /// <returns>Meshy client for user upon successful login.</returns>
+        public async Task<IMeshyConnection> LoginWithPersistanceAsync(string persistanceToken)
+        {
+            var identifier = await this.AuthenticationService.LoginWithPersistanceAsync(persistanceToken).ConfigureAwait(true);
+            var services = this.GenerateAPIRequestService(identifier);
+
+            return new MeshyConnection(services.Item1, services.Item2, identifier);
+        }
+
+        /// <summary>
+        /// Login with peristance token from another session.
+        /// </summary>
+        /// <param name="persistanceToken">Persistance token of previous session for login.</param>
+        /// <returns>Meshy client for user upon successful login.</returns>
+        public IMeshyConnection LoginWithPersistance(string persistanceToken)
+        {
+            var t = this.LoginWithPersistanceAsync(persistanceToken).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <summary>
+        /// Verify user to allow them to log in.
+        /// </summary>
+        /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+        public void Verify(UserVerificationCheck userVerificationCheck)
+        {
+            var t = this.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter();
+
+            t.GetResult();
+        }
+
+        /// <summary>
+        /// Verify user to allow them to log in.
+        /// </summary>
+        /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+        /// <returns>Task to await completion of verification.</returns>
+        public Task VerifyAsync(UserVerificationCheck userVerificationCheck)
+        {
+            return this.AuthenticationService.VerifyAsync(userVerificationCheck);
+        }
+
+        /// <summary>
+        /// Check user hash to verify user request.
+        /// </summary>
+        /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+        /// <returns>Whether or not check was successful.</returns>
+        public bool CheckHash(UserVerificationCheck userVerificationCheck)
+        {
+            var t = this.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <summary>
+        /// Check user hash to verify user request.
+        /// </summary>
+        /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
+        /// <returns>Whether or not check was successful.</returns>
+        public Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck)
+        {
+            return this.AuthenticationService.CheckHashAsync(userVerificationCheck);
+        }
+
+        /// <summary>
+        /// Gets the Api Url configured for the supplied account.
+        /// </summary>
+        /// <returns>The configured account Api Url communication.</returns>
+        internal string GetApiUrl()
+        {
+            return Constants.TemplateApiUrl.Replace("{accountName}", this.AccountName);
+        }
+
+        /// <summary>
+        /// Gets the Auth Url configured for the supplied account.
+        /// </summary>
+        /// <returns>The configured account Auth Url communication.</returns>
+        internal string GetAuthUrl()
+        {
+            return Constants.TemplateAuthUrl.Replace("{accountName}", this.AccountName);
+        }
+
+        /// <summary>
+        /// Instantiates services used for api communication with required dependencies.
+        /// </summary>
+        private Tuple<ITokenService, IRequestService> GenerateAPIRequestService(string identifier)
+        {
+            var httpService = this.HttpService;
+            var authRequestService = new RequestService(httpService, this.GetAuthUrl(), this.Tenant);
+            var tokenService = new TokenService(authRequestService, this.publicKey);
+            var requestService = new RequestService(httpService, this.GetApiUrl(), this.Tenant, tokenService, identifier);
+
+            return new Tuple<ITokenService, IRequestService>(tokenService, requestService);
         }
     }
 }

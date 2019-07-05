@@ -1,4 +1,4 @@
-﻿// <copyright file="IMeshyClient.cs" company="Yeti Softworks LLC">
+﻿// <copyright file="IMeshyConnection.cs" company="Yeti Softworks LLC">
 // Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
@@ -11,9 +11,9 @@ using MeshyDB.SDK.Services;
 namespace MeshyDB.SDK
 {
     /// <summary>
-    /// Represents Meshy Client.
+    /// Represents Meshy Connection.
     /// </summary>
-    public interface IMeshyClient
+    public interface IMeshyConnection
     {
         /// <summary>
         /// Gets service to interact with Meshes for the logged in user.
