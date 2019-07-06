@@ -223,8 +223,8 @@ Now the user is complete. Let us sign out so someone else can have a try.
       
       .. code-block:: javascript
 
-         meshyDBClient.signout()
-                      .then(function(result) { });
+         meshyConnection.signout()
+                        .then(function(result) { });
       
       |parameters|
 
