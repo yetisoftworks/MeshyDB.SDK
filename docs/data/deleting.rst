@@ -34,10 +34,10 @@ Permanently remove Mesh data from collection.
    
       .. code-block:: c#
          
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginAnonymouslyAsync(username);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = await client.LoginAnonymouslyAsync(username);
       
-         await client.Meshes.DeleteAsync(person);
+         await connection.Meshes.DeleteAsync(person);
 
       |parameters|
 
@@ -58,13 +58,13 @@ Permanently remove Mesh data from collection.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                           meshyDBClient.meshes.delete(meshName, id)
-                                               .then(function(_){ });
-                      }); 
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                        meshyConnection.meshes.delete(meshName, id)
+                                              .then(function(_){ });
+                     }); 
       
       |parameters|
 

@@ -52,11 +52,11 @@ Verifies user verification hash request.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(accountName, tenant, publicKey);
+        var client = new MeshyClient(accountName, tenant, publicKey);
 
         var check = new UserVerificationCheck();
 		
-        var isValid = await database.CheckHashAsync(check);
+        var isValid = await client.CheckHashAsync(check);
 
       |parameters|
       
@@ -83,9 +83,9 @@ Verifies user verification hash request.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.checkHash({
+         client.checkHash({
                                username: username,
                                attempt: attempt:
                                hash: hash,
@@ -93,7 +93,7 @@ Verifies user verification hash request.
                                hint: hint,
                                verificationCode: verificationCode
 						    })
-                 .then(function(isValid) { });
+               .then(function(isValid) { });
       
       |parameters|
 

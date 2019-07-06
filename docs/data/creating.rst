@@ -45,10 +45,10 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
            public string LastName { get; set; }
          }
 
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginAnonymouslyAsync(username);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = await client.LoginAnonymouslyAsync(username);
          
-         var person = await client.Meshes.CreateAsync(new Person(){
+         var person = await connection.Meshes.CreateAsync(new Person(){
            FirstName="Bob",
            LastName="Bobberson"
          });
@@ -70,17 +70,17 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
 
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.meshes.create(meshName, 
-                                                                   {
-                                                                        firstName:"Bob",
-                                                                        lastName:"Bobberson"
-                                                                   })
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                  var refreshToken = meshyConnection.meshes.create(meshName, 
+                                                                  {
+                                                                     firstName:"Bob",
+                                                                     lastName:"Bobberson"
+                                                                  })
                                                             .then(function(result) { });
-                  }); 
+                     }); 
       
       |parameters|
 
@@ -102,6 +102,5 @@ Example Response:
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
-    "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "lastName": "Bobberson"
   }

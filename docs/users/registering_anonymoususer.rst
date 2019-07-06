@@ -37,9 +37,9 @@ Creates an anonymous user that can log into the system.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(accountName, tenant, publicKey);
+        var client = new MeshyClient(accountName, tenant, publicKey);
 
-        var anonymousUser = await database.RegisterAnonymousUserAsync(userName);
+        var anonymousUser = await client.RegisterAnonymousUserAsync(userName);
 
       |parameters|
       
@@ -56,10 +56,10 @@ Creates an anonymous user that can log into the system.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.registerAnonymousUser(username)
-                 .then(function(anonymousUser) { });
+         client.registerAnonymousUser(username)
+               .then(function(anonymousUser) { });
       
       |parameters|
 
@@ -86,5 +86,5 @@ Example Response:
     "phoneNumber": null,
     "roles": [],
     "securityQuestions": [],
-	"anonymous": true
+	 "anonymous": true
   }

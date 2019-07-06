@@ -72,12 +72,12 @@ Update details about the logged in user.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginAnonymouslyAsync(username);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = await client.LoginAnonymouslyAsync(username);
 
          var user = new User();
 
-         await client.Users.UpdateUserAsync(id, user);
+         await connection.Users.UpdateUserAsync(id, user);
 
       |parameters|
       
@@ -112,24 +112,24 @@ Update details about the logged in user.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                     meshyDBClient.usersService.updateSelf({
-                                                               username: username,
-                                                               id: id,
-                                                               firstName: firstName,
-                                                               lastName: lastName,
-                                                               verified:  verified,
-                                                               isActive: isActive,
-                                                               phoneNumber: phoneNumber,
-                                                               roles: roles,
-															   securityQuestions: securityQuestions,
-															   anonymous:  anonymous
-                                                          })
-                                               .then(function(self) { });
-                  }); 
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                        meshyConnection.usersService.updateSelf({
+                                                                  username: username,
+                                                                  id: id,
+                                                                  firstName: firstName,
+                                                                  lastName: lastName,
+                                                                  verified:  verified,
+                                                                  isActive: isActive,
+                                                                  phoneNumber: phoneNumber,
+                                                                  roles: roles,
+															                     securityQuestions: securityQuestions,
+															                     anonymous:  anonymous
+                                                               })
+                                                    .then(function(self) { });
+               }); 
       
       |parameters|
 

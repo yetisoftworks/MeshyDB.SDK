@@ -40,11 +40,11 @@ Using the token request made to generate an access token, a refresh token will a
    
       .. code-block:: c#
 
-        var database = new MeshyDB(accountName, tenant, publicKey);
-        var client = database.LoginWithPassword(username, password);
-        var refreshToken = client.RetrievePersistanceToken();
+        var client = new MeshyClient(accountName, tenant, publicKey);
+        var connection = client.LoginWithPassword(username, password);
+        var refreshToken = connection.RetrievePersistanceToken();
         
-        client = await database.LoginWithPersistanceAsync(refreshToken);
+        connection = await client.LoginWithPersistanceAsync(refreshToken);
 
       |parameters|
 
@@ -65,15 +65,15 @@ Using the token request made to generate an access token, a refresh token will a
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.login(username,password)
-                 .then(function (meshyDBClient){
-                     var refreshToken = meshyDBClient.retrievePersistanceToken();
+         client.login(username,password)
+               .then(function (meshyConnection){
+                  var refreshToken = meshyConnection.retrievePersistanceToken();
                      
-                     database.loginWithPersistance(refreshToken)
-                             .then(function(refreshedMeshyDBClient) { });
-                 });
+                  client.loginWithPersistance(refreshToken)
+                        .then(function(refreshedMeshyConnection) { });
+               });
       
       |parameters|
 

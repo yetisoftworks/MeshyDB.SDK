@@ -40,10 +40,10 @@ Allows the logged in user to change their password.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginWithPasswordAsync(username, password);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = await client.LoginWithPasswordAsync(username, password);
 
-         await client.UpdatePasswordAsync(previousPassword, newPassword);
+         await connection.UpdatePasswordAsync(previousPassword, newPassword);
 
       |parameters|
       
@@ -67,13 +67,13 @@ Allows the logged in user to change their password.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.login(username, password)
-                 .then(function (meshyDBClient){
-                     meshyDBClient.updatePassword(previousPassword, newPassword)
-                                  .then(function(_) { });
-                  }); 
+         client.login(username, password)
+               .then(function (meshyConnection){
+                     meshyConnection.updatePassword(previousPassword, newPassword)
+                                    .then(function(_) { });
+                     }); 
       
       |parameters|
 

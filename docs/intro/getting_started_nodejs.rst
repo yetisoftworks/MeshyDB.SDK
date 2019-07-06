@@ -3,7 +3,7 @@ NodeJS
 ======
 The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at `MeshyDB.com <https://meshydb.com/>`_.
 
-Once we have done that we can go to Account and get our Client Key and Public Key.
+Once we have done that we can go to Account and get our Account Name. Next, we can go to Clients and get the Public Key.
 
 Now that we have the required information let's jump in and see how easy it is to start with MeshyDB.
 
@@ -37,16 +37,16 @@ Let's log in using our MeshyDB credentials.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
 
-         var meshyDBClient;
+         var meshyConnection;
         
-         database.login(username,password)
-                 .then(function (client) { meshyDBClient = client; });
+         client.login(username,password)
+                 .then(function (connection) { meshyConnection = connection; });
 				 
 		// Or log in anonomously
-		database.loginAnonmously(username)
-				.then(function (client) { meshyDBClient = client; });
+		client.loginAnonmously(username)
+				.then(function (connection) { meshyConnection = connection; });
       
       |parameters|
 
@@ -91,8 +91,8 @@ The data object can whatever information you would like to capture. The followin
                             lastName:"Bobberson"
                       };
                       
-         meshyDBClient.meshes.create(meshName, person)
-                             .then(function(result) { person = result; });
+         meshyConnection.meshes.create(meshName, person)
+                               .then(function(result) { person = result; });
       
       |parameters|
 
@@ -106,8 +106,7 @@ Example Response:
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
-    "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "lastName": "Bobberson"
   }
   
 -----------
@@ -123,8 +122,8 @@ If we need to make a modificaiton let's update our Mesh!
 
         person.firstName = "Bobbo";
         
-        meshyDBClient.meshes.update(meshName, person, person._id)
-                            .then(function(result){ person = result; });
+        meshyConnection.meshes.update(meshName, person, person._id)
+                              .then(function(result){ person = result; });
       
       |parameters|
 
@@ -139,8 +138,7 @@ Example Response:
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
-    "lastName": "Bobberson",
-    "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "lastName": "Bobberson"
   }
 
 -----------
@@ -155,14 +153,14 @@ Let's see if we can find Bobbo.
       .. code-block:: javascript
          
 
-         meshyDBClient.meshes.search(meshName, 
-                                    {
-                                       filter: { "firstName": "Bobbo" },
-                                       orderby: null,
-                                       pageNumber: 1,
-                                       pageSize: 25
-                                    })
-                             .then(function(results){ });
+         meshyConnection.meshes.search(meshName, 
+                                       {
+                                          filter: { "firstName": "Bobbo" },
+                                          orderby: null,
+                                          pageNumber: 1,
+                                          pageSize: 25
+                                       })
+                               .then(function(results){ });
       
       |parameters|
 
@@ -187,8 +185,7 @@ Example Response:
     "results": [{
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
-                 "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "lastName": "Bobberson"
                }],
     "totalRecords": 1
   }
@@ -205,8 +202,8 @@ We are now done with our data, so let us clean up after ourselves.
       
       .. code-block:: javascript
          
-         meshyDBClient.meshes.delete(meshName, person._id)
-                             .then(function(_){ });
+         meshyConnection.meshes.delete(meshName, person._id)
+                               .then(function(_){ });
          
       |parameters|
 

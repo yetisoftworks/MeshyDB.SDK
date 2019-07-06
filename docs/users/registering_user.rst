@@ -72,11 +72,11 @@ Creates a new user that can log into the system.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(accountName, tenant, publicKey);
+        var client = new MeshyClient(accountName, tenant, publicKey);
 
         var user = new RegisterUser();
 
-        await database.RegisterUserAsync(user);
+        await client.RegisterUserAsync(user);
 
       |parameters|
       
@@ -111,21 +111,21 @@ Creates a new user that can log into the system.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.registerUser({
-                                 username: username,
-                                 newPassword: newPassword,
-                                 id: id,
-                                 firstName: firstName,
-                                 lastName: lastName,
-                                 verified: verified,
-                                 isActive: isActive,
-                                 phoneNumber: phoneNumber,
-                                 roles: roles,
-                                 securityQuestions: securityQuestions
+         client.registerUser({
+                               username: username,
+                               newPassword: newPassword,
+                               id: id,
+                               firstName: firstName,
+                               lastName: lastName,
+                               verified: verified,
+                               isActive: isActive,
+                               phoneNumber: phoneNumber,
+                               roles: roles,
+                               securityQuestions: securityQuestions
                              })
-                 .then(function(user) { });
+               .then(function(user) { });
       
       |parameters|
 

@@ -30,10 +30,10 @@ Retrieve details about the logged in user.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginAnonymouslyAsync(username);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = await client.LoginAnonymouslyAsync(username);
 
-         await client.Users.GetLoggedInUserAsync();
+         await connection.Users.GetLoggedInUserAsync();
 
       |parameters|
       
@@ -50,13 +50,13 @@ Retrieve details about the logged in user.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                     meshyDBClient.usersService.getSelf()
-                                               .then(function(self) { });
-                  }); 
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                        meshyConnection.usersService.getSelf()
+                                                    .then(function(self) { });
+               }); 
       
       |parameters|
 
