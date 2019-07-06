@@ -3,7 +3,7 @@ C#
 ==
 The first thing we need is some MeshyDB credentials. If you have not you can get started with a free account at `MeshyDB.com <https://meshydb.com/>`_.
 
-Once we have done that we can go to Account and get our Client Key and Public Key.
+Once we have done that we can go to Account and get our Account Name. Next, we can go to Clients and get the Public Key.
 
 Now that we have the required information let's jump in and see how easy it is to start with MeshyDB.
 
@@ -37,11 +37,11 @@ Let's log in using our MeshyDB credentials.
    
       .. code-block:: c#
    
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = database.LoginWithPassword(username, password);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = client.LoginWithPassword(username, password);
          
          // Or log in anonomously
-         client = database.LoginAnonymouslyAsync(username);
+         connection = client.LoginAnonymouslyAsync(username);
          
       |parameters|
 
@@ -88,7 +88,7 @@ The data object can whatever information you would like to capture. The followin
            public string LastName { get; set; }
          }
 
-         var person = await client.Meshes.CreateAsync(new Person(){
+         var person = await connection.Meshes.CreateAsync(new Person(){
            FirstName="Bob",
            LastName="Bobberson"
          });
@@ -105,8 +105,7 @@ Example Response:
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bob",
-    "lastName": "Bobberson",
-    "_rid": "https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "lastName": "Bobberson"
   }
   
 -----------
@@ -122,7 +121,7 @@ If we need to make a modificaiton let's update our Mesh!
 
          person.FirstName = "Bobbo";
 
-         person = await client.Meshes.UpdateAsync(person);
+         person = await connection.Meshes.UpdateAsync(person);
 
       |parameters|
 
@@ -136,8 +135,7 @@ Example Response:
   {
     "_id":"5c78cc81dd870827a8e7b6c4",
     "firstName": "Bobbo",
-    "lastName": "Bobberson",
-    "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+    "lastName": "Bobberson"
   }
 
 -----------
@@ -151,7 +149,7 @@ Let's see if we can find Bobbo.
    
       .. code-block:: c#
 
-         var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
+         var pagedPersonResult = await connection.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
       |parameters|
 
@@ -176,8 +174,7 @@ Example Response:
     "results": [{
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
-                 "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "lastName": "Bobberson"
                }],
     "totalRecords": 1
   }
@@ -193,7 +190,7 @@ We are now done with our data, so let us clean up after ourselves.
    
       .. code-block:: c#
       
-         await client.Meshes.DeleteAsync(person);
+         await connection.Meshes.DeleteAsync(person);
 
       |parameters|
 
@@ -211,7 +208,7 @@ Now the user is complete. Let us sign out so someone else can have a try.
    
       .. code-block:: c#
 
-         await client.SignoutAsync();
+         await connection.SignoutAsync();
          
       |parameters|
 

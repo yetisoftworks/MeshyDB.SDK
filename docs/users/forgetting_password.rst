@@ -37,9 +37,9 @@ Creates a request for password reset that must have the matching data to reset t
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
+         var client = new MeshyClient(accountName, tenant, publicKey);
 
-         await database.ForgotPasswordAsync(username, attempt);
+         await client.ForgotPasswordAsync(username, attempt);
 
       |parameters|
       
@@ -59,10 +59,10 @@ Creates a request for password reset that must have the matching data to reset t
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.forgotPassword(username, attempt)
-                 .then(function(passwordResetHash) { });
+         client.forgotPassword(username, attempt)
+               .then(function(passwordResetHash) { });
       
       |parameters|
 

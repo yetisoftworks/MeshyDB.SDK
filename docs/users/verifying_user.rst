@@ -52,11 +52,11 @@ Marks user as verified.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(accountName, tenant, publicKey);
+        var client = new MeshyClient(accountName, tenant, publicKey);
 
         var check = new UserVerificationCheck();
 		
-        await database.VerifyAsync(check);
+        await client.VerifyAsync(check);
 
       |parameters|
       
@@ -83,17 +83,17 @@ Marks user as verified.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.verify({
-                             username: username,
-                             attempt: attempt:
-                             hash: hash,
-                             expires: expires,
-                             hint: hint,
-                             verificationCode: verificationCode
-						 })
-                 .then(function(_) { });
+         client.verify({
+                           username: username,
+                           attempt: attempt:
+                           hash: hash,
+                           expires: expires,
+                           hint: hint,
+                           verificationCode: verificationCode
+						    })
+               .then(function(_) { });
       
       |parameters|
 

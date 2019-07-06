@@ -38,10 +38,10 @@ Log user out.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(accountName, tenant, publicKey);
-        var client = await database.LoginAnonymouslyAsync(username);
+        var client = new MeshyClient(accountName, tenant, publicKey);
+        var connection = await client.LoginAnonymouslyAsync(username);
 
-        await client.SignoutAsync();
+        await connection.SignoutAsync();
 
       |parameters|
       
@@ -58,13 +58,13 @@ Log user out.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
 
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                     meshyDBClient.signout()
-                                  .then(function(result) { });
-                  }); 
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                        meshyConnection.signout()
+                                       .then(function(result) { });
+                     }); 
       
       |parameters|
 

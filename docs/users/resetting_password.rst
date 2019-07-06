@@ -43,9 +43,9 @@ Uses result from Forgot password to allow a user to reset their password.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
+         var client = new MeshyClient(accountName, tenant, publicKey);
 
-         await database.ResetPasswordAsync(resetHash, newPassword);
+         await client.ResetPasswordAsync(resetHash, newPassword);
 
       |parameters|
       
@@ -69,13 +69,13 @@ Uses result from Forgot password to allow a user to reset their password.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.forgotPassword(username)
-                 .then(function(passwordResetHash){
-                     database.resetPassword(passwordResetHash, newPassword)
-                             .then(function(_) { });
-                 });
+         client.forgotPassword(username)
+                .then(function(passwordResetHash){
+                        database.resetPassword(passwordResetHash, newPassword)
+                                .then(function(_) { });
+                      });
       
       |parameters|
 

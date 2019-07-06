@@ -31,10 +31,10 @@ Retrieve user information.
    
       .. code-block:: c#
       
-        var database = new MeshyDB(accountName, tenant, publicKey);
-        var client = await database.LoginAnonymouslyAsync(username);
+        var client = new MeshyClient(accountName, tenant, publicKey);
+        var connection = await client.LoginAnonymouslyAsync(username);
 
-        var userInfo = await client.GetMyUserInfoAsync();
+        var userInfo = await connection.GetMyUserInfoAsync();
 
       |parameters|
       
@@ -51,12 +51,12 @@ Retrieve user information.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
          
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                     meshyDBClient.getMyUserInfo().then(function(info) { });
-                 }); 
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                        meshyConnection.getMyUserInfo().then(function(info) { });
+               }); 
       
       |parameters|
 

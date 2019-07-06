@@ -45,10 +45,10 @@ Filter Mesh data from collection based on query parameters.
    
       .. code-block:: c#
       
-         var database = new MeshyDB(accountName, tenant, publicKey);
-         var client = await database.LoginAnonymouslyAsync(username);
+         var client = new MeshyClient(accountName, tenant, publicKey);
+         var connection = await client.LoginAnonymouslyAsync(username);
 
-         var pagedPersonResult = await client.Meshes.SearchAsync<Person>(filter, page, pageSize);
+         var pagedPersonResult = await connection.Meshes.SearchAsync<Person>(filter, page, pageSize);
 
       |parameters|
 
@@ -76,19 +76,19 @@ Filter Mesh data from collection based on query parameters.
       
       .. code-block:: javascript
          
-         var database = initializeMeshyDB(accountName, tenant, publicKey);
+         var client = initializeMeshyClientWithTenant(accountName, tenant, publicKey);
 
-         database.loginAnonymously(username)
-                 .then(function (meshyDBClient){
-                     meshyDBClient.meshes.search(meshName, 
+         client.loginAnonymously(username)
+               .then(function (meshyConnection){
+                  meshyConnection.meshes.search(meshName, 
                                                 {
                                                    filter: filter,
                                                    orderby: orderby,
                                                    pageNumber: page,
                                                    pageSize: pageSize
                                                 })
-                                         .then(function(results){ });
-                  }); 
+                                        .then(function(results){ });
+                    }); 
       
       |parameters|
       tenant : string
@@ -120,8 +120,7 @@ Example Response:
     "results": [{
                  "_id":"5c78cc81dd870827a8e7b6c4",
                  "firstName": "Bobbo",
-                 "lastName": "Bobberson",
-                 "_rid":"https://api.meshydb.com/{accountName}/meshes/{mesh}/5c78cc81dd870827a8e7b6c4"
+                 "lastName": "Bobberson"
                }],
     "totalRecords": 1
   }
