@@ -35,7 +35,7 @@ Verifies user verification hash request.
          Indicates which account you are connecting for authentication.
       access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      username : string, required, required
+      username : string, required
          Username of user.
       attempt: int, required
          Identifies which attempt hash was generated against.

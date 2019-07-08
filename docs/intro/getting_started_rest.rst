@@ -56,9 +56,9 @@ First, we need to be able to log in with someone. Let's start with registering a
          Indicates which account you are connecting for authentication.
       access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      username : string, required, required
+      username : string, required
          Username of user.
-      newPassword : string, required, required
+      newPassword : string, required
          Password of user to use for login.
       id : string
          Identifier of user.
