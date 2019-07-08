@@ -40,9 +40,14 @@ namespace MeshyDB.SDK.Models
         public string LastName { get; set; }
 
         /// <summary>
-        /// Gets or sets hone number.
+        /// Gets or sets phone number.
         /// </summary>
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets email address.
+        /// </summary>
+        public string EmailAddress { get; set; }
 
         /// <summary>
         /// Gets or sets a New Password for user to be able to log in with.

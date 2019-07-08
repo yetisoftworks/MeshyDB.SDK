@@ -49,6 +49,11 @@ namespace MeshyDB.SDK.Models
         public string PhoneNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets the email address.
+        /// </summary>
+        public string EmailAddress { get; set; }
+
+        /// <summary>
         /// Gets or sets the roles assigned.
         /// </summary>
         public IEnumerable<string> Roles { get; set; }
