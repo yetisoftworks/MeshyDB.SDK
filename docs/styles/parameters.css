@@ -1,7 +1,9 @@
 .type{
     color: blue;
+    font-weight: normal;
 }
 
 .required{
-    color: red;
+    color: darkred;
+    font-weight: normal;
 }
