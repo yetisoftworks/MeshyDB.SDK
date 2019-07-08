@@ -26,17 +26,17 @@ Uses result from Forgot password to allow a user to reset their password.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      username : string
+      username : string, required
         User name that is being reset.
-      expires : date
+      expires : date, required
         Expiration of hash.
-      hash : string
+      hash : string, required
         Forgot password hash.
-      newPassword : string
+      newPassword : string, required
         New password of user.
         
    .. group-tab:: C#
@@ -49,19 +49,19 @@ Uses result from Forgot password to allow a user to reset their password.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
         User name that is being reset.
-      expires : date
+      expires : date, required
         Expiration of hash.
-      hash : string
+      hash : string, required
         Forgot password hash.
-      newPassword : string
+      newPassword : string, required
         New password of user.
 
 
@@ -75,21 +75,21 @@ Uses result from Forgot password to allow a user to reset their password.
                 .then(function(passwordResetHash){
                         database.resetPassword(passwordResetHash, newPassword)
                                 .then(function(_) { });
-                      });
+                });
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
         User name that is being reset.
-      expires : date
+      expires : date, required
         Expiration of hash.
-      hash : string
+      hash : string, required
         Forgot password hash.
-      newPassword : string
+      newPassword : string, required
         New password of user.

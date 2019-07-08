@@ -24,13 +24,13 @@ Filter Mesh data from collection based on query parameters.
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token : string
+      access_token : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
       filter : string
          Filter criteria for search. Uses MongoDB format.
@@ -38,7 +38,7 @@ Filter Mesh data from collection based on query parameters.
          How to order results. Uses MongoDB format.
       page : integer
          Page number of users to bring back.
-      pageSize : integer, max: 200
+      pageSize : integer, max: 200, default: 25
          Number of results to bring back per page.
 
    .. group-tab:: C#
@@ -52,15 +52,15 @@ Filter Mesh data from collection based on query parameters.
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      mesh : string
+      mesh : string, required, default: class name
          Identifies name of mesh collection. e.g. person.
       filter : string
          Filter criteria for search. Uses MongoDB format.
@@ -68,7 +68,7 @@ Filter Mesh data from collection based on query parameters.
          How to order results. Uses MongoDB format.
       page : integer
          Page number of users to bring back.
-      pageSize : integer, max: 200
+      pageSize : integer, max: 200, default: 25
          Number of results to bring back per page.
 
 
@@ -88,16 +88,16 @@ Filter Mesh data from collection based on query parameters.
                                                    pageSize: pageSize
                                                 })
                                         .then(function(results){ });
-                    }); 
+               }); 
       
       |parameters|
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      meshName : string
+      meshName : string, required
          Identifies name of mesh collection. e.g. person.
       username : string
          User name.
@@ -107,7 +107,7 @@ Filter Mesh data from collection based on query parameters.
          How to order results. Uses MongoDB format.
       page : integer
          Page number of users to bring back.
-      pageSize : integer, max: 200
+      pageSize : integer, max: 200, default: 25
          Number of results to bring back per page.
          
 Example Response:

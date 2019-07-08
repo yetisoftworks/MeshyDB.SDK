@@ -24,9 +24,9 @@ Creates a request for password reset that must have the matching data to reset t
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
       username : string, required
          User name to be reset.
@@ -43,13 +43,13 @@ Creates a request for password reset that must have the matching data to reset t
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name to be reset.
       attempt: int, required
          Identifies which number of times of request.
@@ -66,13 +66,13 @@ Creates a request for password reset that must have the matching data to reset t
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name to be reset.
       attempt: int, required
          Identifies which number of times of request.

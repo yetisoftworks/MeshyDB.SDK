@@ -25,13 +25,13 @@ Log user out.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      refresh_token  : string
+      refresh_token  : string, required
          Refresh token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
          
    .. group-tab:: C#
@@ -45,13 +45,13 @@ Log user out.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
 
    .. group-tab:: NodeJS
@@ -64,15 +64,15 @@ Log user out.
                .then(function (meshyConnection){
                         meshyConnection.signout()
                                        .then(function(result) { });
-                     }); 
+               }); 
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.

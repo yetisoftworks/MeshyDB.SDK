@@ -45,15 +45,15 @@ Let's log in using our MeshyDB credentials.
          
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      password : string
+      password : string, required
          User password.
 
 
@@ -95,7 +95,7 @@ The data object can whatever information you would like to capture. The followin
 
       |parameters|
 
-      mesh : string
+      mesh : string, required, default: class name
          Identifies name of mesh collection. e.g. person.
 
 Example Response:
@@ -125,7 +125,7 @@ If we need to make a modificaiton let's update our Mesh!
 
       |parameters|
 
-      mesh : string
+      mesh : string, required, default: class name
          Identifies name of mesh collection. e.g. person. The id of the person to be updated will be derived from the object.
 
 Example Response:
@@ -153,7 +153,7 @@ Let's see if we can find Bobbo.
 
       |parameters|
 
-      mesh : string
+      mesh : string, required, default: class name
          Identifies name of mesh collection. e.g. person.
       filter : string
          Filter criteria for search. Uses MongoDB format.
@@ -161,7 +161,7 @@ Let's see if we can find Bobbo.
          How to order results. Uses MongoDB format.
       page : integer
          Page number of users to bring back.
-      pageSize : integer, max: 200
+      pageSize : integer, max: 200, default: 25
          Number of results to bring back per page.
 
 Example Response:
@@ -194,7 +194,7 @@ We are now done with our data, so let us clean up after ourselves.
 
       |parameters|
 
-      mesh : string
+      mesh : string, required, default: class name
          Identifies name of mesh collection. e.g. person. The id of the person to be deleted will be derived from the object.
 
 --------

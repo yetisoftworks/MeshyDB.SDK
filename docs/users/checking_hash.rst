@@ -1,3 +1,6 @@
+.. role:: required
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -29,23 +32,23 @@ Verifies user verification hash request.
 
       |parameters|
       
-      tenant : string
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token  : string
+      access_token  : :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      attempt: int, required
+      attempt: :type:`int`, :required:`required`
          Identifies which attempt hash was generated against.
-      hash: string, required
+      hash: :type:`string`, :required:`required`
          Generated hash from verification request.
-      expires: date, required
+      expires: :type:`date`, :required:`required`
          Identifies when the request expires.
-      hint: string
+      hint: :type:`string`, :required:`required`
          Hint for verification code was generated
-      verificationCode: string, required
+      verificationCode: :type:`string`, :required:`required`
          Value to verify against verification request.
 
    .. group-tab:: C#
@@ -60,23 +63,23 @@ Verifies user verification hash request.
 
       |parameters|
       
-      tenant : string
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      attempt: int, required
+      attempt: :type:`int`, :required:`required`
          Identifies which attempt hash was generated against.
-      hash: string, required
+      hash: :type:`string`, :required:`required`
          Generated hash from verification request.
-      expires: date, required
+      expires: :type:`date`, :required:`required`
          Identifies when the request expires.
-      hint: string
+      hint: :type:`string`, :required:`required`
          Hint for verification code was generated
-      verificationCode: string, required
+      verificationCode: :type:`string`, :required:`required`
          Value to verify against verification request.
 		
    .. group-tab:: NodeJS
@@ -97,23 +100,23 @@ Verifies user verification hash request.
       
       |parameters|
 
-      tenant : string
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      attempt: int, required
+      attempt: :type:`int`, :required:`required`
          Identifies which attempt hash was generated against.
-      hash: string, required
+      hash: :type:`string`, :required:`required`
          Generated hash from verification request.
-      expires: date, required
+      expires: :type:`date`, :required:`required`
          Identifies when the request expires.
-      hint: string
+      hint: :type:`string`, :required:`required`
          Hint for verification code was generated
-      verificationCode: string, required
+      verificationCode: :type:`string`, :required:`required`
          Value to verify against verification request.
 		
 Example Response:

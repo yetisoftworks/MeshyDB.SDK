@@ -1,0 +1,9 @@
+.type{
+    color: blue;
+    font-weight: normal;
+}
+
+.required{
+    color: darkred;
+    font-weight: normal;
+}

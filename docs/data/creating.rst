@@ -25,13 +25,13 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
             
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token : string
+      access_token : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
    
    .. group-tab:: C#
@@ -55,15 +55,15 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          Username of user.
-      mesh : string
+      mesh : string, default: class name
          Identifies name of mesh collection. e.g. person.
 
    .. group-tab:: NodeJS
@@ -80,19 +80,19 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
                                                                      lastName:"Bobberson"
                                                                   })
                                                             .then(function(result) { });
-                     }); 
+               }); 
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          Username of user.
-      meshName : string
+      meshName : string, required
          Identifies name of mesh collection. e.g. person.
          
 Example Response:

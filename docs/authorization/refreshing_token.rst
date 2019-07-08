@@ -27,13 +27,13 @@ Using the token request made to generate an access token, a refresh token will a
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      refresh_token : string
+      refresh_token : string, required
          Refresh token generated from  previous access token generation.
 
    .. group-tab:: C#
@@ -48,17 +48,17 @@ Using the token request made to generate an access token, a refresh token will a
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      password : string
+      password : string, required
          User password.
-      refreshToken : string
+      refreshToken : string, required
          Refresh token generated from  previous access token generation.
          
    .. group-tab:: NodeJS
@@ -77,16 +77,18 @@ Using the token request made to generate an access token, a refresh token will a
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      password : string
+      password : string, required
          User password.
+      refreshToken : string, required
+         Refresh token generated from  previous access token generation.
          
 Example Response:
 

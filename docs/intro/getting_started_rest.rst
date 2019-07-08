@@ -34,6 +34,7 @@ First, we need to be able to log in with someone. Let's start with registering a
             "verified": true,
             "isActive": true,
             "phoneNumber": "+15555555555",
+            "emailAddress": "test@test.com",
             "roles": [
                         "admin",
                         "test"
@@ -49,11 +50,11 @@ First, we need to be able to log in with someone. Let's start with registering a
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token  : string
+      access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
@@ -69,11 +70,13 @@ First, we need to be able to log in with someone. Let's start with registering a
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
 
 Example Response:
@@ -113,15 +116,15 @@ Let's log in using our MeshyDB credentials.
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      password : string
+      password : string, required
          User password.
    
 Example Response:
@@ -160,13 +163,13 @@ The data object can whatever information you would like to capture. The followin
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string
+      accountName: string, required
          Indicates which account you are connecting for authentication.
-      access_token: string
+      access_token: string, required
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
 
 Example Response:
@@ -202,15 +205,15 @@ If we need to make a modificaiton let's update our Mesh!
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string
+      accountName: string, required
          Indicates which account you are connecting for authentication.
-      access_token: string
+      access_token: string, required
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
-      id : string
+      id : string, required
          Idenfities location of what Mesh data to replace.
 
 Example Response:
@@ -245,13 +248,13 @@ Let's see if we can find Bobbo.
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string
+      accountName: string, required
          Indicates which account you are connecting for authentication.
-      access_token: string
+      access_token: string, required
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
       filter : string
          Filter criteria for search. Uses MongoDB format.
@@ -259,7 +262,7 @@ Let's see if we can find Bobbo.
          How to order results. Uses MongoDB format.
       page : integer
          Page number of users to bring back.
-      pageSize : integer, max: 200
+      pageSize : integer, max: 200, default: 25
          Number of results to bring back per page.
 
 Example Response:
@@ -294,15 +297,15 @@ We are now done with our data, so let us clean up after ourselves.
          
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string
+      accountName: string, required
          Indicates which account you are connecting for authentication.
-      access_token: string
+      access_token: string, required
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
-      id : string
+      id : string, required
          Idenfities location of what Mesh data to replace.
 
 --------
@@ -329,13 +332,9 @@ Now the user is complete. Let us sign out so someone else can have a try.
          
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string
+      accountName: string, required
          Indicates which account you are connecting for authentication.
-      refresh_token: string
+      refresh_token: string, required
         Token to allow reauthorization with MeshyDB after the access token expires requested during `Login`_.
-      mesh : string
-         Identifies name of mesh collection. e.g. person.
-      id : string
-         Idenfities location of what Mesh data to replace.
