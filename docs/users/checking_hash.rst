@@ -29,10 +29,10 @@ Verifies user verification hash request.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
-         Indicates which account you are connecting for authentication.
+      accountName : string
+         Indicates which account you are connecting for authentication. *required*
       access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
