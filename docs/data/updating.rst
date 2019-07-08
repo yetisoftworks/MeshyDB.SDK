@@ -25,15 +25,15 @@ Update Mesh data in collection by id.
 
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token : string
+      access_token : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      mesh : string
+      mesh : string, required
          Identifies name of mesh collection. e.g. person.
-      id : string
+      id : string, required
          Idenfities location of what Mesh data to replace.
 
    .. group-tab:: C#
@@ -50,17 +50,17 @@ Update Mesh data in collection by id.
          
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      mesh : string
+      mesh : string, required, default: class name
          Identifies name of mesh collection. e.g. person.
-      id : string
+      id : string, required
          Idenfities location of what Mesh data to replace.
 
 
@@ -83,17 +83,17 @@ Update Mesh data in collection by id.
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string
+      username : string, required
          User name.
-      meshName : string
+      meshName : string, required
          Identifies name of mesh collection. e.g. person.
-      id : string
+      id : string, required
          Idenfities location of what Mesh data to replace.
          
 Example Response:

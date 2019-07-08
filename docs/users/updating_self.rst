@@ -25,7 +25,8 @@ Update details about the logged in user.
              "lastName": "McTesterton",
              "verified": true,
              "isActive": true,
-             "phoneNumber": "5555555555",
+             "phoneNumber": "+15555555555",
+             "emailAddress": "test@test.com"
              "roles": [
                          "admin",
                          "test"
@@ -33,7 +34,7 @@ Update details about the logged in user.
              "securityQuestions": [
                                     {
                                         "question": "What would you say to this question?",
-                                        "answer": "mceasy123"
+                                        "answer": "..."
                                     }
                                   ],
              "anonymous": false
@@ -41,11 +42,11 @@ Update details about the logged in user.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token : string
+      access_token : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
@@ -59,11 +60,13 @@ Update details about the logged in user.
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
       anonymous : boolean
          Identifies whether or not the user is anonymous.
@@ -81,11 +84,11 @@ Update details about the logged in user.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName  : string
+      accountName  : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
       username : string, required
          Username of user.
@@ -99,11 +102,13 @@ Update details about the logged in user.
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
       anonymous : boolean
          Identifies whether or not the user is anonymous.
@@ -124,6 +129,7 @@ Update details about the logged in user.
                                                                   verified:  verified,
                                                                   isActive: isActive,
                                                                   phoneNumber: phoneNumber,
+                                                                  emailAddress: emailAddress,
                                                                   roles: roles,
 															                     securityQuestions: securityQuestions,
 															                     anonymous:  anonymous
@@ -133,11 +139,11 @@ Update details about the logged in user.
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName  : string
+      accountName  : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
       username : string, required
          Username of user.
@@ -151,11 +157,13 @@ Update details about the logged in user.
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
       anonymous : boolean
          Identifies whether or not the user is anonymous.
@@ -171,7 +179,8 @@ Example Response:
     "lastName": "McTesterton",
     "verified": true,
     "isActive": true,
-    "phoneNumber": "5555555555",
+    "phoneNumber": "+15555555555",
+    "emailAddress": "test@test.com",
     "roles": [
                 "admin",
                 "test"

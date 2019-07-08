@@ -29,11 +29,11 @@ Marks user as verified.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token  : string
+      access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
@@ -43,7 +43,7 @@ Marks user as verified.
          Generated hash from verification request.
       expires: date, required
          Identifies when the request expires.
-      hint: string
+      hint: string, required
          Hint for verification code was generated
       verificationCode: string, required
          Value to verify against verification request.
@@ -60,11 +60,11 @@ Marks user as verified.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
       username : string, required
          Username of user.
@@ -74,7 +74,7 @@ Marks user as verified.
          Generated hash from verification request.
       expires: date, required
          Identifies when the request expires.
-      hint: string
+      hint: string, required
          Hint for verification code was generated
       verificationCode: string, required
          Value to verify against verification request.
@@ -97,11 +97,11 @@ Marks user as verified.
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
       username : string, required
          Username of user.
@@ -111,7 +111,7 @@ Marks user as verified.
          Generated hash from verification request.
       expires: date, required
          Identifies when the request expires.
-      hint: string
+      hint: string, required
          Hint for verification code was generated
       verificationCode: string, required
          Value to verify against verification request.

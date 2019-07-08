@@ -24,11 +24,11 @@ Creates an anonymous user that can log into the system.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token  : string
+      access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
@@ -43,13 +43,13 @@ Creates an anonymous user that can log into the system.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string, optional
+      username : string, required
          Username of user.
 		
    .. group-tab:: NodeJS
@@ -63,13 +63,13 @@ Creates an anonymous user that can log into the system.
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
-      username : string, optional
+      username : string, required
          Username of user.
          
 Example Response:
@@ -84,6 +84,7 @@ Example Response:
     "verified": false,
     "isActive": true,
     "phoneNumber": null,
+    "emailAddress": null,
     "roles": [],
     "securityQuestions": [],
 	 "anonymous": true

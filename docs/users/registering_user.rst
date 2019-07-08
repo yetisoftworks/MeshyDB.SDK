@@ -26,6 +26,7 @@ Creates a new user that can log into the system.
             "verified": true,
             "isActive": true,
             "phoneNumber": "+15555555555",
+            "emailAddress": "test@test.com",
             "roles": [
                         "admin",
                         "test"
@@ -41,11 +42,11 @@ Creates a new user that can log into the system.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      access_token  : string
+      access_token  : string, required
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
       username : string, required
          Username of user.
@@ -61,11 +62,13 @@ Creates a new user that can log into the system.
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
 
    .. group-tab:: C#
@@ -80,11 +83,11 @@ Creates a new user that can log into the system.
 
       |parameters|
       
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
       username : string, required
          Username of user.
@@ -100,11 +103,13 @@ Creates a new user that can log into the system.
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
 		
    .. group-tab:: NodeJS
@@ -122,6 +127,7 @@ Creates a new user that can log into the system.
                                verified: verified,
                                isActive: isActive,
                                phoneNumber: phoneNumber,
+                               emailAddress: emailAddress,
                                roles: roles,
                                securityQuestions: securityQuestions
                              })
@@ -129,11 +135,11 @@ Creates a new user that can log into the system.
       
       |parameters|
 
-      tenant : string
+      tenant : string, required
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string
+      accountName : string, required
          Indicates which account you are connecting for authentication.
-      publicKey : string
+      publicKey : string, required
          Public accessor for application.
       username : string, required
          Username of user.
@@ -149,11 +155,13 @@ Creates a new user that can log into the system.
          Identifies whether or not the user is verified.
       isActive : boolean
          Identifies whether or not the user is active.
-      phoneNumber : string
+      phoneNumber : string, required if using phone verification
          Phone number of user.
+      emailAddress : string, required if using email verification
+         Email address of user.
       roles : string[]
          Collection of roles user has access.
-      securityQuestions : object[]
+      securityQuestions : object[], required if using question verification
          Collection of questions and answers used for password recovery if question security is configured.
          
 Example Response:
