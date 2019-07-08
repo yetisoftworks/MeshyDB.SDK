@@ -88,7 +88,7 @@ Filter Mesh data from collection based on query parameters.
                                                    pageSize: pageSize
                                                 })
                                         .then(function(results){ });
-                    }); 
+               }); 
       
       |parameters|
       tenant : string

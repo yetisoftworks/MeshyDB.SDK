@@ -64,7 +64,7 @@ Log user out.
                .then(function (meshyConnection){
                         meshyConnection.signout()
                                        .then(function(result) { });
-                     }); 
+               }); 
       
       |parameters|
 

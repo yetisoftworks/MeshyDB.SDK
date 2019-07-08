@@ -64,7 +64,7 @@ Permanently remove Mesh data from collection.
                .then(function (meshyConnection){
                         meshyConnection.meshes.delete(meshName, id)
                                               .then(function(_){ });
-                     }); 
+               }); 
       
       |parameters|
 

@@ -75,7 +75,7 @@ Uses result from Forgot password to allow a user to reset their password.
                 .then(function(passwordResetHash){
                         database.resetPassword(passwordResetHash, newPassword)
                                 .then(function(_) { });
-                      });
+                });
       
       |parameters|
 

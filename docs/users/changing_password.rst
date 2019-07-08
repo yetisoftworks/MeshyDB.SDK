@@ -73,7 +73,7 @@ Allows the logged in user to change their password.
                .then(function (meshyConnection){
                      meshyConnection.updatePassword(previousPassword, newPassword)
                                     .then(function(_) { });
-                     }); 
+               }); 
       
       |parameters|
 
