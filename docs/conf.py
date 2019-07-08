@@ -99,6 +99,8 @@ html_static_path = ['_static', 'scripts/requirehttps.js', 'styles/parameters.css
 #
 # html_sidebars = {}
 
+html_css_files = ['parameters.css']
+
 html_js_files = ['requirehttps.js']
 
 html_favicon = 'images/favicon-32.png'
