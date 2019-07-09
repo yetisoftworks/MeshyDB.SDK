@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -25,13 +29,13 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
             
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token : string, required
+      access_token : :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
    
    .. group-tab:: C#
@@ -55,15 +59,15 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      mesh : string, default: class name
+      mesh : :type:`string`, default: class name
          Identifies name of mesh collection. e.g. person.
 
    .. group-tab:: NodeJS
@@ -84,15 +88,15 @@ Create new data into Mesh collection. If it is the first time this Mesh is being
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      meshName : string, required
+      meshName : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
          
 Example Response:

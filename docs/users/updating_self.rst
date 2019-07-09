@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -42,33 +46,33 @@ Update details about the logged in user.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token : string, required
+      access_token : :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      id : string
+      id : :type:`string`
          Identifier of user.
-      firstName : string
+      firstName : :type:`string`
          First name of user.
-      lastName : string
+      lastName : :type:`string`
          Last name of user.
-      verified : boolean
+      verified : :type:`boolean`
          Identifies whether or not the user is verified.
-      isActive : boolean
+      isActive : :type:`boolean`
          Identifies whether or not the user is active.
-      phoneNumber : string, required if using phone verification
+      phoneNumber : :type:`string`, :required:`required` *if using phone verification*
          Phone number of user.
-      emailAddress : string, required if using email verification
+      emailAddress : :type:`string`, :required:`required` *if using email verification*
          Email address of user.
-      roles : string[]
+      roles : :type:`string[]`
          Collection of roles user has access.
-      securityQuestions : object[], required if using question verification
+      securityQuestions : :type:`object[]`, :required:`required` *if using question verification*
          Collection of questions and answers used for password recovery if question security is configured.
-      anonymous : boolean
+      anonymous : :type:`boolean`
          Identifies whether or not the user is anonymous.
 
    .. group-tab:: C#
@@ -84,33 +88,33 @@ Update details about the logged in user.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName  : string, required
+      accountName  : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      id : string
+      id : :type:`string`
          Identifier of user.
-      firstName : string
+      firstName : :type:`string`
          First name of user.
-      lastName : string
+      lastName : :type:`string`
          Last name of user.
-      verified : boolean
+      verified : :type:`boolean`
          Identifies whether or not the user is verified.
-      isActive : boolean
+      isActive : :type:`boolean`
          Identifies whether or not the user is active.
-      phoneNumber : string, required if using phone verification
+      phoneNumber : :type:`string`, :required:`required` *if using phone verification*
          Phone number of user.
-      emailAddress : string, required if using email verification
+      emailAddress : :type:`string`, :required:`required` *if using email verification*
          Email address of user.
-      roles : string[]
+      roles : :type:`string[]`
          Collection of roles user has access.
-      securityQuestions : object[], required if using question verification
+      securityQuestions : :type:`object[]`, :required:`required` *if using question verification*
          Collection of questions and answers used for password recovery if question security is configured.
-      anonymous : boolean
+      anonymous : :type:`boolean`
          Identifies whether or not the user is anonymous.
 
    .. group-tab:: NodeJS
@@ -139,33 +143,33 @@ Update details about the logged in user.
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName  : string, required
+      accountName  : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      id : string
+      id : :type:`string`
          Identifier of user.
-      firstName : string
+      firstName : :type:`string`
          First name of user.
-      lastName : string
+      lastName : :type:`string`
          Last name of user.
-      verified : boolean
+      verified : :type:`boolean`
          Identifies whether or not the user is verified.
-      isActive : boolean
+      isActive : :type:`boolean`
          Identifies whether or not the user is active.
-      phoneNumber : string, required if using phone verification
+      phoneNumber : :type:`string`, :required:`required` *if using phone verification*
          Phone number of user.
-      emailAddress : string, required if using email verification
+      emailAddress : :type:`string`, :required:`required` *if using email verification*
          Email address of user.
-      roles : string[]
+      roles : :type:`string[]`
          Collection of roles user has access.
-      securityQuestions : object[], required if using question verification
+      securityQuestions : :type:`object[]`, :required:`required` *if using question verification*
          Collection of questions and answers used for password recovery if question security is configured.
-      anonymous : boolean
+      anonymous : :type:`boolean`
          Identifies whether or not the user is anonymous.
          
 Example Response:

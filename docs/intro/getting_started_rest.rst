@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 ====
 REST
 ====
@@ -50,33 +54,33 @@ First, we need to be able to log in with someone. Let's start with registering a
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token  : string, required
+      access_token : :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      username : string, required
+      username : :type:`string`, :required:`required`
          Username of user.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
          Password of user to use for login.
-      id : string
+      id : :type:`string`
          Identifier of user.
-      firstName : string
+      firstName : :type:`string`
          First name of user.
-      lastName : string
+      lastName : :type:`string`
          Last name of user.
-      verified : boolean
+      verified : :type:`boolean`
          Identifies whether or not the user is verified.
-      isActive : boolean
+      isActive : :type:`boolean`
          Identifies whether or not the user is active.
-      phoneNumber : string, required if using phone verification
+      phoneNumber : :type:`string`, :required:`required` *if using phone verification*
          Phone number of user.
-      emailAddress : string, required if using email verification
+      emailAddress : :type:`string`, :required:`required` *if using email verification*
          Email address of user.
-      roles : string[]
+      roles : :type:`string[]`
          Collection of roles user has access.
-      securityQuestions : object[], required if using question verification
+      securityQuestions : object[], :required:`required` *if using question verification*
          Collection of questions and answers used for password recovery if question security is configured.
 
 Example Response:
@@ -116,15 +120,15 @@ Let's log in using our MeshyDB credentials.
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      password : string, required
+      password : :type:`string`, :required:`required`
          User password.
    
 Example Response:
@@ -163,13 +167,13 @@ The data object can whatever information you would like to capture. The followin
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string, required
+      accountName: :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token: string, required
+      access_token: :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
 
 Example Response:
@@ -205,15 +209,15 @@ If we need to make a modificaiton let's update our Mesh!
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string, required
+      accountName: :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token: string, required
+      access_token: :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to replace.
 
 Example Response:
@@ -248,21 +252,21 @@ Let's see if we can find Bobbo.
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string, required
+      accountName: :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token: string, required
+      access_token: :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      filter : string
+      filter : :type:`string`
          Filter criteria for search. Uses MongoDB format.
-      orderby : string
+      orderby : :type:`string`
          How to order results. Uses MongoDB format.
-      page : integer
+      page : :type:`integer`
          Page number of users to bring back.
-      pageSize : integer, max: 200, default: 25
+      pageSize : :type:`integer`, max: 200, default: 25
          Number of results to bring back per page.
 
 Example Response:
@@ -297,15 +301,15 @@ We are now done with our data, so let us clean up after ourselves.
          
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string, required
+      accountName: :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token: string, required
+      access_token: :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Login`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to replace.
 
 --------
@@ -332,9 +336,9 @@ Now the user is complete. Let us sign out so someone else can have a try.
          
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName: string, required
+      accountName: :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      refresh_token: string, required
+      refresh_token: :type:`string`, :required:`required`
         Token to allow reauthorization with MeshyDB after the access token expires requested during `Login`_.

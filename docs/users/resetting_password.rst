@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -26,17 +30,17 @@ Uses result from Forgot password to allow a user to reset their password.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      username : string, required
+      username : :type:`string`, :required:`required`
         User name that is being reset.
-      expires : date, required
+      expires : :type:`date`, :required:`required`
         Expiration of hash.
-      hash : string, required
+      hash : :type:`string`, :required:`required`
         Forgot password hash.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
         New password of user.
         
    .. group-tab:: C#
@@ -49,19 +53,19 @@ Uses result from Forgot password to allow a user to reset their password.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
         User name that is being reset.
-      expires : date, required
+      expires : :type:`date`, :required:`required`
         Expiration of hash.
-      hash : string, required
+      hash : :type:`string`, :required:`required`
         Forgot password hash.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
         New password of user.
 
 
@@ -79,17 +83,17 @@ Uses result from Forgot password to allow a user to reset their password.
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
         User name that is being reset.
-      expires : date, required
+      expires : :type:`date`, :required:`required`
         Expiration of hash.
-      hash : string, required
+      hash : :type:`string`, :required:`required`
         Forgot password hash.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
         New password of user.

@@ -1,9 +1,12 @@
 .type{
     color: blue;
-    font-weight: normal;
 }
-
 .required{
     color: darkred;
-    font-weight: normal;
 } 
+.classifier-delimiter{
+    font-weight: normal;
+}
+.classifier{
+    font-weight: normal;
+}

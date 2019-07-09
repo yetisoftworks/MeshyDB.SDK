@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -25,13 +29,13 @@ Log user out.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      refresh_token  : string, required
+      refresh_token  : :type:`string`, :required:`required`
          Refresh token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
          
    .. group-tab:: C#
@@ -45,13 +49,13 @@ Log user out.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
 
    .. group-tab:: NodeJS
@@ -68,11 +72,11 @@ Log user out.
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.

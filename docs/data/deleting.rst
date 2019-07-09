@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -19,15 +23,15 @@ Permanently remove Mesh data from collection.
          
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token : string, required
+      access_token : :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to replace.
 
    .. group-tab:: C#
@@ -41,17 +45,17 @@ Permanently remove Mesh data from collection.
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      meshName : string, required, default: class name
+      meshName : :type:`string`, :required:`required`, default: class name
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to replace.
 		 
    .. group-tab:: NodeJS
@@ -68,15 +72,15 @@ Permanently remove Mesh data from collection.
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to delete. In this case it will be from the Person mesh.

@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 ======
 NodeJS
 ======
@@ -50,15 +54,15 @@ Let's log in using our MeshyDB credentials.
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      password : string, required
+      password : :type:`string`, :required:`required`
          User password.
 
 
@@ -96,7 +100,7 @@ The data object can whatever information you would like to capture. The followin
       
       |parameters|
 
-      meshName : string, required
+      meshName : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
 
 Example Response:
@@ -127,9 +131,9 @@ If we need to make a modificaiton let's update our Mesh!
       
       |parameters|
 
-      meshName : string, required
+      meshName : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to replace.
 
 
@@ -166,15 +170,15 @@ Let's see if we can find Bobbo.
       
       |parameters|
 
-      meshName : string, required
+      meshName : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      filter : string
+      filter : :type:`string`
          Filter criteria for search. Uses MongoDB format.
-      orderby : string
+      orderby : :type:`string`
          How to order results. Uses MongoDB format.
-      page : integer
+      page : :type:`integer`
          Page number of users to bring back.
-      pageSize : integer, max: 200, default: 25
+      pageSize : :type:`integer`, max: 200, default: 25
          Number of results to bring back per page.
 
 Example Response:
@@ -209,9 +213,9 @@ We are now done with our data, so let us clean up after ourselves.
          
       |parameters|
 
-      meshName : string, required
+      meshName : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      id : string, required
+      id : :type:`string`, :required:`required`
          Idenfities location of what Mesh data to replace.
 
 --------

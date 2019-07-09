@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -25,15 +29,15 @@ Allows the logged in user to change their password.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token: string, required
+      access_token: :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generate Access Token <auth.html#generate-access-token>`_.
-      previousPassword : string, required
+      previousPassword : :type:`string`, :required:`required`
         Previous password of user.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
         New password of user.
 
    .. group-tab:: C#
@@ -47,19 +51,19 @@ Allows the logged in user to change their password.
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      password : string, required
+      password : :type:`string`, :required:`required`
          User password.
-      previousPassword : string, required
+      previousPassword : :type:`string`, :required:`required`
         Previous password of user.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
         New password of user.
 
 
@@ -77,17 +81,17 @@ Allows the logged in user to change their password.
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      password : string, required
+      password : :type:`string`, :required:`required`
          User password.
-      previousPassword : string, required
+      previousPassword : :type:`string`, :required:`required`
         Previous password of user.
-      newPassword : string, required
+      newPassword : :type:`string`, :required:`required`
         New password of user.

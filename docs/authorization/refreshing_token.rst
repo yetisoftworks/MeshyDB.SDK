@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -27,13 +31,13 @@ Using the token request made to generate an access token, a refresh token will a
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      refresh_token : string, required
+      refresh_token : :type:`string`, :required:`required`
          Refresh token generated from  previous access token generation.
 
    .. group-tab:: C#
@@ -48,17 +52,17 @@ Using the token request made to generate an access token, a refresh token will a
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      password : string, required
+      password : :type:`string`, :required:`required`
          User password.
-      refreshToken : string, required
+      refreshToken : :type:`string`, :required:`required`
          Refresh token generated from  previous access token generation.
          
    .. group-tab:: NodeJS
@@ -77,17 +81,17 @@ Using the token request made to generate an access token, a refresh token will a
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      password : string, required
+      password : :type:`string`, :required:`required`
          User password.
-      refreshToken : string, required
+      refreshToken : :type:`string`, :required:`required`
          Refresh token generated from  previous access token generation.
          
 Example Response:

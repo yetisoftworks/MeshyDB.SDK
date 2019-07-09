@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -24,21 +28,21 @@ Filter Mesh data from collection based on query parameters.
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      access_token : string, required
+      access_token : :type:`string`, :required:`required`
          Token identifying authorization with MeshyDB requested during `Generating Token <../authorization/generating_token.html#generating-token>`_.
-      mesh : string, required
+      mesh : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      filter : string
+      filter : :type:`string`
          Filter criteria for search. Uses MongoDB format.
-      orderby : string
+      orderby : :type:`string`
          How to order results. Uses MongoDB format.
-      page : integer
+      page : :type:`integer`
          Page number of users to bring back.
-      pageSize : integer, max: 200, default: 25
+      pageSize : :type:`integer`, max: 200, default: 25
          Number of results to bring back per page.
 
    .. group-tab:: C#
@@ -52,23 +56,23 @@ Filter Mesh data from collection based on query parameters.
 
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name.
-      mesh : string, required, default: class name
+      mesh : :type:`string`, :required:`required`, default: class name
          Identifies name of mesh collection. e.g. person.
-      filter : string
+      filter : :type:`string`
          Filter criteria for search. Uses MongoDB format.
-      orderby : string
+      orderby : :type:`string`
          How to order results. Uses MongoDB format.
-      page : integer
+      page : :type:`integer`
          Page number of users to bring back.
-      pageSize : integer, max: 200, default: 25
+      pageSize : :type:`integer`, max: 200, default: 25
          Number of results to bring back per page.
 
 
@@ -91,23 +95,23 @@ Filter Mesh data from collection based on query parameters.
                }); 
       
       |parameters|
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      meshName : string, required
+      meshName : :type:`string`, :required:`required`
          Identifies name of mesh collection. e.g. person.
-      username : string
+      username : :type:`string`
          User name.
-      filter : string
+      filter : :type:`string`
          Filter criteria for search. Uses MongoDB format.
-      orderby : string
+      orderby : :type:`string`
          How to order results. Uses MongoDB format.
-      page : integer
+      page : :type:`integer`
          Page number of users to bring back.
-      pageSize : integer, max: 200, default: 25
+      pageSize : :type:`integer`, max: 200, default: 25
          Number of results to bring back per page.
          
 Example Response:

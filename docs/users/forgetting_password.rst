@@ -1,3 +1,7 @@
+.. role:: required
+
+.. role:: type
+
 .. |parameters| raw:: html
 
    <h4>Parameters</h4>
@@ -24,13 +28,13 @@ Creates a request for password reset that must have the matching data to reset t
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name to be reset.
-      attempt: int, required
+      attempt : :type:`integer`, :required:`required`
          Identifies which number of times of request.
 
    .. group-tab:: C#
@@ -43,15 +47,15 @@ Creates a request for password reset that must have the matching data to reset t
 
       |parameters|
       
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name to be reset.
-      attempt: int, required
+      attempt : :type:`integer`, :required:`required`
          Identifies which number of times of request.
 
 
@@ -66,15 +70,15 @@ Creates a request for password reset that must have the matching data to reset t
       
       |parameters|
 
-      tenant : string, required
+      tenant : :type:`string`, :required:`required`
          Indicates which tenant data to use. If not provided, it will use the configured default.
-      accountName : string, required
+      accountName : :type:`string`, :required:`required`
          Indicates which account you are connecting for authentication.
-      publicKey : string, required
+      publicKey : :type:`string`, :required:`required`
          Public accessor for application.
-      username : string, required
+      username : :type:`string`, :required:`required`
          User name to be reset.
-      attempt: int, required
+      attempt : :type:`integer`, :required:`required`
          Identifies which number of times of request.
 
          
