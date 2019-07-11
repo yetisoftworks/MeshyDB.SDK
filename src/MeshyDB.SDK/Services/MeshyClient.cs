@@ -14,7 +14,7 @@ using MeshyDB.SDK.Services;
 namespace MeshyDB.SDK.Services
 {
     /// <summary>
-    /// MeshyDB Client is used to connect with the MeshyDB REST API.
+    /// Meshy Client is used to connect with the MeshyDB REST API.
     /// </summary>
     internal class MeshyClient : IMeshyClient
     {
