@@ -4,8 +4,8 @@
     <TargetFrameworks>netstandard2.0;net471</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.8.7.0</Version>
-    <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/yetisoftworks/MeshyDB.SDK</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK-csharp</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/yetisoftworks/MeshyDB.SDK-csharp</PackageProjectUrl>
     <PackageReleaseNotes>Updating to match MeshyDB updated functionality.</PackageReleaseNotes>
     <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB Backend Json</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
