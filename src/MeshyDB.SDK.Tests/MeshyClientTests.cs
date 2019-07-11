@@ -9,17 +9,22 @@ namespace MeshyDB.SDK.Tests
 {
     public class MeshyClientTests
     {
+        public MeshyClientTests()
+        {
+            MeshyClient.CurrentConnection = null;
+        }
+
         [Fact]
         public void ShouldCreate()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             Assert.NotNull(client);
         }
 
         [Fact]
         public void ShouldCreateWithNullTenant()
         {
-            var client = new MeshyClient(Generator.RandomString(5), null, Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), null, Generator.RandomString(36));
             Assert.NotNull(client);
         }
 
@@ -27,7 +32,7 @@ namespace MeshyDB.SDK.Tests
         public void ShouldIncludeAccountNameInApiUrl()
         {
             var accountName = Generator.RandomString(5);
-            var client = new MeshyClient(accountName, Generator.RandomString(36));
+            var client = new Services.MeshyClient(accountName, Generator.RandomString(36));
 
             Assert.Equal($"https://api.meshydb.com/{accountName}".ToLowerInvariant(), client.GetApiUrl().ToLowerInvariant());
         }
@@ -36,7 +41,7 @@ namespace MeshyDB.SDK.Tests
         public void ShouldIncludeAccountNameInAuthUrl()
         {
             var accountName = Generator.RandomString(5);
-            var client = new MeshyClient(accountName, Generator.RandomString(36));
+            var client = new Services.MeshyClient(accountName, Generator.RandomString(36));
 
             Assert.Equal($"https://auth.meshydb.com/{accountName}".ToLowerInvariant(), client.GetAuthUrl().ToLowerInvariant());
         }
@@ -45,7 +50,7 @@ namespace MeshyDB.SDK.Tests
         public void ShouldHaveTenantWhenCreated()
         {
             var tenant = Generator.RandomString(5);
-            var client = new MeshyClient(Generator.RandomString(5), tenant, Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), tenant, Generator.RandomString(36));
             Assert.Equal(tenant, client.Tenant);
         }
 
@@ -53,14 +58,14 @@ namespace MeshyDB.SDK.Tests
         public void ShouldHaveTenantTrimmedWhenCreated()
         {
             var tenant = Generator.RandomString(5);
-            var client = new MeshyClient(Generator.RandomString(5), $" {tenant} ", Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), $" {tenant} ", Generator.RandomString(36));
             Assert.Equal(tenant, client.Tenant);
         }
 
         [Fact]
         public void ShouldHaveUsersService()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             authService.Setup(x => x.LoginAnonymouslyAsync(It.IsAny<string>()))
                        .Returns(() =>
@@ -76,7 +81,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldHaveMeshesService()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             authService.Setup(x => x.LoginAnonymouslyAsync(It.IsAny<string>()))
                        .Returns(() =>
@@ -92,7 +97,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldLoginAnonymouslyAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
@@ -110,7 +115,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldLoginAnonymouslySuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
@@ -128,7 +133,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldLoginWithPasswordAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
@@ -146,7 +151,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldLoginWithPasswordSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
@@ -164,7 +169,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldLoginWithPersistanceAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
@@ -182,7 +187,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldLoginWithPersistanceSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
@@ -202,7 +207,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldRegisterUserAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var expected = new UserVerificationHash();
             authService.Setup(x => x.RegisterAsync(It.IsAny<RegisterUser>())).Returns(() =>
@@ -222,7 +227,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldRegisterUserSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var expected = new UserVerificationHash();
             authService.Setup(x => x.RegisterAsync(It.IsAny<RegisterUser>())).Returns(() =>
@@ -243,7 +248,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldForgotPasswordAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var expected = new UserVerificationHash();
             var passedUsername = string.Empty;
@@ -273,7 +278,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldForgotPasswordSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var expected = new UserVerificationHash();
             var passedUsername = string.Empty;
@@ -303,7 +308,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldResetPasswordAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var passedResetPassword = default(ResetPassword);
 
@@ -346,7 +351,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldResetPasswordSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var passedResetPassword = default(ResetPassword);
 
@@ -389,7 +394,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldVerifyAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var passedUserVerificationCheck = default(UserVerificationCheck);
 
@@ -430,7 +435,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldVerifySuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var passedUserVerificationCheck = default(UserVerificationCheck);
 
@@ -471,7 +476,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldCheckHashAsyncSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var passedUserVerificationCheck = default(UserVerificationCheck);
 
@@ -513,7 +518,7 @@ namespace MeshyDB.SDK.Tests
         [Fact]
         public void ShouldCheckHashSuccessfully()
         {
-            var client = new MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
+            var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var passedUserVerificationCheck = default(UserVerificationCheck);
 

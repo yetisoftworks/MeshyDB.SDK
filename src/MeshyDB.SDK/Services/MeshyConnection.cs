@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MeshyDB.SDK.Services;
 
-namespace MeshyDB.SDK
+namespace MeshyDB.SDK.Services
 {
     /// <summary>
     /// Implementation of <see cref="IMeshyConnection"/>.
@@ -61,6 +61,8 @@ namespace MeshyDB.SDK
         /// <inheritdoc/>
         public Task SignoutAsync()
         {
+            SDK.MeshyClient.CurrentConnection = null;
+
             return this.TokenService.SignoutAsync(this.AuthenticationId);
         }
 
