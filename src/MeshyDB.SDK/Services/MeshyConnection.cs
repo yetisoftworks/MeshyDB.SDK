@@ -36,7 +36,7 @@ namespace MeshyDB.SDK.Services
         public IMeshesService Meshes { get; private set; }
 
         /// <summary>
-        /// Gets Authentication Id for establisehd user.
+        /// Gets Authentication Id for established user.
         /// </summary>
         public string AuthenticationId { get; private set; }
 
@@ -81,9 +81,9 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<string> RetrievePersistanceTokenAsync()
+        public Task<string> RetrievePersistenceTokenAsync()
         {
-            return this.AuthenticationService.RetrievePersistanceTokenAsync(this.AuthenticationId);
+            return this.AuthenticationService.RetrievePersistenceTokenAsync(this.AuthenticationId);
         }
 
         /// <inheritdoc/>
@@ -95,9 +95,9 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public string RetrievePersistanceToken()
+        public string RetrievePersistenceToken()
         {
-            var t = this.RetrievePersistanceTokenAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.RetrievePersistenceTokenAsync().ConfigureAwait(true).GetAwaiter();
 
             return t.GetResult();
         }

@@ -12,7 +12,7 @@ namespace MeshyDB.SDK.Models
     public class UserSecurityQuestionUpdate
     {
         /// <summary>
-        /// Gets or sets collection of new security questions for user.
+        /// Gets or sets collection of new security questions to be replaced for user.
         /// </summary>
         public IEnumerable<SecurityQuestion> SecurityQuestions { get; set; }
     }

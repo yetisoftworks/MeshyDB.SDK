@@ -16,17 +16,17 @@ namespace MeshyDB.SDK
     public interface IMeshyConnection
     {
         /// <summary>
-        /// Gets service to interact with Meshes for the logged in user.
+        /// Gets service to interact with Meshes for the authenticated user.
         /// </summary>
         IMeshesService Meshes { get; }
 
         /// <summary>
-        /// Gets service to interact with Users for the logged in user.
+        /// Gets service to interact with Users for the authenticated user.
         /// </summary>
         IUsersService Users { get; }
 
         /// <summary>
-        /// Updates password for logged in user.
+        /// Updates password for authenticated user.
         /// </summary>
         /// <param name="previousPassword">Previous password of user to change.</param>
         /// <param name="newPassword">New password of user to log in with next.</param>
@@ -41,27 +41,27 @@ namespace MeshyDB.SDK
         void UpdatePassword(string previousPassword, string newPassword);
 
         /// <summary>
-        /// Sign out currently logged in user.
+        /// Sign out currently authenticated user.
         /// </summary>
         /// <returns>Task to await completion of sign out.</returns>
         Task SignoutAsync();
 
         /// <summary>
-        /// Sign out currently logged in user.
+        /// Sign out currently authenticated user.
         /// </summary>
         void Signout();
 
         /// <summary>
-        /// Retrieves persistance token of logged in user to refresh their session at a later time.
+        /// Retrieves persistence token of authenticated user to refresh their session at a later time.
         /// </summary>
-        /// <returns>Persistance token to be used for a later login.</returns>
-        Task<string> RetrievePersistanceTokenAsync();
+        /// <returns>Persistence token to be used for a later login.</returns>
+        Task<string> RetrievePersistenceTokenAsync();
 
         /// <summary>
-        /// Retrieves persistance token of logged in user to refresh their session at a later time.
+        /// Retrieves persistence token of authenticated user to refresh their session at a later time.
         /// </summary>
-        /// <returns>Persistance token to be used for a later login.</returns>
-        string RetrievePersistanceToken();
+        /// <returns>Persistence token to be used for a later login.</returns>
+        string RetrievePersistenceToken();
 
         /// <summary>
         /// Gets my user information.

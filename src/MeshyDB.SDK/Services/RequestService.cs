@@ -30,7 +30,7 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestService"/> class.
         /// </summary>
-        /// <param name="httpService">Service to make http requests against.</param>
+        /// <param name="httpService">Service to make HTTP requests against.</param>
         /// <param name="baseUrl">Base Api Url to make requests for.</param>
         /// <param name="tenant">Tenant of data used for partitioning.</param>
         public RequestService(IHttpService httpService, string baseUrl, string tenant = null)
@@ -41,7 +41,7 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestService"/> class.
         /// </summary>
-        /// <param name="httpService">Service to make http requests against.</param>
+        /// <param name="httpService">Service to make HTTP requests against.</param>
         /// <param name="baseUrl">Base Api Url to make requests for.</param>
         /// <param name="tenant">Tenant of data used for partitioning.</param>
         /// <param name="tokenService">Service to get token to add authentication to endpoint.</param>

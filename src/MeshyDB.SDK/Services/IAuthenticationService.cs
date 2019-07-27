@@ -25,29 +25,29 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Log in with provided user name and password.
         /// </summary>
-        /// <param name="username">User name provided for login.</param>
+        /// <param name="username">Unique identifier of user provided for login.</param>
         /// <param name="password">Password provided for login.</param>
         /// <returns>Authentication id upon success.</returns>
         Task<string> LoginWithPasswordAsync(string username, string password);
 
         /// <summary>
-        /// Log in with persistance token provided from a previous session.
+        /// Log in with persistence token provided from a previous session.
         /// </summary>
-        /// <param name="persistanceToken">Persistance token from a previous session.</param>
+        /// <param name="persistanceToken">Persistence token from a previous session.</param>
         /// <returns>Authentication id upon success.</returns>
-        Task<string> LoginWithPersistanceAsync(string persistanceToken);
+        Task<string> LoginWithPersistenceAsync(string persistanceToken);
 
         /// <summary>
-        /// Retrieves persistance token so a user can log in at a later time without requiring credentials.
+        /// Retrieves persistence token so a user can log in at a later time without requiring credentials.
         /// </summary>
         /// <param name="authenticationId">Internal identifier provided from login process.</param>
-        /// <returns>Persistance token used for persistance login at a later time.</returns>
-        Task<string> RetrievePersistanceTokenAsync(string authenticationId);
+        /// <returns>Persistence token used for persistence login at a later time.</returns>
+        Task<string> RetrievePersistenceTokenAsync(string authenticationId);
 
         /// <summary>
         /// Forgot Password for user.
         /// </summary>
-        /// <param name="username">User name to request a reset.</param>
+        /// <param name="username">Unique identifier of user to request a reset.</param>
         /// <param name="attempt">Forgot password attempt.</param>
         /// <returns>Hash object to verify parity in requests.</returns>
         Task<UserVerificationHash> ForgotPasswordAsync(string username, int attempt);
@@ -77,12 +77,12 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Register Anonymous User.
         /// </summary>
-        /// <param name="username">Specify known username for anonymous user.</param>
+        /// <param name="username">Specify known username for anonymous user, such as device id.</param>
         /// <returns>New anonymous user.</returns>
         Task<User> RegisterAnonymousUserAsync(string username = null);
 
         /// <summary>
-        /// Signout the targeted user based on authentication id.
+        /// Sign out the targeted user based on authentication id.
         /// </summary>
         /// <param name="authenticationId">Internal identifier provided from login process.</param>
         /// <returns>Task indicating when operation is complete.</returns>

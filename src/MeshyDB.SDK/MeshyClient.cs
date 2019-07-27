@@ -21,7 +21,7 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="accountName">Name of MeshyDB account required for communication.</param>
         /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
-        /// <param name="httpService">Http Service to use for making requests.</param>
+        /// <param name="httpService">HTTP Service to use for making requests.</param>
         /// <returns>Initialized instance of a Meshy Client.</returns>
         public static IMeshyClient Initialize(string accountName, string publicKey, IHttpService httpService = null)
         {
@@ -34,7 +34,7 @@ namespace MeshyDB.SDK
         /// <param name="accountName">Name of MeshyDB account required for communication.</param>
         /// <param name="tenant">Tenant of data used for partitioning.</param>
         /// <param name="publicKey">Public Api credential supplied from MeshyDB to communicate with tenant.</param>
-        /// <param name="httpService">Http Service to use for making requests.</param>
+        /// <param name="httpService">HTTP Service to use for making requests.</param>
         /// <returns>Initialized instance of a Meshy Client.</returns>
         public static IMeshyClient InitializeWithTenant(string accountName, string tenant, string publicKey, IHttpService httpService = null)
         {

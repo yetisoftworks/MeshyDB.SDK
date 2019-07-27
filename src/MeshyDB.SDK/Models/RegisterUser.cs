@@ -16,8 +16,8 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterUser"/> class.
         /// </summary>
-        /// <param name="username">Username for user to log in with.</param>
-        /// <param name="newPassword">Password for user to log in with.</param>
+        /// <param name="username">unique identifier of user to log in with.</param>
+        /// <param name="newPassword">New password for user to log in with.</param>
         public RegisterUser(string username, string newPassword)
         {
             this.Username = username;
@@ -25,7 +25,7 @@ namespace MeshyDB.SDK.Models
         }
 
         /// <summary>
-        /// Gets or sets username.
+        /// Gets or sets unique identifier of user.
         /// </summary>
         public string Username { get; set; }
 
@@ -55,7 +55,7 @@ namespace MeshyDB.SDK.Models
         public string NewPassword { get; set; }
 
         /// <summary>
-        /// Gets or sets Security Questions for a registering user.
+        /// Gets or sets Security Questions for a registering user to be used for password recovery if questions are configured.
         /// </summary>
         public IEnumerable<SecurityQuestion> SecurityQuestions { get; set; } = new List<SecurityQuestion>();
     }

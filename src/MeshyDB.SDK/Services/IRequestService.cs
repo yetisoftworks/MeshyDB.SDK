@@ -11,7 +11,7 @@ using MeshyDB.SDK.Enums;
 namespace MeshyDB.SDK.Services
 {
     /// <summary>
-    /// Defines methods for http requests actions.
+    /// Defines methods for HTTP requests actions.
     /// </summary>
     internal interface IRequestService
     {
@@ -45,7 +45,7 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <typeparam name="T">Type of data to be returned from request.</typeparam>
         /// <param name="path">Endpoint path to request.</param>
-        /// <param name="model">Mesh data to be comitted.</param>
+        /// <param name="model">Mesh data to be committed.</param>
         /// <param name="format">Data format to serialize data for the request.</param>
         /// <returns>Data result made from request.</returns>
         Task<T> PostRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json);
@@ -55,7 +55,7 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <typeparam name="T">Type of data to be returned from request.</typeparam>
         /// <param name="path">Endpoint path to request.</param>
-        /// <param name="model">Mesh data to be comitted.</param>
+        /// <param name="model">Mesh data to be committed.</param>
         /// <returns>Data result made from request.</returns>
         Task<T> PutRequest<T>(string path, object model);
     }

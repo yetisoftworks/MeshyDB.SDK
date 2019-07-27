@@ -19,7 +19,7 @@ namespace MeshyDB.SDK.Models
         public string NewPassword { get; set; }
 
         /// <summary>
-        /// Gets or sets the previous password to valdiate it was correct.
+        /// Gets or sets the previous password to validate it was correct.
         /// </summary>
         public string PreviousPassword { get; set; }
     }

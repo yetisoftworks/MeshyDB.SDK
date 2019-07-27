@@ -209,7 +209,7 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldRetrievePersistanceTokenAsyncSucessfully()
+        public void ShouldRetrievePersistenceTokenAsyncSucessfully()
         {
             var tokenService = new Mock<ITokenService>();
             var requestService = new Mock<IRequestService>();
@@ -220,7 +220,7 @@ namespace MeshyDB.SDK.Tests
             var passedAuthenticationId = string.Empty;
 
             var authenticationService = new Mock<IAuthenticationService>();
-            authenticationService.Setup(x => x.RetrievePersistanceTokenAsync(It.IsAny<string>()))
+            authenticationService.Setup(x => x.RetrievePersistenceTokenAsync(It.IsAny<string>()))
                 .Callback<string>((authenticationId) =>
                 {
                     passedAuthenticationId = authenticationId;
@@ -233,14 +233,14 @@ namespace MeshyDB.SDK.Tests
 
             connection.AuthenticationService = authenticationService.Object;
 
-            connection.RetrievePersistanceTokenAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+            connection.RetrievePersistenceTokenAsync().ConfigureAwait(true).GetAwaiter().GetResult();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
             authenticationService.VerifyAll();
         }
 
         [Fact]
-        public void ShouldRetrievePersistanceTokenSucessfully()
+        public void ShouldRetrievePersistenceTokenSucessfully()
         {
             var tokenService = new Mock<ITokenService>();
             var requestService = new Mock<IRequestService>();
@@ -251,7 +251,7 @@ namespace MeshyDB.SDK.Tests
             var passedAuthenticationId = string.Empty;
 
             var authenticationService = new Mock<IAuthenticationService>();
-            authenticationService.Setup(x => x.RetrievePersistanceTokenAsync(It.IsAny<string>()))
+            authenticationService.Setup(x => x.RetrievePersistenceTokenAsync(It.IsAny<string>()))
                 .Callback<string>((authenticationId) =>
                 {
                     passedAuthenticationId = authenticationId;
@@ -264,7 +264,7 @@ namespace MeshyDB.SDK.Tests
 
             connection.AuthenticationService = authenticationService.Object;
 
-            connection.RetrievePersistanceToken();
+            connection.RetrievePersistenceToken();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
             authenticationService.VerifyAll();

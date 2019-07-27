@@ -167,38 +167,38 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldLoginWithPersistanceAsyncSuccessfully()
+        public void ShouldLoginWithPersistenceAsyncSuccessfully()
         {
             var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
-            authService.Setup(x => x.LoginWithPersistanceAsync(It.IsAny<string>()))
+            authService.Setup(x => x.LoginWithPersistenceAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(identifier);
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginWithPersistanceAsync(Generator.RandomString(10)).ConfigureAwait(true).GetAwaiter().GetResult();
+            var connection = client.LoginWithPersistenceAsync(Generator.RandomString(10)).ConfigureAwait(true).GetAwaiter().GetResult();
             Assert.NotNull(connection);
         }
 
         [Fact]
-        public void ShouldLoginWithPersistanceSuccessfully()
+        public void ShouldLoginWithPersistenceSuccessfully()
         {
             var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
-            authService.Setup(x => x.LoginWithPersistanceAsync(It.IsAny<string>()))
+            authService.Setup(x => x.LoginWithPersistenceAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(identifier);
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginWithPersistance(Generator.RandomString(10));
+            var connection = client.LoginWithPersistence(Generator.RandomString(10));
             Assert.NotNull(connection);
         }
 

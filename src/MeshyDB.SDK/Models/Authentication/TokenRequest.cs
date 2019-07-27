@@ -30,7 +30,7 @@ namespace MeshyDB.SDK.Models.Authentication
         /// <summary>
         /// Gets or sets OAuth grant type to request authentication.
         /// </summary>
-        /// <remarks>Client Credentials is currently the only supported grant type.</remarks>
+        /// <remarks>Password is currently the only supported grant type.</remarks>
         [JsonProperty("grant_type")]
         public string GrantType { get; set; } = TokenGrantType.Password;
 
@@ -53,7 +53,7 @@ namespace MeshyDB.SDK.Models.Authentication
         public string Scope { get; set; } = Constants.ApiScopes;
 
         /// <summary>
-        /// Gets or sets OAuth refresh token to allow reauthentication of a user.
+        /// Gets or sets OAuth refresh token to allow re-authentication of a user.
         /// </summary>
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }

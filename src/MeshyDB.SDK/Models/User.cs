@@ -19,7 +19,7 @@ namespace MeshyDB.SDK.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the unique identifier of the user.
         /// </summary>
         public string Username { get; set; }
 
@@ -34,7 +34,7 @@ namespace MeshyDB.SDK.Models
         public string LastName { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the user is verified or not.
+        /// Gets or sets a value indicating whether the user is verified.
         /// </summary>
         public bool Verified { get; set; }
 

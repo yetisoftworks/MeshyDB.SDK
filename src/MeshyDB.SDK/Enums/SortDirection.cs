@@ -14,13 +14,13 @@ namespace MeshyDB.SDK.Enums
     public enum SortDirection
     {
         /// <summary>
-        /// This shoiuld be used when wanting to sort in ascending order.
+        /// This should be used when wanting to sort in ascending order.
         /// </summary>
         Ascending = 1,
 
         /// <summary>
-        /// This shoiuld be used when wanting to sort in desending order.
+        /// This should be used when wanting to sort in descending order.
         /// </summary>
-        Desending = -1,
+        Descending = -1,
     }
 }

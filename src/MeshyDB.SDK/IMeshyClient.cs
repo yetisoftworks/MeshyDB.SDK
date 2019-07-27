@@ -7,12 +7,15 @@ using MeshyDB.SDK.Models;
 
 namespace MeshyDB.SDK
 {
+    /// <summary>
+    /// Represents a Meshy Client to establish a connection.
+    /// </summary>
     public interface IMeshyClient
     {
         /// <summary>
         /// Log user in with username and password.
         /// </summary>
-        /// <param name="username">User name of user used during login.</param>
+        /// <param name="username">Unique identifier of user used during login.</param>
         /// <param name="password">Password of user used during login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
         Task<IMeshyConnection> LoginWithPasswordAsync(string username, string password);
@@ -20,7 +23,7 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Log user in with username and password.
         /// </summary>
-        /// <param name="username">User name of user used during login.</param>
+        /// <param name="username">Unique identifier of user used during login.</param>
         /// <param name="password">Password of user used during login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
         IMeshyConnection LoginWithPassword(string username, string password);
@@ -28,14 +31,14 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Login anonymous user.
         /// </summary>
-        /// <param name="username">User name of user used during login.</param>
+        /// <param name="username">Unique identifier of user used during login, such as device id.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
         Task<IMeshyConnection> LoginAnonymouslyAsync(string username);
 
         /// <summary>
         /// Login anonymous user.
         /// </summary>
-        /// <param name="username">User name of user used during login.</param>
+        /// <param name="username">Unique identifier of user used during login, such as device id.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
         IMeshyConnection LoginAnonymously(string username);
 
@@ -70,7 +73,7 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Request forgot password based on username.
         /// </summary>
-        /// <param name="username">Username of forgotton user.</param>
+        /// <param name="username">Unique identifier of forgotten user.</param>
         /// <param name="attempt">Forgot password attempt.</param>
         /// <returns>Hashed object to ensure forgot password parity request.</returns>
         Task<UserVerificationHash> ForgotPasswordAsync(string username, int attempt = 1);
@@ -78,7 +81,7 @@ namespace MeshyDB.SDK
         /// <summary>
         /// Request forgot password based on username.
         /// </summary>
-        /// <param name="username">Username of forgotton user.</param>
+        /// <param name="username">Username of forgotten user.</param>
         /// <param name="attempt">Forgot password attempt.</param>
         /// <returns>Hashed object to ensure forgot password parity request.</returns>
         UserVerificationHash ForgotPassword(string username, int attempt = 1);
@@ -97,18 +100,18 @@ namespace MeshyDB.SDK
         void ResetPassword(ResetPassword resetPassword);
 
         /// <summary>
-        /// Login with peristance token from another session.
+        /// Login with persistence token from another session.
         /// </summary>
-        /// <param name="persistanceToken">Persistance token of previous session for login.</param>
+        /// <param name="persistanceToken">Persistence token of previous session for login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
-        Task<IMeshyConnection> LoginWithPersistanceAsync(string persistanceToken);
+        Task<IMeshyConnection> LoginWithPersistenceAsync(string persistanceToken);
 
         /// <summary>
-        /// Login with peristance token from another session.
+        /// Login with persistence token from another session.
         /// </summary>
-        /// <param name="persistanceToken">Persistance token of previous session for login.</param>
+        /// <param name="persistanceToken">Persistence token of previous session for login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
-        IMeshyConnection LoginWithPersistance(string persistanceToken);
+        IMeshyConnection LoginWithPersistence(string persistanceToken);
 
         /// <summary>
         /// Verify user to allow them to log in.

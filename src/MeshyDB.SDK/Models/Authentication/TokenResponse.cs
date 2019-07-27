@@ -34,7 +34,7 @@ namespace MeshyDB.SDK.Models.Authentication
         public string TokenType { get; internal set; }
 
         /// <summary>
-        /// Gets or sets OAuth refresh token to allow reauthentication of a user.
+        /// Gets or sets OAuth refresh token to allow re-authentication of a user.
         /// </summary>
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; internal set; }

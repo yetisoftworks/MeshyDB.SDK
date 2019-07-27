@@ -23,7 +23,19 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="ResetPassword"/> class.
         /// </summary>
-        /// <param name="userVerificationCheck">User verfication check to copy into a new instance.</param>
+        /// <param name="userVerificationHash">User verification hash to copy into a new instance.</param>
+        public ResetPassword(UserVerificationHash userVerificationHash)
+        {
+            this.Username = userVerificationHash.Username;
+            this.Expires = userVerificationHash.Expires;
+            this.Hint = userVerificationHash.Hint;
+            this.Hash = userVerificationHash.Hash;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResetPassword"/> class.
+        /// </summary>
+        /// <param name="userVerificationCheck">User verification check to copy into a new instance.</param>
         public ResetPassword(UserVerificationCheck userVerificationCheck)
         {
             this.Username = userVerificationCheck.Username;

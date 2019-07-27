@@ -39,8 +39,8 @@ namespace MeshyDB.SDK.Services
         /// Searches mesh data for a given filter.
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
-        /// <param name="filter">Filter of data in mongo db filter format.</param>
-        /// <param name="sort">Sort data in mongo db sort format.</param>
+        /// <param name="filter">Filter of data in Mongo DB filter format.</param>
+        /// <param name="sort">Sort data in Mongo DB sort format.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result data for the given mesh with applied filter.</returns>
@@ -54,8 +54,8 @@ namespace MeshyDB.SDK.Services
         /// Searches mesh data for a given filter.
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
-        /// <param name="filter">Filter of data in mongo db filter format.</param>
-        /// <param name="sort">Sort data in mongo db sort format.</param>
+        /// <param name="filter">Filter of data in Mongo DB filter format.</param>
+        /// <param name="sort">Sort data in Mongo DB sort format.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result data for the given mesh with applied filter.</returns>
@@ -129,7 +129,7 @@ namespace MeshyDB.SDK.Services
         /// Create mesh data.
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned and created.</typeparam>
-        /// <param name="model">Mesh data to be commited.</param>
+        /// <param name="model">Mesh data to be committed.</param>
         /// <returns>Result of committed mesh data.</returns>
         TModel Create<TModel>(TModel model)
             where TModel : MeshData;
@@ -138,7 +138,7 @@ namespace MeshyDB.SDK.Services
         /// Create mesh data.
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned and created.</typeparam>
-        /// <param name="model">Mesh data to be commited.</param>
+        /// <param name="model">Mesh data to be committed.</param>
         /// <returns>Result of committed mesh data.</returns>
         Task<TModel> CreateAsync<TModel>(TModel model)
             where TModel : MeshData;

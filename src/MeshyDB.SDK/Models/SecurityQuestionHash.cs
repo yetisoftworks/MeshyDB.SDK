@@ -15,7 +15,7 @@ namespace MeshyDB.SDK.Models
         public string Question { get; set; }
 
         /// <summary>
-        /// Gets or sets the answer to use for user verification.
+        /// Gets or sets the answer hash to use for user verification.
         /// </summary>
         public string AnswerHash { get; set; }
     }

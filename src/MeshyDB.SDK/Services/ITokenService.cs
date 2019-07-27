@@ -17,7 +17,7 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Generates Access token for provided user name and password.
         /// </summary>
-        /// <param name="username">Username to generate token for.</param>
+        /// <param name="username">Unique identifier of user to generate token for.</param>
         /// <param name="password">Password to generate token with.</param>
         /// <returns>Authentication id upon success.</returns>
         /// <remarks>Generates random authentication id for login.</remarks>
@@ -26,7 +26,7 @@ namespace MeshyDB.SDK.Services
         /// <summary>
         /// Generates User token for provided user name and password.
         /// </summary>
-        /// <param name="username">Username to generate token for.</param>
+        /// <param name="username">Unique identifier of user to generate token for.</param>
         /// <param name="password">Password to generate token with.</param>
         /// <param name="authenticationId">Defined authentication id supplied.</param>
         /// <returns>Authentication id upon success.</returns>

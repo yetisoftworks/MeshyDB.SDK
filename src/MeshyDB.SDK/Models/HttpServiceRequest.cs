@@ -11,7 +11,7 @@ using MeshyDB.SDK.Enums;
 namespace MeshyDB.SDK.Models
 {
     /// <summary>
-    /// Class defining elements of a Http Service Request to abstract away any http specific information.
+    /// Class defining elements of a HTTP Service Request to abstract away any HTTP specific information.
     /// </summary>
     public class HttpServiceRequest
     {

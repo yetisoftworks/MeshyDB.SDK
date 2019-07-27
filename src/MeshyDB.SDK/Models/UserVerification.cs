@@ -14,7 +14,7 @@ namespace MeshyDB.SDK.Models
     public class UserVerification
     {
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets unique identifier of the user.
         /// </summary>
         public string Username { get; set; }
 

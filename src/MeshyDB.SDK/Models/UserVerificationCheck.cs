@@ -23,7 +23,7 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="UserVerificationCheck"/> class.
         /// </summary>
-        /// <param name="userVerificationHash">User verfication hash to copy into a new instance.</param>
+        /// <param name="userVerificationHash">User verification hash to copy into a new instance.</param>
         public UserVerificationCheck(UserVerificationHash userVerificationHash)
         {
             this.Username = userVerificationHash.Username;

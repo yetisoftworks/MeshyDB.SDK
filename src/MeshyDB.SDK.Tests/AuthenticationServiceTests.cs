@@ -12,8 +12,6 @@ namespace MeshyDB.SDK.Tests
 {
     public class AuthenticationServiceTests
     {
-
-        //Task<string> LoginWithPasswordAsync(string username, string password);
         [Fact]
         public void ShouldLoginWithPasswordAsyncSuccessfully()
         {
@@ -48,9 +46,9 @@ namespace MeshyDB.SDK.Tests
             tokenService.VerifyAll();
             requestService.VerifyAll();
         }
-        //Task<string> LoginWithPersistanceAsync(string persistanceToken);
+
         [Fact]
-        public void ShouldLoginWithPersistanceAsyncSuccessfully()
+        public void ShouldLoginWithPersistenceAsyncSuccessfully()
         {
             var tokenService = new Mock<ITokenService>();
 
@@ -73,7 +71,7 @@ namespace MeshyDB.SDK.Tests
             var service = new AuthenticationService(tokenService.Object, requestService.Object);
             var generatedRefreshToken = Generator.RandomString(10);
 
-            var resultId = service.LoginWithPersistanceAsync(generatedRefreshToken).Result;
+            var resultId = service.LoginWithPersistenceAsync(generatedRefreshToken).Result;
 
             Assert.Equal(generatedRefreshToken, passedRefreshToken);
 
@@ -81,9 +79,8 @@ namespace MeshyDB.SDK.Tests
             requestService.VerifyAll();
         }
 
-        //Task<string> RetrievePersistanceTokenAsync(string authenticationId);
         [Fact]
-        public void ShouldRetrievePersistanceTokenAsyncSuccessfully()
+        public void ShouldRetrievePersistenceTokenAsyncSuccessfully()
         {
             var tokenService = new Mock<ITokenService>();
 
@@ -105,7 +102,7 @@ namespace MeshyDB.SDK.Tests
 
             var service = new AuthenticationService(tokenService.Object, requestService.Object);
 
-            var resultId = service.RetrievePersistanceTokenAsync(generatedAuthenticationId).Result;
+            var resultId = service.RetrievePersistenceTokenAsync(generatedAuthenticationId).Result;
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
 
@@ -113,7 +110,6 @@ namespace MeshyDB.SDK.Tests
             requestService.VerifyAll();
         }
 
-        //Task UpdatePasswordAsync(string previousPassword, string newPassword);
         [Fact]
         public void ShouldUpdatePasswordAsyncSuccessfully()
         {
@@ -150,7 +146,6 @@ namespace MeshyDB.SDK.Tests
             requestService.VerifyAll();
         }
 
-        //Task SignOut(string authenticationId);
         [Fact]
         public void ShouldSignoutSuccessfully()
         {

@@ -20,7 +20,7 @@ namespace MeshyDB.SDK
         internal const string TemplateAuthUrl = "https://auth.meshydb.com/{accountName}";
 
         /// <summary>
-        /// Defines Api scoes for user when generating token.
+        /// Defines Api scopes for user when generating token.
         /// </summary>
         internal const string ApiScopes = "meshy.api offline_access openid";
     }

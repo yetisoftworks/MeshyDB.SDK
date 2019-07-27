@@ -8,3 +8,4 @@
 /src/.vs
 /src/MeshyDB.SDK.Tests/obj
 /src/MeshyDB.SDK.Tests/bin
+/src/MeshyDB.SDK/MeshyDB.SDK.xml

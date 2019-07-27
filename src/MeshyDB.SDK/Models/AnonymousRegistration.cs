@@ -14,7 +14,7 @@ namespace MeshyDB.SDK.Models
     public class AnonymousRegistration
     {
         /// <summary>
-        /// Gets or sets username of anonymous user.
+        /// Gets or sets unique identifier of anonymous user, such as a device id.
         /// </summary>
         public string Username { get; set; }
     }

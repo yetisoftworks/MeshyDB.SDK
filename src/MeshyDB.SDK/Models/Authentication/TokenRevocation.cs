@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace MeshyDB.SDK.Models.Authentication
 {
     /// <summary>
-    /// Class to identifiy what token to revoke.
+    /// Class to identify what token to revoke.
     /// </summary>
     internal class TokenRevocation
     {

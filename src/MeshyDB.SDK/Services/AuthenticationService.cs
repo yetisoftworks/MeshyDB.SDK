@@ -92,13 +92,13 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<string> LoginWithPersistanceAsync(string persistanceToken)
+        public Task<string> LoginWithPersistenceAsync(string persistanceToken)
         {
             return this.tokenService.GenerateAccessTokenWithRefreshToken(persistanceToken);
         }
 
         /// <inheritdoc/>
-        public Task<string> RetrievePersistanceTokenAsync(string authenticationId)
+        public Task<string> RetrievePersistenceTokenAsync(string authenticationId)
         {
             return this.tokenService.GetRefreshTokenAsync(authenticationId);
         }

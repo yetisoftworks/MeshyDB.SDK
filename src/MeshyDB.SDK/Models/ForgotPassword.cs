@@ -14,7 +14,7 @@ namespace MeshyDB.SDK.Models
     internal class ForgotPassword
     {
         /// <summary>
-        /// Gets or sets username that is requested which a password was forgotten.
+        /// Gets or sets unique identifier of user that is requested which a password was forgotten.
         /// </summary>
         public string Username { get; set; }
 
