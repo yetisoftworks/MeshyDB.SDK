@@ -31,18 +31,18 @@ namespace MeshyDB.SDK.Services
         Task<string> LoginWithPasswordAsync(string username, string password);
 
         /// <summary>
-        /// Log in with persistence token provided from a previous session.
+        /// Log in with refresh token provided from a previous session.
         /// </summary>
-        /// <param name="persistanceToken">Persistence token from a previous session.</param>
+        /// <param name="refreshToken">Refresh token from a previous session.</param>
         /// <returns>Authentication id upon success.</returns>
-        Task<string> LoginWithPersistenceAsync(string persistanceToken);
+        Task<string> LoginWithRefreshTokenAsync(string refreshToken);
 
         /// <summary>
-        /// Retrieves persistence token so a user can log in at a later time without requiring credentials.
+        /// Retrieves refresh token so a user can log in at a later time without requiring credentials.
         /// </summary>
         /// <param name="authenticationId">Internal identifier provided from login process.</param>
-        /// <returns>Persistence token used for persistence login at a later time.</returns>
-        Task<string> RetrievePersistenceTokenAsync(string authenticationId);
+        /// <returns>Refresh token used for refresh login at a later time.</returns>
+        Task<string> RetrieveRefreshTokenAsync(string authenticationId);
 
         /// <summary>
         /// Forgot Password for user.
@@ -100,6 +100,13 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
         /// <returns>Whether or not the check was successful.</returns>
-        Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck);
+        Task<Valid> CheckHashAsync(UserVerificationCheck userVerificationCheck);
+
+        /// <summary>
+        /// Check whether a user already exists.
+        /// </summary>
+        /// <param name="username">Unique identifier of user used during login.</param>
+        /// <returns>Whether or not the name is already exists.</returns>
+        Task<Exist> CheckUserExistAsync(string username);
     }
 }

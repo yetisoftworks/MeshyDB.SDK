@@ -52,16 +52,16 @@ namespace MeshyDB.SDK
         void Signout();
 
         /// <summary>
-        /// Retrieves persistence token of authenticated user to refresh their session at a later time.
+        /// Retrieves refresh token of authenticated user to refresh their session at a later time.
         /// </summary>
-        /// <returns>Persistence token to be used for a later login.</returns>
-        Task<string> RetrievePersistenceTokenAsync();
+        /// <returns>Refresh token to be used for a later login.</returns>
+        Task<string> RetrieveRefreshTokenAsync();
 
         /// <summary>
-        /// Retrieves persistence token of authenticated user to refresh their session at a later time.
+        /// Retrieves refresh token of authenticated user to refresh their session at a later time.
         /// </summary>
-        /// <returns>Persistence token to be used for a later login.</returns>
-        string RetrievePersistenceToken();
+        /// <returns>Refresh token to be used for a later login.</returns>
+        string RetrieveRefreshToken();
 
         /// <summary>
         /// Gets my user information.

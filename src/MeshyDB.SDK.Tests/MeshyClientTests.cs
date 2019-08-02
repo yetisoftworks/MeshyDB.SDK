@@ -167,38 +167,38 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldLoginWithPersistenceAsyncSuccessfully()
+        public void ShouldLoginWithRefreshAsyncSuccessfully()
         {
             var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
-            authService.Setup(x => x.LoginWithPersistenceAsync(It.IsAny<string>()))
+            authService.Setup(x => x.LoginWithRefreshTokenAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(identifier);
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginWithPersistenceAsync(Generator.RandomString(10)).ConfigureAwait(true).GetAwaiter().GetResult();
+            var connection = client.LoginWithRefreshTokenAsync(Generator.RandomString(10)).ConfigureAwait(true).GetAwaiter().GetResult();
             Assert.NotNull(connection);
         }
 
         [Fact]
-        public void ShouldLoginWithPersistenceSuccessfully()
+        public void ShouldLoginWithRefreshSuccessfully()
         {
             var client = new Services.MeshyClient(Generator.RandomString(5), Generator.RandomString(36));
             var authService = new Mock<IAuthenticationService>();
             var identifier = Generator.RandomString(25);
 
-            authService.Setup(x => x.LoginWithPersistenceAsync(It.IsAny<string>()))
+            authService.Setup(x => x.LoginWithRefreshTokenAsync(It.IsAny<string>()))
                        .Returns(() =>
                        {
                            return Task.FromResult(identifier);
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginWithPersistence(Generator.RandomString(10));
+            var connection = client.LoginWithRefreshToken(Generator.RandomString(10));
             Assert.NotNull(connection);
         }
 
@@ -487,7 +487,7 @@ namespace MeshyDB.SDK.Tests
                 })
                 .Returns(() =>
                 {
-                    return Task.FromResult(true);
+                    return Task.FromResult(new Valid { IsValid = true });
                 });
 
             client.AuthenticationService = authService.Object;
@@ -503,7 +503,7 @@ namespace MeshyDB.SDK.Tests
             };
 
             var result = client.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult();
-            Assert.True(result);
+            Assert.True(result.IsValid);
             Assert.Equal(userVerificationCheck.Hash, passedUserVerificationCheck.Hash);
             Assert.Equal(userVerificationCheck.Expires, passedUserVerificationCheck.Expires);
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);
@@ -529,7 +529,7 @@ namespace MeshyDB.SDK.Tests
                 })
                 .Returns(() =>
                 {
-                    return Task.FromResult(true);
+                    return Task.FromResult(new Valid { IsValid = true });
                 });
 
             client.AuthenticationService = authService.Object;
@@ -545,7 +545,7 @@ namespace MeshyDB.SDK.Tests
             };
 
             var result = client.CheckHash(userVerificationCheck);
-            Assert.True(result);
+            Assert.True(result.IsValid);
             Assert.Equal(userVerificationCheck.Hash, passedUserVerificationCheck.Hash);
             Assert.Equal(userVerificationCheck.Expires, passedUserVerificationCheck.Expires);
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);

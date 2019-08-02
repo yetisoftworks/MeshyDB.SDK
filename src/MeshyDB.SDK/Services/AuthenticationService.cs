@@ -92,13 +92,13 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<string> LoginWithPersistenceAsync(string persistanceToken)
+        public Task<string> LoginWithRefreshTokenAsync(string refreshToken)
         {
-            return this.tokenService.GenerateAccessTokenWithRefreshToken(persistanceToken);
+            return this.tokenService.GenerateAccessTokenWithRefreshToken(refreshToken);
         }
 
         /// <inheritdoc/>
-        public Task<string> RetrievePersistenceTokenAsync(string authenticationId)
+        public Task<string> RetrieveRefreshTokenAsync(string authenticationId)
         {
             return this.tokenService.GetRefreshTokenAsync(authenticationId);
         }
@@ -110,9 +110,15 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck)
+        public Task<Valid> CheckHashAsync(UserVerificationCheck userVerificationCheck)
         {
-            return this.requestService.PostRequest<bool>("users/checkhash", userVerificationCheck);
+            return this.requestService.PostRequest<Valid>("users/checkhash", userVerificationCheck);
+        }
+
+        /// <inheritdoc/>
+        public Task<Exist> CheckUserExistAsync(string username)
+        {
+            return this.requestService.GetRequest<Exist>($"users/{username}/exists");
         }
     }
 }

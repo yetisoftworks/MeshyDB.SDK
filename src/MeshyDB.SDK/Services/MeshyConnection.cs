@@ -81,9 +81,9 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<string> RetrievePersistenceTokenAsync()
+        public Task<string> RetrieveRefreshTokenAsync()
         {
-            return this.AuthenticationService.RetrievePersistenceTokenAsync(this.AuthenticationId);
+            return this.AuthenticationService.RetrieveRefreshTokenAsync(this.AuthenticationId);
         }
 
         /// <inheritdoc/>
@@ -95,9 +95,9 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public string RetrievePersistenceToken()
+        public string RetrieveRefreshToken()
         {
-            var t = this.RetrievePersistenceTokenAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.RetrieveRefreshTokenAsync().ConfigureAwait(true).GetAwaiter();
 
             return t.GetResult();
         }

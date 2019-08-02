@@ -100,18 +100,18 @@ namespace MeshyDB.SDK
         void ResetPassword(ResetPassword resetPassword);
 
         /// <summary>
-        /// Login with persistence token from another session.
+        /// Login with refresh token from another session.
         /// </summary>
-        /// <param name="persistanceToken">Persistence token of previous session for login.</param>
+        /// <param name="refreshToken">Refresh token of previous session for login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
-        Task<IMeshyConnection> LoginWithPersistenceAsync(string persistanceToken);
+        Task<IMeshyConnection> LoginWithRefreshTokenAsync(string refreshToken);
 
         /// <summary>
-        /// Login with persistence token from another session.
+        /// Login with refresh token from another session.
         /// </summary>
-        /// <param name="persistanceToken">Persistence token of previous session for login.</param>
+        /// <param name="refreshToken">Refresh token of previous session for login.</param>
         /// <returns>Meshy client for user upon successful login.</returns>
-        IMeshyConnection LoginWithPersistence(string persistanceToken);
+        IMeshyConnection LoginWithRefreshToken(string refreshToken);
 
         /// <summary>
         /// Verify user to allow them to log in.
@@ -131,13 +131,27 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
         /// <returns>Whether or not check was successful.</returns>
-        bool CheckHash(UserVerificationCheck userVerificationCheck);
+        Valid CheckHash(UserVerificationCheck userVerificationCheck);
 
         /// <summary>
         /// Check user hash to verify user request.
         /// </summary>
         /// <param name="userVerificationCheck">User verification check object to establish authorization.</param>
         /// <returns>Whether or not check was successful.</returns>
-        Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck);
+        Task<Valid> CheckHashAsync(UserVerificationCheck userVerificationCheck);
+
+        /// <summary>
+        /// Check whether a user already exists.
+        /// </summary>
+        /// <param name="username">Unique identifier of user used during login.</param>
+        /// <returns>Whether or not the name is already exists.</returns>
+        Exist CheckUserExist(string username);
+
+        /// <summary>
+        /// Check whether a user already exists.
+        /// </summary>
+        /// <param name="username">Unique identifier of user used during login.</param>
+        /// <returns>Whether or not the name is already exists.</returns>
+        Task<Exist> CheckUserExistAsync(string username);
     }
 }

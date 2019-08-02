@@ -48,7 +48,7 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldLoginWithPersistenceAsyncSuccessfully()
+        public void ShouldLoginWithRefreshAsyncSuccessfully()
         {
             var tokenService = new Mock<ITokenService>();
 
@@ -71,7 +71,7 @@ namespace MeshyDB.SDK.Tests
             var service = new AuthenticationService(tokenService.Object, requestService.Object);
             var generatedRefreshToken = Generator.RandomString(10);
 
-            var resultId = service.LoginWithPersistenceAsync(generatedRefreshToken).Result;
+            var resultId = service.LoginWithRefreshTokenAsync(generatedRefreshToken).Result;
 
             Assert.Equal(generatedRefreshToken, passedRefreshToken);
 
@@ -80,7 +80,7 @@ namespace MeshyDB.SDK.Tests
         }
 
         [Fact]
-        public void ShouldRetrievePersistenceTokenAsyncSuccessfully()
+        public void ShouldRetrieveRefreshTokenAsyncSuccessfully()
         {
             var tokenService = new Mock<ITokenService>();
 
@@ -102,7 +102,7 @@ namespace MeshyDB.SDK.Tests
 
             var service = new AuthenticationService(tokenService.Object, requestService.Object);
 
-            var resultId = service.RetrievePersistenceTokenAsync(generatedAuthenticationId).Result;
+            var resultId = service.RetrieveRefreshTokenAsync(generatedAuthenticationId).Result;
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
 
@@ -348,7 +348,7 @@ namespace MeshyDB.SDK.Tests
             var passedModel = default(UserVerificationCheck);
             var passedFormat = RequestDataFormat.Json;
 
-            requestService.Setup(x => x.PostRequest<bool>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
+            requestService.Setup(x => x.PostRequest<Valid>(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<RequestDataFormat>()))
                 .Callback<string, object, RequestDataFormat>((path, model, format) =>
                 {
                     passedPath = path;
@@ -357,7 +357,7 @@ namespace MeshyDB.SDK.Tests
                 })
                 .Returns(() =>
                 {
-                    return Task.FromResult(It.IsAny<bool>());
+                    return Task.FromResult(It.IsAny<Valid>());
                 });
 
             var service = new AuthenticationService(tokenService.Object, requestService.Object);

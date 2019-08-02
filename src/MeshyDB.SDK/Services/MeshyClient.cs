@@ -208,14 +208,14 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public async Task<IMeshyConnection> LoginWithPersistenceAsync(string persistanceToken)
+        public async Task<IMeshyConnection> LoginWithRefreshTokenAsync(string refreshToken)
         {
             if (SDK.MeshyClient.CurrentConnection != null)
             {
                 throw new InvalidOperationException("Connection has already been established. Please sign out before switching");
             }
 
-            var identifier = await this.AuthenticationService.LoginWithPersistenceAsync(persistanceToken).ConfigureAwait(true);
+            var identifier = await this.AuthenticationService.LoginWithRefreshTokenAsync(refreshToken).ConfigureAwait(true);
             var services = this.GenerateAPIRequestService(identifier);
 
             SDK.MeshyClient.CurrentConnection = new MeshyConnection(services.Item1, services.Item2, identifier);
@@ -224,9 +224,9 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public IMeshyConnection LoginWithPersistence(string persistanceToken)
+        public IMeshyConnection LoginWithRefreshToken(string refreshToken)
         {
-            var t = this.LoginWithPersistenceAsync(persistanceToken).ConfigureAwait(true).GetAwaiter();
+            var t = this.LoginWithRefreshTokenAsync(refreshToken).ConfigureAwait(true).GetAwaiter();
 
             return t.GetResult();
         }
@@ -246,7 +246,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public bool CheckHash(UserVerificationCheck userVerificationCheck)
+        public Valid CheckHash(UserVerificationCheck userVerificationCheck)
         {
             var t = this.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter();
 
@@ -254,9 +254,23 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<bool> CheckHashAsync(UserVerificationCheck userVerificationCheck)
+        public Task<Valid> CheckHashAsync(UserVerificationCheck userVerificationCheck)
         {
             return this.AuthenticationService.CheckHashAsync(userVerificationCheck);
+        }
+
+        /// <inheritdoc/>
+        public Exist CheckUserExist(string username)
+        {
+            var t = this.CheckUserExistAsync(username).ConfigureAwait(true).GetAwaiter();
+
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public Task<Exist> CheckUserExistAsync(string username)
+        {
+            return this.AuthenticationService.CheckUserExistAsync(username);
         }
 
         /// <summary>
