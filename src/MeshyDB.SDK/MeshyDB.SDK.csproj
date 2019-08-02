@@ -36,7 +36,7 @@
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <Company>Yeti Softworks LLC</Company>
-    <RepositoryType>git</RepositoryType>
+    <RepositoryType>github</RepositoryType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <Optimize>false</Optimize>
