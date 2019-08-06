@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MeshyDB.SDK.Models;
 using MeshyDB.SDK.Services;
 
 namespace MeshyDB.SDK
@@ -24,6 +25,11 @@ namespace MeshyDB.SDK
         /// Gets service to interact with Users for the authenticated user.
         /// </summary>
         IUsersService Users { get; }
+
+        /// <summary>
+        /// Gets the currently authenticated user information.
+        /// </summary>
+        CurrentUser CurrentUser { get; }
 
         /// <summary>
         /// Updates password for authenticated user.
@@ -62,17 +68,5 @@ namespace MeshyDB.SDK
         /// </summary>
         /// <returns>Refresh token to be used for a later login.</returns>
         string RetrieveRefreshToken();
-
-        /// <summary>
-        /// Gets my user information.
-        /// </summary>
-        /// <returns>Dictionary of user claim info.</returns>
-        IDictionary<string, string> GetMyUserInfo();
-
-        /// <summary>
-        /// Gets my user information.
-        /// </summary>
-        /// <returns>Dictionary of user claim info.</returns>
-        Task<IDictionary<string, string>> GetMyUserInfoAsync();
     }
 }

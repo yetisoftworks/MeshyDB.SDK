@@ -131,17 +131,6 @@ namespace MeshyDB.SDK.Services
             return authenticationId;
         }
 
-        /// <inheritdoc/>
-        public Task<IDictionary<string, string>> GetUserInfoAsync(string authenticationId)
-        {
-            var headers = new Dictionary<string, string>
-            {
-                { "Authorization", $"Bearer {TokenCache[authenticationId].Token}" },
-            };
-
-            return this.requestService.GetRequest<IDictionary<string, string>>($"/connect/userinfo", headers);
-        }
-
         private async Task<TokenCacheData> RefreshUserToken(string refreshToken)
         {
             var response = await this.requestService.PostRequest<TokenResponse>(

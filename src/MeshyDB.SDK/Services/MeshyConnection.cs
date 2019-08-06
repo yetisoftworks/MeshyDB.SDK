@@ -4,8 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MeshyDB.SDK.Models;
 using MeshyDB.SDK.Services;
 
 namespace MeshyDB.SDK.Services
@@ -30,6 +33,7 @@ namespace MeshyDB.SDK.Services
             this.Meshes = new MeshesService(requestService);
             this.Users = new UsersService(requestService);
             this.AuthenticationService = new AuthenticationService(tokenService, requestService);
+            this.SetCurrentUser();
         }
 
         /// <inheritdoc/>
@@ -39,6 +43,9 @@ namespace MeshyDB.SDK.Services
         /// Gets Authentication Id for established user.
         /// </summary>
         public string AuthenticationId { get; private set; }
+
+        /// <inheritdoc/>
+        public CurrentUser CurrentUser { get; internal set; }
 
         /// <inheritdoc/>
         public IUsersService Users { get; private set; }
@@ -62,6 +69,7 @@ namespace MeshyDB.SDK.Services
         public Task SignoutAsync()
         {
             SDK.MeshyClient.CurrentConnection = null;
+            this.CurrentUser = null;
 
             return this.TokenService.SignoutAsync(this.AuthenticationId);
         }
@@ -102,18 +110,26 @@ namespace MeshyDB.SDK.Services
             return t.GetResult();
         }
 
-        /// <inheritdoc/>
-        public IDictionary<string, string> GetMyUserInfo()
+        private void SetCurrentUser()
         {
-            var t = this.GetMyUserInfoAsync().ConfigureAwait(true).GetAwaiter();
+            var accessToken = this.TokenService.GetAccessTokenAsync(this.AuthenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
 
-            return t.GetResult();
-        }
+            if (string.IsNullOrWhiteSpace(accessToken))
+            {
+                return;
+            }
 
-        /// <inheritdoc/>
-        public Task<IDictionary<string, string>> GetMyUserInfoAsync()
-        {
-            return this.TokenService.GetUserInfoAsync(this.AuthenticationId);
+            var handler = new JwtSecurityTokenHandler();
+            var parsedToken = handler.ReadToken(accessToken) as JwtSecurityToken;
+
+            this.CurrentUser = new CurrentUser()
+            {
+                FirstName = parsedToken.Claims.Where(x => x.Type == "given_name").FirstOrDefault()?.Value.ToString(),
+                LastName = parsedToken.Claims.Where(x => x.Type == "family_name").FirstOrDefault()?.Value.ToString(),
+                Id = parsedToken.Claims.Where(x => x.Type == "sub").FirstOrDefault()?.Value.ToString(),
+                UserName = parsedToken.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value.ToString(),
+                Roles = parsedToken.Claims.Where(x => x.Type == "role").Select(x => x.Value),
+            };
         }
     }
 }

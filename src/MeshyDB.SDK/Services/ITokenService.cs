@@ -68,12 +68,5 @@ namespace MeshyDB.SDK.Services
         /// <param name="authenticationId">Authentication id to sign out.</param>
         /// <returns>Task indicating when operation is complete.</returns>
         Task SignoutAsync(string authenticationId);
-
-        /// <summary>
-        /// Get User Info from user's access token.
-        /// </summary>
-        /// <param name="authenticationId">Authentication id to look up.</param>
-        /// <returns>Key value pair collection of user information.</returns>
-        Task<IDictionary<string, string>> GetUserInfoAsync(string authenticationId);
     }
 }

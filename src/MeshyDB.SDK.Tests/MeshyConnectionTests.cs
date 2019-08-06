@@ -269,57 +269,5 @@ namespace MeshyDB.SDK.Tests
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
             authenticationService.VerifyAll();
         }
-
-        [Fact]
-        public void ShouldGetMyUserInfoSuccessfully()
-        {
-            var tokenService = new Mock<ITokenService>();
-            var requestService = new Mock<IRequestService>();
-            var generatedAuthenticationId = Generator.RandomString(10);
-
-            var passedAuthenticationId = string.Empty;
-
-            tokenService.Setup(x => x.GetUserInfoAsync(It.IsAny<string>()))
-                        .Callback<string>((authenticationId) => {
-                            passedAuthenticationId = authenticationId;
-                        })
-                        .Returns(() => {
-                            return Task.FromResult<IDictionary<string, string>>(null);
-                        })
-                        .Verifiable();
-
-            var connection = new MeshyConnection(tokenService.Object, requestService.Object, generatedAuthenticationId);
-
-            connection.GetMyUserInfo();
-
-            Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
-            tokenService.VerifyAll();
-        }
-
-        [Fact]
-        public void ShouldGetMyUserInfoAsyncSuccessfully()
-        {
-            var tokenService = new Mock<ITokenService>();
-            var requestService = new Mock<IRequestService>();
-            var generatedAuthenticationId = Generator.RandomString(10);
-
-            var passedAuthenticationId = string.Empty;
-
-            tokenService.Setup(x => x.GetUserInfoAsync(It.IsAny<string>()))
-                        .Callback<string>((authenticationId) => {
-                            passedAuthenticationId = authenticationId;
-                        })
-                        .Returns(() => {
-                            return Task.FromResult<IDictionary<string, string>>(null);
-                        })
-                        .Verifiable();
-
-            var connection = new MeshyConnection(tokenService.Object, requestService.Object, generatedAuthenticationId);
-
-            connection.GetMyUserInfoAsync().ConfigureAwait(true).GetAwaiter().GetResult();
-
-            Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
-            tokenService.VerifyAll();
-        }
     }
 }
