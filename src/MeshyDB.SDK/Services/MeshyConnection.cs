@@ -127,7 +127,7 @@ namespace MeshyDB.SDK.Services
                 FirstName = parsedToken.Claims.Where(x => x.Type == "given_name").FirstOrDefault()?.Value.ToString(),
                 LastName = parsedToken.Claims.Where(x => x.Type == "family_name").FirstOrDefault()?.Value.ToString(),
                 Id = parsedToken.Claims.Where(x => x.Type == "sub").FirstOrDefault()?.Value.ToString(),
-                UserName = parsedToken.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value.ToString(),
+                Username = parsedToken.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value.ToString(),
                 Roles = parsedToken.Claims.Where(x => x.Type == "role").Select(x => x.Value),
             };
         }

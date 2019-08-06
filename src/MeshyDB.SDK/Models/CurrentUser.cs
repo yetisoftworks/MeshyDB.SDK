@@ -36,6 +36,6 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Gets or sets unique identifier of anonymous user, such as a device id.
         /// </summary>
-        public string UserName { get; set; }
+        public string Username { get; set; }
     }
 }
