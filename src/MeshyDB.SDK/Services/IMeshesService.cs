@@ -70,14 +70,14 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
         /// <param name="filter">Filter predicate for data.</param>
-        /// <param name="sort">Collection of sort for data.</param>
+        /// <param name="sort">Defines sort for data.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result data for the given mesh with applied filter.</returns>
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filter, IEnumerable<KeyValuePair<string, SortDirection>> sort = null, int page = 1, int pageSize = 200)
+        PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filter, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData;
 
         /// <summary>
@@ -85,14 +85,14 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
         /// <param name="filter">Filter predicate for data.</param>
-        /// <param name="sort">Collection of sort for data.</param>
+        /// <param name="sort">Defines sort for data.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result data for the given mesh with applied filter.</returns>
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, IEnumerable<KeyValuePair<string, SortDirection>> sort = null, int page = 1, int pageSize = 200)
+        Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData;
 
         /// <summary>
@@ -100,14 +100,14 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
         /// <param name="filters">Enumerable of filters that all must be met for data.</param>
-        /// <param name="sort">Collection of sort for data.</param>
+        /// <param name="sort">Defines sort for data.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result data for the given mesh with applied filter.</returns>
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, IEnumerable<KeyValuePair<string, SortDirection>> sort = null, int page = 1, int pageSize = 200)
+        PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData;
 
         /// <summary>
@@ -115,14 +115,14 @@ namespace MeshyDB.SDK.Services
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
         /// <param name="filters">Enumerable of filters that all must be met for data.</param>
-        /// <param name="sort">Collection of sort for data.</param>
+        /// <param name="sort">Defines sort for data.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result data for the given mesh with applied filter.</returns>
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, IEnumerable<KeyValuePair<string, SortDirection>> sort = null, int page = 1, int pageSize = 200)
+        Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
             where TModel : MeshData;
 
         /// <summary>

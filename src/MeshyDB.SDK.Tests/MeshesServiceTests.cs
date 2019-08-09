@@ -854,8 +854,7 @@ namespace MeshyDB.SDK.Tests
             var pageNumber = new Random().Next();
             var pageSize = new Random().Next();
 
-
-            await service.SearchAsync<MeshNameAttributeClassTest>(x => x.FavoriteNumber > 5000, new List<KeyValuePair<string, SortDirection>>() { new KeyValuePair<string, SortDirection>("FavoriteNumber", SortDirection.Descending) }, pageNumber, pageSize).ConfigureAwait(true);
+            await service.SearchAsync<MeshNameAttributeClassTest>(x => x.FavoriteNumber > 5000, SortDefinition<MeshNameAttributeClassTest>.SortByDescending("FavoriteNumber"), pageNumber, pageSize).ConfigureAwait(true);
             var encodedFilter = WebUtility.UrlEncode("{ \"FavoriteNumber\" : { \"$gt\" : 5000 } }");
             var encodedSort = WebUtility.UrlEncode("{ FavoriteNumber:-1 }");
 
