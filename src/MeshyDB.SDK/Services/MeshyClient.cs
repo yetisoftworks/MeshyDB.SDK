@@ -6,6 +6,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MeshyDB.SDK.Models;
+using MeshyDB.SDK.Resolvers;
 using MeshyDB.SDK.Services;
 
 [assembly: InternalsVisibleTo("MeshyDB.SDK.Tests")]
@@ -47,6 +48,7 @@ namespace MeshyDB.SDK.Services
             this.publicKey = publicKey.Trim();
 
             this.HttpService = httpService ?? new HttpService();
+            CustomDateTimeOffsetSerializer.AddSeralizer();
         }
 
         /// <summary>
