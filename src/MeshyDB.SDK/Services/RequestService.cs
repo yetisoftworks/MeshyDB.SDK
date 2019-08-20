@@ -64,7 +64,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public Task<T> GetRequest<T>(string path, IDictionary<string, string> headers)
         {
-            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Get, headers).ConfigureAwait(true).GetAwaiter().GetResult();
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Get, headers).ConfigureAwait(false).GetAwaiter().GetResult();
 
             return this.SendRequest<T>(request);
         }
@@ -72,7 +72,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public Task<T> DeleteRequest<T>(string path)
         {
-            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Delete).ConfigureAwait(true).GetAwaiter().GetResult();
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Delete).ConfigureAwait(false).GetAwaiter().GetResult();
 
             return this.SendRequest<T>(request);
         }
@@ -80,9 +80,9 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public Task<T> PostRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json)
         {
-            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Post).ConfigureAwait(true).GetAwaiter().GetResult();
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Post).ConfigureAwait(false).GetAwaiter().GetResult();
 
-            request.Content = this.GetContent(model, format).ConfigureAwait(true).GetAwaiter().GetResult();
+            request.Content = this.GetContent(model, format).ConfigureAwait(false).GetAwaiter().GetResult();
             request.RequestDataFormat = format;
 
             if (format == RequestDataFormat.Form)
@@ -96,7 +96,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public Task<T> PutRequest<T>(string path, object model)
         {
-            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Put).ConfigureAwait(true).GetAwaiter().GetResult();
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Put).ConfigureAwait(false).GetAwaiter().GetResult();
 
             request.Content = JsonConvert.SerializeObject(model, new JsonSerializerSettings()
             {
@@ -155,7 +155,7 @@ namespace MeshyDB.SDK.Services
         {
             if (this.tokenService != null && !string.IsNullOrWhiteSpace(this.authenticationId))
             {
-                var token = this.tokenService.GetAccessTokenAsync(this.authenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
+                var token = this.tokenService.GetAccessTokenAsync(this.authenticationId).ConfigureAwait(false).GetAwaiter().GetResult();
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     headers.Add("Authorization", $"Bearer {token}");

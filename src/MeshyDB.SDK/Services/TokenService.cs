@@ -49,7 +49,7 @@ namespace MeshyDB.SDK.Services
                     ClientId = this.publicKey,
                     Username = username,
                     Password = password,
-                }, RequestDataFormat.Form).ConfigureAwait(true);
+                }, RequestDataFormat.Form).ConfigureAwait(false);
 
             TokenCache.Add(authenticationId, new TokenCacheData()
             {
@@ -72,7 +72,7 @@ namespace MeshyDB.SDK.Services
                 }
                 else
                 {
-                    value = await this.RefreshUserToken(value.RefreshToken).ConfigureAwait(true);
+                    value = await this.RefreshUserToken(value.RefreshToken).ConfigureAwait(false);
                     TokenCache.Remove(authenticationId);
                     TokenCache.Add(authenticationId, value);
                 }
@@ -101,7 +101,7 @@ namespace MeshyDB.SDK.Services
                     TokenTypeHint = "refresh_token",
                     ClientId = this.publicKey,
                 }, RequestDataFormat.Form)
-                .ConfigureAwait(true);
+                .ConfigureAwait(false);
 
             TokenCache.Remove(authenticationId);
         }
@@ -126,7 +126,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public async Task<string> GenerateAccessTokenWithRefreshToken(string refreshToken, string authenticationId)
         {
-            var tokenCacheData = await this.RefreshUserToken(refreshToken).ConfigureAwait(true);
+            var tokenCacheData = await this.RefreshUserToken(refreshToken).ConfigureAwait(false);
             TokenCache.Add(authenticationId, tokenCacheData);
             return authenticationId;
         }
@@ -141,7 +141,7 @@ namespace MeshyDB.SDK.Services
                     GrantType = "refresh_token",
                     RefreshToken = refreshToken,
                 }, RequestDataFormat.Form)
-                .ConfigureAwait(true);
+                .ConfigureAwait(false);
 
             return new TokenCacheData()
             {

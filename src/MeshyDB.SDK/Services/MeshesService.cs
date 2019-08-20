@@ -111,7 +111,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.GetDataAsync<TModel>(id);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -119,7 +119,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.SearchAsync<TModel>(filter, sort, page, pageSize);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -127,7 +127,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.SearchAsync<TModel>(filters, sort, page, pageSize);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -136,7 +136,7 @@ namespace MeshyDB.SDK.Services
         {
             var filter = PredicateBuilder.CombineExpressions(filters);
             var t = this.SearchAsync<TModel>(filter, sort, page, pageSize);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -144,7 +144,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.CreateAsync<TModel>(model);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -152,7 +152,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.UpdateAsync<TModel>(id, model);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -160,7 +160,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.UpdateAsync<TModel>(model);
-            return t.ConfigureAwait(true).GetAwaiter().GetResult();
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -168,7 +168,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.DeleteAsync<TModel>(id);
-            t.ConfigureAwait(true).GetAwaiter().GetResult();
+            t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
@@ -176,7 +176,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData
         {
             var t = this.DeleteAsync<TModel>();
-            t.ConfigureAwait(true).GetAwaiter().GetResult();
+            t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>

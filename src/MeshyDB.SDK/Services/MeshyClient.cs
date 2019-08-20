@@ -113,7 +113,7 @@ namespace MeshyDB.SDK.Services
                 throw new InvalidOperationException("Connection has already been established. Please sign out before switching");
             }
 
-            var identifier = await this.AuthenticationService.LoginWithPasswordAsync(username, password).ConfigureAwait(true);
+            var identifier = await this.AuthenticationService.LoginWithPasswordAsync(username, password).ConfigureAwait(false);
             var services = this.GenerateAPIRequestService(identifier);
 
             SDK.MeshyClient.CurrentConnection = new MeshyConnection(services.Item1, services.Item2, identifier);
@@ -124,7 +124,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public IMeshyConnection LoginWithPassword(string username, string password)
         {
-            var t = this.LoginWithPasswordAsync(username, password).ConfigureAwait(true).GetAwaiter();
+            var t = this.LoginWithPasswordAsync(username, password).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -137,7 +137,7 @@ namespace MeshyDB.SDK.Services
                 throw new InvalidOperationException("Connection has already been established. Please sign out before switching");
             }
 
-            var identifier = await this.AuthenticationService.LoginAnonymouslyAsync(username).ConfigureAwait(true);
+            var identifier = await this.AuthenticationService.LoginAnonymouslyAsync(username).ConfigureAwait(false);
             var services = this.GenerateAPIRequestService(identifier);
 
             SDK.MeshyClient.CurrentConnection = new MeshyConnection(services.Item1, services.Item2, identifier);
@@ -148,7 +148,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public IMeshyConnection LoginAnonymously(string username)
         {
-            var t = this.LoginAnonymouslyAsync(username).ConfigureAwait(true).GetAwaiter();
+            var t = this.LoginAnonymouslyAsync(username).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -162,7 +162,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public User RegisterAnonymousUser(string username = null)
         {
-            var t = this.RegisterAnonymousUserAsync(username).ConfigureAwait(true).GetAwaiter();
+            var t = this.RegisterAnonymousUserAsync(username).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -176,7 +176,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public UserVerificationHash RegisterUser(RegisterUser user)
         {
-            var t = this.RegisterUserAsync(user).ConfigureAwait(true).GetAwaiter();
+            var t = this.RegisterUserAsync(user).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -190,7 +190,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public UserVerificationHash ForgotPassword(string username, int attempt = 1)
         {
-            var t = this.ForgotPasswordAsync(username).ConfigureAwait(true).GetAwaiter();
+            var t = this.ForgotPasswordAsync(username).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -204,7 +204,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public void ResetPassword(ResetPassword resetPassword)
         {
-            var t = this.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter();
+            var t = this.ResetPasswordAsync(resetPassword).ConfigureAwait(false).GetAwaiter();
 
             t.GetResult();
         }
@@ -217,7 +217,7 @@ namespace MeshyDB.SDK.Services
                 throw new InvalidOperationException("Connection has already been established. Please sign out before switching");
             }
 
-            var identifier = await this.AuthenticationService.LoginWithRefreshTokenAsync(refreshToken).ConfigureAwait(true);
+            var identifier = await this.AuthenticationService.LoginWithRefreshTokenAsync(refreshToken).ConfigureAwait(false);
             var services = this.GenerateAPIRequestService(identifier);
 
             SDK.MeshyClient.CurrentConnection = new MeshyConnection(services.Item1, services.Item2, identifier);
@@ -228,7 +228,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public IMeshyConnection LoginWithRefreshToken(string refreshToken)
         {
-            var t = this.LoginWithRefreshTokenAsync(refreshToken).ConfigureAwait(true).GetAwaiter();
+            var t = this.LoginWithRefreshTokenAsync(refreshToken).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -236,7 +236,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public void Verify(UserVerificationCheck userVerificationCheck)
         {
-            var t = this.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter();
+            var t = this.VerifyAsync(userVerificationCheck).ConfigureAwait(false).GetAwaiter();
 
             t.GetResult();
         }
@@ -250,7 +250,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public Valid CheckHash(UserVerificationCheck userVerificationCheck)
         {
-            var t = this.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter();
+            var t = this.CheckHashAsync(userVerificationCheck).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
@@ -264,7 +264,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public Exist CheckUserExist(string username)
         {
-            var t = this.CheckUserExistAsync(username).ConfigureAwait(true).GetAwaiter();
+            var t = this.CheckUserExistAsync(username).ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }

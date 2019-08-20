@@ -45,14 +45,14 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public User GetSelf()
         {
-            var t = this.GetSelfAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.GetSelfAsync().ConfigureAwait(false).GetAwaiter();
             return t.GetResult();
         }
 
         /// <inheritdoc/>
         public User UpdateSelf(User user)
         {
-            var t = this.UpdateSelfAsync(user).ConfigureAwait(true).GetAwaiter();
+            var t = this.UpdateSelfAsync(user).ConfigureAwait(false).GetAwaiter();
             return t.GetResult();
         }
 
@@ -65,7 +65,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public void UpdateSecurityQuestions(UserSecurityQuestionUpdate userSecurityQuestionUpdate)
         {
-            var t = this.UpdateSecurityQuestionsAsync(userSecurityQuestionUpdate).ConfigureAwait(true).GetAwaiter();
+            var t = this.UpdateSecurityQuestionsAsync(userSecurityQuestionUpdate).ConfigureAwait(false).GetAwaiter();
             t.GetResult();
         }
     }

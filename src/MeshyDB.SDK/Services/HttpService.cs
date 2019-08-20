@@ -43,8 +43,8 @@ namespace MeshyDB.SDK.Services
                     message.Headers.Add(item.Key, item.Value);
                 }
 
-                var response = await httpClient.SendAsync(message).ConfigureAwait(true);
-                var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+                var response = await httpClient.SendAsync(message).ConfigureAwait(false);
+                var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 try
                 {

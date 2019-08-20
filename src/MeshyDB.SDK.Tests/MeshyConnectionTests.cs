@@ -109,7 +109,7 @@ namespace MeshyDB.SDK.Tests
             var generatedPreviousPassword = Generator.RandomString(10);
             var generatedNewPassword = Generator.RandomString(10);
 
-            connection.UpdatePasswordAsync(generatedPreviousPassword, generatedNewPassword).ConfigureAwait(true).GetAwaiter().GetResult();
+            connection.UpdatePasswordAsync(generatedPreviousPassword, generatedNewPassword).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal(generatedPreviousPassword, passedPreviousPassword);
             Assert.Equal(generatedNewPassword, passedNewPassword);
@@ -174,7 +174,7 @@ namespace MeshyDB.SDK.Tests
 
             var connection = new MeshyConnection(tokenService.Object, requestService.Object, generatedAuthenticationId);
 
-            connection.SignoutAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+            connection.SignoutAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
             tokenService.VerifyAll();
@@ -233,7 +233,7 @@ namespace MeshyDB.SDK.Tests
 
             connection.AuthenticationService = authenticationService.Object;
 
-            connection.RetrieveRefreshTokenAsync().ConfigureAwait(true).GetAwaiter().GetResult();
+            connection.RetrieveRefreshTokenAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
             authenticationService.VerifyAll();

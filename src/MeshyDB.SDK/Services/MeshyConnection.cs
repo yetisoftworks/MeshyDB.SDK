@@ -77,7 +77,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public void Signout()
         {
-            var t = this.SignoutAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.SignoutAsync().ConfigureAwait(false).GetAwaiter();
 
             t.GetResult();
         }
@@ -97,7 +97,7 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public void UpdatePassword(string previousPassword, string newPassword)
         {
-            var t = this.UpdatePasswordAsync(previousPassword, newPassword).ConfigureAwait(true).GetAwaiter();
+            var t = this.UpdatePasswordAsync(previousPassword, newPassword).ConfigureAwait(false).GetAwaiter();
 
             t.GetResult();
         }
@@ -105,14 +105,14 @@ namespace MeshyDB.SDK.Services
         /// <inheritdoc/>
         public string RetrieveRefreshToken()
         {
-            var t = this.RetrieveRefreshTokenAsync().ConfigureAwait(true).GetAwaiter();
+            var t = this.RetrieveRefreshTokenAsync().ConfigureAwait(false).GetAwaiter();
 
             return t.GetResult();
         }
 
         private void SetCurrentUser()
         {
-            var accessToken = this.TokenService.GetAccessTokenAsync(this.AuthenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
+            var accessToken = this.TokenService.GetAccessTokenAsync(this.AuthenticationId).ConfigureAwait(false).GetAwaiter().GetResult();
 
             if (string.IsNullOrWhiteSpace(accessToken))
             {

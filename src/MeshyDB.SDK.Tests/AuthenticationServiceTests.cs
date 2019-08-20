@@ -136,7 +136,7 @@ namespace MeshyDB.SDK.Tests
             var generatedPreviousPassword = Generator.RandomString(10);
             var generatedNewPassword = Generator.RandomString(10);
 
-            service.UpdatePasswordAsync(generatedPreviousPassword, generatedNewPassword).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.UpdatePasswordAsync(generatedPreviousPassword, generatedNewPassword).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("users/me/password", passedPath);
             Assert.Equal(generatedPreviousPassword, passedModel.PreviousPassword);
@@ -167,7 +167,7 @@ namespace MeshyDB.SDK.Tests
 
             var generatedAuthenticationId = Generator.RandomString(10);
 
-            service.SignoutAsync(generatedAuthenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.SignoutAsync(generatedAuthenticationId).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal(generatedAuthenticationId, passedAuthenticationId);
 
@@ -201,7 +201,7 @@ namespace MeshyDB.SDK.Tests
 
             var user = new RegisterUser(Generator.RandomString(5), Generator.RandomString(5));
 
-            service.RegisterAsync(user).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.RegisterAsync(user).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("users/register", passedPath);
             Assert.Equal(user.Username, passedModel.Username);
@@ -237,7 +237,7 @@ namespace MeshyDB.SDK.Tests
 
             var username = Generator.RandomString(5);
 
-            service.ForgotPasswordAsync(username).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.ForgotPasswordAsync(username).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("users/forgotpassword", passedPath);
             Assert.Equal(username, passedModel.Username);
@@ -280,7 +280,7 @@ namespace MeshyDB.SDK.Tests
                 VerificationCode = Generator.RandomString(5)
             };
 
-            service.ResetPasswordAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.ResetPasswordAsync(data).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("users/resetpassword", passedPath);
             Assert.Equal(data.Username, passedModel.Username);
@@ -326,7 +326,7 @@ namespace MeshyDB.SDK.Tests
                 VerificationCode = Generator.RandomString(5)
             };
 
-            service.VerifyAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.VerifyAsync(data).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("users/verify", passedPath);
             Assert.Equal(data.Username, passedModel.Username);
@@ -371,7 +371,7 @@ namespace MeshyDB.SDK.Tests
                 VerificationCode = Generator.RandomString(5)
             };
 
-            service.CheckHashAsync(data).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.CheckHashAsync(data).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("users/checkhash", passedPath);
             Assert.Equal(data.Username, passedModel.Username);
@@ -409,7 +409,7 @@ namespace MeshyDB.SDK.Tests
 
             var generatedUsername = Generator.RandomString(5);
 
-            service.LoginAnonymouslyAsync(generatedUsername).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.LoginAnonymouslyAsync(generatedUsername).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal(generatedUsername, passedUsername);
             Assert.Equal("nopassword", passedPassword);

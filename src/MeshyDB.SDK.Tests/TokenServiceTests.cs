@@ -184,7 +184,7 @@ namespace MeshyDB.SDK.Tests
             var service = new TokenService(requestService.Object, publicKey);
             var authenticationId = Generator.RandomString(10);
             var newToken = service.GenerateAccessToken(username, password, authenticationId).Result;
-            service.GetAccessTokenAsync(authenticationId).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.GetAccessTokenAsync(authenticationId).ConfigureAwait(false).GetAwaiter().GetResult();
 
             Assert.Equal("connect/token", passedEndpoint);
             Assert.Equal(request.ClientId, passedRequest.ClientId);
@@ -415,7 +415,7 @@ namespace MeshyDB.SDK.Tests
             var authenticationId = Generator.RandomString(10);
             var resultId = service.GenerateAccessTokenWithRefreshToken(Generator.RandomString(10), authenticationId).Result;
 
-            service.SignoutAsync(resultId).ConfigureAwait(true).GetAwaiter().GetResult();
+            service.SignoutAsync(resultId).ConfigureAwait(false).GetAwaiter().GetResult();
 
             var signedoutToken = service.GetAccessTokenAsync(resultId).Result;
 

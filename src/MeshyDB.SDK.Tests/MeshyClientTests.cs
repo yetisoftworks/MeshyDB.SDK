@@ -108,7 +108,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginAnonymouslyAsync(Generator.RandomString(5)).ConfigureAwait(true).GetAwaiter().GetResult();
+            var connection = client.LoginAnonymouslyAsync(Generator.RandomString(5)).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.NotNull(connection);
         }
 
@@ -144,7 +144,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginWithPasswordAsync(Generator.RandomString(10), Generator.RandomString(10)).ConfigureAwait(true).GetAwaiter().GetResult();
+            var connection = client.LoginWithPasswordAsync(Generator.RandomString(10), Generator.RandomString(10)).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.NotNull(connection);
         }
 
@@ -180,7 +180,7 @@ namespace MeshyDB.SDK.Tests
                        });
 
             client.AuthenticationService = authService.Object;
-            var connection = client.LoginWithRefreshTokenAsync(Generator.RandomString(10)).ConfigureAwait(true).GetAwaiter().GetResult();
+            var connection = client.LoginWithRefreshTokenAsync(Generator.RandomString(10)).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.NotNull(connection);
         }
 
@@ -217,7 +217,7 @@ namespace MeshyDB.SDK.Tests
 
             client.AuthenticationService = authService.Object;
 
-            var actual = client.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5))).ConfigureAwait(true).GetAwaiter().GetResult();
+            var actual = client.RegisterUserAsync(new RegisterUser(Generator.RandomString(5), Generator.RandomString(5))).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(expected, actual);
         }
 
@@ -266,7 +266,7 @@ namespace MeshyDB.SDK.Tests
             client.AuthenticationService = authService.Object;
 
             var username = Generator.RandomString(5);
-            var actual = client.ForgotPasswordAsync(username).ConfigureAwait(true).GetAwaiter().GetResult();
+            var actual = client.ForgotPasswordAsync(username).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(expected, actual);
             Assert.Equal(username, passedUsername);
         }
@@ -335,7 +335,7 @@ namespace MeshyDB.SDK.Tests
                 VerificationCode = Generator.RandomString(5)
             };
 
-            client.ResetPasswordAsync(resetPassword).ConfigureAwait(true).GetAwaiter().GetResult();
+            client.ResetPasswordAsync(resetPassword).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(resetPassword.Hash, passedResetPassword.Hash);
             Assert.Equal(resetPassword.Expires, passedResetPassword.Expires);
             Assert.Equal(resetPassword.Hint, passedResetPassword.Hint);
@@ -420,7 +420,7 @@ namespace MeshyDB.SDK.Tests
                 VerificationCode = Generator.RandomString(5)
             };
 
-            client.VerifyAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult();
+            client.VerifyAsync(userVerificationCheck).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(userVerificationCheck.Hash, passedUserVerificationCheck.Hash);
             Assert.Equal(userVerificationCheck.Expires, passedUserVerificationCheck.Expires);
             Assert.Equal(userVerificationCheck.Hint, passedUserVerificationCheck.Hint);
@@ -502,7 +502,7 @@ namespace MeshyDB.SDK.Tests
                 VerificationCode = Generator.RandomString(5)
             };
 
-            var result = client.CheckHashAsync(userVerificationCheck).ConfigureAwait(true).GetAwaiter().GetResult();
+            var result = client.CheckHashAsync(userVerificationCheck).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.True(result.IsValid);
             Assert.Equal(userVerificationCheck.Hash, passedUserVerificationCheck.Hash);
             Assert.Equal(userVerificationCheck.Expires, passedUserVerificationCheck.Expires);
