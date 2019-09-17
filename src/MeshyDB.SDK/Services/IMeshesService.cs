@@ -47,7 +47,7 @@ namespace MeshyDB.SDK.Services
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        PageResult<TModel> Search<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 200)
+        PageResult<TModel> Search<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace MeshyDB.SDK.Services
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 200)
+        Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData;
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace MeshyDB.SDK.Services
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filter, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filter, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData;
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace MeshyDB.SDK.Services
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData;
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace MeshyDB.SDK.Services
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData;
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace MeshyDB.SDK.Services
         /// <remarks>
         /// The maximum page size is 200.
         /// </remarks>
-        Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData;
 
         /// <summary>

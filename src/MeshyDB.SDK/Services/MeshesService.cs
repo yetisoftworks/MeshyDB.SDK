@@ -41,7 +41,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 200)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var encodedUrl = WebUtility.UrlEncode(filter);
@@ -52,7 +52,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var mongoFilter = Builders<TModel>.Filter.Where(filter).Render(BsonSerializer.SerializerRegistry.GetSerializer<TModel>(), BsonSerializer.SerializerRegistry);
@@ -70,7 +70,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var filter = PredicateBuilder.CombineExpressions(filters);
@@ -115,7 +115,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<TModel> Search<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 200)
+        public PageResult<TModel> Search<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var t = this.SearchAsync<TModel>(filter, sort, page, pageSize);
@@ -123,7 +123,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        public PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var t = this.SearchAsync<TModel>(filters, sort, page, pageSize);
@@ -131,7 +131,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 200)
+        public PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var filter = PredicateBuilder.CombineExpressions(filters);

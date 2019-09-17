@@ -32,6 +32,7 @@ namespace MeshyDB.SDK.Services
 
             this.Meshes = new MeshesService(requestService);
             this.Users = new UsersService(requestService);
+            this.Projections = new ProjectionsService(requestService);
             this.AuthenticationService = new AuthenticationService(tokenService, requestService);
             this.SetCurrentUser();
         }
@@ -46,6 +47,9 @@ namespace MeshyDB.SDK.Services
 
         /// <inheritdoc/>
         public CurrentUser CurrentUser { get; internal set; }
+
+        /// <inheritdoc/>
+        public IProjectionsService Projections { get; private set; }
 
         /// <inheritdoc/>
         public IUsersService Users { get; private set; }

@@ -3,17 +3,17 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net471</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.2</Version>
+    <Version>1.3.0</Version>
     <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK-csharp</RepositoryUrl>
     <PackageProjectUrl>https://meshydb.com</PackageProjectUrl>
-    <PackageReleaseNotes>Fixing ability to filter by datetime offset.</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding ability to gather projections</PackageReleaseNotes>
     <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB Backend mBaaS Mobile SDK</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>MeshyDB gives you a fully functional API backend in minutes. We take care of the bulky time consuming API, letting you focus on the front-end design. Build apps faster by leveraging the MeshyDB backend.</Description>
     <Authors>Yeti Softworks</Authors>
     <Copyright />
-    <AssemblyVersion>1.2.2.0</AssemblyVersion>
-    <FileVersion>1.2.2.0</FileVersion>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <FileVersion>1.3.0.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
