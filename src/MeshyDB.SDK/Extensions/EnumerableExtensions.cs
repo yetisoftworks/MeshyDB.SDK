@@ -15,53 +15,53 @@ namespace MeshyDB.SDK
     public static class EnumerableExtensions
     {
         /// <summary>
-        /// Sort by given member expression in ascending order.
+        /// Order by given member expression in ascending order.
         /// </summary>
-        /// <typeparam name="T">Type of data that will be sorted.</typeparam>
+        /// <typeparam name="T">Type of data that will be ordered.</typeparam>
         /// <typeparam name="TKey">Type of member supplied.</typeparam>
-        /// <param name="collection">Collection of data to be sorted.</param>
+        /// <param name="collection">Collection of data to be ordered.</param>
         /// <param name="keyExpression">Key expression to derive member name.</param>
-        /// <returns>Current Definition of Sort.</returns>
-        public static SortDefinition<T> SortBy<T, TKey>(this IEnumerable<T> collection, Expression<Func<T, TKey>> keyExpression)
+        /// <returns>Current Definition of Order.</returns>
+        public static OrderByDefinition<T> OrderBy<T, TKey>(this IEnumerable<T> collection, Expression<Func<T, TKey>> keyExpression)
         {
-            return new SortDefinition<T>().ThenBy(keyExpression);
+            return new OrderByDefinition<T>().ThenBy(keyExpression);
         }
 
         /// <summary>
-        /// Sort by given member expression in descending order.
+        /// Order by given member expression in descending order.
         /// </summary>
-        /// <typeparam name="T">Type of data that will be sorted.</typeparam>
+        /// <typeparam name="T">Type of data that will be ordered.</typeparam>
         /// <typeparam name="TKey">Type of member supplied.</typeparam>
-        /// <param name="collection">Collection of data to be sorted.</param>
+        /// <param name="collection">Collection of data to be ordered.</param>
         /// <param name="keyExpression">Key expression to derive member name.</param>
-        /// <returns>Current Definition of Sort.</returns>
-        public static SortDefinition<T> SortByDescending<T, TKey>(this IEnumerable<T> collection, Expression<Func<T, TKey>> keyExpression)
+        /// <returns>Current Definition of Order.</returns>
+        public static OrderByDefinition<T> OrderByDescending<T, TKey>(this IEnumerable<T> collection, Expression<Func<T, TKey>> keyExpression)
         {
-            return new SortDefinition<T>().ThenByDescending(keyExpression);
+            return new OrderByDefinition<T>().ThenByDescending(keyExpression);
         }
 
         /// <summary>
-        /// Sort by given member expression in ascending order.
+        /// Order by given member expression in ascending order.
         /// </summary>
-        /// <typeparam name="T">Type of data that will be sorted.</typeparam>
-        /// <param name="collection">Collection of data to be sorted.</param>
+        /// <typeparam name="T">Type of data that will be ordered.</typeparam>
+        /// <param name="collection">Collection of data to be ordered.</param>
         /// <param name="key">Name of member to order.</param>
-        /// <returns>Current Definition of Sort.</returns>
-        public static SortDefinition<T> SortBy<T>(this IEnumerable<T> collection, string key)
+        /// <returns>Current Definition of Order.</returns>
+        public static OrderByDefinition<T> OrderBy<T>(this IEnumerable<T> collection, string key)
         {
-            return new SortDefinition<T>().ThenBy(key);
+            return new OrderByDefinition<T>().ThenBy(key);
         }
 
         /// <summary>
-        /// Sort by given member expression in descending order.
+        /// Order by given member expression in descending order.
         /// </summary>
-        /// <typeparam name="T">Type of data that will be sorted.</typeparam>
-        /// <param name="collection">Collection of data to be sorted.</param>
+        /// <typeparam name="T">Type of data that will be ordered.</typeparam>
+        /// <param name="collection">Collection of data to be ordered.</param>
         /// <param name="key">Name of member to order.</param>
-        /// <returns>Current Definition of Sort.</returns>
-        public static SortDefinition<T> SortByDescending<T>(this IEnumerable<T> collection, string key)
+        /// <returns>Current Definition of Order.</returns>
+        public static OrderByDefinition<T> OrderByDescending<T>(this IEnumerable<T> collection, string key)
         {
-            return new SortDefinition<T>().ThenByDescending(key);
+            return new OrderByDefinition<T>().ThenByDescending(key);
         }
     }
 }

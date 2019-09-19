@@ -28,10 +28,10 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<TData> Get<TData>(string projectionName, SortDefinition<TData> sort, int page = 1, int pageSize = 25)
+        public PageResult<TData> Get<TData>(string projectionName, OrderByDefinition<TData> orderBy, int page = 1, int pageSize = 25)
             where TData : class
         {
-            return this.Get<TData>(projectionName, sort.GenerateBsonDocument(), page, pageSize);
+            return this.Get<TData>(projectionName, orderBy.GenerateBsonDocument(), page, pageSize);
         }
 
         /// <inheritdoc/>
@@ -42,10 +42,10 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<TData> Get<TData>(string projectionName, string sort, int page = 1, int pageSize = 25)
+        public PageResult<TData> Get<TData>(string projectionName, string orderBy, int page = 1, int pageSize = 25)
             where TData : class
         {
-            var t = this.GetAsync<TData>(projectionName, sort, page, pageSize);
+            var t = this.GetAsync<TData>(projectionName, orderBy, page, pageSize);
 
             return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
@@ -58,10 +58,10 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TData>> GetAsync<TData>(string projectionName, SortDefinition<TData> sort, int page = 1, int pageSize = 25)
+        public Task<PageResult<TData>> GetAsync<TData>(string projectionName, OrderByDefinition<TData> orderBy, int page = 1, int pageSize = 25)
             where TData : class
         {
-            return this.GetAsync<TData>(projectionName, sort.GenerateBsonDocument(), page, pageSize);
+            return this.GetAsync<TData>(projectionName, orderBy.GenerateBsonDocument(), page, pageSize);
         }
 
         /// <inheritdoc/>
@@ -72,17 +72,17 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TData>> GetAsync<TData>(string projectionName, string sort, int page = 1, int pageSize = 25)
+        public Task<PageResult<TData>> GetAsync<TData>(string projectionName, string orderBy, int page = 1, int pageSize = 25)
             where TData : class
         {
-            var encodedSort = string.Empty;
+            var encodedOrderBy = string.Empty;
 
-            if (sort != null)
+            if (orderBy != null)
             {
-                encodedSort = WebUtility.UrlEncode(sort);
+                encodedOrderBy = WebUtility.UrlEncode(orderBy);
             }
 
-            return this.requestService.GetRequest<PageResult<TData>>($"projections/{projectionName}?orderby={encodedSort}&page={page}&pageSize={pageSize}");
+            return this.requestService.GetRequest<PageResult<TData>>($"projections/{projectionName}?orderby={encodedOrderBy}&page={page}&pageSize={pageSize}");
         }
 
         /// <inheritdoc/>

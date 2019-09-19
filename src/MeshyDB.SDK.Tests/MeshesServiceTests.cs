@@ -824,13 +824,13 @@ namespace MeshyDB.SDK.Tests
             var pageSize = new Random().Next();
 
             var searchFilter = "{ 'FavoriteNumber': { '$gt': 5000 } }";
-            var sort = "{ FavoriteNumber: -1 }";
+            var orderBy = "{ FavoriteNumber: -1 }";
 
-            service.Search<MeshNameAttributeClassTest>(searchFilter, sort, pageNumber, pageSize);
+            service.Search<MeshNameAttributeClassTest>(searchFilter, orderBy, pageNumber, pageSize);
             var encodedFilter = WebUtility.UrlEncode(searchFilter);
-            var encodedSort = WebUtility.UrlEncode("{ FavoriteNumber: -1 }");
+            var encodedOrderBy = WebUtility.UrlEncode("{ FavoriteNumber: -1 }");
 
-            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby={encodedSort}&page={pageNumber}&pageSize={pageSize}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby={encodedOrderBy}&page={pageNumber}&pageSize={pageSize}", passedUrl);
 
             requestService.VerifyAll();
         }
@@ -854,11 +854,11 @@ namespace MeshyDB.SDK.Tests
             var pageNumber = new Random().Next();
             var pageSize = new Random().Next();
 
-            await service.SearchAsync<MeshNameAttributeClassTest>(x => x.FavoriteNumber > 5000, SortDefinition<MeshNameAttributeClassTest>.SortByDescending("FavoriteNumber"), pageNumber, pageSize).ConfigureAwait(false);
+            await service.SearchAsync<MeshNameAttributeClassTest>(x => x.FavoriteNumber > 5000, OrderByDefinition<MeshNameAttributeClassTest>.OrderByDescending("FavoriteNumber"), pageNumber, pageSize).ConfigureAwait(false);
             var encodedFilter = WebUtility.UrlEncode("{ \"FavoriteNumber\" : { \"$gt\" : 5000 } }");
-            var encodedSort = WebUtility.UrlEncode("{ FavoriteNumber:-1 }");
+            var encodedOrderBy = WebUtility.UrlEncode("{ FavoriteNumber:-1 }");
 
-            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby={encodedSort}&page={pageNumber}&pageSize={pageSize}", passedUrl);
+            Assert.Equal($"meshes/{MeshName.ToLowerInvariant()}?filter={encodedFilter}&orderby={encodedOrderBy}&page={pageNumber}&pageSize={pageSize}", passedUrl);
 
             requestService.VerifyAll();
         }

@@ -6,7 +6,7 @@
     <Version>1.3.0</Version>
     <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK-csharp</RepositoryUrl>
     <PackageProjectUrl>https://meshydb.com</PackageProjectUrl>
-    <PackageReleaseNotes>Adding ability to gather projections</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding ability to gather projections. Also fixed naming discrepancy with sorting to be order by to follow API closer.</PackageReleaseNotes>
     <PackageTags>NoSQL Meshy BaaS Backend-as-a-Service MeshyDB Backend mBaaS Mobile SDK</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>MeshyDB gives you a fully functional API backend in minutes. We take care of the bulky time consuming API, letting you focus on the front-end design. Build apps faster by leveraging the MeshyDB backend.</Description>

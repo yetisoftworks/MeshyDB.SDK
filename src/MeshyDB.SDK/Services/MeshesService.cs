@@ -41,41 +41,41 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 25)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(string filter = null, string orderBy = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var encodedUrl = WebUtility.UrlEncode(filter);
 
-            var encodedSort = WebUtility.UrlEncode(sort);
+            var encodedOrderBy = WebUtility.UrlEncode(orderBy);
 
-            return this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedSort}&page={page}&pageSize={pageSize}");
+            return this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedOrderBy}&page={page}&pageSize={pageSize}");
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(Expression<Func<TModel, bool>> filter, OrderByDefinition<TModel> orderBy = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var mongoFilter = Builders<TModel>.Filter.Where(filter).Render(BsonSerializer.SerializerRegistry.GetSerializer<TModel>(), BsonSerializer.SerializerRegistry);
 
             var encodedUrl = WebUtility.UrlEncode(mongoFilter.ToString());
 
-            var encodedSort = string.Empty;
+            var encodedOrderBy = string.Empty;
 
-            if (sort != null)
+            if (orderBy != null)
             {
-                encodedSort = WebUtility.UrlEncode(sort.GenerateBsonDocument());
+                encodedOrderBy = WebUtility.UrlEncode(orderBy.GenerateBsonDocument());
             }
 
-            return this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedSort}&page={page}&pageSize={pageSize}");
+            return this.requestService.GetRequest<PageResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}&orderby={encodedOrderBy}&page={page}&pageSize={pageSize}");
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
+        public Task<PageResult<TModel>> SearchAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, OrderByDefinition<TModel> orderBy = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var filter = PredicateBuilder.CombineExpressions(filters);
 
-            return this.SearchAsync(filter, sort, page, pageSize);
+            return this.SearchAsync(filter, orderBy, page, pageSize);
         }
 
         /// <inheritdoc/>
@@ -115,27 +115,27 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<TModel> Search<TModel>(string filter = null, string sort = null, int page = 1, int pageSize = 25)
+        public PageResult<TModel> Search<TModel>(string filter = null, string orderBy = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
-            var t = this.SearchAsync<TModel>(filter, sort, page, pageSize);
+            var t = this.SearchAsync<TModel>(filter, orderBy, page, pageSize);
             return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
-        public PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
+        public PageResult<TModel> Search<TModel>(Expression<Func<TModel, bool>> filters, OrderByDefinition<TModel> orderBy = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
-            var t = this.SearchAsync<TModel>(filters, sort, page, pageSize);
+            var t = this.SearchAsync<TModel>(filters, orderBy, page, pageSize);
             return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         /// <inheritdoc/>
-        public PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, Models.SortDefinition<TModel> sort = null, int page = 1, int pageSize = 25)
+        public PageResult<TModel> Search<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, OrderByDefinition<TModel> orderBy = null, int page = 1, int pageSize = 25)
             where TModel : MeshData
         {
             var filter = PredicateBuilder.CombineExpressions(filters);
-            var t = this.SearchAsync<TModel>(filter, sort, page, pageSize);
+            var t = this.SearchAsync<TModel>(filter, orderBy, page, pageSize);
             return t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
