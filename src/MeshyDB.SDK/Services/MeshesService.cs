@@ -171,12 +171,63 @@ namespace MeshyDB.SDK.Services
             t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
+        /// <inheritdoc/>
+        public DeleteManyResult DeleteMany<TModel>(string filter)
+            where TModel : MeshData
+        {
+            var t = this.DeleteManyAsync<TModel>(filter);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public Task<DeleteManyResult> DeleteManyAsync<TModel>(string filter)
+            where TModel : MeshData
+        {
+            var encodedUrl = WebUtility.UrlEncode(filter);
+
+            return this.requestService.DeleteRequest<DeleteManyResult>($"meshes/{this.GetMeshName<TModel>()}?filter={encodedUrl}");
+        }
+
+        /// <inheritdoc/>
+        public DeleteManyResult DeleteMany<TModel>(Expression<Func<TModel, bool>> filter)
+            where TModel : MeshData
+        {
+            var t = this.DeleteManyAsync<TModel>(filter);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public Task<DeleteManyResult> DeleteManyAsync<TModel>(Expression<Func<TModel, bool>> filter)
+            where TModel : MeshData
+        {
+            var mongoFilter = Builders<TModel>.Filter.Where(filter).Render(BsonSerializer.SerializerRegistry.GetSerializer<TModel>(), BsonSerializer.SerializerRegistry);
+
+            return this.DeleteManyAsync<TModel>(mongoFilter.ToString());
+        }
+
+        /// <inheritdoc/>
+        public DeleteManyResult DeleteMany<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters)
+            where TModel : MeshData
+        {
+            var t = this.DeleteManyAsync<TModel>(filters);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public Task<DeleteManyResult> DeleteManyAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters)
+            where TModel : MeshData
+        {
+            var filter = PredicateBuilder.CombineExpressions(filters);
+
+            return this.DeleteManyAsync(filter);
+        }
+
         private string GetMeshName<TModel>()
         {
             var meshName = (MeshNameAttribute)Attribute.GetCustomAttribute(typeof(TModel), typeof(MeshNameAttribute));
-            #pragma warning disable CA1308 // Normalize strings to uppercase
+#pragma warning disable CA1308 // Normalize strings to uppercase
             return meshName?.Name.ToLowerInvariant() ?? typeof(TModel).Name.ToLowerInvariant();
-            #pragma warning restore CA1308 // Normalize strings to uppercase
+#pragma warning restore CA1308 // Normalize strings to uppercase
         }
     }
 }

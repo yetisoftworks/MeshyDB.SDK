@@ -182,7 +182,7 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData;
 
         /// <summary>
-        /// Get mesh data for a given id.
+        /// Delete mesh data for a given id.
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
         /// <param name="id">Identifier of mesh record to be deleted.</param>
@@ -190,12 +190,66 @@ namespace MeshyDB.SDK.Services
             where TModel : MeshData;
 
         /// <summary>
-        /// Get mesh data for a given id.
+        /// Delete mesh data for a given id.
         /// </summary>
         /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
         /// <param name="id">Identifier of mesh record to be deleted.</param>
         /// <returns>Task indicating when operation is complete.</returns>
         Task DeleteAsync<TModel>(string id)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Delete mesh data for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be deleted.</param>
+        /// <returns>Result of how many records were deleted.</returns>
+        DeleteManyResult DeleteMany<TModel>(string filter)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Get mesh data for a given id.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be deleted.</param>
+        /// <returns>Result of how many records were deleted.</returns>
+        Task<DeleteManyResult> DeleteManyAsync<TModel>(string filter)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Delete mesh data for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be deleted.</param>
+        /// <returns>Result of how many records were deleted.</returns>
+        DeleteManyResult DeleteMany<TModel>(Expression<Func<TModel, bool>> filter)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Get mesh data for a given id.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be deleted.</param>
+        /// <returns>Result of how many records were deleted.</returns>
+        Task<DeleteManyResult> DeleteManyAsync<TModel>(Expression<Func<TModel, bool>> filter)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Delete mesh data for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be returned.</typeparam>
+        /// <param name="filters">Filters of all mesh records must meet to be deleted.</param>
+        /// <returns>Result of how many records were deleted.</returns>
+        DeleteManyResult DeleteMany<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Get mesh data for a given id.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
+        /// <param name="filters">Filters of all mesh records must meet to be deleted.</param>
+        /// <returns>Result of how many records were deleted.</returns>
+        Task<DeleteManyResult> DeleteManyAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters)
             where TModel : MeshData;
     }
 }
