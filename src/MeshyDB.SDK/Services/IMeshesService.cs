@@ -197,20 +197,5 @@ namespace MeshyDB.SDK.Services
         /// <returns>Task indicating when operation is complete.</returns>
         Task DeleteAsync<TModel>(string id)
             where TModel : MeshData;
-
-        /// <summary>
-        /// Remove entire mesh collection.
-        /// </summary>
-        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
-        void Delete<TModel>()
-            where TModel : MeshData;
-
-        /// <summary>
-        /// Remove entire mesh collection.
-        /// </summary>
-        /// <typeparam name="TModel">Type of mesh data to be deleted.</typeparam>
-        /// <returns>Task indicating when operation is complete.</returns>
-        Task DeleteAsync<TModel>()
-            where TModel : MeshData;
     }
 }

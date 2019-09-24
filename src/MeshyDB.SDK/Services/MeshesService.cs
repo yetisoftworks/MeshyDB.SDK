@@ -171,21 +171,6 @@ namespace MeshyDB.SDK.Services
             t.ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        /// <inheritdoc/>
-        public void Delete<TModel>()
-            where TModel : MeshData
-        {
-            var t = this.DeleteAsync<TModel>();
-            t.ConfigureAwait(false).GetAwaiter().GetResult();
-        }
-
-        /// <inheritdoc/>
-        public Task DeleteAsync<TModel>()
-            where TModel : MeshData
-        {
-            return this.requestService.DeleteRequest<object>($"meshes/{this.GetMeshName<TModel>()}");
-        }
-
         private string GetMeshName<TModel>()
         {
             var meshName = (MeshNameAttribute)Attribute.GetCustomAttribute(typeof(TModel), typeof(MeshNameAttribute));
