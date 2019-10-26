@@ -32,6 +32,11 @@ namespace MeshyDB.SDK
         IProjectionsService Projections { get; }
 
         /// <summary>
+        /// Gets service to interact with Roles for the authenticated user.
+        /// </summary>
+        IRolesService Roles { get; }
+
+        /// <summary>
         /// Gets the currently authenticated user information.
         /// </summary>
         CurrentUser CurrentUser { get; }

@@ -33,6 +33,7 @@ namespace MeshyDB.SDK.Services
             this.Meshes = new MeshesService(requestService);
             this.Users = new UsersService(requestService);
             this.Projections = new ProjectionsService(requestService);
+            this.Roles = new RolesService(requestService);
             this.AuthenticationService = new AuthenticationService(tokenService, requestService);
             this.SetCurrentUser();
         }
@@ -50,6 +51,9 @@ namespace MeshyDB.SDK.Services
 
         /// <inheritdoc/>
         public IProjectionsService Projections { get; private set; }
+
+        /// <inheritdoc/>
+        public IRolesService Roles { get; private set; }
 
         /// <inheritdoc/>
         public IUsersService Users { get; private set; }
@@ -133,6 +137,7 @@ namespace MeshyDB.SDK.Services
                 Id = parsedToken.Claims.Where(x => x.Type == "sub").FirstOrDefault()?.Value.ToString(),
                 Username = parsedToken.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value.ToString(),
                 Roles = parsedToken.Claims.Where(x => x.Type == "role").Select(x => x.Value),
+                Permissions = parsedToken.Claims.Where(x => x.Type == "permission").Select(x => x.Value),
             };
         }
     }

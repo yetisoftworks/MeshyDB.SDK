@@ -78,6 +78,22 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
+        public Task<T> DeleteRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json)
+        {
+            var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Delete).ConfigureAwait(false).GetAwaiter().GetResult();
+
+            request.Content = this.GetContent(model, format).ConfigureAwait(false).GetAwaiter().GetResult();
+            request.RequestDataFormat = format;
+
+            if (format == RequestDataFormat.Form)
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+            }
+
+            return this.SendRequest<T>(request);
+        }
+
+        /// <inheritdoc/>
         public Task<T> PostRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json)
         {
             var request = this.GetDefaultRequestMessageAsync(path, HttpMethod.Post).ConfigureAwait(false).GetAwaiter().GetResult();

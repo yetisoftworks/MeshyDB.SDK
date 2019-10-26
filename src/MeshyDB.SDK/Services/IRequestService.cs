@@ -41,6 +41,16 @@ namespace MeshyDB.SDK.Services
         Task<T> DeleteRequest<T>(string path);
 
         /// <summary>
+        /// Performs HTTP DELETE request.
+        /// </summary>
+        /// <typeparam name="T">Type of data to be returned from request.</typeparam>
+        /// <param name="path">Endpoint path to request.</param>
+        /// <param name="model">Mesh data to be deleted.</param>
+        /// <param name="format">Data format to serialize data for the request.</param>
+        /// <returns>Data result made from request.</returns>
+        Task<T> DeleteRequest<T>(string path, object model, RequestDataFormat format = RequestDataFormat.Json);
+
+        /// <summary>
         /// Performs HTTP POST request.
         /// </summary>
         /// <typeparam name="T">Type of data to be returned from request.</typeparam>

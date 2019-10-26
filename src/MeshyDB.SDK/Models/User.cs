@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MeshyDB.SDK.Models
 {
@@ -56,7 +55,7 @@ namespace MeshyDB.SDK.Models
         /// <summary>
         /// Gets or sets the roles assigned.
         /// </summary>
-        public IEnumerable<string> Roles { get; set; }
+        public IEnumerable<UserRole> Roles { get; set; }
 
         /// <summary>
         /// Gets or sets the security questions for user.
@@ -67,5 +66,10 @@ namespace MeshyDB.SDK.Models
         /// Gets or sets a value indicating whether a user is anonymous.
         /// </summary>
         public bool Anonymous { get; set; }
+
+        /// <summary>
+        /// Gets or sets when a user last accessed the system.
+        /// </summary>
+        public DateTimeOffset? LastAccessed { get; set; }
     }
 }

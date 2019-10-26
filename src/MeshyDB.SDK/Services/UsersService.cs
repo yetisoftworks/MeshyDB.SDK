@@ -3,14 +3,9 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using MeshyDB.SDK.Models;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
 
 namespace MeshyDB.SDK.Services
 {
@@ -66,6 +61,118 @@ namespace MeshyDB.SDK.Services
         public void UpdateSecurityQuestions(UserSecurityQuestionUpdate userSecurityQuestionUpdate)
         {
             var t = this.UpdateSecurityQuestionsAsync(userSecurityQuestionUpdate).ConfigureAwait(false).GetAwaiter();
+            t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public Task<User> GetAsync(string id)
+        {
+            return this.requestService.GetRequest<User>($"users/{id}");
+        }
+
+        /// <inheritdoc/>
+        public Task<PageResult<User>> SearchAsync(string name = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        {
+            var encodedFilter = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                encodedFilter = WebUtility.UrlEncode(name);
+            }
+
+            var encodedOrderBy = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(orderBy))
+            {
+                encodedOrderBy = WebUtility.UrlEncode(orderBy);
+            }
+
+            return this.requestService.GetRequest<PageResult<User>>($"users?name={encodedFilter}&orderBy={encodedOrderBy}&activeOnly={activeOnly}&page={page}&pageSize={pageSize}");
+        }
+
+        /// <inheritdoc/>
+        public Task<PageResult<User>> SearchAsync(string name = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        {
+            var parsedOrderBy = string.Empty;
+
+            if (orderBy != null)
+            {
+                parsedOrderBy = orderBy.GenerateBsonDocument();
+            }
+
+            return this.SearchAsync(name, parsedOrderBy, activeOnly, page, pageSize);
+        }
+
+        /// <inheritdoc/>
+        public Task UpdateSecurityQuestionsAsync(string id, UserSecurityQuestionUpdate userSecurityQuestionUpdate)
+        {
+            return this.requestService.PostRequest<User>($"users/{id}/questions", userSecurityQuestionUpdate);
+        }
+
+        /// <inheritdoc/>
+        public Task<User> CreateAsync(NewUser model)
+        {
+            return this.requestService.PostRequest<User>($"users", model);
+        }
+
+        /// <inheritdoc/>
+        public Task<User> UpdateAsync(string id, User model)
+        {
+            return this.requestService.PutRequest<User>($"users/{id}", model);
+        }
+
+        /// <inheritdoc/>
+        public Task DeleteAsync(string id)
+        {
+            return this.requestService.DeleteRequest<object>($"users/{id}");
+        }
+
+        /// <inheritdoc/>
+        public User Get(string id)
+        {
+            var t = this.GetAsync(id).ConfigureAwait(false).GetAwaiter();
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public PageResult<User> Search(string name = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        {
+            var t = this.SearchAsync(name, orderBy, activeOnly, page, pageSize).ConfigureAwait(false).GetAwaiter();
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public PageResult<User> Search(string name = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        {
+            var t = this.SearchAsync(name, orderBy, activeOnly, page, pageSize).ConfigureAwait(false).GetAwaiter();
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public void UpdateSecurityQuestions(string id, UserSecurityQuestionUpdate userSecurityQuestionUpdate)
+        {
+            var t = this.UpdateSecurityQuestionsAsync(id, userSecurityQuestionUpdate).ConfigureAwait(false).GetAwaiter();
+            t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public User Create(NewUser model)
+        {
+            var t = this.CreateAsync(model).ConfigureAwait(false).GetAwaiter();
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public User Update(string id, User model)
+        {
+            var t = this.UpdateAsync(id, model).ConfigureAwait(false).GetAwaiter();
+            return t.GetResult();
+        }
+
+        /// <inheritdoc/>
+        public void Delete(string id)
+        {
+            var t = this.DeleteAsync(id).ConfigureAwait(false).GetAwaiter();
             t.GetResult();
         }
     }
