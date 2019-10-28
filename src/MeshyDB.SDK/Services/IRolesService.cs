@@ -191,24 +191,6 @@ namespace MeshyDB.SDK.Services
         PageResult<Permissible> SearchPermissible(string name = null, int page = 1, int pageSize = 25);
 
         /// <summary>
-        /// Searches users for the given filters.
-        /// </summary>
-        /// <param name="id">Identifier of role that users have assigned.</param>
-        /// <param name="page">Page number to find results on.</param>
-        /// <param name="pageSize">Number of items to bring back from search.</param>
-        /// <returns>Page result for users with applied filter.</returns>
-        Task<PageResult<User>> SearchUsersAsync(string id, int page = 1, int pageSize = 25);
-
-        /// <summary>
-        /// Searches users for the given filters.
-        /// </summary>
-        /// <param name="id">Identifier of role that users have assigned.</param>
-        /// <param name="page">Page number to find results on.</param>
-        /// <param name="pageSize">Number of items to bring back from search.</param>
-        /// <returns>Page result for users with applied filter.</returns>
-        PageResult<User> SearchUsers(string id, int page = 1, int pageSize = 25);
-
-        /// <summary>
         /// Add set of users to specified role.
         /// </summary>
         /// <param name="id">Identifier of role.</param>

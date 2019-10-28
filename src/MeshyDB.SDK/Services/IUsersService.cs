@@ -65,23 +65,25 @@ namespace MeshyDB.SDK.Services
         /// Searches users for a given filter.
         /// </summary>
         /// <param name="name">Contains search of name case-insensitive.</param>
+        /// <param name="roleId">Has role assigned.</param>
         /// <param name="orderBy">Order data in Mongo DB sort format.</param>
         /// <param name="activeOnly">Filter users that are active.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result for the given users with applied filter.</returns>
-        Task<PageResult<User>> SearchAsync(string name = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
+        Task<PageResult<User>> SearchAsync(string name = null, string roleId = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
 
         /// <summary>
         /// Searches users for a given filter.
         /// </summary>
         /// <param name="name">Contains search of name case-insensitive.</param>
+        /// <param name="roleId">Has role assigned.</param>
         /// <param name="orderBy">Defines order for user.</param>
         /// <param name="activeOnly">Filter users that are active.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result for the given users with applied filter.</returns>
-        Task<PageResult<User>> SearchAsync(string name = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
+        Task<PageResult<User>> SearchAsync(string name = null, string roleId = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
 
         /// <summary>
         /// Replaces users security questions with questions provided.
@@ -124,23 +126,25 @@ namespace MeshyDB.SDK.Services
         /// Searches users for a given filter.
         /// </summary>
         /// <param name="name">Contains search of name case-insensitive.</param>
+        /// <param name="roleId">Has role assigned.</param>
         /// <param name="orderBy">Order data in Mongo DB sort format.</param>
         /// <param name="activeOnly">Filter users that are active.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result for the given users with applied filter.</returns>
-        PageResult<User> Search(string name = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
+        PageResult<User> Search(string name = null, string roleId = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
 
         /// <summary>
         /// Searches users for a given filter.
         /// </summary>
         /// <param name="name">Contains search of name case-insensitive.</param>
+        /// <param name="roleId">Has role assigned.</param>
         /// <param name="orderBy">Defines order for user.</param>
         /// <param name="activeOnly">Filter users that are active.</param>
         /// <param name="page">Page number to find results on.</param>
         /// <param name="pageSize">Number of items to bring back from search.</param>
         /// <returns>Page result for the given users with applied filter.</returns>
-        PageResult<User> Search(string name = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
+        PageResult<User> Search(string name = null, string roleId = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25);
 
         /// <summary>
         /// Replaces users security questions with questions provided.

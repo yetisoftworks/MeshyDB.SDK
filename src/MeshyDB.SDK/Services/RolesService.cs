@@ -167,19 +167,6 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<User> SearchUsers(string id, int page = 1, int pageSize = 25)
-        {
-            var t = this.SearchUsersAsync(id, page, pageSize).ConfigureAwait(false).GetAwaiter();
-            return t.GetResult();
-        }
-
-        /// <inheritdoc/>
-        public Task<PageResult<User>> SearchUsersAsync(string id, int page = 1, int pageSize = 25)
-        {
-            return this.requestService.GetRequest<PageResult<User>>($"roles/{id}/users?page={page}&pageSize={pageSize}");
-        }
-
-        /// <inheritdoc/>
         public Role Update(string id, Role model)
         {
             var t = this.UpdateAsync(id, model).ConfigureAwait(false).GetAwaiter();

@@ -71,7 +71,7 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<User>> SearchAsync(string name = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        public Task<PageResult<User>> SearchAsync(string name = null, string roleId = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
         {
             var encodedFilter = string.Empty;
 
@@ -87,11 +87,11 @@ namespace MeshyDB.SDK.Services
                 encodedOrderBy = WebUtility.UrlEncode(orderBy);
             }
 
-            return this.requestService.GetRequest<PageResult<User>>($"users?name={encodedFilter}&orderBy={encodedOrderBy}&activeOnly={activeOnly}&page={page}&pageSize={pageSize}");
+            return this.requestService.GetRequest<PageResult<User>>($"users?name={encodedFilter}&roleId={roleId}&orderBy={encodedOrderBy}&activeOnly={activeOnly}&page={page}&pageSize={pageSize}");
         }
 
         /// <inheritdoc/>
-        public Task<PageResult<User>> SearchAsync(string name = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        public Task<PageResult<User>> SearchAsync(string name = null, string roleId = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
         {
             var parsedOrderBy = string.Empty;
 
@@ -100,7 +100,7 @@ namespace MeshyDB.SDK.Services
                 parsedOrderBy = orderBy.GenerateBsonDocument();
             }
 
-            return this.SearchAsync(name, parsedOrderBy, activeOnly, page, pageSize);
+            return this.SearchAsync(name, roleId, parsedOrderBy, activeOnly, page, pageSize);
         }
 
         /// <inheritdoc/>
@@ -135,16 +135,16 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public PageResult<User> Search(string name = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        public PageResult<User> Search(string name = null, string roleId = null, string orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
         {
-            var t = this.SearchAsync(name, orderBy, activeOnly, page, pageSize).ConfigureAwait(false).GetAwaiter();
+            var t = this.SearchAsync(name, roleId, orderBy, activeOnly, page, pageSize).ConfigureAwait(false).GetAwaiter();
             return t.GetResult();
         }
 
         /// <inheritdoc/>
-        public PageResult<User> Search(string name = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
+        public PageResult<User> Search(string name = null, string roleId = null, OrderByDefinition<User> orderBy = null, bool activeOnly = true, int page = 1, int pageSize = 25)
         {
-            var t = this.SearchAsync(name, orderBy, activeOnly, page, pageSize).ConfigureAwait(false).GetAwaiter();
+            var t = this.SearchAsync(name, roleId, orderBy, activeOnly, page, pageSize).ConfigureAwait(false).GetAwaiter();
             return t.GetResult();
         }
 
