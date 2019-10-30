@@ -2,18 +2,16 @@
 // Copyright (c) Yeti Softworks LLC. All rights reserved.
 // </copyright>
 
-using System.Collections.Generic;
-
 namespace MeshyDB.SDK.Models
 {
     /// <summary>
-    /// Class that defines removing a role to a set of users.
+    /// Class that defines date needed to find a user for a role.
     /// </summary>
     public class UserRoleRemove
     {
         /// <summary>
-        /// Gets or sets an enumeration of users to be removed from a role.
+        /// Gets or sets identifier of a user.
         /// </summary>
-        public IEnumerable<UserRoleData> Users { get; set; }
+        public string Id { get; set; }
     }
 }

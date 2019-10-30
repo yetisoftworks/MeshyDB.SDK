@@ -196,7 +196,7 @@ namespace MeshyDB.SDK.Services
         /// <param name="id">Identifier of role.</param>
         /// <param name="model">Users to be added.</param>
         /// <returns>Task indicating when operation is complete.</returns>
-        Task AddUsersAsync(string id, UserRoleAdd model);
+        Task AddUsersAsync(string id, BatchRoleAdd model);
 
         /// <summary>
         /// Remove set of users to specified role.
@@ -204,20 +204,20 @@ namespace MeshyDB.SDK.Services
         /// <param name="id">Identifier of role.</param>
         /// <param name="model">Users to be removed.</param>
         /// <returns>Task indicating when operation is complete.</returns>
-        Task RemoveUsersAsync(string id, UserRoleRemove model);
+        Task RemoveUsersAsync(string id, BatchRoleRemove model);
 
         /// <summary>
         /// Add set of users to specified role.
         /// </summary>
         /// <param name="id">Identifier of role.</param>
         /// <param name="model">Users to be added.</param>
-        void AddUsers(string id, UserRoleAdd model);
+        void AddUsers(string id, BatchRoleAdd model);
 
         /// <summary>
         /// Remove set of users to specified role.
         /// </summary>
         /// <param name="id">Identifier of role.</param>
         /// <param name="model">Users to be removed.</param>
-        void RemoveUsers(string id, UserRoleRemove model);
+        void RemoveUsers(string id, BatchRoleRemove model);
     }
 }

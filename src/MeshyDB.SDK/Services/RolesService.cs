@@ -24,14 +24,14 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public void AddUsers(string id, UserRoleAdd model)
+        public void AddUsers(string id, BatchRoleAdd model)
         {
             var t = this.AddUsersAsync(id, model).ConfigureAwait(false).GetAwaiter();
             t.GetResult();
         }
 
         /// <inheritdoc/>
-        public Task AddUsersAsync(string id, UserRoleAdd model)
+        public Task AddUsersAsync(string id, BatchRoleAdd model)
         {
             return this.requestService.PostRequest<object>($"roles/{id}/users", model);
         }
@@ -115,14 +115,14 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public void RemoveUsers(string id, UserRoleRemove model)
+        public void RemoveUsers(string id, BatchRoleRemove model)
         {
             var t = this.RemoveUsersAsync(id, model).ConfigureAwait(false).GetAwaiter();
             t.GetResult();
         }
 
         /// <inheritdoc/>
-        public Task RemoveUsersAsync(string id, UserRoleRemove model)
+        public Task RemoveUsersAsync(string id, BatchRoleRemove model)
         {
             return this.requestService.DeleteRequest<object>($"roles/{id}/users", model);
         }
