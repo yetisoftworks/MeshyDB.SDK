@@ -27,11 +27,6 @@ namespace MeshyDB.SDK.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets an enumeration of permissions assigned to the role.
-        /// </summary>
-        public IEnumerable<Permission> Permissions { get; set; }
-
-        /// <summary>
         /// Gets or sets number of users assigned to the role.
         /// </summary>
         public int NumberOfUsers { get; set; }
