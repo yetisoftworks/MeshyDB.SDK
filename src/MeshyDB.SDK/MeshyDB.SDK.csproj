@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net471</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.4.0.1</Version>
+    <Version>1.5.0</Version>
     <RepositoryUrl>https://github.com/yetisoftworks/MeshyDB.SDK-csharp</RepositoryUrl>
     <PackageProjectUrl>https://meshydb.com</PackageProjectUrl>
     <PackageReleaseNotes>Adding new integration for users and roles.</PackageReleaseNotes>
@@ -19,6 +19,10 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="logo-blue-no-text.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   <ItemGroup>
@@ -36,7 +40,8 @@
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <Company>Yeti Softworks LLC</Company>
     <RepositoryType>github</RepositoryType>
-    <PackageIconUrl>https://cdn.meshydb.com/images/logo-blue-no-text.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon>logo-blue-no-text.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <Optimize>false</Optimize>
