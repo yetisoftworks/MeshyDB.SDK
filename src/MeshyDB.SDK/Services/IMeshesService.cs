@@ -251,5 +251,83 @@ namespace MeshyDB.SDK.Services
         /// <returns>Result of how many records were deleted.</returns>
         Task<DeleteManyResult> DeleteManyAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters)
             where TModel : MeshData;
+
+        /// <summary>
+        /// Update multiple records for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be updated.</param>
+        /// <param name="update">MongoDB formatted update object.</param>
+        /// <returns>Result of update.</returns>
+        Task<UpdateManyResult> UpdateManyAsync<TModel>(string filter, string update)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Update multiple records for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="filters">Filters of all mesh records must meet to be updated.</param>
+        /// <param name="update">MongoDB formatted update object.</param>
+        /// <returns>Result of update.</returns>
+        Task<UpdateManyResult> UpdateManyAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, string update)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Update multiple records for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be updated.</param>
+        /// <param name="update">MongoDB formatted update object.</param>
+        /// <returns>Result of update.</returns>
+        Task<UpdateManyResult> UpdateManyAsync<TModel>(Expression<Func<TModel, bool>> filter, string update)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Update multiple records for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be updated.</param>
+        /// <param name="update">MongoDB formatted update object.</param>
+        /// <returns>Result of update.</returns>
+        UpdateManyResult UpdateMany<TModel>(string filter, string update)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Update multiple records for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="filters">Filters of all mesh records must meet to be updated.</param>
+        /// <param name="update">MongoDB formatted update object.</param>
+        /// <returns>Result of update.</returns>
+        UpdateManyResult UpdateMany<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, string update)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Update multiple records for a provided filter.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="filter">Filter of all mesh records must meet to be updated.</param>
+        /// <param name="update">MongoDB formatted update object.</param>
+        /// <returns>Result of update.</returns>
+        UpdateManyResult UpdateMany<TModel>(Expression<Func<TModel, bool>> filter, string update)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Create multiple records.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="data">Collection of data to be created.</param>
+        /// <returns>Result of create.</returns>
+        Task<CreateManyResult> CreateManyAsync<TModel>(IEnumerable<TModel> data)
+            where TModel : MeshData;
+
+        /// <summary>
+        /// Create multiple records.
+        /// </summary>
+        /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
+        /// <param name="data">Collection of data to be created.</param>
+        /// <returns>Result of create.</returns>
+        CreateManyResult CreateMany<TModel>(IEnumerable<TModel> data)
+            where TModel : MeshData;
     }
 }

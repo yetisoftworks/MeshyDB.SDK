@@ -12,8 +12,8 @@
     <Description>MeshyDB gives you a fully functional API backend in minutes. We take care of the bulky time consuming API, letting you focus on the front-end design. Build apps faster by leveraging the MeshyDB backend.</Description>
     <Authors>Yeti Softworks</Authors>
     <Copyright />
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <FileVersion>1.4.0.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

@@ -222,6 +222,70 @@ namespace MeshyDB.SDK.Services
             return this.DeleteManyAsync(filter);
         }
 
+        /// <inheritdoc/>
+        public Task<UpdateManyResult> UpdateManyAsync<TModel>(string filter, string update)
+            where TModel : MeshData
+        {
+            return this.requestService.PatchRequest<UpdateManyResult>($"meshes/{this.GetMeshName<TModel>()}", new { Filter = filter, Update = update });
+        }
+
+        /// <inheritdoc/>
+        public Task<UpdateManyResult> UpdateManyAsync<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, string update)
+            where TModel : MeshData
+        {
+            var filter = PredicateBuilder.CombineExpressions(filters);
+
+            return this.UpdateManyAsync<TModel>(filter, update);
+        }
+
+        /// <inheritdoc/>
+        public Task<UpdateManyResult> UpdateManyAsync<TModel>(Expression<Func<TModel, bool>> filter, string update)
+            where TModel : MeshData
+        {
+            var mongoFilter = Builders<TModel>.Filter.Where(filter).Render(BsonSerializer.SerializerRegistry.GetSerializer<TModel>(), BsonSerializer.SerializerRegistry);
+
+            return this.UpdateManyAsync<TModel>(mongoFilter.ToString(), update);
+        }
+
+        /// <inheritdoc/>
+        public Task<CreateManyResult> CreateManyAsync<TModel>(IEnumerable<TModel> data)
+            where TModel : MeshData
+        {
+            return this.requestService.PostRequest<CreateManyResult>($"meshes/{this.GetMeshName<TModel>()}", data);
+        }
+
+        /// <inheritdoc/>
+        public CreateManyResult CreateMany<TModel>(IEnumerable<TModel> data)
+            where TModel : MeshData
+        {
+            var t = this.CreateManyAsync<TModel>(data);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public UpdateManyResult UpdateMany<TModel>(string filter, string update)
+            where TModel : MeshData
+        {
+            var t = this.UpdateManyAsync<TModel>(filter, update);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public UpdateManyResult UpdateMany<TModel>(IEnumerable<Expression<Func<TModel, bool>>> filters, string update)
+            where TModel : MeshData
+        {
+            var t = this.UpdateManyAsync<TModel>(filters, update);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc/>
+        public UpdateManyResult UpdateMany<TModel>(Expression<Func<TModel, bool>> filter, string update)
+            where TModel : MeshData
+        {
+            var t = this.UpdateManyAsync<TModel>(filter, update);
+            return t.ConfigureAwait(false).GetAwaiter().GetResult();
+        }
+
         private string GetMeshName<TModel>()
         {
             var meshName = (MeshNameAttribute)Attribute.GetCustomAttribute(typeof(TModel), typeof(MeshNameAttribute));
