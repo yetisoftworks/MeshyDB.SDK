@@ -318,7 +318,7 @@ namespace MeshyDB.SDK.Services
         /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
         /// <param name="data">Collection of data to be created.</param>
         /// <returns>Result of create.</returns>
-        Task<CreateManyResult> CreateManyAsync<TModel>(IEnumerable<TModel> data)
+        Task<CreateManyResult<TModel>> CreateManyAsync<TModel>(IEnumerable<TModel> data)
             where TModel : MeshData;
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace MeshyDB.SDK.Services
         /// <typeparam name="TModel">Type of mesh data to be updated.</typeparam>
         /// <param name="data">Collection of data to be created.</param>
         /// <returns>Result of create.</returns>
-        CreateManyResult CreateMany<TModel>(IEnumerable<TModel> data)
+        CreateManyResult<TModel> CreateMany<TModel>(IEnumerable<TModel> data)
             where TModel : MeshData;
     }
 }

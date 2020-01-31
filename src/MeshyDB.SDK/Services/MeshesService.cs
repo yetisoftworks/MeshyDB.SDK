@@ -248,14 +248,14 @@ namespace MeshyDB.SDK.Services
         }
 
         /// <inheritdoc/>
-        public Task<CreateManyResult> CreateManyAsync<TModel>(IEnumerable<TModel> data)
+        public Task<CreateManyResult<TModel>> CreateManyAsync<TModel>(IEnumerable<TModel> data)
             where TModel : MeshData
         {
-            return this.requestService.PostRequest<CreateManyResult>($"meshes/{this.GetMeshName<TModel>()}", data);
+            return this.requestService.PostRequest<CreateManyResult<TModel>>($"meshes/{this.GetMeshName<TModel>()}", data);
         }
 
         /// <inheritdoc/>
-        public CreateManyResult CreateMany<TModel>(IEnumerable<TModel> data)
+        public CreateManyResult<TModel> CreateMany<TModel>(IEnumerable<TModel> data)
             where TModel : MeshData
         {
             var t = this.CreateManyAsync<TModel>(data);
